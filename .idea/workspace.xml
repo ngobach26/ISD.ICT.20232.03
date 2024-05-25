@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="228d128d-7d0d-4ca2-a953-3525d59eef86" name="Changes" comment="update" />
+    <list default="true" id="228d128d-7d0d-4ca2-a953-3525d59eef86" name="Changes" comment="update">
+      <change afterPath="$PROJECT_DIR$/src/subsystem/IPaymentSubsystem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/subsystem/PaymentSubsystem.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -47,6 +50,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "dart.analysis.tool.window.visible": "false",
     "last_opened_file_path": "D:/20232/ISD.ICT.20232-3",
@@ -98,7 +102,7 @@
       <workItem from="1716629481084" duration="1270000" />
       <workItem from="1716631747218" duration="73000" />
       <workItem from="1716631917612" duration="106000" />
-      <workItem from="1716642995263" duration="693000" />
+      <workItem from="1716642995263" duration="1413000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1704544342831</created>
