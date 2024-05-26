@@ -6,8 +6,8 @@
 | Ngô Xuân Bách          | 20215181    |Team Leader |
 | Trần Thị Lan Anh       | 20215180    |Member      |
 | Trần Thuỷ Châu         | 20215182    |Member      |
-| Đào Minh Chí           | 20210082    |Member      |
-| Bùi Hữu Thành Công     | 20215176    |Member      |
+| Đào Minh Chí           | 20200082    |Member      |
+| Bùi Hữu Thành Công     | 20205176    |Member      |
 
 ## Report Content
 <details>
@@ -73,10 +73,9 @@
 - Assigned tasks: Implement Place Order, Place Rush Order function
 
 - Implementation details:
-  - Pull Request(s): 
+  - Pull Request(s): https://github.com/ngobach26/ISD.ICT.20232.03/commit/24b4b415e10f6557b4b43a733da620a57e205688
   - Specific implementation details:
-    - ...
-    - ...
+    - Implement Place Order and Place Rush Order functions
 </details>
 </details>
 
