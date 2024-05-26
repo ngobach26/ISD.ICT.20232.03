@@ -48,10 +48,9 @@
 - Assigned tasks: Implement the viewing cart
 
 - Implementation details:
-  - Pull Request(s): 
+  - Pull Request(s): [#7](https://github.com/ngobach26/ISD.ICT.20232.03/pull/7)
   - Specific implementation details:
-    - ...
-    - ...
+    - Implement controller, fxml view and handler for View Cart use case
 </details>
 
 <details>
