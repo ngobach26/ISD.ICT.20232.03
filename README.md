@@ -36,10 +36,10 @@
 - Assigned tasks: Implement the home screen and product view
 
 - Implementation details:
-  - Pull Request(s): 
+  - Pull Request(s): https://github.com/ngobach26/ISD.ICT.20232.03/commit/b8897760e9d0ed7d77c4e30df7343bfa3b3eb780
   - Specific task details:
-    - ...
-    - ...
+    - Edit the HomeController, BaseController, Cart, Media, AimsException, MediaNotAvailableException according to the task
+    - Create the home.fxml, media_home.fxml, popup.fxml and according handlers for those interfaces
 </details>
 
 <details>
