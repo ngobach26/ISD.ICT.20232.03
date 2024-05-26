@@ -21,12 +21,11 @@
   - Create and set up database and connections
 
 - Implementation details:
-  - Pull Request(s): No PR (because creating init project)
+  - Pull Request(s): No PR (because creating init project)  https://github.com/ngobach26/ISD.ICT.20232.03/commit/c545587f52aa41bfb24fc05103b2a638189a8d5b?diff=split&w=0
   - Specific task details:
     - Create a temporary db(not final implementation )
     - Create initial project.
-    
-  
+
 </details>
 
 <details>
