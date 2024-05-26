@@ -21,10 +21,10 @@
   - Create and set up database and connections
 
 - Implementation details:
-  - Pull Request(s): link 
+  - Pull Request(s): No PR (because creating init project)
   - Specific task details:
-    - ...
-    - ...
+    - Create a temporary db(not final implementation )
+    - Create initial project.
     
   
 </details>
