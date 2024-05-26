@@ -11,8 +11,10 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
+import common.exception.ViewCartException;
 //import common.exception.ViewCartException;
 import controller.HomeController;
+import controller.ViewCartController;
 //import controller.ViewCartController;
 import entity.cart.Cart;
 import entity.media.Media;
@@ -35,6 +37,7 @@ import views.screen.BaseScreenHandler;
 //import views.screen.ChooseRoleScreenHandler;
 //import views.screen.cart.CartScreenHandler;
 //import views.screen.order.OrderScreenHandler;
+import views.screen.cart.CartScreenHandler;
 
 
 public class HomeScreenHandler extends BaseScreenHandler implements Initializable{
@@ -135,18 +138,18 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
             addMediaHome(this.homeItems);
         });
 
-//        cartImage.setOnMouseClicked(e -> {
-//            CartScreenHandler cartScreen;
-//            try {
-//                LOGGER.info("User clicked to view cart");
-//                cartScreen = new CartScreenHandler(this.stage, Configs.CART_SCREEN_PATH);
-//                cartScreen.setHomeScreenHandler(this);
-//                cartScreen.setBController(new ViewCartController());
-//                cartScreen.requestToViewCart(this);
-//            } catch (IOException | SQLException e1) {
-//                throw new ViewCartException(Arrays.toString(e1.getStackTrace()).replaceAll(", ", "\n"));
-//            }
-//        });
+        cartImage.setOnMouseClicked(e -> {
+            CartScreenHandler cartScreen;
+            try {
+                LOGGER.info("User clicked to view cart");
+                cartScreen = new CartScreenHandler(this.stage, Configs.CART_SCREEN_PATH);
+                cartScreen.setHomeScreenHandler(this);
+                cartScreen.setBController(new ViewCartController());
+                cartScreen.requestToViewCart(this);
+            } catch (IOException | SQLException e1) {
+                throw new ViewCartException(Arrays.toString(e1.getStackTrace()).replaceAll(", ", "\n"));
+            }
+        });
 
 //        orderIcon.setOnMouseClicked(e -> {
 //        	OrderScreenHandler orderScreen;

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import common.exception.MediaNotAvailableException;
 import entity.media.Media;
 import entity.order.Order;
 import entity.order.OrderMedia;
@@ -59,6 +60,25 @@ public class Cart {
         for (Object obj : lstCartMedia) {
             CartMedia cm = (CartMedia) obj;
             total += cm.getQuantity();
+        }
+        return total;
+    }
+
+    public void checkAvailabilityOfProduct() throws SQLException{
+        boolean allAvai = true;
+        for (Object object : lstCartMedia) {
+            CartMedia cartMedia = (CartMedia) object;
+            int requiredQuantity = cartMedia.getQuantity();
+            int availQuantity = cartMedia.getMedia().getQuantity();
+            if (requiredQuantity > availQuantity) allAvai = false;
+        }
+        if (!allAvai) throw new MediaNotAvailableException("Some media not available");
+    }
+    public int calSubtotal(){
+        int total = 0;
+        for (Object obj : lstCartMedia) {
+            CartMedia cm = (CartMedia) obj;
+            total += cm.getPrice()*cm.getQuantity();
         }
         return total;
     }
