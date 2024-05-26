@@ -2,6 +2,7 @@ package entity.cart;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import entity.media.Media;
@@ -39,4 +40,26 @@ public class Cart {
         lstCartMedia.clear();
     }
 
+    public CartMedia checkMediaInCart(Media media) {
+        Iterator var2 = this.lstCartMedia.iterator();
+
+        CartMedia cartMedia;
+        do {
+            if (!var2.hasNext()) {
+                return null;
+            }
+
+            cartMedia = (CartMedia)var2.next();
+        } while(cartMedia.getMedia().getId() != media.getId());
+
+        return cartMedia;
+    }
+    public int getTotalMedia(){
+        int total = 0;
+        for (Object obj : lstCartMedia) {
+            CartMedia cm = (CartMedia) obj;
+            total += cm.getQuantity();
+        }
+        return total;
+    }
 }
