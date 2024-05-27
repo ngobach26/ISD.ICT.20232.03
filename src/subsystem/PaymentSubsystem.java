@@ -8,30 +8,22 @@ import entity.payment.RefundTransaction;
 import java.io.IOException;
 import java.util.Map;
 
-/***
- * The {@code InterbankSubsystem} class is used to communicate with the
- * Interbank to make transaction.
- * 
- * @author hieud
- *
- */
 public class PaymentSubsystem implements IPaymentSubsystem {
 
-	/**
-	 * Represent the controller of the subsystem
-	 */
 	private IPaymentSubsystem controller;
 
 	/**
-	 * Initializes a newly created {@code InterbankSubsystem} object so that it
-	 * represents an Interbank subsystem.
+	 * Initializes a newly created {@code PaymentSubsystem} object with the specified controller.
+	 *
+	 * @param controller The controller for this subsystem.
 	 */
 	public PaymentSubsystem(IPaymentSubsystem controller) {
 		this.controller = controller;
 	}
 
 	@Override
-	public PaymentTransaction getPaymentTransaction(Map<String, String> res) throws PaymentException, UnrecognizedException, IOException {
+	public PaymentTransaction getPaymentTransaction(Map<String, String> res)
+			throws PaymentException, UnrecognizedException, IOException {
 		return controller.getPaymentTransaction(res);
 	}
 
