@@ -6,9 +6,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
-import utils.*;
 
 import entity.db.AIMSDB;
+import utils.Utils;
 
 /**
  * The general media class, for another media it can be done by inheriting this class
@@ -55,7 +55,104 @@ public class Media {
         this.imageURL = imageURL;
     }
 
-    // getter and setter 
+    public int getQuantity() throws SQLException {
+        int updated_quantity = getMediaById(id).quantity;
+        this.quantity = updated_quantity;
+        return updated_quantity;
+    }
+
+
+    public List<Media> searchMedia(String title) throws SQLException{
+        String sql = "SELECT * FROM Media where title like '%" + title + "%';";
+        Statement stm = AIMSDB.getConnection().createStatement();
+        ResultSet res = stm.executeQuery(sql);
+        List<Media> list = new ArrayList<Media>();
+        while (res.next()) {
+
+            Media m = new Media()
+                    .setId(res.getInt("id"))
+                    .setTitle(res.getString("title"))
+                    .setQuantity(res.getInt("quantity"))
+                    .setCategory(res.getString("category"))
+                    .setMediaURL(res.getString("imageUrl"))
+                    .setPrice(res.getInt("price"))
+                    .setType(res.getString("type"))
+                    .setWeight(res.getFloat("weight"));
+            list.add(m);
+        }
+        return list;
+    }
+
+    public Media getMediaById(int id) throws SQLException {
+        String sql = "SELECT * FROM Media ;";
+        Statement stm = AIMSDB.getConnection().createStatement();
+        ResultSet res = stm.executeQuery(sql);
+        if (res.next()) {
+
+            return new Media()
+                    .setId(res.getInt("id"))
+                    .setTitle(res.getString("title"))
+                    .setQuantity(res.getInt("quantity"))
+                    .setCategory(res.getString("category"))
+                    .setMediaURL(res.getString("imageUrl"))
+                    .setPrice(res.getInt("price"))
+                    .setType(res.getString("type"));
+        }
+        return null;
+    }
+
+    public List getAllMedia() throws SQLException {
+        Statement stm = AIMSDB.getConnection().createStatement();
+        ResultSet res = stm.executeQuery("select * from Media");
+        ArrayList medium = new ArrayList<>();
+        while (res.next()) {
+            Media media = new Media()
+                    .setId(res.getInt("id"))
+                    .setTitle(res.getString("title"))
+                    .setQuantity(res.getInt("quantity"))
+                    .setCategory(res.getString("category"))
+                    .setMediaURL(res.getString("imageUrl"))
+                    .setPrice(res.getInt("price"))
+                    .setType(res.getString("type"))
+                    .setWeight(res.getFloat("weight"));
+            medium.add(media);
+        }
+        return medium;
+    }
+
+    public void createMedia() throws SQLException {
+        // String title, String category, int price, int quantity, String type
+        StringBuilder queryValues = new StringBuilder();
+        queryValues.append("(")
+                .append(title).append(",")
+                .append(category).append(",")
+                .append(price).append(",")
+                .append(quantity).append(",")
+                .append(type).append(")");
+        String sql = "INSERT INTO aims.Media "
+                + "(title, category, price, quantity, type)"
+                + "VALUES "
+                + queryValues.toString() + ";";
+        Statement stm = AIMSDB.getConnection().createStatement();
+        ResultSet res = stm.executeQuery(sql);
+    }
+
+    public void updateMediaFieldById(String tbname, int id, String field, Object value) throws SQLException {
+        Statement stm = AIMSDB.getConnection().createStatement();
+        if (value instanceof String) {
+            value = "\"" + value + "\"";
+        }
+        stm.executeUpdate(" update " + tbname + " set" + " "
+                + field + "=" + value + " "
+                + "where id=" + id + ";");
+    }
+
+    public void deleteMediaFieldById(int id) throws SQLException {
+        Statement stm = AIMSDB.getConnection().createStatement();
+        stm.executeUpdate("DELETE FROM " + "Media" + " WHERE id = " + id + ";");
+    }
+
+    // getter and setter
     public int getId() {
         return this.id;
     }
@@ -131,6 +228,19 @@ public class Media {
     public Media setType(String type) {
         this.type = type;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                " id='" + id + "'" +
+                ", title='" + title + "'" +
+                ", category='" + category + "'" +
+                ", price='" + price + "'" +
+                ", quantity='" + quantity + "'" +
+                ", type='" + type + "'" +
+                ", imageURL='" + imageURL + "'" +
+                "}";
     }
 
 }
