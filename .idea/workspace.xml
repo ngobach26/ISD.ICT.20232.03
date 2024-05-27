@@ -5,12 +5,82 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="228d128d-7d0d-4ca2-a953-3525d59eef86" name="Changes" comment="update">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/common/exception/AimsException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/exception/AimsException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/common/exception/MediaNotAvailableException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/exception/MediaNotAvailableException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/common/exception/MediaUpdateException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/exception/MediaUpdateException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/common/exception/ViewCartException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/exception/ViewCartException.java" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/book/book1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/book/book10.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/book/book11.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/book/book12.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/book/book2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/book/book3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/book/book4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/book/book5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/book/book6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/book/book7.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/book/book8.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/book/book9.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/cart.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/orderIcon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/tickgreen.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/common/exception/AimsException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/common/exception/MediaNotAvailableException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/common/exception/MediaUpdateException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/common/exception/PaymentException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/common/exception/UnrecognizedException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/common/exception/ViewCartException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controller/BaseController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controller/HomeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controller/ViewCartController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/entity/payment/CreditCard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/entity/payment/PaymentTransaction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/entity/payment/RefundTransaction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/subsystem/IPaymentSubsystem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/subsystem/PaymentSubsystem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/subsystem/vnpay/ConfigVNPay.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/subsystem/vnpay/PayRequestVNPay.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/subsystem/vnpay/PayResponseVNPay.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/subsystem/vnpay/RefundRequestVNPay.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/subsystem/vnpay/RefundResponseVNPay.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/subsystem/vnpay/VNPayBoundary.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/subsystem/vnpay/VNPaySubsystemController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/fxml/cart.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/fxml/home.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/fxml/media_cart.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/fxml/media_home.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/fxml/popup.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/screen/BaseScreenHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/screen/FXMLScreenHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/screen/SplashScreenHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/screen/cart/CartScreenHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/screen/cart/MediaHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/screen/home/HomeScreenHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/screen/home/MediaHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/screen/popup/PopupScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/.classpath" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/google_code_gson.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/google_code_gson.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/javafx15.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/javafx15.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/javax_persistence_api.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/javax_persistence_api.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/javax_servlet_api.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/javax_servlet_api.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.project" beforeDir="false" afterPath="$PROJECT_DIR$/.project" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AIMS-Student.iml" beforeDir="false" afterPath="$PROJECT_DIR$/AIMS-Student.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/cart/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/cart/Cart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/db/AIMSDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/db/AIMSDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/media/Media.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/media/Media.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/Configs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/Configs.java" afterDir="false" />
+>>>>>>> 30aa007d9ef1153d28e05ee4c8dbc0a1c04b97e9
       <change beforePath="$PROJECT_DIR$/src/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/Utils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -31,18 +101,6 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="jar://$PROJECT_DIR$/lib/win/javafx-sdk-15/lib/javafx.graphics.jar!/javafx/scene/image/ImageView.class" root0="SKIP_INSPECTION" />
   </component>
-  <component name="JpbToolWindowState">
-    <option name="myId2FirstActivated">
-      <map>
-        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
-      </map>
-    </option>
-    <option name="myId2Visible">
-      <map>
-        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
-      </map>
-    </option>
-  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -51,6 +109,7 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+<<<<<<< HEAD
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
@@ -69,6 +128,22 @@
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+=======
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/2023_2/ITSS/ISD.ICT.20232.03",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "vue.rearranger.settings.migration": "true"
+>>>>>>> 30aa007d9ef1153d28e05ee4c8dbc0a1c04b97e9
   }
 }</component>
   <component name="RunManager">
@@ -96,18 +171,13 @@
       <updated>1704382013398</updated>
       <workItem from="1716475581455" duration="8000" />
       <workItem from="1716475598816" duration="2179000" />
-      <workItem from="1716478150623" duration="1035000" />
-      <workItem from="1716479306885" duration="867000" />
-      <workItem from="1716481539092" duration="1837000" />
-      <workItem from="1716535878301" duration="842000" />
-      <workItem from="1716536831934" duration="1579000" />
-      <workItem from="1716539265616" duration="1038000" />
-      <workItem from="1716608223502" duration="9328000" />
-      <workItem from="1716628213268" duration="1240000" />
-      <workItem from="1716629481084" duration="1270000" />
-      <workItem from="1716631747218" duration="73000" />
-      <workItem from="1716631917612" duration="106000" />
-      <workItem from="1716642995263" duration="3417000" />
+      <workItem from="1716478150623" duration="1690000" />
+      <workItem from="1716481542009" duration="592000" />
+      <workItem from="1716535883181" duration="751000" />
+      <workItem from="1716539938756" duration="606000" />
+      <workItem from="1716608226420" duration="6842000" />
+      <workItem from="1716626859490" duration="357000" />
+      <workItem from="1716775557583" duration="329000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1704544342831</created>

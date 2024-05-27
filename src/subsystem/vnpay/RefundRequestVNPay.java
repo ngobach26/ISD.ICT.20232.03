@@ -2,7 +2,6 @@ package subsystem.vnpay;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import entity.order.Order;
 import entity.payment.PaymentTransaction;
 import entity.payment.RefundTransaction;
 import utils.Utils;

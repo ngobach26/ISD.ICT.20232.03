@@ -13,9 +13,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.logging.Logger;
 
-/**
- * @author nguyenlm Contains helper functions
- */
 public class Utils {
 
 	private static Logger LOGGER = getLogger(Utils.class.getName());

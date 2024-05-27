@@ -95,8 +95,6 @@ public class Order {
     }
 
     public void setShippingFees(int shippingFees) {
-        // there should be a function to calculate the shipping fees
-        // not place that function in the controller class
         this.shippingFees = shippingFees;
     }
 
@@ -127,8 +125,8 @@ public class Order {
         Connection connection = AIMSDB.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, state);
-        preparedStatement.setInt(2, startRow); // startRow is a page's initial value
-        preparedStatement.setInt(3, pageSize); // pageSize is the size of each page
+        preparedStatement.setInt(2, startRow); // startRow is the initial value of a page
+        preparedStatement.setInt(3, pageSize); // pageSize is the size of a page
 
         ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -312,7 +310,7 @@ public class Order {
 
     public int calculateShippingFees() {
 
-        if (calculateTotalProductIncludeVAT() >= 100000) {
+        if (calculateTotalProductIncludeVAT() > 100000) {
             return 0;
         }
 
