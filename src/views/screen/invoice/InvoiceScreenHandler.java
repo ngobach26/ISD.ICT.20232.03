@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import common.exception.ProcessInvoiceException;
 //import controller.PaymentController;
+import controller.PaymentController;
 import entity.invoice.Invoice;
 import entity.order.Order;
 import entity.order.OrderMedia;
@@ -20,6 +21,7 @@ import utils.Configs;
 import utils.Utils;
 import views.screen.BaseScreenHandler;
 import views.screen.home.HomeScreenHandler;
+import views.screen.payment.PaymentScreenHandler;
 import views.screen.popup.PopupScreen;
 import views.screen.invoice.MediaInvoiceScreenHandler;
 //import views.screen.payment.PaymentScreenHandler;
@@ -121,27 +123,14 @@ public class InvoiceScreenHandler extends BaseScreenHandler {
 		});
 
 	}
-
 	@FXML
 	void confirmInvoice(MouseEvent event) throws IOException {
-//		BaseScreenHandler paymentScreen = new PaymentScreenHandler(this.stage, Configs.PAYMENT_SCREEN_PATH, invoice.getOrder());
-//		paymentScreen.setBController(new PaymentController());
-//		paymentScreen.setPreviousScreen(this);
-//		paymentScreen.setHomeScreenHandler(homeScreenHandler);
-//		paymentScreen.setScreenTitle("Payment Screen");
-//		paymentScreen.show();
-//		LOGGER.info("Confirmed invoice");
-
-		PopupScreen.success("order successufully");
-		try {
-			HomeScreenHandler homeHandler = new HomeScreenHandler(this.stage, Configs.HOME_PATH);
-			homeHandler.setScreenTitle("Home Screen");
-			homeHandler.setImage();
-			homeHandler.show();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-
+		BaseScreenHandler paymentScreen = new PaymentScreenHandler(this.stage, Configs.PAYMENT_SCREEN_PATH, invoice.getOrder());
+		paymentScreen.setBController(new PaymentController());
+		paymentScreen.setPreviousScreen(this);
+		paymentScreen.setHomeScreenHandler(homeScreenHandler);
+		paymentScreen.setScreenTitle("Payment Screen");
+		paymentScreen.show();
+		LOGGER.info("Confirmed invoice");
 	}
-
 }
