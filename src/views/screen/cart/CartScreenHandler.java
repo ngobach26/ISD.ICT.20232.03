@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import common.exception.MediaNotAvailableException;
+import common.exception.PlaceOrderException;
+import controller.PlaceOrderController;
 import controller.ViewCartController;
 import entity.cart.CartMedia;
 import entity.order.Order;
@@ -22,6 +24,7 @@ import utils.Configs;
 import utils.Utils;
 import views.screen.BaseScreenHandler;
 import views.screen.popup.PopupScreen;
+import views.screen.shipping.ShippingScreenHandler;
 
 public class CartScreenHandler extends BaseScreenHandler {
 
@@ -59,12 +62,23 @@ public class CartScreenHandler extends BaseScreenHandler {
 		Image im = new Image(file.toURI().toString());
 		aimsImage.setImage(im);
 
-		// on mouse clicked, we back to home
+		// Click to go back to home screen
 		aimsImage.setOnMouseClicked(e -> {
 			homeScreenHandler.show();
 		});
 
-		// on mouse clicked, we start processing place order usecase
+		// On clicked, start Place Order UC
+		btnPlaceOrder.setOnMouseClicked(e -> {
+			LOGGER.info("Place Order button clicked");
+			try {
+				requestToPlaceOrder();
+			} catch (SQLException | IOException exp) {
+				LOGGER.severe("Cannot place the order, see the logs");
+				exp.printStackTrace();
+				throw new PlaceOrderException(Arrays.toString(exp.getStackTrace()).replaceAll(", ", "\n"));
+			}
+
+		});
 
 	}
 
@@ -89,6 +103,33 @@ public class CartScreenHandler extends BaseScreenHandler {
 	}
 
 	public void requestToPlaceOrder() throws SQLException, IOException {
+		try {
+			// create placeOrderController and process the order
+			PlaceOrderController placeOrderController = new PlaceOrderController();
+			if (placeOrderController.getListCartMedia().size() == 0){
+				PopupScreen.error("You don't have anything to place");
+				return;
+			}
+
+			placeOrderController.placeOrder();
+
+			// display available media
+			displayCartWithMediaAvailability();
+
+			// create order
+			Order order = placeOrderController.createOrder();
+
+			ShippingScreenHandler ShippingScreenHandler = new ShippingScreenHandler(this.stage, Configs.SHIPPING_SCREEN_PATH, order);
+			ShippingScreenHandler.setPreviousScreen(this);
+			ShippingScreenHandler.setHomeScreenHandler(homeScreenHandler);
+			ShippingScreenHandler.setScreenTitle("Shipping Screen");
+			ShippingScreenHandler.setBController(placeOrderController);
+			ShippingScreenHandler.show();
+
+		} catch (MediaNotAvailableException e) {
+			// if some media are not available then display cart and break usecase Place Order
+			displayCartWithMediaAvailability();
+		}
 
 	}
 

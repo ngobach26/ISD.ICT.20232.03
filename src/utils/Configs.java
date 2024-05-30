@@ -10,20 +10,27 @@ public class Configs {
 	public static final String DB_NAME = "aims";
 	public static final String DB_USERNAME = System.getenv("DB_USERNAME");
 	public static final String DB_PASSWORD = System.getenv("DB_PASSWORD");
-	public static final String HOME_PATH  = "/views/fxml/home.fxml";
-	public static final String HOME_MEDIA_PATH = "/views/fxml/media_home.fxml";
-	public static final String IMAGE_PATH = "assets/images";
-	public static final String POPUP_PATH = "/views/fxml/popup.fxml";
-	public static final String SPLASH_SCREEN_PATH = "/views/fxml/splash.fxml";
-	public static final String INVOICE_SCREEN_PATH = "/views/fxml/invoice.fxml";
-	public static final String INVOICE_MEDIA_SCREEN_PATH = "/views/fxml/media_invoice.fxml";
-	
 	
 	public static float PERCENT_VAT = 10;
 	
-	//	Viewing cart
+	//	Static resource
+	public static final String IMAGE_PATH = "assets/images";
+	public static final String INVOICE_SCREEN_PATH = "/views/fxml/invoice.fxml";
+	public static final String INVOICE_MEDIA_SCREEN_PATH = "/views/fxml/media_invoice.fxml";
+	public static final String PAYMENT_SCREEN_PATH = "/views/fxml/payment.fxml";
+	public static final String RESULT_SCREEN_PATH = "/views/fxml/result.fxml";
+	public static final String SPLASH_SCREEN_PATH = "/views/fxml/splash.fxml";
 	public static final String CART_SCREEN_PATH = "/views/fxml/cart.fxml";
+	public static final String VIEW_ORDER_SCREEN_PATH = "/views/fxml/view_order.fxml";
+	public static final String SHIPPING_SCREEN_PATH = "/views/fxml/shipping.fxml";
 	public static final String CART_MEDIA_PATH = "/views/fxml/media_cart.fxml";
+	public static final String HOME_PATH  = "/views/fxml/home.fxml";
+	public static final String HOME_MEDIA_PATH = "/views/fxml/media_home.fxml";
+	public static final String POPUP_PATH = "/views/fxml/popup.fxml";
+	public static final String ORDER_MANAGEMENT_ADMIN_PATH = "/views/fxml/order_management_admin.fxml";
+	public static final String ITEM_ORDER_PATH = "/views/fxml/item_order.fxml";
+	public static final String ORDER_DETAIL_ADMIN_PATH = "/views/fxml/detail_order_admin.fxml";
+	public static final String REFUND_RESULT_PATH = "/views/fxml/refund_result.fxml";
 	
 	//	FONT
 	public static Font REGULAR_FONT = Font.font("Segoe UI", FontWeight.NORMAL, FontPosture.REGULAR, 24);
