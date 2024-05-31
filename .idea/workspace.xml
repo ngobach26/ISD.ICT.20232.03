@@ -5,74 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="228d128d-7d0d-4ca2-a953-3525d59eef86" name="Changes" comment="update">
-      <change afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/book/book1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/book/book10.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/book/book11.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/book/book12.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/book/book2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/book/book3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/book/book4.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/book/book5.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/book/book6.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/book/book7.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/book/book8.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/book/book9.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/cart.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/orderIcon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/tickgreen.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/common/exception/AimsException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/common/exception/MediaNotAvailableException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/common/exception/MediaUpdateException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/common/exception/PaymentException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/common/exception/UnrecognizedException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/common/exception/ViewCartException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/controller/BaseController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/controller/HomeController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/controller/ViewCartController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entity/payment/CreditCard.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entity/payment/PaymentTransaction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entity/payment/RefundTransaction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/subsystem/IPaymentSubsystem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/subsystem/PaymentSubsystem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/subsystem/vnpay/ConfigVNPay.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/subsystem/vnpay/PayRequestVNPay.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/subsystem/vnpay/PayResponseVNPay.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/subsystem/vnpay/RefundRequestVNPay.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/subsystem/vnpay/RefundResponseVNPay.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/subsystem/vnpay/VNPayBoundary.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/subsystem/vnpay/VNPaySubsystemController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/fxml/cart.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/fxml/home.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/fxml/media_cart.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/fxml/media_home.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/fxml/popup.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/screen/BaseScreenHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/screen/FXMLScreenHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/screen/SplashScreenHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/screen/cart/CartScreenHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/screen/cart/MediaHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/screen/home/HomeScreenHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/screen/home/MediaHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/screen/popup/PopupScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/.classpath" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/google_code_gson.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/google_code_gson.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/javafx15.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/javafx15.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/javax_persistence_api.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/javax_persistence_api.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/javax_servlet_api.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/javax_servlet_api.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.project" beforeDir="false" afterPath="$PROJECT_DIR$/.project" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AIMS-Student.iml" beforeDir="false" afterPath="$PROJECT_DIR$/AIMS-Student.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/cart/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/cart/Cart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/db/AIMSDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/db/AIMSDB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/media/Media.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/media/Media.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/Configs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/Configs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/Utils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,6 +86,8 @@
       <workItem from="1716608226420" duration="6842000" />
       <workItem from="1716626859490" duration="357000" />
       <workItem from="1716775557583" duration="329000" />
+      <workItem from="1717074969761" duration="1374000" />
+      <workItem from="1717077943970" duration="909000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1704544342831</created>
