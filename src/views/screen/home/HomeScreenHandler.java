@@ -7,15 +7,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 import common.exception.ViewCartException;
 //import common.exception.ViewCartException;
+import controller.CartController;
 import controller.HomeController;
-import controller.ViewCartController;
-//import controller.ViewCartController;
+//import controller.CartController;
 import entity.cart.Cart;
 import entity.media.Media;
 import javafx.fxml.FXML;
@@ -144,7 +143,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
                 LOGGER.info("User clicked to view cart");
                 cartScreen = new CartScreenHandler(this.stage, Configs.CART_SCREEN_PATH);
                 cartScreen.setHomeScreenHandler(this);
-                cartScreen.setBController(new ViewCartController());
+                cartScreen.setBController(new CartController());
                 cartScreen.requestToViewCart(this);
             } catch (IOException | SQLException e1) {
                 throw new ViewCartException(Arrays.toString(e1.getStackTrace()).replaceAll(", ", "\n"));

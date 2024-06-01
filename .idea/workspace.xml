@@ -5,8 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="228d128d-7d0d-4ca2-a953-3525d59eef86" name="Changes" comment="update">
+      <change afterPath="$PROJECT_DIR$/src/controller/PaymentController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/screen/payment/PaymentScreenHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/screen/payment/ResultScreenHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jpa-buddy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/db/aims.db" beforeDir="false" afterPath="$PROJECT_DIR$/assets/db/aims.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/db/aims_sqlite.sql" beforeDir="false" afterPath="$PROJECT_DIR$/assets/db/aims_sqlite.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/BaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/BaseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/HomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/ViewCartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/CartController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/subsystem/vnpay/ConfigVNPay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/subsystem/vnpay/ConfigVNPay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/Configs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/Configs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/fxml/invoice.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/fxml/invoice.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/cart/CartScreenHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/cart/CartScreenHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/cart/MediaHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/cart/MediaHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/home/HomeScreenHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/home/HomeScreenHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/home/MediaHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/home/MediaHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/invoice/InvoiceScreenHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/invoice/InvoiceScreenHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +35,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -26,10 +45,27 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="jar://$PROJECT_DIR$/lib/win/javafx-sdk-15/lib/javafx.graphics.jar!/javafx/scene/image/ImageView.class" root0="SKIP_INSPECTION" />
   </component>
+  <component name="JpbToolWindowState">
+    <option name="myId2FirstActivated">
+      <map>
+        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+      </map>
+    </option>
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="false" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="false" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="false" />
+      </map>
+    </option>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2aUnQ7TiKMk5swZLBeHFSYHDA97" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -41,13 +77,13 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/20232/ISD.ICT.20232-3&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/2023_2/ITSS/ISD.ICT.20232.03&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Global Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
@@ -59,6 +95,16 @@
       <option name="MAIN_CLASS_NAME" value="App" />
       <module name="AIMS-Student" />
       <option name="VM_PARAMETERS" value="--module-path D:\2023_2\ITSS\Check\TKXDPM.KHMT.20231-15-develop\lib\win\javafx-sdk-21.0.1\lib --add-modules javafx.controls,javafx.fxml --add-modules javafx.web" />
+      <extension name="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+        </ENTRIES>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -72,59 +118,16 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="228d128d-7d0d-4ca2-a953-3525d59eef86" name="Changes" comment="" />
-      <created>1704382013398</created>
+      <changelist id="228d128d-7d0d-4ca2-a953-3525d59eef86" name="Changes" comment="update" />
+      <created>1717205836560</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1704382013398</updated>
-      <workItem from="1716475581455" duration="8000" />
-      <workItem from="1716475598816" duration="2179000" />
-      <workItem from="1716478150623" duration="1690000" />
-      <workItem from="1716481542009" duration="592000" />
-      <workItem from="1716535883181" duration="751000" />
-      <workItem from="1716539938756" duration="606000" />
-      <workItem from="1716608226420" duration="6842000" />
-      <workItem from="1716626859490" duration="357000" />
-      <workItem from="1716775557583" duration="329000" />
-      <workItem from="1717074969761" duration="1374000" />
-      <workItem from="1717077943970" duration="909000" />
+      <updated>1717205836560</updated>
+      <workItem from="1717205839773" duration="5825000" />
+      <workItem from="1717222787818" duration="3468000" />
+      <workItem from="1717227793509" duration="2034000" />
+      <workItem from="1717250944810" duration="4396000" />
     </task>
-    <task id="LOCAL-00001" summary="update">
-      <created>1704544342831</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1704544342831</updated>
-    </task>
-    <task id="LOCAL-00002" summary="update ui">
-      <created>1704546714271</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1704546714271</updated>
-    </task>
-    <task id="LOCAL-00003" summary="update ui">
-      <created>1704553331381</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1704553331381</updated>
-    </task>
-    <task id="LOCAL-00004" summary="update">
-      <created>1704686718447</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1704686718447</updated>
-    </task>
-    <task id="LOCAL-00005" summary="update">
-      <created>1704687726140</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1704687726140</updated>
-    </task>
-    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

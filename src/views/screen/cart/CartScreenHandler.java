@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 import common.exception.MediaNotAvailableException;
 import common.exception.PlaceOrderException;
 import controller.PlaceOrderController;
-import controller.ViewCartController;
+import controller.CartController;
 import entity.cart.CartMedia;
 import entity.order.Order;
 import javafx.fxml.FXML;
@@ -90,8 +90,8 @@ public class CartScreenHandler extends BaseScreenHandler {
 		return labelSubtotal;
 	}
 
-	public ViewCartController getBController(){
-		return (ViewCartController) super.getBController();
+	public CartController getBController(){
+		return (CartController) super.getBController();
 	}
 
 	public void requestToViewCart(BaseScreenHandler prevScreen) throws SQLException {
@@ -150,7 +150,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 		labelVAT.setText(Utils.getCurrencyFormat(vat));
 		labelAmount.setText(Utils.getCurrencyFormat(amount));
 	}
-	
+
 	private void displayCartWithMediaAvailability(){
 		// clear all old cartMedia
 		vboxCart.getChildren().clear();
