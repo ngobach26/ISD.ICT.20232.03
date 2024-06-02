@@ -8,16 +8,24 @@ import java.util.Locale;
 import java.util.Random;
 import java.util.logging.Logger;
 
+import common.exception.MediaNotAvailableException;
 import entity.cart.Cart;
 import entity.cart.CartMedia;
 import common.exception.InvalidDeliveryInfoException;
 import entity.invoice.Invoice;
 import entity.order.Order;
 import entity.order.OrderMedia;
+import services.mediaservice.MediaService;
 import views.screen.popup.PopupScreen;
 
 public class PlaceOrderController extends BaseController{
     private static Logger LOGGER = utils.Utils.getLogger(PlaceOrderController.class.getName());
+    private MediaService mediaService ;
+
+    public PlaceOrderController() throws MediaNotAvailableException {
+        this.mediaService = MediaService.getInstance();
+    }
+
 
     public void placeOrder() throws SQLException{
         Cart.getCart().checkAvailabilityOfProduct();
@@ -45,7 +53,7 @@ public class PlaceOrderController extends BaseController{
         LOGGER.info(info.toString());
         validateDeliveryInfo(info);
     }
-    
+
     public String validateDeliveryInfo(HashMap<String, String> info) {
         if(!validateName(info.get("name"))){
             return "Invalid name";

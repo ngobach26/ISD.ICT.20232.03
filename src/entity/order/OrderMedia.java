@@ -1,6 +1,6 @@
 package entity.order;
 
-import entity.db.AIMSDB;
+import db.AIMSDB;
 import entity.media.Media;
 
 import java.sql.PreparedStatement;

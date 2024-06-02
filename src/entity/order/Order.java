@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import entity.db.AIMSDB;
+import db.AIMSDB;
 import utils.Configs;
 
 public class Order {

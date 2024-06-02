@@ -9,7 +9,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-import subsystem.vnpay.ConfigVNPay;
+import services.vnpay.ConfigVNPay;
 import utils.Configs;
 import utils.Utils;
 import views.screen.BaseScreenHandler;

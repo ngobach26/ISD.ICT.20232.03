@@ -10,6 +10,7 @@ import common.exception.MediaNotAvailableException;
 import entity.cart.Cart;
 import entity.cart.CartMedia;
 import entity.media.Media;
+import services.mediaservice.MediaService;
 import utils.Utils;
 import views.screen.home.MediaHandler;
 
@@ -19,18 +20,22 @@ import views.screen.home.MediaHandler;
 public class HomeController extends BaseController{
 
     private static Logger LOGGER = Utils.getLogger(HomeController.class.getName());
+    private MediaService mediaService ;
     /**
      * this method gets all Media in DB and return back to home to display
      * @return List[Media]
      * @throws SQLException
      */
+    public HomeController(){
+        this.mediaService = MediaService.getInstance();
+    }
     public List getAllMedia() throws SQLException{
-        return new Media().getAllMedia();
+        return mediaService.getAllMedia();
     }
 
     public List<Media> search(String searchText) throws SQLException{
 
-        return new Media().searchMedia(searchText);
+        return mediaService.searchMedia(searchText);
     }
     public void sortTitle(List<MediaHandler> list){
         Comparator<MediaHandler> mediaTitleComparator = new Comparator<MediaHandler>() {

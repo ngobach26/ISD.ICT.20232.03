@@ -1,10 +1,9 @@
-package subsystem.vnpay;
+package services.vnpay;
 
 import common.exception.*;
 import entity.payment.PaymentTransaction;
 import utils.Utils;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.Map;
 
 public class PayResponseVNPay {

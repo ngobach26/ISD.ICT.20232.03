@@ -5,10 +5,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
+import common.exception.MediaNotAvailableException;
 import common.exception.MediaUpdateException;
 import common.exception.ViewCartException;
 import entity.cart.Cart;
 import entity.cart.CartMedia;
+import services.mediaservice.MediaService;
 import utils.Utils;
 
 /**
@@ -20,7 +22,7 @@ public class CartController extends BaseController{
      * This method checks the available products in Cart
      * @throws SQLException
      */
-    public void checkAvailabilityOfProduct() throws SQLException{
+    public void checkAvailabilityOfProduct() throws SQLException, MediaNotAvailableException {
         Cart.getCart().checkAvailabilityOfProduct();
     }
 

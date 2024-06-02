@@ -1,84 +1,70 @@
 package entity.cart;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import common.exception.MediaNotAvailableException;
 import entity.media.Media;
-import entity.order.Order;
-import entity.order.OrderMedia;
+import services.mediaservice.MediaService;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Cart {
-    
+
     private List<CartMedia> lstCartMedia;
     private static Cart cartInstance;
+    private MediaService mediaService;
 
-    public static Cart getCart(){
-        if(cartInstance == null) cartInstance = new Cart();
+    public static Cart getCart() {
+        if (cartInstance == null) cartInstance = new Cart();
         return cartInstance;
     }
 
-    private Cart(){
+    private Cart() {
         lstCartMedia = new ArrayList<>();
+        mediaService = MediaService.getInstance();
     }
 
-    public void addCartMedia(CartMedia cm){
+    public void addCartMedia(CartMedia cm) {
         lstCartMedia.add(cm);
     }
 
-    public void removeCartMedia(CartMedia cm){
+    public void removeCartMedia(CartMedia cm) {
         lstCartMedia.remove(cm);
     }
 
-    public List getListMedia(){
+    public List<CartMedia> getListMedia() {
         return lstCartMedia;
     }
 
-    // This function is the replacement for the clear cat function in payment class
-    public void emptyCart(){
+    // This function is the replacement for the clear cart function in payment class
+    public void emptyCart() {
         lstCartMedia.clear();
     }
 
     public CartMedia checkMediaInCart(Media media) {
-        Iterator var2 = this.lstCartMedia.iterator();
-
-        CartMedia cartMedia;
-        do {
-            if (!var2.hasNext()) {
-                return null;
+        for (CartMedia cartMedia : lstCartMedia) {
+            if (cartMedia.getMedia().getId() == media.getId()) {
+                return cartMedia;
             }
-
-            cartMedia = (CartMedia)var2.next();
-        } while(cartMedia.getMedia().getId() != media.getId());
-
-        return cartMedia;
+        }
+        return null;
     }
-    public int getTotalMedia(){
+
+    public int getTotalMedia() {
         int total = 0;
-        for (Object obj : lstCartMedia) {
-            CartMedia cm = (CartMedia) obj;
+        for (CartMedia cm : lstCartMedia) {
             total += cm.getQuantity();
         }
         return total;
     }
 
-    public void checkAvailabilityOfProduct() throws SQLException{
-        boolean allAvai = true;
-        for (Object object : lstCartMedia) {
-            CartMedia cartMedia = (CartMedia) object;
-            int requiredQuantity = cartMedia.getQuantity();
-            int availQuantity = cartMedia.getMedia().getQuantity();
-            if (requiredQuantity > availQuantity) allAvai = false;
-        }
-        if (!allAvai) throw new MediaNotAvailableException("Some media not available");
+    public void checkAvailabilityOfProduct() throws SQLException, MediaNotAvailableException {
+        mediaService.checkAvailabilityOfProduct(lstCartMedia); // Pass the list of cart media to the service method
     }
-    public int calSubtotal(){
+
+    public int calSubtotal() {
         int total = 0;
-        for (Object obj : lstCartMedia) {
-            CartMedia cm = (CartMedia) obj;
-            total += cm.getPrice()*cm.getQuantity();
+        for (CartMedia cm : lstCartMedia) {
+            total += cm.getPrice() * cm.getQuantity();
         }
         return total;
     }

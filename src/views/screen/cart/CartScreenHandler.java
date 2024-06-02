@@ -96,11 +96,17 @@ public class CartScreenHandler extends BaseScreenHandler {
 	}
 
 	public void requestToViewCart(BaseScreenHandler prevScreen) throws SQLException {
-		setPreviousScreen(prevScreen);
-		setScreenTitle("Cart Screen");
-		getBController().checkAvailabilityOfProduct();
+		try{
+			setPreviousScreen(prevScreen);
+			setScreenTitle("Cart Screen");
+			getBController().checkAvailabilityOfProduct();
+			displayCartWithMediaAvailability();
+			show();
+		} catch (MediaNotAvailableException e) {
+		// if some media are not available then display cart and break usecase Place Order
 		displayCartWithMediaAvailability();
-		show();
+	}
+
 	}
 
 	public void requestToPlaceOrder() throws SQLException, IOException {
