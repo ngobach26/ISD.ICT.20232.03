@@ -20,6 +20,7 @@ import views.screen.BaseScreenHandler;
 import views.screen.payment.PaymentScreenHandler;
 
 
+
 public class InvoiceScreenHandler extends BaseScreenHandler {
 
 	private static Logger LOGGER = Utils.getLogger(InvoiceScreenHandler.class.getName());
