@@ -198,6 +198,7 @@ public class Order {
         return calculateTotalProductIncludeVAT() + calculateShippingFees();
     }
 
+
     public enum OrderState {
         WAITING,
         DELIVERING,

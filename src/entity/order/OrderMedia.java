@@ -61,5 +61,4 @@ public class OrderMedia {
     public int calculatePrice() {
         return getMedia().getPrice() * getQuantity();
     }
-
 }
