@@ -1,42 +1,71 @@
 package entity.cart;
 
+import common.exception.MediaNotAvailableException;
+import entity.media.Media;
+import services.DAOService.MediaService;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import entity.media.Media;
-import entity.order.Order;
-import entity.order.OrderMedia;
-
 public class Cart {
-    
+
     private List<CartMedia> lstCartMedia;
     private static Cart cartInstance;
+    private MediaService mediaService;
 
-    public static Cart getCart(){
-        if(cartInstance == null) cartInstance = new Cart();
+    public static Cart getCart() {
+        if (cartInstance == null) cartInstance = new Cart();
         return cartInstance;
     }
 
-    private Cart(){
+    private Cart() {
         lstCartMedia = new ArrayList<>();
+        mediaService = MediaService.getInstance();
     }
 
-    public void addCartMedia(CartMedia cm){
+    public void addCartMedia(CartMedia cm) {
         lstCartMedia.add(cm);
     }
 
-    public void removeCartMedia(CartMedia cm){
+    public void removeCartMedia(CartMedia cm) {
         lstCartMedia.remove(cm);
     }
 
-    public List getListMedia(){
+    public List<CartMedia> getListMedia() {
         return lstCartMedia;
     }
 
-    // This function is the replacement for the clear cat function in payment class
-    public void emptyCart(){
+    // This function is the replacement for the clear cart function in payment class
+    public void emptyCart() {
         lstCartMedia.clear();
     }
 
+    public CartMedia checkMediaInCart(Media media) {
+        for (CartMedia cartMedia : lstCartMedia) {
+            if (cartMedia.getMedia().getId() == media.getId()) {
+                return cartMedia;
+            }
+        }
+        return null;
+    }
+
+    public int getTotalMedia() {
+        int total = 0;
+        for (CartMedia cm : lstCartMedia) {
+            total += cm.getQuantity();
+        }
+        return total;
+    }
+
+    public void checkAvailabilityOfProduct() throws SQLException, MediaNotAvailableException {
+        mediaService.checkAvailabilityOfProduct(lstCartMedia); // Pass the list of cart media to the service method
+    }
+
+    public int calSubtotal() {
+        int total = 0;
+        for (CartMedia cm : lstCartMedia) {
+            total += cm.getPrice() * cm.getQuantity();
+        }
+        return total;
+    }
 }

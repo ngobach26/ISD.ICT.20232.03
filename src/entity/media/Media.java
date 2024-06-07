@@ -6,9 +6,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
-import utils.*;
 
-import entity.db.AIMSDB;
+import db.AIMSDB;
+import utils.Utils;
 
 /**
  * The general media class, for another media it can be done by inheriting this class
@@ -55,7 +55,7 @@ public class Media {
         this.imageURL = imageURL;
     }
 
-    // getter and setter 
+    // getter and setter
     public int getId() {
         return this.id;
     }
@@ -123,6 +123,9 @@ public class Media {
         this.quantity = quantity;
         return this;
     }
+    public int getQuantity() {
+        return this.quantity;
+    }
 
     public String getType() {
         return this.type;
@@ -131,6 +134,19 @@ public class Media {
     public Media setType(String type) {
         this.type = type;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                " id='" + id + "'" +
+                ", title='" + title + "'" +
+                ", category='" + category + "'" +
+                ", price='" + price + "'" +
+                ", quantity='" + quantity + "'" +
+                ", type='" + type + "'" +
+                ", imageURL='" + imageURL + "'" +
+                "}";
     }
 
 }

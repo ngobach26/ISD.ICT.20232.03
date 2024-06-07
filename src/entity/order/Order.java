@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import entity.db.AIMSDB;
+import db.AIMSDB;
 import utils.Configs;
 
 public class Order {
@@ -95,8 +95,6 @@ public class Order {
     }
 
     public void setShippingFees(int shippingFees) {
-        // there should be a function to calculate the shipping fees
-        // not place that function in the controller class
         this.shippingFees = shippingFees;
     }
 
@@ -111,6 +109,95 @@ public class Order {
     public void setDeliveryInfo(HashMap deliveryInfo) {
         this.deliveryInfo = deliveryInfo;
     }
+    
+    public int getAmount() {
+    	double amount = 0;
+    	for (Object object : lstOrderMedia) {
+    		OrderMedia om = (OrderMedia) object;
+    		amount += om.getPrice();
+    	}
+    	return (int) (amount + (Configs.PERCENT_VAT / 100) * amount);
+    }
+
+    public int calculateShippingFees() {
+
+        if (calculateTotalProductIncludeVAT() > 100000) {
+            return 0;
+        }
+
+        double baseCost = 0;
+        double baseWeight = 0;
+        double additionalCostPerHalfKg = 0;
+
+        if (isUrban()) {
+            baseCost = 22000;
+            baseWeight = 3;
+        } else {
+            baseCost = 30000;
+            baseWeight = 0.5;
+        }
+        additionalCostPerHalfKg = 2500;
+
+        double rushShippingCost = 0;
+
+        if (isRushShipping()) rushShippingCost = 10000 * getNumberOfRushShippingProduct();
+
+        double regularShippingCost = 0;
+
+        if (getMaxWeight() <= baseWeight) {
+            regularShippingCost = baseCost;
+        } else {
+            regularShippingCost = baseCost + Math.ceil((getMaxWeight() - baseWeight) * 2) * additionalCostPerHalfKg;
+        }
+        setShippingFees((int) (rushShippingCost + regularShippingCost));
+        return (int) (rushShippingCost + regularShippingCost);
+    }
+
+    public boolean isRushShipping() {
+        String isRushShipping = deliveryInfo.get("isRushShipping");
+        return isRushShipping.equals("Yes");
+    }
+
+    public boolean isUrban() {
+        String address = deliveryInfo.get("province");
+        return address.toLowerCase().contains("hà nội") || address.toLowerCase().contains("hồ chí minh");
+    }
+
+    public int calculateTotalProductIncludeVAT() {
+        double amount = 0;
+        for (Object object : getlstOrderMedia()) {
+            OrderMedia om = (OrderMedia) object;
+            amount += om.getMedia().getPrice() * om.getQuantity() ;
+        }
+        return (int) (amount + (Configs.PERCENT_VAT / 100) * amount);
+    }
+
+    public int calculateTotalProductNoVAT() {
+        double amount = 0;
+        for (Object object : getlstOrderMedia()) {
+            OrderMedia om = (OrderMedia) object;
+            amount += om.getMedia().getPrice() * om.getQuantity() ;
+        }
+        return (int) (amount);
+    }
+
+    public int getNumberOfRushShippingProduct() {
+        return getlstOrderMedia().size();
+    }
+
+    public double getMaxWeight() {
+        float max = 0;
+        for (Object object : getlstOrderMedia()) {
+            OrderMedia om = (OrderMedia) object;
+            if (om.getMedia().getWeight() > max) max = om.getMedia().getWeight();
+        }
+        return max;
+    }
+
+    public int calculateTotalPrice() {
+        return calculateTotalProductIncludeVAT() + calculateShippingFees();
+    }
+
 
     public enum OrderState {
         WAITING,
