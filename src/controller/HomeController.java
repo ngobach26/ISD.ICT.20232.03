@@ -1,7 +1,6 @@
 package controller;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Logger;
@@ -10,7 +9,7 @@ import common.exception.MediaNotAvailableException;
 import entity.cart.Cart;
 import entity.cart.CartMedia;
 import entity.media.Media;
-import services.mediaservice.MediaService;
+import services.DAOService.MediaService;
 import utils.Utils;
 import views.screen.home.MediaHandler;
 

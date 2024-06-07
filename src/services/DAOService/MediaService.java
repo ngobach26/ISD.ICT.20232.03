@@ -1,9 +1,8 @@
-package services.mediaservice;
+package services.DAOService;
 import DAO.MediaDAO;
 import common.exception.MediaNotAvailableException;
 import entity.cart.CartMedia;
 import entity.media.Media;
-import services.mediaservice.MediaDAOFactory;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -13,7 +12,7 @@ public class MediaService {
     private final MediaDAO mediaDAO;
 
     public MediaService() throws SQLException {
-        this.mediaDAO = MediaDAOFactory.getMediaDAO();
+        this.mediaDAO = DAOFactory.getMediaDAO();
     }
     public static MediaService getInstance() {
         try {

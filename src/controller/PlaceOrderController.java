@@ -3,20 +3,16 @@ package controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
 import java.util.Random;
 import java.util.logging.Logger;
 
 import common.exception.MediaNotAvailableException;
 import entity.cart.Cart;
 import entity.cart.CartMedia;
-import common.exception.InvalidDeliveryInfoException;
 import entity.invoice.Invoice;
 import entity.order.Order;
 import entity.order.OrderMedia;
-import services.mediaservice.MediaService;
-import views.screen.popup.PopupScreen;
+import services.DAOService.MediaService;
 
 public class PlaceOrderController extends BaseController{
     private static Logger LOGGER = utils.Utils.getLogger(PlaceOrderController.class.getName());

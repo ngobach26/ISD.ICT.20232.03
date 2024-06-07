@@ -1,7 +1,6 @@
 package controller;
 
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -10,7 +9,6 @@ import common.exception.MediaUpdateException;
 import common.exception.ViewCartException;
 import entity.cart.Cart;
 import entity.cart.CartMedia;
-import services.mediaservice.MediaService;
 import utils.Utils;
 
 /**

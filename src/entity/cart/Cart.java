@@ -2,7 +2,7 @@ package entity.cart;
 
 import common.exception.MediaNotAvailableException;
 import entity.media.Media;
-import services.mediaservice.MediaService;
+import services.DAOService.MediaService;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;

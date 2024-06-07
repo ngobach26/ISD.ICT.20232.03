@@ -61,56 +61,5 @@ public class OrderMedia {
     public int calculatePrice() {
         return getMedia().getPrice() * getQuantity();
     }
-    
-    public static ArrayList<OrderMedia> getAllOrderMediaByOrderId(int orderId) throws SQLException {
-        String sql = "SELECT OrderMedia.*, Media.id, Media.title, Media.category, Media.imageUrl, Media.price "
-        		+ "as mediaPrice, Media.type, Media.weight "
-                + "FROM OrderMedia "
-                + "INNER JOIN Media ON OrderMedia.mediaID = Media.id "
-                + "WHERE OrderMedia.orderID = " + orderId + ";";
-
-        Statement stm = AIMSDB.getConnection().createStatement();
-        ResultSet res = stm.executeQuery(sql);
-
-        ArrayList<OrderMedia> orderMediaArrayList = new ArrayList<>();
-
-        while (res.next()) {
-            OrderMedia orderMedia = new OrderMedia();
-
-            Media media = new Media()
-                    .setId(res.getInt("id"))
-                    .setTitle(res.getString("title"))
-                    .setCategory(res.getString("category"))
-                    .setMediaURL(res.getString("imageUrl"))
-                    .setPrice(res.getInt("mediaPrice"))
-                    .setType(res.getString("type"))
-                    .setWeight(res.getFloat("weight"));
-            int quantity = res.getInt("quantity");
-            int price = res.getInt("price");
-
-            orderMedia.setMedia(media);
-            orderMedia.setPrice(price);
-            orderMedia.setQuantity(quantity);
-
-            orderMediaArrayList.add(orderMedia);
-        }
-        return orderMediaArrayList;
-    }
-
-    public static void createOrderMedia(OrderMedia orderMedia, int orderId) throws SQLException {
-        try {
-            String sql = "INSERT INTO OrderMedia (mediaID, orderID, price, quantity) VALUES (?, ?, ?, ?)";
-
-            try (PreparedStatement preparedStatement = AIMSDB.getConnection().prepareStatement(sql)) {
-                preparedStatement.setInt(1, orderMedia.getMedia().getId());
-                preparedStatement.setInt(2, orderId);
-                preparedStatement.setDouble(3, orderMedia.getPrice());
-                preparedStatement.setInt(4, orderMedia.getQuantity());
-                preparedStatement.executeUpdate();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
 }
