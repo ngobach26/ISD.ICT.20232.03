@@ -1,4 +1,4 @@
-package subsystem.vnpay;
+package services.vnpay;
 
 import common.exception.*;
 import entity.payment.RefundTransaction;

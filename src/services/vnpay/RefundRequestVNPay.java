@@ -1,9 +1,8 @@
-package subsystem.vnpay;
+package services.vnpay;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import entity.payment.PaymentTransaction;
-import entity.payment.RefundTransaction;
 import utils.Utils;
 
 import java.io.BufferedReader;
@@ -19,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TimeZone;
 
-import static subsystem.vnpay.ConfigVNPay.vnp_Version;
+import static services.vnpay.ConfigVNPay.vnp_Version;
 
 public class RefundRequestVNPay {
     PaymentTransaction paymentTransaction;

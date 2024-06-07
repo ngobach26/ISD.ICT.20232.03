@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 import common.exception.MediaUpdateException;
 import common.exception.ViewCartException;
+import controller.CartController;
 import entity.cart.Cart;
 import entity.cart.CartMedia;
 import javafx.fxml.FXML;
@@ -25,9 +26,6 @@ import utils.Utils;
 import views.screen.FXMLScreenHandler;
 
 public class MediaHandler extends FXMLScreenHandler {
-
-	private static Logger LOGGER = Utils.getLogger(MediaHandler.class.getName());
-
 	@FXML
 	protected HBox hboxMedia;
 
@@ -58,13 +56,15 @@ public class MediaHandler extends FXMLScreenHandler {
 	private CartMedia cartMedia;
 	private Spinner<Integer> spinner;
 	private CartScreenHandler cartScreen;
+	private CartController cartController;
 
 	public MediaHandler(String screenPath, CartScreenHandler cartScreen) throws IOException {
 		super(screenPath);
 		this.cartScreen = cartScreen;
+		this.cartController = new CartController();
 		hboxMedia.setAlignment(Pos.CENTER);
 	}
-	
+
 	public void setCartMedia(CartMedia cartMedia) {
 		this.cartMedia = cartMedia;
 		setMediaInfo();
@@ -80,51 +80,35 @@ public class MediaHandler extends FXMLScreenHandler {
 		image.setFitHeight(110);
 		image.setFitWidth(92);
 
-		// add delete button
 		btnDelete.setFont(Configs.REGULAR_FONT);
 		btnDelete.setOnMouseClicked(e -> {
 			try {
-				Cart.getCart().removeCartMedia(cartMedia); // update user cart
-				cartScreen.updateCart(); // re-display user cart
-				LOGGER.info("Deleted " + cartMedia.getMedia().getTitle() + " from the cart");
-			} catch (SQLException exp) {
+				cartController.removeCartMedia(cartMedia);
+				cartScreen.updateCart();
+			} catch (SQLException | ViewCartException exp) {
 				exp.printStackTrace();
-				throw new ViewCartException();
 			}
 		});
 
 		initializeSpinner();
 	}
 
-	private void initializeSpinner(){
-		SpinnerValueFactory<Integer> valueFactory = //
-			new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, cartMedia.getQuantity());
-		spinner = new Spinner<Integer>(valueFactory);
-		spinner.setOnMouseClicked( e -> {
+	private void initializeSpinner() {
+		SpinnerValueFactory<Integer> valueFactory =
+				new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, cartMedia.getQuantity());
+		spinner = new Spinner<>(valueFactory);
+		spinner.setOnMouseClicked(e -> {
 			try {
 				int numOfProd = this.spinner.getValue();
-				int remainQuantity = cartMedia.getMedia().getQuantity();
-				LOGGER.info("NumOfProd: " + numOfProd + " -- remainOfProd: " + remainQuantity);
-				if (numOfProd > remainQuantity){
-					LOGGER.info("product " + cartMedia.getMedia().getTitle() + " only remains " + remainQuantity + " (required " + numOfProd + ")");
-					labelOutOfStock.setText("Sorry, Only " + remainQuantity + " remain in stock");
-					spinner.getValueFactory().setValue(remainQuantity);
-					numOfProd = remainQuantity;
-				}
-
-				// update quantity of mediaCart in useCart
-				cartMedia.setQuantity(numOfProd);
-
-				// update the total of mediaCart
-				price.setText(Utils.getCurrencyFormat(numOfProd*cartMedia.getPrice()));
-
-				// update subtotal and amount of Cart
+				numOfProd = cartController.checkStockAvailability(cartMedia, numOfProd);
+				labelOutOfStock.setText(numOfProd < cartMedia.getQuantity() ? "Sorry, Only " + numOfProd + " remain in stock" : "");
+				spinner.getValueFactory().setValue(numOfProd);
+				cartController.updateCartMediaQuantity(cartMedia, numOfProd);
+				price.setText(Utils.getCurrencyFormat(numOfProd * cartMedia.getPrice()));
 				cartScreen.updateCartAmount();
-
-			} catch (SQLException e1) {
-				throw new MediaUpdateException(Arrays.toString(e1.getStackTrace()).replaceAll(", ", "\n"));
+			} catch (SQLException | MediaUpdateException e1) {
+				e1.printStackTrace();
 			}
-			
 		});
 		spinnerFX.setAlignment(Pos.CENTER);
 		spinnerFX.getChildren().add(this.spinner);

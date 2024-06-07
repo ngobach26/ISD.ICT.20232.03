@@ -1,4 +1,4 @@
-package subsystem.vnpay;
+package services.vnpay;
 
 import com.google.gson.Gson;
 import entity.payment.PaymentTransaction;

@@ -6,25 +6,19 @@ import java.util.HashMap;
 import java.util.logging.Logger;
 
 import common.exception.ProcessInvoiceException;
-//import controller.PaymentController;
 import controller.PaymentController;
 import entity.invoice.Invoice;
-import entity.order.Order;
 import entity.order.OrderMedia;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import utils.Configs;
 import utils.Utils;
 import views.screen.BaseScreenHandler;
-import views.screen.home.HomeScreenHandler;
 import views.screen.payment.PaymentScreenHandler;
-import views.screen.popup.PopupScreen;
-import views.screen.invoice.MediaInvoiceScreenHandler;
-//import views.screen.payment.PaymentScreenHandler;
+
 
 
 public class InvoiceScreenHandler extends BaseScreenHandler {

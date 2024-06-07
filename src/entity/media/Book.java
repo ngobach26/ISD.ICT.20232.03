@@ -1,12 +1,9 @@
 package entity.media;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Date;
-import java.util.List;
 
-import entity.db.AIMSDB;
+import db.AIMSDB;
 
 public class Book extends Media {
 

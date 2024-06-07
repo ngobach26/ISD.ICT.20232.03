@@ -1,4 +1,4 @@
-package subsystem;
+package services.vnpay;
 
 import common.exception.PaymentException;
 import common.exception.UnrecognizedException;

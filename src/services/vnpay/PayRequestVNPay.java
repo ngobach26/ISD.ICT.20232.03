@@ -1,18 +1,12 @@
-package subsystem.vnpay;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+package services.vnpay;
 
 import java.io.*;
-import java.lang.reflect.Type;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import static subsystem.vnpay.ConfigVNPay.vnp_Version;
+import static services.vnpay.ConfigVNPay.vnp_Version;
 
 public class PayRequestVNPay {
     private int amount;

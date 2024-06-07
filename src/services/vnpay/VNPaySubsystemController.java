@@ -1,8 +1,7 @@
-package subsystem.vnpay;
+package services.vnpay;
 
 import entity.payment.PaymentTransaction;
 import entity.payment.RefundTransaction;
-import subsystem.IPaymentSubsystem;
 
 import java.io.IOException;
 import java.util.Map;

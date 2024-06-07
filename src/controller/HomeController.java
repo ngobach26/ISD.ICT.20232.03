@@ -1,30 +1,40 @@
 package controller;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.logging.Logger;
 
+import common.exception.MediaNotAvailableException;
 import entity.cart.Cart;
+import entity.cart.CartMedia;
 import entity.media.Media;
+import services.DAOService.MediaService;
+import utils.Utils;
 import views.screen.home.MediaHandler;
 
 /**
  * This class controls the flow of events in homescreen
  */
 public class HomeController extends BaseController{
+
+    private static Logger LOGGER = Utils.getLogger(HomeController.class.getName());
+    private MediaService mediaService ;
     /**
      * this method gets all Media in DB and return back to home to display
      * @return List[Media]
      * @throws SQLException
      */
+    public HomeController(){
+        this.mediaService = MediaService.getInstance();
+    }
     public List getAllMedia() throws SQLException{
-        return new Media().getAllMedia();
+        return mediaService.getAllMedia();
     }
 
     public List<Media> search(String searchText) throws SQLException{
 
-        return new Media().searchMedia(searchText);
+        return mediaService.searchMedia(searchText);
     }
     public void sortTitle(List<MediaHandler> list){
         Comparator<MediaHandler> mediaTitleComparator = new Comparator<MediaHandler>() {
@@ -47,6 +57,25 @@ public class HomeController extends BaseController{
             }
         };
         list.sort(mediaTitleComparator);
+    }
+
+    public void addMediaToCart(Media media, int quantity) throws MediaNotAvailableException, SQLException {
+        if (quantity > media.getQuantity()) throw new MediaNotAvailableException();
+        Cart cart = Cart.getCart();
+        CartMedia mediaInCart = cart.checkMediaInCart(media);
+        if (mediaInCart != null) {
+            mediaInCart.setQuantity(mediaInCart.getQuantity() + quantity);
+        } else {
+            CartMedia cartMedia = new CartMedia(media, cart, quantity, media.getPrice());
+            cart.getListMedia().add(cartMedia);
+            LOGGER.info("Added " + cartMedia.getQuantity() + " " + media.getTitle() + " to cart");
+        }
+
+        media.setQuantity(media.getQuantity() - quantity);
+    }
+
+    public int checkMediaAvailability(Media media, int requestedQuantity) throws SQLException {
+        return Math.min(requestedQuantity, media.getQuantity());
     }
 
 }

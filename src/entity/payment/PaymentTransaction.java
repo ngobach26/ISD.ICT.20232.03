@@ -1,6 +1,6 @@
 package entity.payment;
 
-import entity.db.AIMSDB;
+import db.AIMSDB;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

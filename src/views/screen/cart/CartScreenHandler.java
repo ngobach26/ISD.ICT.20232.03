@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 import common.exception.MediaNotAvailableException;
 import common.exception.PlaceOrderException;
 import controller.PlaceOrderController;
-import controller.ViewCartController;
+import controller.CartController;
 import entity.cart.CartMedia;
 import entity.order.Order;
 import javafx.fxml.FXML;
@@ -53,10 +53,11 @@ public class CartScreenHandler extends BaseScreenHandler {
 
 	@FXML
 	private Button btnPlaceOrder;
+	private CartController cartController;
 
 	public CartScreenHandler(Stage stage, String screenPath) throws IOException {
 		super(stage, screenPath);
-
+		this.cartController = new CartController();
 		// fix relative image path caused by fxml
 		File file = new File("assets/images/Logo.png");
 		Image im = new Image(file.toURI().toString());
@@ -90,23 +91,29 @@ public class CartScreenHandler extends BaseScreenHandler {
 		return labelSubtotal;
 	}
 
-	public ViewCartController getBController(){
-		return (ViewCartController) super.getBController();
+	public CartController getBController(){
+		return (CartController) super.getBController();
 	}
 
 	public void requestToViewCart(BaseScreenHandler prevScreen) throws SQLException {
-		setPreviousScreen(prevScreen);
-		setScreenTitle("Cart Screen");
-		getBController().checkAvailabilityOfProduct();
+		try{
+			setPreviousScreen(prevScreen);
+			setScreenTitle("Cart Screen");
+			getBController().checkAvailabilityOfProduct();
+			displayCartWithMediaAvailability();
+			show();
+		} catch (MediaNotAvailableException e) {
+		// if some media are not available then display cart and break usecase Place Order
 		displayCartWithMediaAvailability();
-		show();
+	}
+
 	}
 
 	public void requestToPlaceOrder() throws SQLException, IOException {
 		try {
 			// create placeOrderController and process the order
 			PlaceOrderController placeOrderController = new PlaceOrderController();
-			if (placeOrderController.getListCartMedia().size() == 0){
+			if (cartController.getListCartMedia().size() == 0){
 				PopupScreen.error("You don't have anything to place");
 				return;
 			}
@@ -150,13 +157,13 @@ public class CartScreenHandler extends BaseScreenHandler {
 		labelVAT.setText(Utils.getCurrencyFormat(vat));
 		labelAmount.setText(Utils.getCurrencyFormat(amount));
 	}
-	
+
 	private void displayCartWithMediaAvailability(){
 		// clear all old cartMedia
 		vboxCart.getChildren().clear();
 
 		// get list media of cart after check availability
-		List lstMedia = getBController().getListCartMedia();
+		List lstMedia = cartController.getListCartMedia();
 
 		try {
 			for (Object cm : lstMedia) {
