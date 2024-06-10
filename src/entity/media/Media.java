@@ -135,6 +135,31 @@ public class Media {
         this.type = type;
         return this;
     }
+    
+    
+    public List getAllMedia() throws SQLException {
+        Statement stm = AIMSDB.getConnection().createStatement();
+        ResultSet res = stm.executeQuery("select * from Media");
+        ArrayList medium = new ArrayList<>();
+        while (res.next()) {
+            Media media = new Media()
+                    .setId(res.getInt("id"))
+                    .setTitle(res.getString("title"))
+                    .setQuantity(res.getInt("quantity"))
+                    .setCategory(res.getString("category"))
+                    .setMediaURL(res.getString("imageUrl"))
+                    .setPrice(res.getInt("price"))
+                    .setType(res.getString("type"))
+                    .setWeight(res.getFloat("weight"));
+            medium.add(media);
+        }
+        return medium;
+    }
+    
+    public void deleteMediaFieldById(int id) throws SQLException {
+        Statement stm = AIMSDB.getConnection().createStatement();
+        stm.executeUpdate("DELETE FROM " + "Media" + " WHERE id = " + id + ";");
+    }
 
     @Override
     public String toString() {

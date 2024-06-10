@@ -67,4 +67,19 @@ public class CD extends Media {
         this.releasedDate = releasedDate;
         return this;
     }
+    
+    public String createCDQuery(String artist, String recordLabel, String musicType, String releaseDate) throws SQLException {
+        StringBuilder queryValues = new StringBuilder();
+        queryValues.append("(")
+                .append("placeForId").append(", ")
+                .append("'").append(artist).append("'").append(", ")
+                .append("'").append(recordLabel).append("'").append(", ")
+                .append("'").append(musicType).append("'").append(", ")
+                .append("'").append(releaseDate).append("'").append(")");
+        String sql = "INSERT INTO CD "
+                + "(id, artist, recordLabel, musicType, releasedDate)"
+                + " VALUES "
+                + queryValues.toString() + ";";
+        return sql;
+    }
 }

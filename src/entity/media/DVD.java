@@ -1,7 +1,10 @@
 package entity.media;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Date;
+import java.util.List;
 
 public class DVD extends Media {
 
@@ -102,5 +105,58 @@ public class DVD extends Media {
     public DVD setFilmType(String filmType) {
         this.filmType = filmType;
         return this;
+    }
+    
+    
+    public Media getMediaById(int id) throws SQLException {
+        String sql = "SELECT * FROM "+
+                "DVD " +
+                "JOIN Media " +
+                "ON Media.id = DVD.id " +
+                "where Media.id = " + id + ";";
+        ResultSet res = stm.executeQuery(sql);
+        if(res.next()) {
+            // from media table
+            String title = res.getString("title");
+            String type = res.getString("type");
+            int price = res.getInt("price");
+            int value = res.getInt("value");
+            String category = res.getString("category");
+            int quantity = res.getInt("quantity");
+            float weight = res.getFloat("weight");
+            String imageUrl = res.getString("imageUrl");
+
+            // from DVD table
+            String discType = res.getString("discType");
+            String director = res.getString("director");
+            int runtime = res.getInt("runtime");
+            String studio = res.getString("studio");
+            String subtitles = res.getString("subtitle");
+            Date releasedDate = res.getDate("releasedDate");
+            String filmType = res.getString("filmType");
+
+            return new DVD(id, title, category, price, value, quantity, type, weight, imageUrl, discType, director, runtime, studio, subtitles, releasedDate, filmType);
+
+        } else {
+            throw new SQLException();
+        }
+    }
+    
+    public String createDVDQuery(String discType, String director, int runtime, String studio, String subtitles, String releasedDate, String filmType) throws SQLException {
+        StringBuilder queryValues = new StringBuilder();
+        queryValues.append("(")
+                .append("placeForId").append(", ")
+                .append("'").append(discType).append("'").append(", ")
+                .append("'").append(director).append("'").append(", ")
+                .append(runtime).append(", ")
+                .append("'").append(studio).append("'").append(", ")
+                .append("'").append(subtitles).append("'").append(", ")
+                .append("'").append(releasedDate).append("'").append(", ")
+                .append("'").append(filmType).append("'").append(")");
+        String sql = "INSERT INTO aims.Book "
+                + "(id, discType, director, runtime, studio, subtitles, releasedDate, filmType)"
+                + " VALUES "
+                + queryValues.toString() + ";";
+        return sql;
     }
 }
