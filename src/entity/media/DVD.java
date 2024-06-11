@@ -9,6 +9,7 @@ public class DVD extends Media {
     String director;
     int runtime;
     String studio;
+    String language;
     String subtitles;
     Date releasedDate;
     String filmType;
@@ -18,24 +19,26 @@ public class DVD extends Media {
     }
 
     public DVD(int id, String title, String category, int price, int quantity, String type, String discType,
-            String director, int runtime, String studio, String subtitles, Date releasedDate, String filmType) throws SQLException{
+            String director, int runtime, String studio, String language, String subtitles, Date releasedDate, String filmType) throws SQLException{
         super(id, title, category, price, quantity, type);
         this.discType = discType;
         this.director = director;
         this.runtime = runtime;
         this.studio = studio;
+        this.language = language;
         this.subtitles = subtitles;
         this.releasedDate = releasedDate;
         this.filmType = filmType;
     }
 
     public DVD(int id, String title, String category, int price, int value, int quantity, String type, float weight, String imageURL, String discType,
-               String director, int runtime, String studio, String subtitles, Date releasedDate, String filmType) throws SQLException{
-        super(id, title, category, price, value, quantity, weight, type, imageURL);
+               String director, int runtime, String studio, String language, String subtitles, Date releasedDate, String filmType, int supportForRushDelivery) throws SQLException{
+        super(id, title, category, price, value, quantity, weight, type, imageURL, supportForRushDelivery);
         this.discType = discType;
         this.director = director;
         this.runtime = runtime;
         this.studio = studio;
+        this.language = language;
         this.subtitles = subtitles;
         this.releasedDate = releasedDate;
         this.filmType = filmType;
