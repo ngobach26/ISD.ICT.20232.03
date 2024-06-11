@@ -145,12 +145,29 @@ public class Book extends Media {
             String bookCategory = res.getString("bookCategory");
 
             return new Book(id, title, category, price, value, quantity, type, weight, imageUrl,
-                    author, coverType, publisher, publishDate, numOfPages, language, bookCategory);
+                    author, coverType, publisher, publishDate, numOfPages, language, bookCategory, supportForRushDelivery);
         } else {
             throw new SQLException();
         }
     }
-    
+
+    public List getAllMedia() {
+        return null;
+    }
+
+    public String toString() {
+        return "{" +
+            super.toString() +
+            " author='" + author + "'" +
+            ", coverType='" + coverType + "'" +
+            ", publisher='" + publisher + "'" +
+            ", publishDate='" + publishDate + "'" +
+            ", numOfPages='" + numOfPages + "'" +
+            ", language='" + language + "'" +
+            ", bookCategory='" + bookCategory + "'" +
+            "}";
+    }
+
     public String createBookQuery(String author, String coverType, String publisher, String publishDate, int numberPages, String language, String category) throws SQLException {
         StringBuilder queryValues = new StringBuilder();
         queryValues.append("(")
@@ -168,4 +185,10 @@ public class Book extends Media {
                 + queryValues.toString() + ";";
         return sql;
     }
+
+    public void deleteMediaFieldById(int id) throws SQLException {
+        Statement stm = AIMSDB.getConnection().createStatement();
+        stm.executeUpdate("DELETE FROM " + "Book" + " WHERE id = " + id + ";");
+    }
 }
+

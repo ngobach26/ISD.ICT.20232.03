@@ -6,6 +6,8 @@ import java.sql.Statement;
 import java.util.Date;
 import java.util.List;
 
+import db.AIMSDB;
+
 public class DVD extends Media {
 
     String discType;
@@ -138,13 +140,17 @@ public class DVD extends Media {
             Date releasedDate = res.getDate("releasedDate");
             String filmType = res.getString("filmType");
 
-            return new DVD(id, title, category, price, value, quantity, type, weight, imageUrl, discType, director, runtime, studio, subtitles, releasedDate, filmType);
-
+            return new DVD(id, title, category, price, value, quantity, type, weight, imageUrl, discType, director, 
+            		runtime, studio, language, subtitles, releasedDate, filmType, supportForRushDelivery);        
         } else {
             throw new SQLException();
         }
     }
-    
+   
+    public List getAllMedia() {
+        return null;
+    }
+
     public String createDVDQuery(String discType, String director, int runtime, String studio, String subtitles, String releasedDate, String filmType) throws SQLException {
         StringBuilder queryValues = new StringBuilder();
         queryValues.append("(")
@@ -161,5 +167,10 @@ public class DVD extends Media {
                 + " VALUES "
                 + queryValues.toString() + ";";
         return sql;
+    }
+
+    public void deleteMediaFieldById(int id) throws SQLException {
+        Statement stm = AIMSDB.getConnection().createStatement();
+        stm.executeUpdate("DELETE FROM " + "DVD" + " WHERE id = " + id + ";");
     }
 }
