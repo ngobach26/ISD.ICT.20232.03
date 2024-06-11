@@ -10,6 +10,7 @@ public class Configs {
 	public static final String DB_NAME = "aims";
 	public static final String DB_USERNAME = System.getenv("DB_USERNAME");
 	public static final String DB_PASSWORD = System.getenv("DB_PASSWORD");
+	public static final String DB_URL = "jdbc:sqlite:K:\\ITSS\\ISD.ICT.20232.03\\assets\\db\\aims.db";
 
     public static float PERCENT_VAT = 10;
 	
@@ -28,6 +29,8 @@ public class Configs {
 	public static final String HOME_PATH  = "/views/fxml/home.fxml";
 	public static final String HOME_MEDIA_PATH = "/views/fxml/media_home.fxml";
 	public static final String POPUP_PATH = "/views/fxml/popup.fxml";
+	public static final String LOGIN = "/views/fxml/login.fxml";
+	public static final String REGISTER = "/views/fxml/register.fxml";
 	
 	//	FONT
 	public static Font REGULAR_FONT = Font.font("Segoe UI", FontWeight.NORMAL, FontPosture.REGULAR, 24);

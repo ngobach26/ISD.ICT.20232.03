@@ -18,7 +18,10 @@ import controller.HomeController;
 import entity.cart.Cart;
 import entity.media.Media;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -30,6 +33,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import services.user.LoginManager;
 import utils.Configs;
 import utils.Utils;
 import views.screen.BaseScreenHandler;
@@ -37,6 +41,7 @@ import views.screen.BaseScreenHandler;
 //import views.screen.cart.CartScreenHandler;
 //import views.screen.order.OrderScreenHandler;
 import views.screen.cart.CartScreenHandler;
+import views.screen.login.LoginHandler;
 
 
 public class HomeScreenHandler extends BaseScreenHandler implements Initializable{
@@ -85,6 +90,24 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
 
     public HomeScreenHandler(Stage stage, String screenPath) throws IOException{
         super(stage, screenPath);
+        sign_out.setOnMouseClicked(mouseEvent -> {
+           
+            try {
+            	LoginManager loginManager = new LoginManager();
+            	loginManager.clearSavedLoginInfo();
+            	LoginHandler loginHandler = new LoginHandler(this.stage, Configs.LOGIN);
+				loginHandler.setScreenTitle("Login");
+//				loginHandler.setImage();
+				loginHandler.show();
+//            	Stage stage1 = (Stage) searchText.getScene().getWindow();
+//    			Parent root = FXMLLoader.load(getClass().getResource(Configs.LOGIN));
+//    			stage1.setScene(new Scene(root));
+//    			stage1.setTitle("Login");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+           
+        });
     }
 
     public Label getNumMediaCartLabel(){
