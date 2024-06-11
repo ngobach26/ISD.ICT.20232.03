@@ -1,9 +1,6 @@
 package services.DAOService;
 
-import DAO.MediaDAO;
-import DAO.OrderDAO;
-import DAO.SQLiteMediaDAO;
-import DAO.SQLiteOrderDAO;
+import DAO.*;
 
 import java.sql.SQLException;
 
@@ -15,6 +12,11 @@ public class DAOFactory {
     public static OrderDAO getOrderDAO() throws SQLException {
         // Bạn có thể thay đổi implementation ở đây nếu muốn sử dụng loại cơ sở dữ liệu khác
         return new SQLiteOrderDAO();
+    }
+
+    public static UserDAO getUserDAO() throws SQLException {
+        // Bạn có thể thay đổi implementation ở đây nếu muốn sử dụng loại cơ sở dữ liệu khác
+        return new SQLiteUserDAO();
     }
 }
 

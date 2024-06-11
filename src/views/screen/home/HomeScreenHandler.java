@@ -18,7 +18,10 @@ import controller.HomeController;
 import entity.cart.Cart;
 import entity.media.Media;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -30,6 +33,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import services.user.LoginManager;
 import utils.Configs;
 import utils.Utils;
 import views.screen.BaseScreenHandler;
@@ -37,6 +41,7 @@ import views.screen.BaseScreenHandler;
 //import views.screen.cart.CartScreenHandler;
 //import views.screen.order.OrderScreenHandler;
 import views.screen.cart.CartScreenHandler;
+import views.screen.login.LoginHandler;
 
 
 public class HomeScreenHandler extends BaseScreenHandler implements Initializable{
@@ -85,6 +90,24 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
 
     public HomeScreenHandler(Stage stage, String screenPath) throws IOException{
         super(stage, screenPath);
+        sign_out.setOnMouseClicked(mouseEvent -> {
+           
+            try {
+            	LoginManager loginManager = new LoginManager();
+            	loginManager.clearSavedLoginInfo();
+            	LoginHandler loginHandler = new LoginHandler(this.stage, Configs.LOGIN);
+				loginHandler.setScreenTitle("Login");
+//				loginHandler.setImage();
+				loginHandler.show();
+//            	Stage stage1 = (Stage) searchText.getScene().getWindow();
+//    			Parent root = FXMLLoader.load(getClass().getResource(Configs.LOGIN));
+//    			stage1.setScene(new Scene(root));
+//    			stage1.setTitle("Login");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+           
+        });
     }
 
     public Label getNumMediaCartLabel(){
@@ -149,31 +172,6 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
                 throw new ViewCartException(Arrays.toString(e1.getStackTrace()).replaceAll(", ", "\n"));
             }
         });
-
-//        orderIcon.setOnMouseClicked(e -> {
-//        	OrderScreenHandler orderScreen;
-//            try {
-//                LOGGER.info("User clicked to view orders");
-//                orderScreen = new OrderScreenHandler(this.stage, Configs.VIEW_ORDER_SCREEN_PATH);
-//                orderScreen.setHomeScreenHandler(this);
-//                orderScreen.setBController(new ViewOrderController());
-//                orderScreen.show();
-//            } catch (IOException ex) {
-//                LOGGER.severe("Failed to load order view: " + ex.getMessage());
-//                ex.printStackTrace();
-//            }
-//        });
-//
-//        sign_out.setOnMouseClicked(mouseEvent -> {
-//            ChooseRoleScreenHandler roleScreenHandler = null;
-//            try {
-//                roleScreenHandler = new ChooseRoleScreenHandler(stage, Configs.SELLER_OR_USER_PATH);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            roleScreenHandler.setScreenTitle("Path choosing screen");
-//            roleScreenHandler.show();
-//        });
 
         addMediaHome(this.homeItems);
         addMenuItem(0, "Book", splitMenuBtnSearch);

@@ -10,6 +10,7 @@ public class Configs {
 	public static final String DB_NAME = "aims";
 	public static final String DB_USERNAME = System.getenv("DB_USERNAME");
 	public static final String DB_PASSWORD = System.getenv("DB_PASSWORD");
+	public static final String DB_URL = "jdbc:sqlite:assets/db/aims.db";
 
     public static float PERCENT_VAT = 10;
     
@@ -27,9 +28,14 @@ public class Configs {
 	public static final String SPLASH_SCREEN_PATH = "/views/fxml/splash.fxml";
 	public static final String CART_SCREEN_PATH = "/views/fxml/cart.fxml";
 	public static final String VIEW_ORDER_SCREEN_PATH = "/views/fxml/view_order.fxml";
+
+	public static final String EDIT_USER_POPUP_PATH = "/views/fxml/edit_user_popup.fxml";
 	public static final String SHIPPING_SCREEN_PATH = "/views/fxml/shipping.fxml";
 	public static final String CART_MEDIA_PATH = "/views/fxml/media_cart.fxml";
 	public static final String HOME_PATH  = "/views/fxml/home.fxml";
+
+	public static final String CREATE_USER_POPUP_PATH  = "/views/fxml/create_user_popup.fxml";
+	public static final String ADMIN_PATH  = "/views/fxml/admin.fxml";
 	public static final String HOME_MEDIA_PATH = "/views/fxml/media_home.fxml";
 	public static final String POPUP_PATH = "/views/fxml/popup.fxml";
 	public static final String ORDER_MANAGEMENT_ADMIN_PATH = "/views/fxml/order_management_admin.fxml";
@@ -46,6 +52,8 @@ public class Configs {
 	public static final String SELLER_UPDATE_BOOK_PATH = "/views/fxml/Update_Book.fxml";
 	public static final String SELLER_UPDATE_CD_PATH = "/views/fxml/Update_CD.fxml";
 	public static final String SELLER_UPDATE_DVD_PATH = "/views/fxml/Update_DVD.fxml";
+	public static final String LOGIN = "/views/fxml/login.fxml";
+	public static final String REGISTER = "/views/fxml/register.fxml";
 	
 	//	FONT
 	public static Font REGULAR_FONT = Font.font("Segoe UI", FontWeight.NORMAL, FontPosture.REGULAR, 24);
