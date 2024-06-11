@@ -1,10 +1,9 @@
-package views.screen.login;
+package views.screen.auth;
 
 
 import java.io.IOException;
 import java.util.logging.Logger;
 
-import DAO.UserDAO;
 import common.exception.LoginAccountException;
 import controller.AuthController;
 import entity.user.User;
@@ -21,7 +20,7 @@ import views.screen.BaseScreenHandler;
 //import views.screen.RegisterHandler;
 import views.screen.admin.AdminScreenHandler;
 import views.screen.home.HomeScreenHandler;
-import views.screen.register.RegisterHandler;
+
 public class LoginHandler extends BaseScreenHandler {
     @FXML
     private TextField email;
@@ -74,13 +73,13 @@ public class LoginHandler extends BaseScreenHandler {
             try {
                 User user = authController.validateLogin(email.getText(), password.getText());
                 System.out.println(">>>check user: " + user.toString());
-                if (user.getUserType() == 1){
+                if (user.getUserType() == 2){
                     System.out.println("Admin logged in");
                     AdminScreenHandler adminHandler = new AdminScreenHandler(this.stage, Configs.ADMIN_PATH);
 					adminHandler.setScreenTitle("Home Screen");
 					adminHandler.show();
                 }
-                else {
+                else if(user.getUserType() == 0) {
                 	LoginManager loginManager = new LoginManager();
                 	loginManager.saveLoginInfo(user.getId(), user.getName(), user.getPhone(), user.getAddress(), user.getEmail());
                     System.out.println("Customer logged in");

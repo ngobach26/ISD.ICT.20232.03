@@ -22,6 +22,7 @@ public class User {
         this.email = email;
         this.address = address;
         this.phone = phone;
+        this.userType = userType;
     }
     public User(String name, String email, String address, String phone,int userType, String password){
         this.name = name;
@@ -33,7 +34,6 @@ public class User {
     }
 
     public User() {
-    	
     }
     public User(int id, String name, String phone, String address, String email) {
     	this.id = id;

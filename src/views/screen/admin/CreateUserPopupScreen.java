@@ -76,7 +76,6 @@ public class CreateUserPopupScreen extends BaseScreenHandler {
                 userTypeValue = 2;
                 break;
             default:
-                // Handle invalid user type
                 return;
         }
         User newUser = new User(name, email, address, phone , userTypeValue, password);

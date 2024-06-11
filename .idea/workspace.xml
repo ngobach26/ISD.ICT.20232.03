@@ -5,66 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="228d128d-7d0d-4ca2-a953-3525d59eef86" name="Changes" comment="update">
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/legal/javafx.base/ADDITIONAL_LICENSE_INFO" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/legal/javafx.base/ASSEMBLY_EXCEPTION" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/legal/javafx.base/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/legal/javafx.controls/ADDITIONAL_LICENSE_INFO" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/legal/javafx.controls/ASSEMBLY_EXCEPTION" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/legal/javafx.controls/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/legal/javafx.fxml/ADDITIONAL_LICENSE_INFO" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/legal/javafx.fxml/ASSEMBLY_EXCEPTION" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/legal/javafx.fxml/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/legal/javafx.graphics/ADDITIONAL_LICENSE_INFO" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/legal/javafx.graphics/ASSEMBLY_EXCEPTION" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/legal/javafx.graphics/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/legal/javafx.graphics/jpeg_fx.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/legal/javafx.graphics/mesa3d.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/legal/javafx.media/ADDITIONAL_LICENSE_INFO" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/legal/javafx.media/ASSEMBLY_EXCEPTION" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/legal/javafx.media/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/legal/javafx.media/directshow.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/legal/javafx.media/glib.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/legal/javafx.media/gstreamer.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/legal/javafx.media/libffi.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/legal/javafx.swing/ADDITIONAL_LICENSE_INFO" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/legal/javafx.swing/ASSEMBLY_EXCEPTION" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/legal/javafx.swing/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/legal/javafx.web/ADDITIONAL_LICENSE_INFO" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/legal/javafx.web/ASSEMBLY_EXCEPTION" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/legal/javafx.web/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/legal/javafx.web/icu_web.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/legal/javafx.web/libxml2.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/legal/javafx.web/libxslt.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/legal/javafx.web/webkit.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/lib/javafx-swt.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/lib/javafx.base.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/lib/javafx.controls.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/lib/javafx.fxml.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/lib/javafx.graphics.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/lib/javafx.media.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/lib/javafx.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/lib/javafx.swing.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/lib/javafx.web.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/win/javafx-sdk-21.0.3/src.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/common/exception/LoginAccountException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/common/exception/RegisterAccountException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/controller/AuthController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/user/LoginManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/fxml/login.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/fxml/register.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/screen/login/LoginHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/screen/register/RegisterHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/.classpath" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/db/aims.db" beforeDir="false" afterPath="$PROJECT_DIR$/assets/db/aims.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/SQLiteUserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/SQLiteUserDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/UserDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/db/AIMSDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/AIMSDB.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entity/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/user/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/DAOService/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/DAOService/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/Configs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/Configs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/admin/AdminScreenHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/admin/AdminScreenHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/admin/CreateUserPopupScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/admin/CreateUserPopupScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/screen/home/HomeScreenHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/home/HomeScreenHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/login/LoginHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/auth/LoginHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/register/RegisterHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/auth/RegisterHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

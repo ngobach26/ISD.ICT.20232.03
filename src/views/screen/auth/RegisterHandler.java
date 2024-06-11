@@ -1,22 +1,17 @@
-package views.screen.register;
+package views.screen.auth;
 
 import java.io.IOException;
 import java.util.logging.Logger;
 
-import DAO.UserDAO;
 import controller.AuthController;
 //import entity.user.User;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import utils.Configs;
 import utils.Utils;
 import views.screen.BaseScreenHandler;
-import views.screen.login.LoginHandler;
 
 public class RegisterHandler extends BaseScreenHandler {
 	@FXML

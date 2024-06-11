@@ -1,12 +1,5 @@
 package views.screen.admin;
 
-import java.io.IOException;
-import java.net.URL;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.logging.Logger;
-
 import controller.AdminController;
 import entity.user.User;
 import javafx.beans.property.SimpleStringProperty;
@@ -18,8 +11,18 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import services.user.LoginManager;
+import utils.Configs;
 import utils.Utils;
 import views.screen.BaseScreenHandler;
+import views.screen.auth.LoginHandler;
+
+import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
 public class AdminScreenHandler extends BaseScreenHandler implements Initializable {
 
@@ -133,7 +136,7 @@ public class AdminScreenHandler extends BaseScreenHandler implements Initializab
 //        changePasswordButton.setOnAction(event -> changePassword());
 //        logoutButton.setOnAction(event -> logout());
 //
-//        sign_out.setOnMouseClicked(event -> logout());
+        sign_out.setOnMouseClicked(event -> logout());
 //
 //        aimsImage.setOnMouseClicked(event -> reloadPage());
 //        cartImage.setOnMouseClicked(event -> viewCart());
@@ -150,7 +153,9 @@ public class AdminScreenHandler extends BaseScreenHandler implements Initializab
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
         typeColumn.setCellValueFactory(cellData -> {
             User user = (User) cellData.getValue();
+//            System.out.println(user.getUserType());
             String userTypeString = getUserTypeString(user.getUserType());
+//            System.out.println(userTypeString);
             return new SimpleStringProperty(userTypeString);
         });
         try {
@@ -239,7 +244,16 @@ public class AdminScreenHandler extends BaseScreenHandler implements Initializab
     }
 
     private void logout() {
-        // Logic to logout
+        try {
+            LoginManager loginManager = new LoginManager();
+            loginManager.clearSavedLoginInfo();
+            LoginHandler loginHandler = new LoginHandler(this.stage, Configs.LOGIN);
+            loginHandler.setScreenTitle("Login");
+            loginHandler.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void reloadPage() {

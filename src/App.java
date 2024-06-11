@@ -10,7 +10,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import utils.Configs;
-import views.screen.login.LoginHandler;
+import views.screen.auth.LoginHandler;
 
 
 public class App extends Application {
