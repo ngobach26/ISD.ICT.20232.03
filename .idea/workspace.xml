@@ -5,14 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="228d128d-7d0d-4ca2-a953-3525d59eef86" name="Changes" comment="update">
-      <change afterPath="$PROJECT_DIR$/Design Concepts and Design Principles Report/Coupling and Cohesion Level.docx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Design Concepts and Design Principles Report/Good Design Report.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/order/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/order/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/order/OrderMedia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/order/OrderMedia.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/Configs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/Configs.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

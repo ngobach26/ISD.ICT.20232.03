@@ -10,7 +10,7 @@ public class Configs {
 	public static final String DB_NAME = "aims";
 	public static final String DB_USERNAME = System.getenv("DB_USERNAME");
 	public static final String DB_PASSWORD = System.getenv("DB_PASSWORD");
-	public static final String DB_URL = "jdbc:sqlite:K:\\ITSS\\ISD.ICT.20232.03\\assets\\db\\aims.db";
+	public static final String DB_URL = "jdbc:sqlite:assets/db/aims.db";
 
     public static float PERCENT_VAT = 10;
 	
