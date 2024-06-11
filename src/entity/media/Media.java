@@ -27,6 +27,7 @@ public class Media {
     protected float weight;
     protected String type;
     protected String imageURL;
+    protected int supportForRushDelivery;
 
     public Media() throws SQLException {
         stm = AIMSDB.getConnection().createStatement();
@@ -43,7 +44,7 @@ public class Media {
     }
 
     public Media (int id, String title, String category, int price, int value,
-                  int quantity, float weight, String type, String imageURL) throws SQLException{
+                  int quantity, float weight, String type, String imageURL, int supportForRushDelivery) throws SQLException{
         this.id = id;
         this.title = title;
         this.category = category;
@@ -53,6 +54,7 @@ public class Media {
         this.weight = weight;
         this.type = type;
         this.imageURL = imageURL;
+        this.supportForRushDelivery = supportForRushDelivery;
     }
 
     // getter and setter
@@ -134,6 +136,14 @@ public class Media {
     public Media setType(String type) {
         this.type = type;
         return this;
+    }
+
+    public int getSupportForRushDelivery() {
+        return supportForRushDelivery;
+    }
+
+    public void setSupportForRushDelivery(int supportForRushDelivery) {
+        this.supportForRushDelivery = supportForRushDelivery;
     }
 
     @Override
