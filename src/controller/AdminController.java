@@ -23,4 +23,8 @@ public class AdminController {
         return userService.getAllUsers();
     }
 
+    public void updateUser(User user) throws SQLException{
+        userService.updateUser(user);
+    }
+
 }

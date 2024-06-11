@@ -111,23 +111,6 @@
             </HBox>
         </VBox>
 
-        <!-- Right Section: User Role Management -->
-        <VBox layoutX="1030.0" layoutY="123.0" spacing="10" prefWidth="300.0">
-            <Label text="Manage Roles" style="-fx-font-size: 18px;"/>
-            <HBox spacing="10">
-                <Label text="Select User:"/>
-                <ComboBox fx:id="userComboBox"/>
-            </HBox>
-            <HBox spacing="10">
-                <Label text="Assign Roles:"/>
-                <VBox>
-                    <CheckBox fx:id="adminRoleCheckBox" text="Administrator"/>
-                    <CheckBox fx:id="productManagerRoleCheckBox" text="Product Manager"/>
-                </VBox>
-            </HBox>
-            <Button fx:id="setRolesButton" text="Set Roles"/>
-        </VBox>
-
         <!-- Bottom Section: Logout and Change Password Buttons -->
         <HBox layoutX="24.0" layoutY="720.0" spacing="10" prefWidth="1283.0" alignment="CENTER_RIGHT">
             <Button fx:id="changePasswordButton" text="Change Password"/>

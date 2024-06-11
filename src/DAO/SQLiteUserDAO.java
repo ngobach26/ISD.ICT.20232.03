@@ -51,5 +51,20 @@ public class SQLiteUserDAO implements UserDAO {
         return users;
     }
 
+    @Override
+    public void updateUser(User user) throws SQLException {
+        String sql = "UPDATE User SET name = ?, email = ?, address = ?, phone = ?, user_type = ?, password = ? WHERE id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, user.getName());
+            statement.setString(2, user.getEmail());
+            statement.setString(3, user.getAddress());
+            statement.setString(4, user.getPhone());
+            statement.setInt(5, user.getUserType());
+            statement.setString(6, user.getPassword());
+            statement.setInt(7, user.getId());
+            statement.executeUpdate();
+        }
+    }
+
 
 }

@@ -1,4 +1,4 @@
-package views.screen.popup;
+package views.screen.admin;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -14,6 +14,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import utils.Configs;
 import views.screen.BaseScreenHandler;
+import views.screen.admin.AdminScreenHandler;
+import views.screen.popup.PopupScreen;
 
 public class CreateUserPopupScreen extends BaseScreenHandler {
 
@@ -37,15 +39,18 @@ public class CreateUserPopupScreen extends BaseScreenHandler {
     private TextField passwordField;
 
     private AdminController adminController;
+    private AdminScreenHandler adminScreenHandler;
 
-    public CreateUserPopupScreen(Stage stage) throws IOException {
+    public CreateUserPopupScreen(Stage stage, AdminScreenHandler adminScreenHandler) throws IOException {
         super(stage, Configs.CREATE_USER_POPUP_PATH);
+        this.adminController = new AdminController();
+        this.adminScreenHandler = adminScreenHandler;
         init();
     }
 
     public void init() {
         createButton.setOnAction(event -> createUser());
-        this.adminController = new AdminController();
+
         userTypeComboBox.getItems().clear();
         userTypeComboBox.getItems().addAll("Admin", "User", "Manager");
 
@@ -79,6 +84,7 @@ public class CreateUserPopupScreen extends BaseScreenHandler {
             adminController.createUser(newUser);
             // Show success popup
             PopupScreen.success("User created successfully!");
+            adminScreenHandler.reloadPage();
             // Close the popup
             Stage stage = (Stage) createButton.getScene().getWindow();
             stage.close();

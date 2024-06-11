@@ -4,9 +4,21 @@ import entity.cart.Cart;
 import entity.cart.CartMedia;
 import entity.media.Media;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class User {
 
+    public int getId() {
+        return id;
+    }
+
     private int id;
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     private String name;
     private String email;
     private String address;
@@ -89,5 +101,6 @@ public class User {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
     
 }

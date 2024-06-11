@@ -9,22 +9,17 @@ import java.util.logging.Logger;
 
 import controller.AdminController;
 import entity.user.User;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.SplitMenuButton;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import utils.Utils;
 import views.screen.BaseScreenHandler;
-import views.screen.popup.CreateUserPopupScreen;
 
 public class AdminScreenHandler extends BaseScreenHandler implements Initializable {
 
@@ -55,19 +50,22 @@ public class AdminScreenHandler extends BaseScreenHandler implements Initializab
     private SplitMenuButton splitMenuBtnSearch;
 
     @FXML
-    private TableView<?> userTable;
+    private TableView<User> userTable;
 
     @FXML
-    private TableColumn<?, ?> usernameColumn;
+    private TableColumn<User, String> usernameColumn;
 
     @FXML
-    private TableColumn<?, ?> emailColumn;
+    private TableColumn<User, String> emailColumn;
 
     @FXML
-    private TableColumn<?, ?> rolesColumn;
+    private TableColumn<User, String> addressColumn;
 
     @FXML
-    private TableColumn<?, ?> statusColumn;
+    private TableColumn<User, String> phoneColumn;
+
+    @FXML
+    private TableColumn<User, String> typeColumn;
 
     @FXML
     private Button createUserButton;
@@ -110,13 +108,17 @@ public class AdminScreenHandler extends BaseScreenHandler implements Initializab
 
     private AdminController adminController;
 
+
     public AdminScreenHandler(Stage stage, String screenPath) throws IOException{
         super(stage, screenPath);
+
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        this.adminController = new AdminController();
         initializeButtons();
-//        initializeTable();
+        initializeTable();
+        setupClickHandlerForEachRow();
     }
 
     private void initializeButtons() {
@@ -142,28 +144,66 @@ public class AdminScreenHandler extends BaseScreenHandler implements Initializab
     }
 
     private void initializeTable() {
-        usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
+        usernameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
-        rolesColumn.setCellValueFactory(new PropertyValueFactory<>("roles"));
-        statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
-
+        addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
+        phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
+        typeColumn.setCellValueFactory(cellData -> {
+            User user = (User) cellData.getValue();
+            String userTypeString = getUserTypeString(user.getUserType());
+            return new SimpleStringProperty(userTypeString);
+        });
         try {
-            List<User> users = adminController.getAllUsers();
-            userTable.getItems().addAll(users);
+            List<User> userList = adminController.getAllUsers();
+            ObservableList<User> users = FXCollections.observableArrayList(userList);
+            userTable.setItems(users);
         } catch (SQLException e) {
             e.printStackTrace();
             // Handle exception
         }
     }
 
+    private String getUserTypeString(int userType) {
+        switch (userType) {
+            case 0:
+                return "User";
+            case 1:
+                return "Manager";
+            case 2:
+                return "Admin";
+            default:
+                return "Unknown";
+        }
+    }
+
+
     private void createUser() {
         try {
             Stage popupStage = new Stage();
-            CreateUserPopupScreen createUserPopup = new CreateUserPopupScreen(popupStage);
+            CreateUserPopupScreen createUserPopup = new CreateUserPopupScreen(popupStage,this);
             createUserPopup.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void setupClickHandlerForEachRow() {
+        userTable.setRowFactory(tableView -> {
+            TableRow<User> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    try {
+                        User user = row.getItem();
+                        Stage popupStage = new Stage();
+                        EditUserPopupScreen editUserPopup = new EditUserPopupScreen(popupStage, user,this);
+                        editUserPopup.show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            return row;
+        });
     }
 
     private void viewUserInfo() {
@@ -202,8 +242,13 @@ public class AdminScreenHandler extends BaseScreenHandler implements Initializab
         // Logic to logout
     }
 
-    private void reloadPage() {
-        // Logic to reload the page
+    public void reloadPage() {
+        try {
+            ObservableList<User> users = FXCollections.observableArrayList(adminController.getAllUsers());
+            userTable.setItems(users);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private void viewCart() {

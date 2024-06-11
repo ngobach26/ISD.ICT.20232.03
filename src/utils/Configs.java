@@ -23,6 +23,8 @@ public class Configs {
 	public static final String SPLASH_SCREEN_PATH = "/views/fxml/splash.fxml";
 	public static final String CART_SCREEN_PATH = "/views/fxml/cart.fxml";
 	public static final String VIEW_ORDER_SCREEN_PATH = "/views/fxml/view_order.fxml";
+
+	public static final String EDIT_USER_POPUP_PATH = "/views/fxml/edit_user_popup.fxml";
 	public static final String SHIPPING_SCREEN_PATH = "/views/fxml/shipping.fxml";
 	public static final String CART_MEDIA_PATH = "/views/fxml/media_cart.fxml";
 	public static final String HOME_PATH  = "/views/fxml/home.fxml";
