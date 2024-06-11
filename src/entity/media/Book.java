@@ -37,8 +37,8 @@ public class Book extends Media {
 
     public Book(int id, String title, String category, int price, int value, int quantity, String type, float weight, String imageURL, String author,
                 String coverType, String publisher, Date publishDate, int numOfPages, String language,
-                String bookCategory) throws SQLException{
-        super(id, title, category, price, value, quantity, weight, type, imageURL);
+                String bookCategory, int supportForRushDelivery) throws SQLException{
+        super(id, title, category, price, value, quantity, weight, type, imageURL, supportForRushDelivery);
         this.author = author;
         this.coverType = coverType;
         this.publisher = publisher;
