@@ -150,31 +150,6 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
             }
         });
 
-//        orderIcon.setOnMouseClicked(e -> {
-//        	OrderScreenHandler orderScreen;
-//            try {
-//                LOGGER.info("User clicked to view orders");
-//                orderScreen = new OrderScreenHandler(this.stage, Configs.VIEW_ORDER_SCREEN_PATH);
-//                orderScreen.setHomeScreenHandler(this);
-//                orderScreen.setBController(new ViewOrderController());
-//                orderScreen.show();
-//            } catch (IOException ex) {
-//                LOGGER.severe("Failed to load order view: " + ex.getMessage());
-//                ex.printStackTrace();
-//            }
-//        });
-//
-//        sign_out.setOnMouseClicked(mouseEvent -> {
-//            ChooseRoleScreenHandler roleScreenHandler = null;
-//            try {
-//                roleScreenHandler = new ChooseRoleScreenHandler(stage, Configs.SELLER_OR_USER_PATH);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            roleScreenHandler.setScreenTitle("Path choosing screen");
-//            roleScreenHandler.show();
-//        });
-
         addMediaHome(this.homeItems);
         addMenuItem(0, "Book", splitMenuBtnSearch);
         addMenuItem(1, "DVD", splitMenuBtnSearch);
