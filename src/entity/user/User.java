@@ -8,17 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class User {
-
-    public int getId() {
-        return id;
-    }
-
     private int id;
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     private String name;
     private String email;
     private String address;
@@ -42,22 +32,67 @@ public class User {
         this.password = password;
     }
 
-    
-    // override toString method
-    @Override
-    public String toString() {
-        return "{" +
-            "  username='" + name + "'" +
-            ", email='" + email + "'" +
-            ", address='" + address + "'" +
-            ", phone='" + phone + "'" +
-            "}";
+    public User() {
+    	
+    }
+    public User(int id, String name, String phone, String address, String email) {
+    	this.id = id;
+    	this.name = name;
+		this.email = email;
+		this.address = address;
+		this.phone = phone;
+    }
+	
+	public User(String name, String email, String address, String phone, String password, int user_type) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.address = address;
+		this.phone = phone;
+		this.password = password;
+		this.userType = user_type;
+	}
+
+    public int getId() {
+        return id;
     }
 
-    // getter and setter
-    public String getName() {
-        return this.name;
+    public void setId(int id) {
+        this.id = id;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public int getUserType() {
         return userType;
     }
@@ -74,33 +109,10 @@ public class User {
         this.password = password;
     }
 
-    public void setusername(String name) {
-        this.name = name;
-    }
+    @Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", address=" + address + ", phone=" + phone
+				+ ", password=" + password + ", user_type=" + userType + "]";
+	}
 
-    public String getEmail() {
-        return this.email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getAddress() {
-        return this.address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getPhone() {
-        return this.phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    
 }

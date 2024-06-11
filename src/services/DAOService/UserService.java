@@ -39,4 +39,13 @@ public class UserService {
     public void updateUser(User user)throws SQLException{
         userDAO.updateUser(user);
     }
+    public boolean registerUser(String name, String email, String address, String phone, String password, int userType) throws SQLException {
+        return userDAO.registerUser(name, email, address, phone, password, userType);
+    }
+
+    public User getUserByEmail(String email){
+        return userDAO.getUserByEmail(email);
+    }
+
+
 }
