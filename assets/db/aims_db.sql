@@ -121,3 +121,5 @@ CREATE TABLE [TRANSACTION] (
     orderID INT NOT NULL,
     CONSTRAINT "fk_order_transaction" FOREIGN KEY ("orderID") REFERENCES "ORDER"(orderID)
 );
+
+ALTER TABLE "USER" ADD COLUMN status INT;
