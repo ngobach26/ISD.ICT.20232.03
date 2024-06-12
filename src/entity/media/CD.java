@@ -1,7 +1,12 @@
 package entity.media;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Date;
+import java.util.List;
+
+import db.AIMSDB;
 
 public class CD extends Media {
 
@@ -66,5 +71,63 @@ public class CD extends Media {
     public CD setReleasedDate(Date releasedDate) {
         this.releasedDate = releasedDate;
         return this;
+    }
+    
+    public Media getMediaById(int id) throws SQLException {
+        String sql = "SELECT * FROM "+
+                "CD " +
+                "JOIN Media " +
+                "ON Media.id = CD.id " +
+                "where Media.id = " + id + ";";
+        ResultSet res = stm.executeQuery(sql);
+        if(res.next()) {
+            // from media table
+            String title = res.getString("title");
+            String type = res.getString("type");
+            int price = res.getInt("price");
+            int value = res.getInt("value");
+            String category = res.getString("category");
+            int quantity = res.getInt("quantity");
+            float weight = res.getFloat("weight");
+            String imageUrl = res.getString("imageUrl");
+
+            // from CD table
+            String artist = res.getString("artist");
+            String recordLabel = res.getString("recordLabel");
+            String musicType = res.getString("musicType");
+            Date releasedDate = res.getDate("releasedDate");
+
+            return new CD(id, title, category, price, value, quantity, type, weight, imageUrl,
+                    artist, recordLabel, musicType, releasedDate, supportForRushDelivery);
+
+        } else {
+            throw new SQLException();
+        }
+    }
+
+    @Override
+    public List getAllMedia() {
+        return null;
+    }
+
+    public String createCDQuery(String artist, String recordLabel, String musicType, String releaseDate) throws SQLException {
+        StringBuilder queryValues = new StringBuilder();
+        queryValues.append("(")
+                .append("placeForId").append(", ")
+                .append("'").append(artist).append("'").append(", ")
+                .append("'").append(recordLabel).append("'").append(", ")
+                .append("'").append(musicType).append("'").append(", ")
+                .append("'").append(releaseDate).append("'").append(")");
+        String sql = "INSERT INTO CD "
+                + "(id, artist, recordLabel, musicType, releasedDate)"
+                + " VALUES "
+                + queryValues.toString() + ";";
+        return sql;
+    }
+
+    @Override
+    public void deleteMediaFieldById(int id) throws SQLException {
+        Statement stm = AIMSDB.getConnection().createStatement();
+        stm.executeUpdate("DELETE FROM " + "CD" + " WHERE id = " + id + ";");
     }
 }

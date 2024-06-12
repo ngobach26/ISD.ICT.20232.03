@@ -1,7 +1,10 @@
 package entity.media;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Date;
+import java.util.List;
 
 import db.AIMSDB;
 
@@ -112,4 +115,80 @@ public class Book extends Media {
         this.bookCategory = bookCategory;
         return this;
     }
+    
+    public Book getMediaById(int id) throws SQLException {
+        String sql = "SELECT * FROM "+
+                "Book " +
+                "JOIN Media " +
+                "ON Media.id = Book.id " +
+                "WHERE Media.id = " + id + ";";
+        Statement stm = AIMSDB.getConnection().createStatement();
+        ResultSet res = stm.executeQuery(sql);
+        if(res.next()) {
+            // from Media table
+            String title = res.getString("title");
+            String type = res.getString("type");
+            int price = res.getInt("price");
+            int value = res.getInt("value");
+            String category = res.getString("category");
+            int quantity = res.getInt("quantity");
+            float weight = res.getFloat("weight");
+            String imageUrl = res.getString("imageUrl");
+
+            // from Book table
+            String author = res.getString("author");
+            String coverType = res.getString("coverType");
+            String publisher = res.getString("publisher");
+            Date publishDate = res.getDate("publishDate");
+            int numOfPages = res.getInt("numOfPages");
+            String language = res.getString("language");
+            String bookCategory = res.getString("bookCategory");
+
+            return new Book(id, title, category, price, value, quantity, type, weight, imageUrl,
+                    author, coverType, publisher, publishDate, numOfPages, language, bookCategory, supportForRushDelivery);
+        } else {
+            throw new SQLException();
+        }
+    }
+
+    public List getAllMedia() {
+        return null;
+    }
+
+    public String toString() {
+        return "{" +
+            super.toString() +
+            " author='" + author + "'" +
+            ", coverType='" + coverType + "'" +
+            ", publisher='" + publisher + "'" +
+            ", publishDate='" + publishDate + "'" +
+            ", numOfPages='" + numOfPages + "'" +
+            ", language='" + language + "'" +
+            ", bookCategory='" + bookCategory + "'" +
+            "}";
+    }
+
+    public String createBookQuery(String author, String coverType, String publisher, String publishDate, int numberPages, String language, String category) throws SQLException {
+        StringBuilder queryValues = new StringBuilder();
+        queryValues.append("(")
+                .append("placeForId").append(", ")
+                .append("'").append(author).append("'").append(", ")
+                .append("'").append(coverType).append("'").append(", ")
+                .append("'").append(publisher).append("'").append(", ")
+                .append("'").append(publishDate).append("'").append(", ")
+                .append(numberPages).append(", ")
+                .append("'").append(language).append("'").append(", ")
+                .append("'").append(category).append("'").append(")");
+        String sql = "INSERT INTO Book "
+                + "(id, author, coverType, publisher, publishDate, numOfPages, language, bookCategory)"
+                + " VALUES "
+                + queryValues.toString() + ";";
+        return sql;
+    }
+
+    public void deleteMediaFieldById(int id) throws SQLException {
+        Statement stm = AIMSDB.getConnection().createStatement();
+        stm.executeUpdate("DELETE FROM " + "Book" + " WHERE id = " + id + ";");
+    }
 }
+

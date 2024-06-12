@@ -1,22 +1,17 @@
-package views.screen.register;
+package views.screen.auth;
 
 import java.io.IOException;
 import java.util.logging.Logger;
 
-import DAO.UserDAO;
-import controller.RegisterController;
+import controller.AuthController;
 //import entity.user.User;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import utils.Configs;
 import utils.Utils;
 import views.screen.BaseScreenHandler;
-import views.screen.login.LoginHandler;
 
 public class RegisterHandler extends BaseScreenHandler {
 	@FXML
@@ -36,7 +31,7 @@ public class RegisterHandler extends BaseScreenHandler {
 	@FXML
 	private Button loginBtn;
 	public Alert alert;
-	private RegisterController registerController = new RegisterController();
+	private AuthController authController = new AuthController();
 	public static Logger LOGGER = Utils.getLogger(LoginHandler.class.getName());
 
 	public RegisterHandler(Stage stage, String screenPath) throws IOException {
@@ -79,9 +74,9 @@ public class RegisterHandler extends BaseScreenHandler {
             String passwordText = password.getText();
             int userTypeText = Integer.parseInt(userType.getText());
 			System.out.println("đăng kí");
-			boolean success = registerController.registerUser(nameText, emailText, addressText, phoneText, passwordText,
-					userTypeText, new UserDAO());
+
 			try {
+				boolean success = authController.registerUser(nameText, emailText, addressText, phoneText, passwordText, userTypeText);
 				LoginHandler loginHandler = new LoginHandler(this.stage, Configs.LOGIN);
 				loginHandler.setScreenTitle("Login");
 				loginHandler.show();

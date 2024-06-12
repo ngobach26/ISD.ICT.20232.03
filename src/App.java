@@ -10,7 +10,8 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import utils.Configs;
-import views.screen.login.LoginHandler;
+import views.screen.auth.LoginHandler;
+
 
 public class App extends Application {
 
@@ -44,20 +45,15 @@ public class App extends Application {
 			fadeIn.setOnFinished((e) -> {
 				fadeOut.play();
 			});
-			// After fade out, load actual content
 			fadeOut.setOnFinished((e) -> {
 				try {
+//					AdminScreenHandler adminHandler = new AdminScreenHandler(primaryStage, Configs.ADMIN_PATH);
+//					adminHandler.setScreenTitle("Home Screen");
+//					adminHandler.show();
 					LoginHandler loginHandler = new LoginHandler(primaryStage, Configs.LOGIN);
 					loginHandler.setScreenTitle("Login");
-//					loginHandler.setImage();
 					loginHandler.show();
-//					HomeScreenHandler homeHandler = new HomeScreenHandler(primaryStage, Configs.HOME_PATH);
-//					homeHandler.setScreenTitle("Home Cart");
-//					homeHandler.setImage();
-//					homeHandler.show();
-//					RegisterHandler registerHandler = new RegisterHandler(primaryStage, Configs.REGISTER);
-//					registerHandler.setScreenTitle("Register");
-//					registerHandler.show();
+
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}

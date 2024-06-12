@@ -4,18 +4,44 @@ import entity.cart.Cart;
 import entity.cart.CartMedia;
 import entity.media.Media;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class User {
-    
     private int id;
     private String name;
     private String email;
     private String address;
     private String phone;
+    private int userType;
     private String password;
-    private int user_type;
-    
+
+    public User(int id, String name, String email, String address, String phone, int userType){
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.address = address;
+        this.phone = phone;
+        this.userType = userType;
+    }
+    public User(int id, String name, String email, String address, String phone,int userType, String password){
+        this.name = name;
+        this.email = email;
+        this.address = address;
+        this.phone = phone;
+        this.userType = userType;
+        this.password = password;
+    }
+    public User(String name, String email, String address, String phone,int userType, String password){
+        this.name = name;
+        this.email = email;
+        this.address = address;
+        this.phone = phone;
+        this.userType = userType;
+        this.password = password;
+    }
+
     public User() {
-    	
     }
     public User(int id, String name, String phone, String address, String email) {
     	this.id = id;
@@ -32,70 +58,69 @@ public class User {
 		this.address = address;
 		this.phone = phone;
 		this.password = password;
-		this.user_type = user_type;
+		this.userType = user_type;
 	}
 
-	public String getName() {
-		return name;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getAddress() {
-		return address;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public String getPhone() {
-		return phone;
-	}
+    public String getAddress() {
+        return address;
+    }
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getPhone() {
+        return phone;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
-	public int getUser_type() {
-		return user_type;
-	}
+    public int getUserType() {
+        return userType;
+    }
 
-	public void setUser_type(int user_type) {
-		this.user_type = user_type;
-	}
+    public void setUserType(int userType) {
+        this.userType = userType;
+    }
 
-	public int getId() {
-		return id;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	@Override
+    @Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", email=" + email + ", address=" + address + ", phone=" + phone
-				+ ", password=" + password + ", user_type=" + user_type + "]";
+				+ ", password=" + password + ", user_type=" + userType + "]";
 	}
 
-  
 }

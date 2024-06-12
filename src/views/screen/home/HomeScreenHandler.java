@@ -18,10 +18,7 @@ import controller.HomeController;
 import entity.cart.Cart;
 import entity.media.Media;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -41,7 +38,7 @@ import views.screen.BaseScreenHandler;
 //import views.screen.cart.CartScreenHandler;
 //import views.screen.order.OrderScreenHandler;
 import views.screen.cart.CartScreenHandler;
-import views.screen.login.LoginHandler;
+import views.screen.auth.LoginHandler;
 
 
 public class HomeScreenHandler extends BaseScreenHandler implements Initializable{
@@ -172,31 +169,6 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
                 throw new ViewCartException(Arrays.toString(e1.getStackTrace()).replaceAll(", ", "\n"));
             }
         });
-
-//        orderIcon.setOnMouseClicked(e -> {
-//        	OrderScreenHandler orderScreen;
-//            try {
-//                LOGGER.info("User clicked to view orders");
-//                orderScreen = new OrderScreenHandler(this.stage, Configs.VIEW_ORDER_SCREEN_PATH);
-//                orderScreen.setHomeScreenHandler(this);
-//                orderScreen.setBController(new ViewOrderController());
-//                orderScreen.show();
-//            } catch (IOException ex) {
-//                LOGGER.severe("Failed to load order view: " + ex.getMessage());
-//                ex.printStackTrace();
-//            }
-//        });
-//
-//        sign_out.setOnMouseClicked(mouseEvent -> {
-//            ChooseRoleScreenHandler roleScreenHandler = null;
-//            try {
-//                roleScreenHandler = new ChooseRoleScreenHandler(stage, Configs.SELLER_OR_USER_PATH);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            roleScreenHandler.setScreenTitle("Path choosing screen");
-//            roleScreenHandler.show();
-//        });
 
         addMediaHome(this.homeItems);
         addMenuItem(0, "Book", splitMenuBtnSearch);
