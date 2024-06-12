@@ -35,6 +35,9 @@ public class EditUserPopupScreen extends BaseScreenHandler {
     private Button cancelButton;
 
     @FXML
+    private Button deleteButton;
+
+    @FXML
     private ComboBox<String> userTypeComboBox;
 
     @FXML
@@ -65,6 +68,7 @@ public class EditUserPopupScreen extends BaseScreenHandler {
 
         saveButton.setOnAction(event -> saveUser());
         cancelButton.setOnAction(event -> cancelEdit());
+        deleteButton.setOnAction(event -> deleteUser());  // Add this line
     }
 
     private String getUserTypeString(int userType) {
@@ -114,6 +118,25 @@ public class EditUserPopupScreen extends BaseScreenHandler {
             try {
                 // Show error popup
                 PopupScreen.error("Error updating user: Invalid Information");
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    private void deleteUser() {
+        try {
+            adminController.deleteUser(user.getId());
+            // Show success popup
+            PopupScreen.success("User deleted successfully!");
+            adminScreenHandler.reloadPage();
+            // Close the popup
+            Stage stage = (Stage) deleteButton.getScene().getWindow();
+            stage.close();
+        } catch (SQLException | IOException e) {
+            try {
+                // Show error popup
+                PopupScreen.error("Error deleting user");
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

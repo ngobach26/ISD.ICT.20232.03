@@ -5,15 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="228d128d-7d0d-4ca2-a953-3525d59eef86" name="Changes" comment="update">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/db/aims.db" beforeDir="false" afterPath="$PROJECT_DIR$/assets/db/aims.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/SQLiteUserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/SQLiteUserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AdminController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entity/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/user/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/screen/admin/AdminScreenHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/admin/AdminScreenHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/screen/admin/CreateUserPopupScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/admin/CreateUserPopupScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/screen/home/HomeScreenHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/home/HomeScreenHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/screen/login/LoginHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/auth/LoginHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/screen/register/RegisterHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/auth/RegisterHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/DAOService/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/DAOService/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/fxml/edit_user_popup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/fxml/edit_user_popup.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/admin/EditUserPopupScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/admin/EditUserPopupScreen.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,6 +125,7 @@
       <workItem from="1716738970674" duration="436000" />
       <workItem from="1717906615203" duration="857000" />
       <workItem from="1718099876197" duration="9856000" />
+      <workItem from="1718195576063" duration="1374000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1704544342831</created>
