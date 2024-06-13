@@ -1,5 +1,6 @@
 package views.screen.orderManagement;
 
+import entity.order.DeliveryInformation;
 import entity.order.Order;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -40,7 +41,7 @@ public class ItemOrderScreenHandler extends FXMLScreenHandler {
 
     public ItemOrderScreenHandler(String screenPath, Order order, int index, OnClickItemOrder onClickItemOrder ) throws IOException {
         super(screenPath);
-        setOrderInformation(order, index);
+        setOrderInformation(new DeliveryInformation(),order, index);
         detail.setOnMouseClicked(mouseEvent -> {
             try {
                 onClickItemOrder.goToOrderDetail(order.getId());
@@ -50,10 +51,10 @@ public class ItemOrderScreenHandler extends FXMLScreenHandler {
         });
     }
 
-    private void setOrderInformation(Order order, int index){
-        this.email.setText(order.getDeliveryInfo().get("email"));
-        this.phone.setText(order.getDeliveryInfo().get("phone"));
-        this.address.setText(order.getDeliveryInfo().get("address"));
+    private void setOrderInformation(DeliveryInformation deliveryInformation,Order order, int index){
+        this.email.setText(deliveryInformation.getEmail());
+        this.phone.setText(deliveryInformation.getPhoneNumber());
+        this.address.setText(deliveryInformation.getDeliveryAddress());
         this.stt.setText(String.valueOf(index));
         this.shippingfee.setText(Utils.getCurrencyFormat(order.getShippingFees()));
         this.state.setText(order.getStateString());

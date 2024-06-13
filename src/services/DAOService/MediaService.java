@@ -56,7 +56,7 @@ public class MediaService {
         for (CartMedia cartMedia : cartMediaList) {
             int mediaId = cartMedia.getMedia().getId();
             int requiredQuantity = cartMedia.getQuantity();
-            int availQuantity = 100;//mediaDAO.getMediaById(mediaId).getQuantity();
+            int availQuantity = mediaDAO.getMediaById(mediaId).getQuantity();
             if (requiredQuantity > availQuantity) {
                 throw new MediaNotAvailableException("Media with ID " + mediaId + " not available in required quantity");
             }

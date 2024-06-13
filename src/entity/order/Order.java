@@ -31,15 +31,6 @@ public class Order {
         return null;
     }
 
-    public static void acceptOrderById(int orderId) {
-    }
-
-    public static void declineOrderById(int orderId) {
-    }
-
-    public static void confirmDeliveredOrderById(int orderId) {
-    }
-
     public OrderState getState() {
         return state;
     }
@@ -92,155 +83,105 @@ public class Order {
     	}
     	return (int) (amount + (Configs.PERCENT_VAT / 100) * amount);
     }
-    
-    public static ArrayList<Order> getOrdersByPage(int startRow, int pageSize, int state) throws SQLException {
-        String sql = "SELECT * FROM `Order` WHERE state = ? LIMIT ?, ?";
 
-        Connection connection = AIMSDB.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setInt(1, state);
-        preparedStatement.setInt(2, startRow); // startRow là giá trị bắt đầu của trang
-        preparedStatement.setInt(3, pageSize); // pageSize là kích thước của mỗi trang
+    public int createOrder(DeliveryInformation deliveryInformation, Order order) throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet generatedKeys = null;
 
-        ResultSet resultSet = preparedStatement.executeQuery();
+        try {
+            connection = AIMSDB.getConnection();
+            connection.setAutoCommit(false); // Begin transaction
 
-        ArrayList<OrderDTO> orderDTOArrayList = new ArrayList<>();
-        while (resultSet.next()) {
-            OrderDTO orderDTO = new OrderDTO(
-                    resultSet.getInt("id"),
-                    resultSet.getString("email"),
-                    resultSet.getString("address"),
-                    resultSet.getString("phone"),
-                    resultSet.getInt("userID"),
-                    resultSet.getInt("shipping_fee"),
-                    resultSet.getInt("state"),
-                    resultSet.getString("province"),
-                    resultSet.getString("time"),
-                    resultSet.getString("shipping_instruction"),
-                    resultSet.getString("rush_shipping_instruction"),
-                    resultSet.getInt("is_rush_shipping"));
-            orderDTOArrayList.add(orderDTO);
-        }
+            // Insert delivery information
+            String insertDeliverySQL = "INSERT INTO Delivery_information (/* columns for delivery info */) VALUES (/* values for delivery info */)";
+            preparedStatement = connection.prepareStatement(insertDeliverySQL, Statement.RETURN_GENERATED_KEYS);
 
-        ArrayList<Order> orderArrayList = new ArrayList<>();
-        for (OrderDTO orderDTO : orderDTOArrayList) {
-            orderArrayList.add(new Order(orderDTO));
-        }
-        return orderArrayList;
-    }
-    
-    public static ArrayList<Order> getAllOrders() throws SQLException {
-        String sql = "SELECT * FROM `Order`";
+            // Set the values for the delivery information here
+            // preparedStatement.setXXX(index, value);
 
-        Connection connection = AIMSDB.getConnection();
-        ResultSet resultSet = connection.createStatement().executeQuery(sql);
+            int deliveryRowsAffected = preparedStatement.executeUpdate();
+            if (deliveryRowsAffected == 0) {
+                connection.rollback();
+                throw new SQLException("Failed to insert delivery information!");
+            }
 
-        ArrayList<OrderDTO> orderDTOArrayList = new ArrayList<>();
-        while (resultSet.next()) {
-            OrderDTO orderDTO = new OrderDTO(
-                    resultSet.getInt("id"),
-                    resultSet.getString("email"),
-                    resultSet.getString("address"),
-                    resultSet.getString("phone"),
-                    resultSet.getInt("userID"),
-                    resultSet.getInt("shipping_fee"),
-                    resultSet.getInt("state"),
-                    resultSet.getString("province"),
-                    resultSet.getString("time"),
-                    resultSet.getString("shipping_instruction"),
-                    resultSet.getString("rush_shipping_instruction"),
-                    resultSet.getInt("is_rush_shipping"));
-            orderDTOArrayList.add(orderDTO);
-        }
+            generatedKeys = preparedStatement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                int deliveryID = generatedKeys.getInt(1);
 
-        ArrayList<Order> orderArrayList = new ArrayList<>();
-        for (OrderDTO orderDTO : orderDTOArrayList) {
-            orderArrayList.add(new Order(orderDTO));
-        }
-        return orderArrayList;
-    }
-    
-    public static Order getOrderById(int id) throws SQLException {
-        String sql = "SELECT * FROM `Order` WHERE id = " + id;
-        Statement stm = AIMSDB.getConnection().createStatement();
-        ResultSet res = stm.executeQuery(sql);
-        ArrayList<OrderMedia> orderMediaArrayList = OrderMedia.getAllOrderMediaByOrderId(id);
-        if (res.next()) {
-            OrderDTO orderDTO = new OrderDTO(res.getInt("id"),
-                    res.getString("email"),
-                    res.getString("address"),
-                    res.getString("phone"),
-                    res.getInt("userID"),
-                    res.getInt("shipping_fee"),
-                    res.getInt("state"),
-                    res.getString("province"),
-                    res.getString("time"),
-                    res.getString("shipping_instruction"),
-                    res.getString("rush_shipping_instruction"),
-                    res.getInt("is_rush_shipping"));
-            Order order = new Order(orderDTO);
-            order.setlstOrderMedia(orderMediaArrayList);
-            return order;
-        }
-        return null;
-    }
-    
-    public static int createOrder(Order order) throws SQLException {
-        String sql = "INSERT INTO `Order` (email, address, phone, userID, shipping_fee, state, province, time, shipping_instruction, rush_shipping_instruction, is_rush_shipping) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                // Insert order
+                String insertOrderSQL = "INSERT INTO \"ORDER\" (total, total_shipping_fee, cartID, deliveryID) VALUES (?, ?, ?, ?)";
+                preparedStatement = connection.prepareStatement(insertOrderSQL, Statement.RETURN_GENERATED_KEYS);
 
-        String email = order.getDeliveryInfo().get("email");
-        String address = order.getDeliveryInfo().get("address");
-        String phone = order.getDeliveryInfo().get("phone");
-        int userID = 1;
-        double shippingFee = order.calculateShippingFees();
-        int state = 0;
-        String province = order.getDeliveryInfo().get("province");
-        String time = order.getDeliveryInfo().get("time");
-        int isRushShipping = 0;
-        if (order.deliveryInfo.get("isRushShipping").equals("Yes")) {
-            isRushShipping = 1;
-        }
-        String shippingInstruction = order.getDeliveryInfo().get("instructions");
-        String rushShippingInstruction = order.getDeliveryInfo().get("rushShippingInstruction");
-        Connection connection = AIMSDB.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        // Set values for parameters
-        preparedStatement.setString(1, email);
-        preparedStatement.setString(2, address);
-        preparedStatement.setString(3, phone);
-        preparedStatement.setInt(4, userID);
-        preparedStatement.setDouble(5, shippingFee);
-        preparedStatement.setInt(6, state);
-        preparedStatement.setString(7, province);
-        preparedStatement.setString(8, time);
-        preparedStatement.setString(9, shippingInstruction);
-        preparedStatement.setString(10, rushShippingInstruction);
-        preparedStatement.setInt(11, isRushShipping);
+                double total = order.calculateTotalProductIncludeVAT();
+                double totalShippingFee = order.calculateShippingFees(deliveryInformation);
+                int cartID = 1;
 
-        int rowsAffected = preparedStatement.executeUpdate();
+                preparedStatement.setDouble(1, total);
+                preparedStatement.setDouble(2, totalShippingFee);
+                preparedStatement.setInt(3, cartID);
+                preparedStatement.setInt(4, deliveryID);
 
-        if (rowsAffected > 0) {
-            System.out.println("Record added successfully!");
-            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                int orderRowsAffected = preparedStatement.executeUpdate();
+                if (orderRowsAffected == 0) {
+                    connection.rollback();
+                    throw new SQLException("Failed to insert order!");
+                }
+
+                generatedKeys = preparedStatement.getGeneratedKeys();
                 if (generatedKeys.next()) {
                     int orderID = generatedKeys.getInt(1);
 
-                    // Call createOrderMedia with orderID
+                    // Insert order media
                     for (OrderMedia orderMedia : order.getlstOrderMedia()) {
                         OrderMedia.createOrderMedia(orderMedia, orderID);
                     }
-                    System.out.println("Order and OrderMedia added successfully");
+
+                    connection.commit(); // Commit transaction
+                    System.out.println("Order & OrderMedia added successfully!");
                     return orderID;
                 }
             }
-        } else {
-            System.out.println("Record added unsuccessfully!");
-            return -1;
+
+            connection.rollback();
+            throw new SQLException("Failed to create order!");
+        } catch (SQLException e) {
+            if (connection != null) {
+                try {
+                    connection.rollback();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            throw e;
+        } finally {
+            if (generatedKeys != null) {
+                try {
+                    generatedKeys.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.setAutoCommit(true);
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
-        return -1;
     }
-    
+
+
     public static void acceptOrderById(int orderId) throws SQLException {
         Statement stm = AIMSDB.getConnection().createStatement();
         stm.executeUpdate("UPDATE `Order` SET" + " state = " + 1
@@ -349,10 +290,6 @@ public class Order {
 
     public int calculateTotalPrice(DeliveryInformation deliveryInformation) {
         return calculateTotalProductIncludeVAT() + calculateShippingFees(deliveryInformation);
-    }
-
-    public String getStateString() {
-        return null;
     }
 
 
