@@ -106,4 +106,8 @@ public class DVD extends Media {
         this.filmType = filmType;
         return this;
     }
+
+    public String createDVDQuery(String value, String text, int parseInt, String text1, String text2, String toString, String value1) {
+        return value;
+    }
 }

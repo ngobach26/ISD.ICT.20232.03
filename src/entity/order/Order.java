@@ -11,46 +11,33 @@ import utils.Configs;
 public class Order {
 
     private int id;
+
+    private double total;
     private int shippingFees;
+
+    private int deliveryID;
     private List lstOrderMedia;
-    private HashMap<String, String> deliveryInfo;
     private OrderState state;
 
     public Order() {
         this.lstOrderMedia = new ArrayList<>();
     }
 
-    public Order(OrderDTO orderDTO) {
-        this.id = orderDTO.getId();
-        this.shippingFees = orderDTO.getShipping_fee();
-        this.deliveryInfo = new HashMap<>();
-        this.lstOrderMedia = new ArrayList();
-        deliveryInfo.put("email", orderDTO.getEmail());
-        deliveryInfo.put("phone", orderDTO.getPhone());
-        deliveryInfo.put("address", orderDTO.getAddress());
-        deliveryInfo.put("province", orderDTO.getProvince());
-        deliveryInfo.put("time", orderDTO.getTime());
-        if (orderDTO.getIs_rush_shipping() == 1) {
-            deliveryInfo.put("isRushShipping", "Yes");
-        } else {
-            deliveryInfo.put("isRushShipping", "No");
-        }
-        deliveryInfo.put("rushShippingInstruction", orderDTO.getRush_shipping_instruction());
-        deliveryInfo.put("instructions", orderDTO.getShipping_instruction());
-        switch (orderDTO.getState()) {
-            case 0:
-                this.state = OrderState.WAITING;
-                break;
-            case 1:
-                this.state = OrderState.DELIVERING;
-                break;
-            case 2:
-                this.state = OrderState.DELIVERED;
-                break;
-            case 3:
-                this.state = OrderState.DECLINED;
-                break;
-        }
+    public static ArrayList<Order> getOrdersByPage(int start, int pageSize, int state) {
+        return null;
+    }
+
+    public static Order getOrderById(int id) {
+        return null;
+    }
+
+    public static void acceptOrderById(int orderId) {
+    }
+
+    public static void declineOrderById(int orderId) {
+    }
+
+    public static void confirmDeliveredOrderById(int orderId) {
     }
 
     public OrderState getState() {
@@ -67,10 +54,6 @@ public class Order {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getPhone() {
-        return getDeliveryInfo().get("phone");
     }
 
     public Order(List lstOrderMedia) {
@@ -102,14 +85,6 @@ public class Order {
         return shippingFees;
     }
 
-    public HashMap<String, String> getDeliveryInfo() {
-        return deliveryInfo;
-    }
-
-    public void setDeliveryInfo(HashMap deliveryInfo) {
-        this.deliveryInfo = deliveryInfo;
-    }
-    
     public int getAmount() {
     	double amount = 0;
     	for (Object object : lstOrderMedia) {
@@ -119,7 +94,7 @@ public class Order {
     	return (int) (amount + (Configs.PERCENT_VAT / 100) * amount);
     }
 
-    public int calculateShippingFees() {
+    public int calculateShippingFees(DeliveryInformation deliveryInformation) {
 
         if (calculateTotalProductIncludeVAT() > 100000) {
             return 0;
@@ -129,18 +104,18 @@ public class Order {
         double baseWeight = 0;
         double additionalCostPerHalfKg = 0;
 
-        if (isUrban()) {
-            baseCost = 22000;
+        if (deliveryInformation.isUrban()) {
+            baseCost = 18000;
             baseWeight = 3;
         } else {
-            baseCost = 30000;
+            baseCost = 25000;
             baseWeight = 0.5;
         }
         additionalCostPerHalfKg = 2500;
 
         double rushShippingCost = 0;
 
-        if (isRushShipping()) rushShippingCost = 10000 * getNumberOfRushShippingProduct();
+        if (deliveryInformation.isRushShipping()) rushShippingCost = 10000 * getNumberOfRushShippingProduct();
 
         double regularShippingCost = 0;
 
@@ -153,15 +128,6 @@ public class Order {
         return (int) (rushShippingCost + regularShippingCost);
     }
 
-    public boolean isRushShipping() {
-        String isRushShipping = deliveryInfo.get("isRushShipping");
-        return isRushShipping.equals("Yes");
-    }
-
-    public boolean isUrban() {
-        String address = deliveryInfo.get("province");
-        return address.toLowerCase().contains("hà nội") || address.toLowerCase().contains("hồ chí minh");
-    }
 
     public int calculateTotalProductIncludeVAT() {
         double amount = 0;
@@ -194,8 +160,12 @@ public class Order {
         return max;
     }
 
-    public int calculateTotalPrice() {
-        return calculateTotalProductIncludeVAT() + calculateShippingFees();
+    public int calculateTotalPrice(DeliveryInformation deliveryInformation) {
+        return calculateTotalProductIncludeVAT() + calculateShippingFees(deliveryInformation);
+    }
+
+    public String getStateString() {
+        return null;
     }
 
 

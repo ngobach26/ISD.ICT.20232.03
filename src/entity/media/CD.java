@@ -67,4 +67,8 @@ public class CD extends Media {
         this.releasedDate = releasedDate;
         return this;
     }
+
+    public String createCDQuery(String text, String text1, String value, String toString) {
+        return text;
+    }
 }

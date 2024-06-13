@@ -1,6 +1,7 @@
 package entity.order;
 
 import db.AIMSDB;
+import entity.media.Media;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,107 +9,56 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class DeliveryInformation {
+public class OrderMedia {
 
-    private int deliveryID;
-    private int userID;
-    private String provinceCity;
-    private String deliveryAddress;
-    private String recipientName;
-    private String email;
-    private String phoneNumber;
-    private int supportForRushDelivery;
+    private Media media;
+    private int price;
+    private int quantity;
 
-    public DeliveryInformation(int deliveryID, int userID, String provinceCity, String deliveryAddress, String recipientName, String email, String phoneNumber, int supportForRushDelivery) {
-        this.deliveryID = deliveryID;
-        this.userID = userID;
-        this.provinceCity = provinceCity;
-        this.deliveryAddress = deliveryAddress;
-        this.recipientName = recipientName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.supportForRushDelivery = supportForRushDelivery;
+    public OrderMedia(Media media, int quantity, int price) {
+        this.media = media;
+        this.quantity = quantity;
+        this.price = price;
     }
 
-    public DeliveryInformation() {
+    public OrderMedia() {
 
     }
 
     @Override
     public String toString() {
         return "{" +
-                "  deliveryID='" + deliveryID + "'" +
-                ", userID='" + userID + "'" +
-                ", provinceCity='" + provinceCity + "'" +
-                ", deliveryAddress='" + deliveryAddress + "'" +
-                ", recipientName='" + recipientName + "'" +
-                ", email='" + email + "'" +
-                ", phoneNumber='" + phoneNumber + "'" +
-                ", supportForRushDelivery='" + supportForRushDelivery + "'" +
+                "  media='" + media + "'" +
+                ", quantity='" + quantity + "'" +
+                ", price='" + price + "'" +
                 "}";
     }
 
-    public int getDeliveryID() {
-        return this.deliveryID;
+    public Media getMedia() {
+        return this.media;
     }
 
-    public void setDeliveryID(int deliveryID) {
-        this.deliveryID = deliveryID;
+    public void setMedia(Media media) {
+        this.media = media;
     }
 
-    public int getUserID() {
-        return this.userID;
+    public int getQuantity() {
+        return this.quantity;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
-    public String getProvinceCity() {
-        return this.provinceCity;
+    public int getPrice() {
+        return this.price;
     }
 
-    public void setProvinceCity(String provinceCity) {
-        this.provinceCity = provinceCity;
+    public void setPrice(int price) {
+        this.price = price;
     }
 
-    public String getDeliveryAddress() {
-        return this.deliveryAddress;
-    }
-
-    public void setDeliveryAddress(String deliveryAddress) {
-        this.deliveryAddress = deliveryAddress;
-    }
-
-    public String getRecipientName() {
-        return this.recipientName;
-    }
-
-    public void setRecipientName(String recipientName) {
-        this.recipientName = recipientName;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhoneNumber() {
-        return this.phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public int getSupportForRushDelivery() {
-        return this.supportForRushDelivery;
-    }
-
-    public void setSupportForRushDelivery(int supportForRushDelivery) {
-        this.supportForRushDelivery = supportForRushDelivery;
+    public int calculatePrice() {
+        return getMedia().getPrice() * getQuantity();
     }
 }

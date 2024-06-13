@@ -2,6 +2,7 @@ package services.DAOService;
 
 import DAO.MediaDAO;
 import DAO.OrderDAO;
+import entity.order.DeliveryInformation;
 import entity.order.Order;
 
 import java.sql.SQLException;
@@ -27,8 +28,8 @@ public class OrderService {
         }
         return instance;
     }
-    public int createOrder(Order order) throws SQLException {
-        return orderDAO.createOrder(order);
+    public int createOrder(DeliveryInformation deliveryInformation,Order order) throws SQLException {
+        return orderDAO.createOrder(deliveryInformation,order);
     }
 
 }

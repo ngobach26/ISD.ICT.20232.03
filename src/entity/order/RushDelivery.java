@@ -1,2 +1,4 @@
-package entity.order;public class RushDelivery {
+package entity.order;
+
+public class RushDelivery {
 }
