@@ -1,30 +1,31 @@
 package db;
 
-import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import java.sql.Connection;
+import utils.*;
 
 public class AIMSDB {
 
-    private static final Logger LOGGER = Logger.getLogger(AIMSDB.class.getName());
-    private static Connection connection;
+    private static Logger LOGGER = Utils.getLogger(Connection.class.getName());
+    private static Connection connect;
 
-    public static Connection getConnection() throws SQLException {
-        if (connection != null && !connection.isClosed()) {
-            return connection;
-        }
-
+    public static Connection getConnection() {
+        if (connect != null) return connect;
         try {
             Class.forName("org.sqlite.JDBC");
             String url = "jdbc:sqlite:assets/db/aims.db";
-            connection = DriverManager.getConnection(url);
-            LOGGER.log(Level.INFO, "Connected to database successfully");
-        } catch (ClassNotFoundException | SQLException e) {
-            LOGGER.log(Level.SEVERE, "Failed to connect to database: " + e.getMessage(), e);
-            throw new SQLException("Failed to connect to database: " + e.getMessage(), e);
+            connect = DriverManager.getConnection(url);
+            LOGGER.info("Connect database successfully");
+        } catch (Exception e) {
+            LOGGER.info(e.getMessage());
         }
-        return connection;
+        return connect;
     }
+
+
+//    public static void main(String[] args) {
+//        AIMSDB.getConnection();
+//    }
 }
