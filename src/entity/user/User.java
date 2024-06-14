@@ -24,6 +24,14 @@ public class User {
         this.phone = phone;
         this.userType = userType;
     }
+    public User(int id, String name, String email, String address, String phone,int userType, String password){
+        this.name = name;
+        this.email = email;
+        this.address = address;
+        this.phone = phone;
+        this.userType = userType;
+        this.password = password;
+    }
     public User(String name, String email, String address, String phone,int userType, String password){
         this.name = name;
         this.email = email;

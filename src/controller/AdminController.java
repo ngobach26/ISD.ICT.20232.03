@@ -27,4 +27,8 @@ public class AdminController {
         userService.updateUser(user);
     }
 
+    public void deleteUser(int id) throws SQLException{
+        userService.deleteUser(id);
+    }
+
 }

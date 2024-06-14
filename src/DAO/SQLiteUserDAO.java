@@ -72,8 +72,9 @@ public class SQLiteUserDAO implements UserDAO {
                 String address = resultSet.getString("address");
                 String phone = resultSet.getString("phone");
                 int userType = resultSet.getInt("user_type");
+                String password = resultSet.getString("password");
 
-                User user = new User(id, name, email, address, phone, userType);
+                User user = new User(id, name, email, address, phone, userType, password);
                 users.add(user);
             }
         }
@@ -130,6 +131,15 @@ public class SQLiteUserDAO implements UserDAO {
         User user = new User(name, email, address, phone, password, user_type);
         return createUser(user);
     }
+
+    public void deleteUser(int userId) throws SQLException {
+        String sql = "DELETE FROM User WHERE id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, userId);
+            int rowsAffected = statement.executeUpdate();
+        }
+    }
+
 
 
 }

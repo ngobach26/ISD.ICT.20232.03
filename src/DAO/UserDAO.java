@@ -11,4 +11,5 @@ public interface UserDAO {
     void updateUser(User user) throws SQLException;
     public boolean registerUser(String name, String email, String address, String phone, String password, int user_type) throws SQLException;
     public User getUserByEmail(String email);
+    public void deleteUser(int userId) throws SQLException;
 }
