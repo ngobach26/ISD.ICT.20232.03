@@ -23,8 +23,8 @@ import java.util.Map;
 
 public class PaymentScreenHandler extends BaseScreenHandler {
 
-    private Order order;
-    private DeliveryInformation deliveryInformation;
+    private final Order order;
+    private final DeliveryInformation deliveryInformation;
     @FXML
     private Label pageTitle;
     @FXML

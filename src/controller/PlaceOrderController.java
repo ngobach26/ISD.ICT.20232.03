@@ -16,8 +16,8 @@ import entity.order.OrderMedia;
 import services.DAOService.MediaService;
 
 public class PlaceOrderController extends BaseController{
-    private static Logger LOGGER = utils.Utils.getLogger(PlaceOrderController.class.getName());
-    private MediaService mediaService ;
+    private static final Logger LOGGER = utils.Utils.getLogger(PlaceOrderController.class.getName());
+    private final MediaService mediaService ;
 
     public PlaceOrderController() throws MediaNotAvailableException {
         this.mediaService = MediaService.getInstance();

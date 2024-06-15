@@ -1,12 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYZE_INJECTED_CODE" value="false" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="228d128d-7d0d-4ca2-a953-3525d59eef86" name="Changes" comment="update">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/AdminUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/db/aims.db" beforeDir="false" afterPath="$PROJECT_DIR$/assets/db/aims.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/db/aimsTest.db" beforeDir="false" afterPath="$PROJECT_DIR$/assets/db/aimsTest.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/SQLiteCartDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/SQLiteCartDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/SQLiteMediaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/SQLiteMediaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/SQLiteUserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/SQLiteUserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/exception/AimsException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/exception/AimsException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/exception/AnonymousTransactionException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/exception/AnonymousTransactionException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/exception/InternalServerErrorException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/exception/InternalServerErrorException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/exception/InvalidCardException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/exception/InvalidCardException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/exception/InvalidDeliveryInfoException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/exception/InvalidDeliveryInfoException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/exception/InvalidTransactionAmountException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/exception/InvalidTransactionAmountException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/exception/InvalidVersionException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/exception/InvalidVersionException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/exception/MediaNotAvailableException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/exception/MediaNotAvailableException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/exception/MediaUpdateException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/exception/MediaUpdateException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/exception/PaymentException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/exception/PaymentException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/exception/ProcessInvoiceException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/exception/ProcessInvoiceException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/exception/ProcessingException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/exception/ProcessingException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/exception/SendToBankException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/exception/SendToBankException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/exception/SuspiciousTransactionException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/exception/SuspiciousTransactionException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/exception/TransactionReverseException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/exception/TransactionReverseException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/exception/UnrecognizedException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/exception/UnrecognizedException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/exception/ViewCartException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/exception/ViewCartException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/CartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/CartController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/HomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/OrderManagementAdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/OrderManagementAdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/PaymentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/PaymentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/PlaceOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/PlaceOrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/db/AIMSDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/AIMSDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/cart/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/cart/Cart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/media/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/media/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/media/CD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/media/CD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/media/DVD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/media/DVD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/media/Media.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/media/Media.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/payment/CreditCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/payment/CreditCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/user/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/DAOService/DAOFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/DAOService/DAOFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/vnpay/ConfigVNPay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/vnpay/ConfigVNPay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/vnpay/PayRequestVNPay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/vnpay/PayRequestVNPay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/vnpay/PayResponseVNPay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/vnpay/PayResponseVNPay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/vnpay/PaymentSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/vnpay/PaymentSubsystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/vnpay/RefundRequestVNPay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/vnpay/RefundRequestVNPay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/vnpay/VNPaySubsystemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/vnpay/VNPaySubsystemController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/Configs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/Configs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/fxml/admin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/fxml/admin.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/fxml/edit_user_popup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/fxml/edit_user_popup.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/FXMLScreenHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/FXMLScreenHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/admin/AdminScreenHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/admin/AdminScreenHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/admin/CreateUserPopupScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/admin/CreateUserPopupScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/admin/EditUserPopupScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/admin/EditUserPopupScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/auth/LoginHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/auth/LoginHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/auth/RegisterHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/auth/RegisterHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/cart/CartScreenHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/cart/CartScreenHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/cart/MediaHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/cart/MediaHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/home/HomeScreenHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/home/HomeScreenHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/home/MediaHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/home/MediaHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/invoice/InvoiceScreenHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/invoice/InvoiceScreenHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/orderManagement/ItemOrderScreenHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/orderManagement/ItemOrderScreenHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/orderManagement/OrderDetailsScreenHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/orderManagement/OrderDetailsScreenHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/payment/PaymentScreenHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/payment/PaymentScreenHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/shipping/ShippingScreenHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/shipping/ShippingScreenHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/sellerScreen/MediaProductHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/sellerScreen/MediaProductHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/sellerScreen/sellerEventScreen/create/CommonInfoCreateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/sellerScreen/sellerEventScreen/create/CommonInfoCreateHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/sellerScreen/sellerEventScreen/update/BookUpdateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/sellerScreen/sellerEventScreen/update/BookUpdateHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/sellerScreen/sellerEventScreen/update/CDUpdateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/sellerScreen/sellerEventScreen/update/CDUpdateHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/sellerScreen/sellerEventScreen/update/DVDUpdateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/sellerScreen/sellerEventScreen/update/DVDUpdateHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,8 +90,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -43,9 +116,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2aUnQ7TiKMk5swZLBeHFSYHDA97" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -73,6 +146,7 @@
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
     "show.migrate.to.gradle.popup": "false",
     "vue.rearranger.settings.migration": "true"
   }

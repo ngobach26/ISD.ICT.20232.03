@@ -111,7 +111,7 @@ public class OrderDetailsScreenHandler extends BaseScreenHandler {
         order.getlstOrderMedia().forEach(orderMedia -> {
             try {
                 MediaInvoiceScreenHandler mis = new MediaInvoiceScreenHandler(Configs.INVOICE_MEDIA_SCREEN_PATH);
-                mis.setOrderMedia((OrderMedia) orderMedia);
+                mis.setOrderMedia(orderMedia);
                 vboxItems.getChildren().add(mis.getContent());
             } catch (IOException | SQLException e) {
                 System.err.println("errors: " + e.getMessage());

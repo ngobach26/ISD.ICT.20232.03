@@ -31,7 +31,7 @@ public class RegisterHandler extends BaseScreenHandler {
 	@FXML
 	private Button loginBtn;
 	public Alert alert;
-	private AuthController authController = new AuthController();
+	private final AuthController authController = new AuthController();
 	public static Logger LOGGER = Utils.getLogger(LoginHandler.class.getName());
 
 	public RegisterHandler(Stage stage, String screenPath) throws IOException {
@@ -187,10 +187,7 @@ public class RegisterHandler extends BaseScreenHandler {
         if(idx_at == 0) {
 			return false;
 		}
-        if(email.charAt(idx_at+1) == '.') {
-			return false;
-		}
-        return true;
+        return email.charAt(idx_at + 1) != '.';
     }
 
 }

@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class SQLiteMediaDAO implements MediaDAO {
-    private static Logger LOGGER = Logger.getLogger(SQLiteMediaDAO.class.getName());
-    private Connection connection;
+    private static final Logger LOGGER = Logger.getLogger(SQLiteMediaDAO.class.getName());
+    private final Connection connection;
 
     public SQLiteMediaDAO() throws SQLException {
         this.connection = AIMSDB.getConnection();
@@ -72,8 +72,7 @@ public class SQLiteMediaDAO implements MediaDAO {
                     .setCategory(res.getString("category"))
                     .setMediaURL(res.getString("imageUrl"))
                     .setPrice(res.getInt("price"))
-                    .setType(res.getString("type"))
-                    .setWeight(res.getFloat("weight"));
+                    .setType(res.getString("type"));
             list.add(m);
         }
         // Create and add a fixed Media object

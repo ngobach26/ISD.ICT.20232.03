@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class OrderManagementAdminController extends BaseController {
 
-    private IPaymentSubsystem vnPay;
+    private final IPaymentSubsystem vnPay;
 
     public OrderManagementAdminController() {
         this.vnPay = new PaymentSubsystem(new VNPaySubsystemController());

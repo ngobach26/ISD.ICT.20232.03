@@ -12,59 +12,57 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class SQLiteUserDAO implements UserDAO {
-    private static Logger LOGGER = Logger.getLogger(SQLiteUserDAO.class.getName());
-    private Connection connection;
+    private static final Logger LOGGER = Logger.getLogger(SQLiteUserDAO.class.getName());
+    Connection connection;
 
-    public SQLiteUserDAO() throws SQLException {
+    public SQLiteUserDAO() {
         this.connection = AIMSDB.getConnection();
     }
+
     @Override
     public boolean createUser(User user) {
-        Connection conn = null;
         boolean userCreated = false;
-        User isExist = this.getUserByEmail(user.getEmail());
+        User isExist = getUserByEmail(user.getEmail());
         if (isExist == null) {
-            String query = "INSERT INTO User (name, email, address, phone, password, user_type) VALUES (?, ?, ?, ?, ?, ?)";
-
+            String query = "INSERT INTO User (name, email, address, phone, password, user_type, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement stmt = null;
             try {
-                conn = AIMSDB.getConnection();
-                System.out.println("Connected to the database");
-                PreparedStatement stmt = conn.prepareStatement(query);
-                System.out.println("Prepared statement created successfully");
+                stmt = connection.prepareStatement(query);
                 stmt.setString(1, user.getName());
                 stmt.setString(2, user.getEmail());
                 stmt.setString(3, user.getAddress());
                 stmt.setString(4, user.getPhone());
                 stmt.setString(5, user.getPassword());
                 stmt.setInt(6, user.getUserType());
+                stmt.setInt(6, 0);
 
                 int rowsAffected = stmt.executeUpdate();
-                System.out.println(">>>User creation check: " + rowsAffected);
+                LOGGER.info("User creation check: " + rowsAffected);
                 userCreated = rowsAffected > 0;
-
             } catch (SQLException e) {
-                System.out.println("Error creating user");
-                e.printStackTrace();
+                LOGGER.severe("Error creating user: " + e.getMessage());
             } finally {
-                if (conn != null) {
-                    try {
-                        conn.close();
-                    } catch (SQLException e) {
-                        e.printStackTrace();
+                try {
+                    if (stmt != null) {
+                        stmt.close();
                     }
+                } catch (SQLException e) {
+                    LOGGER.severe("Error closing resources: " + e.getMessage());
                 }
             }
-
-            return userCreated;
         }
         return userCreated;
     }
+
     @Override
     public List<User> getAllUsers() throws SQLException {
         List<User> users = new ArrayList<>();
         String query = "SELECT * FROM USER";
-        try (PreparedStatement statement = connection.prepareStatement(query);
-             ResultSet resultSet = statement.executeQuery()) {
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        try {
+            statement = connection.prepareStatement(query);
+            resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
@@ -73,9 +71,21 @@ public class SQLiteUserDAO implements UserDAO {
                 String phone = resultSet.getString("phone");
                 int userType = resultSet.getInt("user_type");
                 String password = resultSet.getString("password");
+                int status = resultSet.getInt("status");
 
-                User user = new User(id, name, email, address, phone, userType, password);
+                User user = new User(id, name, email, address, phone, userType, password,status);
                 users.add(user);
+            }
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException e) {
+                LOGGER.severe("Error closing resources: " + e.getMessage());
             }
         }
         return users;
@@ -83,33 +93,41 @@ public class SQLiteUserDAO implements UserDAO {
 
     @Override
     public void updateUser(User user) throws SQLException {
-        String sql = "UPDATE User SET name = ?, email = ?, address = ?, phone = ?, user_type = ?, password = ? WHERE id = ?";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+        String sql = "UPDATE User SET name = ?, email = ?, address = ?, phone = ?, user_type = ?, password = ?, status = ? WHERE id = ?";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
             statement.setString(1, user.getName());
             statement.setString(2, user.getEmail());
             statement.setString(3, user.getAddress());
             statement.setString(4, user.getPhone());
             statement.setInt(5, user.getUserType());
             statement.setString(6, user.getPassword());
-            statement.setInt(7, user.getId());
+            statement.setInt(7, user.getStatus());
+            statement.setInt(8, user.getId());
+
             statement.executeUpdate();
+        } finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException e) {
+                LOGGER.severe("Error closing resources: " + e.getMessage());
+            }
         }
     }
 
-    public User getUserByEmail(String email){
+    public User getUserByEmail(String email) {
         User user = null;
-        Connection conn = null;
-        System.out.println(">>>check email: " + email);
-        String query = "SELECT * FROM User WHERE email = ?;";
-        try{
-            conn = AIMSDB.getConnection();
-            System.out.println("ket not db");
-            PreparedStatement stmt = conn.prepareStatement(query);
-            System.out.println("goi db thanh cong");
+        String query = "SELECT * FROM User WHERE email = ?";
+        PreparedStatement stmt = null;
+        ResultSet res = null;
+        try {
+            stmt = connection.prepareStatement(query);
             stmt.setString(1, email);
-            ResultSet res = stmt.executeQuery();
-            System.out.println(">>>>check get user by email");
-            while (res.next()){
+            res = stmt.executeQuery();
+            while (res.next()) {
                 user = new User();
                 user.setId(res.getInt("id"));
                 user.setName(res.getString("name"));
@@ -118,28 +136,44 @@ public class SQLiteUserDAO implements UserDAO {
                 user.setEmail(res.getString("email"));
                 user.setAddress(res.getString("address"));
                 user.setPhone(res.getString("phone"));
-                System.out.println(">>>check user: " + user.toString());
             }
-        }catch (SQLException e){
-            System.out.println("error user");
-            e.printStackTrace();
+        } catch (SQLException e) {
+            LOGGER.severe("Error retrieving user by email: " + e.getMessage());
+        } finally {
+            try {
+                if (res != null) {
+                    res.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                LOGGER.severe("Error closing resources: " + e.getMessage());
+            }
         }
-
         return user;
     }
-    public boolean registerUser(String name, String email, String address, String phone, String password, int user_type) throws SQLException {
+
+    public boolean registerUser(String name, String email, String address, String phone, String password, int user_type) {
         User user = new User(name, email, address, phone, password, user_type);
         return createUser(user);
     }
 
     public void deleteUser(int userId) throws SQLException {
         String sql = "DELETE FROM User WHERE id = ?";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
             statement.setInt(1, userId);
-            int rowsAffected = statement.executeUpdate();
+            statement.executeUpdate();
+        } finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException e) {
+                LOGGER.severe("Error closing resources: " + e.getMessage());
+            }
         }
     }
-
-
-
 }

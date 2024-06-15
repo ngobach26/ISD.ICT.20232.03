@@ -7,7 +7,7 @@ import utils.Utils;
 import java.util.Map;
 
 public class PayResponseVNPay {
-    private Map<String, String> response;
+    private final Map<String, String> response;
 
     public PayResponseVNPay(Map<String, String> response) {
         this.response = response;

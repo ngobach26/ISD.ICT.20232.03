@@ -75,7 +75,7 @@ public class BookUpdateHandler extends BaseScreenHandler implements Initializabl
 	private ComboBox<String> image_url;
 
 	private CommonInfoCreateHandler commonInfoCreateHandler;
-	private Media media;
+	private final Media media;
 
 	public BookUpdateHandler(Stage stage, String screenPath, Media media) throws IOException, SQLException {
 		super(stage, screenPath);
@@ -132,7 +132,7 @@ public class BookUpdateHandler extends BaseScreenHandler implements Initializabl
 
 	public void setMediaInfo() throws SQLException {
 		LOGGER.info("Id of the media: " + this.media);
-		Book targetMedia = (Book) new Book().getMediaById(media.getId());
+		Book targetMedia = new Book().getMediaById(media.getId());
 		category.setValue(targetMedia.getCategory());
 		author.setText(targetMedia.getAuthor());
 		cover_type.setText(targetMedia.getCoverType());
@@ -197,7 +197,7 @@ public class BookUpdateHandler extends BaseScreenHandler implements Initializabl
 				+ " WHERE "
 				+ "id = " + this.media.getId() + ";";
 
-		LOGGER.info("" + bookSQL);
+		LOGGER.info(bookSQL);
 
 		String mediaSQL = "UPDATE Media "
 				+ "SET "
@@ -210,7 +210,7 @@ public class BookUpdateHandler extends BaseScreenHandler implements Initializabl
 				+ " WHERE "
 				+ "id = " + this.media.getId() + ";";
 
-		LOGGER.info("" + mediaSQL);
+		LOGGER.info(mediaSQL);
 		Statement stm = AIMSDB.getConnection().createStatement();
 		stm.executeUpdate(bookSQL);
 		stm.executeUpdate(mediaSQL);
