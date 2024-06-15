@@ -30,8 +30,8 @@ public class SQLiteMediaDAO implements MediaDAO {
                     .setCategory(res.getString("category"))
                     .setMediaURL(res.getString("imageUrl"))
                     .setPrice(res.getInt("price"))
-                    .setType(res.getString("type"))
-                    .setWeight(res.getFloat("weight"));
+                    .setType(res.getString("type"));
+                    // .setWeight(res.getFloat("weight"));
         }
         return null;
     }
@@ -51,8 +51,8 @@ public class SQLiteMediaDAO implements MediaDAO {
                     .setCategory(res.getString("category"))
                     .setMediaURL(res.getString("imageUrl"))
                     .setPrice(res.getInt("price"))
-                    .setType(res.getString("type"))
-                    .setWeight(res.getFloat("weight"));
+                    .setType(res.getString("type"));
+                    // .setWeight(res.getFloat("weight"));
             list.add(m);
         }
         return list;
@@ -84,7 +84,7 @@ public class SQLiteMediaDAO implements MediaDAO {
                 .setMediaURL("http://example.com/fixed-media.jpg")  // Example fixed URL
                 .setPrice(100)  // Example fixed price
                 .setType("Fixed Type")  // Example fixed type
-                .setWeight(0.5f);  // Example fixed weight
+                // .setWeight(0.5f);  // Example fixed weight
         list.add(fixedMedia);
 
         return list;

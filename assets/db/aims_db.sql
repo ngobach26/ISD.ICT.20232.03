@@ -6,7 +6,8 @@ CREATE TABLE "USER"(
     "address" VARCHAR(45) NOT NULL,
     "phone" VARCHAR(45) NOT NULL,
     "user_type" INTEGER NOT NULL,
-    "password" VARCHAR(20) NOT NULL
+    "password" VARCHAR(20) NOT NULL,
+    "status" INT NOT NULL
 );
 -- Media-related tables
 CREATE TABLE "MEDIA"(
@@ -31,7 +32,7 @@ CREATE TABLE "CD"(
 );
 
 CREATE TABLE "BOOKS"(
-    "id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    "id" INTEGER PRIMARY KEY NOT NULL,
     "author" VARCHAR(45) NOT NULL,
     "coverType" VARCHAR(45) NOT NULL,
     "publisher" VARCHAR(45) NOT NULL,
@@ -98,11 +99,19 @@ CREATE TABLE "ORDER" (
     orderID INTEGER NOT NULL PRIMARY KEY,
     total DECIMAL(10, 2),
     total_shipping_fee DECIMAL(10,2),
-    cartID INTEGER NOT NULL,
     deliveryID INTEGER NOT NULL,
-    FOREIGN KEY (cartID) REFERENCES Cart(cartID),
     FOREIGN KEY (deliveryID) REFERENCES Delivery_information(deliveryID)
 );
+
+-- Table: Order_Media
+CREATE TABLE "ORDER_MEDIA" (
+    orderID INTEGER NOT NULL,
+    mediaID INTEGER NOT NULL,
+    number_of_products INTEGER,
+    CONSTRAINT "fk_order_cartmedia" FOREIGN KEY ("orderID") REFERENCES "ORDER"("orderID"),
+    CONSTRAINT "fk_media_cartmedia" FOREIGN KEY ("mediaID") REFERENCES "MEDIA"("ID")
+);
+
 -- Table: Rush_delivery
 CREATE TABLE RUSH_DELIVERY (
     rush_shipping_fee DECIMAL(10, 2),
@@ -113,8 +122,8 @@ CREATE TABLE RUSH_DELIVERY (
 );
 
 -- Table: Transaction
-CREATE TABLE TRANSACTION (
-    transactionID VARCHAR(255) PRIMARY KEY NOT NULL,
+CREATE TABLE [TRANSACTION] (
+    transactionID INT NOT NULL PRIMARY KEY,
     time TIME,
     date DATE,
     transaction_content TEXT,
