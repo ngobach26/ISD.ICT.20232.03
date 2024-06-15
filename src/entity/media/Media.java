@@ -151,8 +151,7 @@ public class Media {
                     .setCategory(res.getString("category"))
                     .setMediaURL(res.getString("imageUrl"))
                     .setPrice(res.getInt("price"))
-                    .setType(res.getString("type"))
-                    .setWeight(res.getFloat("weight"));
+                    .setType(res.getString("type"));
             medium.add(media);
         }
         return medium;

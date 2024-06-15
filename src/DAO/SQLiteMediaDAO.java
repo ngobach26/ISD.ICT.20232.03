@@ -83,7 +83,7 @@ public class SQLiteMediaDAO implements MediaDAO {
                 .setCategory("Fixed Category")  // Example fixed category
                 .setMediaURL("http://example.com/fixed-media.jpg")  // Example fixed URL
                 .setPrice(100)  // Example fixed price
-                .setType("Fixed Type")  // Example fixed type
+                .setType("Fixed Type");  // Example fixed type
                 // .setWeight(0.5f);  // Example fixed weight
         list.add(fixedMedia);
 
@@ -101,7 +101,6 @@ public class SQLiteMediaDAO implements MediaDAO {
         statement.setString(5, media.getType());
         statement.setString(6, media.getImageURL());
         statement.setInt(7, media.getValue());
-        statement.setFloat(8, media.getWeight());
         statement.executeUpdate();
     }
 

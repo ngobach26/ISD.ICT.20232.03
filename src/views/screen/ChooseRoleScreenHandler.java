@@ -12,7 +12,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import utils.Configs;
 import views.screen.home.HomeScreenHandler;
-import views.sellerScreen.ManageProductScreenHandler;
+import views.screen.sellerScreen.ManageProductScreenHandler;
 
 public class ChooseRoleScreenHandler extends BaseScreenHandler implements Initializable{
 	

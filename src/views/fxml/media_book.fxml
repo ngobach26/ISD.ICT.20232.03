@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="457.0" prefWidth="698.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.screen.sellerScreen.sellerEventScreen.create.BookCreateHandler">
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="457.0" prefWidth="698.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <GridPane layoutX="14.0" layoutY="14.0" prefHeight="362.0" prefWidth="382.0">
          <columnConstraints>
@@ -34,19 +34,19 @@
             <Label prefHeight="18.0" prefWidth="140.0" text="Cover Type" GridPane.rowIndex="2" />
             <Label prefHeight="18.0" prefWidth="142.0" text="Publisher" GridPane.rowIndex="3" />
             <Label prefHeight="18.0" prefWidth="142.0" text="Publish Date" GridPane.rowIndex="4" />
-            <Label prefHeight="18.0" prefWidth="141.0" text="Pages" GridPane.rowIndex="5" />
+            <Label prefHeight="18.0" prefWidth="141.0" text="Number of Pages" GridPane.rowIndex="5" />
             <Label prefHeight="18.0" prefWidth="141.0" text="Language" GridPane.rowIndex="6" />
             <TextField fx:id="author" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="cover_type" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="publisher" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <TextField fx:id="language" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <TextField fx:id="pages" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField fx:id="number_pages" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <DatePicker fx:id="publish_date" prefHeight="26.0" prefWidth="197.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
       <Button fx:id="create" layoutX="598.0" layoutY="409.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="86.0" text="Create" />
       <ImageView fx:id="image" fitHeight="150.0" fitWidth="236.0" layoutX="434.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
       <ComboBox fx:id="image_url" layoutX="434.0" layoutY="213.0" prefHeight="28.0" prefWidth="236.0" promptText="Image URL..." />
-      <Label layoutX="520.0" layoutY="186.0" text="Book image" />
+      <Label layoutX="434.0" layoutY="195.0" text="Chose the image for this media" />
    </children>
 </AnchorPane>

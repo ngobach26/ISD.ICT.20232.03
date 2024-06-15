@@ -13,7 +13,7 @@ import utils.Configs;
 import utils.Utils;
 import views.screen.BaseScreenHandler;
 import views.screen.home.HomeScreenHandler;
-import views.sellerScreen.ManageProductScreenHandler;
+import views.screen.sellerScreen.ManageProductScreenHandler;
 
 import java.io.IOException;
 import java.net.URL;
