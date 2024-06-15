@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import controller.PlaceOrderController;
 import common.exception.InvalidDeliveryInfoException;
 import entity.invoice.Invoice;
+import entity.order.DeliveryInformation;
 import entity.order.Order;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -113,18 +114,24 @@ public class ShippingScreenHandler extends BaseScreenHandler implements Initiali
         messages.put("phone", phone.getText());
         messages.put("address", address.getText());
         messages.put("instructions", instructions.getText());
+        DeliveryInformation deliveryInformation = new DeliveryInformation();
+        deliveryInformation.setDeliveryAddress(address.getText());
         if(province.getValue() != null){
             messages.put("province", province.getValue());
+            deliveryInformation.setProvinceCity(province.getValue());
         }
         else notifyError("Empty province");
         messages.put("email", email.getText());
+        deliveryInformation.setEmail(email.getText());
 
         if (chooseShip.isSelected()) {
             messages.put("isRushShipping", "Yes");
+            deliveryInformation.setIsRushShipping("Yes");
             messages.put("time", time.getText());
             messages.put("rushShippingInstruction", rushShippingInstr.getText());
         } else {
             messages.put("isRushShipping", "No");
+            deliveryInformation.setIsRushShipping("No");
         }
         if(!validateShippingInformation(messages)){
             return;
@@ -139,10 +146,9 @@ public class ShippingScreenHandler extends BaseScreenHandler implements Initiali
         // calculate shipping fees
         int shippingFees = getBController().calculateShippingFee(order);
         order.setShippingFees(shippingFees);
-        order.setDeliveryInfo(messages);
 
         // create invoice screen
-        Invoice invoice = getBController().createInvoice(order);
+        Invoice invoice = getBController().createInvoice(deliveryInformation,order);
         BaseScreenHandler InvoiceScreenHandler = new InvoiceScreenHandler(this.stage, Configs.INVOICE_SCREEN_PATH, invoice);
         InvoiceScreenHandler.setPreviousScreen(this);
         InvoiceScreenHandler.setHomeScreenHandler(homeScreenHandler);

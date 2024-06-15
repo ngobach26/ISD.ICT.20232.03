@@ -2,13 +2,15 @@ package entity.cart;
 
 import common.exception.MediaNotAvailableException;
 import entity.media.Media;
+import services.DAOService.CartService;
 import services.DAOService.MediaService;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Cart {
-
+    private int cartId;
+    private int userId;
     private List<CartMedia> lstCartMedia;
     private static Cart cartInstance;
     private MediaService mediaService;
@@ -17,7 +19,12 @@ public class Cart {
         if (cartInstance == null) cartInstance = new Cart();
         return cartInstance;
     }
-
+    public int getUserId() {
+        return userId;
+    }
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
     private Cart() {
         lstCartMedia = new ArrayList<>();
         mediaService = MediaService.getInstance();

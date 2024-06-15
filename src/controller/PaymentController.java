@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Map;
 import entity.cart.Cart;
+import entity.order.DeliveryInformation;
 import entity.order.Order;
 import entity.payment.PaymentTransaction;
 import services.DAOService.OrderService;
@@ -36,8 +37,8 @@ public class PaymentController extends BaseController {
     public String generateURL(int amount, String content) throws IOException {
         return vnPay.generateURL(amount, content);
     }
-    public int createOrder(Order order) throws SQLException {
-        return orderService.createOrder(order);
+    public int createOrder(DeliveryInformation deliveryInformation,Order order) throws SQLException {
+        return orderService.createOrder(deliveryInformation,order);
     }
 
     public void emptyCart(){

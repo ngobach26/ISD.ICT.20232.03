@@ -53,6 +53,10 @@ public class CartScreenHandler extends BaseScreenHandler {
 
 	@FXML
 	private Button btnPlaceOrder;
+
+	@FXML
+	private Button btnCancelOrder;
+
 	private CartController cartController;
 
 	public CartScreenHandler(Stage stage, String screenPath) throws IOException {
@@ -80,7 +84,19 @@ public class CartScreenHandler extends BaseScreenHandler {
 			}
 
 		});
-
+		btnCancelOrder.setOnMouseClicked(e -> {
+			LOGGER.info("Cancel Order button clicked");
+			navigateToHomeScreen();
+		});
+	}
+	private void navigateToHomeScreen() {
+		try {
+			homeScreenHandler.show();
+			LOGGER.info("Navigated to Home Screen");
+		} catch (Exception e) {
+			LOGGER.severe("Error while navigating to Home Screen: " + e.getMessage());
+			e.printStackTrace();
+		}
 	}
 
 	public Label getLabelAmount() {

@@ -10,6 +10,7 @@ import common.exception.MediaNotAvailableException;
 import entity.cart.Cart;
 import entity.cart.CartMedia;
 import entity.invoice.Invoice;
+import entity.order.DeliveryInformation;
 import entity.order.Order;
 import entity.order.OrderMedia;
 import services.DAOService.MediaService;
@@ -40,8 +41,8 @@ public class PlaceOrderController extends BaseController{
          return order;
      }
 
-    public Invoice createInvoice(Order order) {
-        return new Invoice(order);
+    public Invoice createInvoice(DeliveryInformation deliveryInformation,Order order) {
+        return new Invoice(deliveryInformation, order);
     }
 
     public void processDeliveryInfo(HashMap info) throws InterruptedException, IOException{
