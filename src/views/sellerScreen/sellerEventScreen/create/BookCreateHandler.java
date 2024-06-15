@@ -35,7 +35,7 @@ public class BookCreateHandler extends BaseScreenHandler implements Initializabl
 	private DatePicker publish_date;
 
 	@FXML
-	private TextField number_pages;
+	private TextField numOfPages;
 
 	@FXML
 	private TextField language;
@@ -105,7 +105,7 @@ public class BookCreateHandler extends BaseScreenHandler implements Initializabl
 		String coverTypeText = cover_type.getText();
 		String publisherText = publisher.getText();
 		String publishDateText = publish_date.getValue().toString();
-		String numOfPages = number_pages.getText();
+		String numOfPagesText = numOfPages.getText();
 		String languageText = language.getText();
 		String imageUrl = image_url.getValue();
 		return comboBoxText.length() > 0 && 
@@ -114,13 +114,13 @@ public class BookCreateHandler extends BaseScreenHandler implements Initializabl
 				coverTypeText.length() > 0 && 
 				publisherText.length() > 0 && 
 				publishDateText.length() > 0 && 
-				numOfPages.length() > 0 && 
+				numOfPagesText.length() > 0 && 
 				languageText.length() > 0;
 	}
 	
 	public String createBookQuery() throws SQLException {
 		Book bookEntity = new Book();
-		String createSql = bookEntity.createBookQuery(author.getText(), cover_type.getText(), publisher.getText(), publish_date.getValue().toString(), Integer.parseInt(number_pages.getText()), language.getText(), category.getValue());
+		String createSql = bookEntity.createBookQuery(author.getText(), cover_type.getText(), publisher.getText(), publish_date.getValue().toString(), Integer.parseInt(numOfPages.getText()), language.getText(), category.getValue());
 		return createSql;
 	}
 }

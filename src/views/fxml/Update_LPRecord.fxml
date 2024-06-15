@@ -27,8 +27,8 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label prefHeight="18.0" prefWidth="142.0" text="Music type" />
-            <ComboBox fx:id="musicType" prefHeight="26.0" prefWidth="190.0" GridPane.columnIndex="1" />
+            <Label prefHeight="18.0" prefWidth="142.0" text="Genre" />
+            <ComboBox fx:id="genre" prefHeight="26.0" prefWidth="190.0" GridPane.columnIndex="1" />
             <Label prefHeight="18.0" prefWidth="141.0" text="Artist" GridPane.rowIndex="1" />
             <Label prefHeight="18.0" prefWidth="140.0" text="Record Label" GridPane.rowIndex="2" />
             <Label prefHeight="18.0" prefWidth="142.0" text="Released Date" GridPane.rowIndex="3" />

@@ -24,7 +24,7 @@ import views.screen.popup.PopupScreen;
 
 public class CommonInfoCreateHandler extends BaseScreenHandler implements Initializable {
 	
-	private static Logger LOGGER = Utils.getLogger(CommonInfoCreateHandler.class.getName());
+	private static final Logger LOGGER = Utils.getLogger(CommonInfoCreateHandler.class.getName());
 
 	@FXML
 	private TextField title;
@@ -44,9 +44,9 @@ public class CommonInfoCreateHandler extends BaseScreenHandler implements Initia
 	@FXML
 	private Button save;
 	
-	private String type;
-	private String category;
-	private String imageUrl;
+	private final String type;
+	private final String category;
+	private final String imageUrl;
 	private String createQuery;
 
 	public CommonInfoCreateHandler(Stage stage, String screenPath, String type, String createQuery, String category, String imageUrl) throws IOException {
@@ -111,20 +111,19 @@ public class CommonInfoCreateHandler extends BaseScreenHandler implements Initia
 	}
 
 	public String createMediaQuery() throws SQLException {
-		StringBuilder queryValues = new StringBuilder();
-		queryValues.append("(")
-		.append("'").append(title.getText()).append("'").append(", ")
-		.append("'").append(this.category).append("'").append(", ")
-		.append(Integer.parseInt(price.getText())).append(", ")
-		.append(quantity.getValue()).append(", ")
-		.append("'").append(type).append("'").append(", ")
-		.append("'").append(Integer.parseInt(value.getText())).append("'").append(", ")
-		.append("'").append(this.imageUrl).append("'").append(", ")
-		.append(weight.getText()).append(")");
+		String queryValues = "(" +
+				"'" + title.getText() + "'" + ", " +
+				"'" + this.category + "'" + ", " +
+				Integer.parseInt(price.getText()) + ", " +
+				quantity.getValue() + ", " +
+				"'" + type + "'" + ", " +
+				"'" + Integer.parseInt(value.getText()) + "'" + ", " +
+				"'" + this.imageUrl + "'" + ", " +
+				weight.getText() + ")";
 		String sql = "INSERT INTO Media " 
 				+ "(title, category, price, quantity, type, value, imageUrl, weight)"
 				+ " VALUES "
-				+ queryValues.toString() + ";";
+				+ queryValues + ";";
 //		LOGGER.info("Errors occured: " + sql);
 		return sql;
 	}

@@ -48,7 +48,7 @@ public class BookUpdateHandler extends BaseScreenHandler implements Initializabl
 	private DatePicker publish_date;
 
 	@FXML
-	private TextField number_pages;
+	private TextField numOfPages;
 
 	@FXML
 	private TextField language;
@@ -69,7 +69,7 @@ public class BookUpdateHandler extends BaseScreenHandler implements Initializabl
 	private Spinner<Integer> quantity;
 
 	@FXML
-	private Button create;
+	private Button update;
 
 	@FXML
 	private ComboBox<String> image_url;
@@ -117,7 +117,7 @@ public class BookUpdateHandler extends BaseScreenHandler implements Initializabl
 				"assets/images/book/book12.jpg"
 		);
 
-		create.setOnMouseClicked(event -> {
+		update.setOnMouseClicked(event -> {
 			if (checkFillInformation()) {
 				try {
 					updateBookQuery();
@@ -138,7 +138,7 @@ public class BookUpdateHandler extends BaseScreenHandler implements Initializabl
 		cover_type.setText(targetMedia.getCoverType());
 		publisher.setText(targetMedia.getPublisher());
 		publish_date.setValue(LOCAL_DATE(targetMedia.getPublishDate().toString()));
-		number_pages.setText("" + targetMedia.getNumOfPages());
+		numOfPages.setText("" + targetMedia.getNumOfPages());
 		language.setText(targetMedia.getLanguage());
 		title.setText(targetMedia.getTitle());
 		value.setText("" + targetMedia.getValue());
@@ -160,7 +160,7 @@ public class BookUpdateHandler extends BaseScreenHandler implements Initializabl
 		String coverTypeText = cover_type.getText();
 		String publisherText = publisher.getText();
 		String publishDateText = publish_date.getValue().toString();
-		String numOfPages = number_pages.getText();
+		String numOfPagesText = numOfPages.getText();
 		String languageText = language.getText();
 		String imageUrl = image_url.getValue();
 		String titleText = title.getText();
@@ -174,7 +174,7 @@ public class BookUpdateHandler extends BaseScreenHandler implements Initializabl
 				coverTypeText.length() > 0 &&
 				publisherText.length() > 0 &&
 				publishDateText.length() > 0 &&
-				numOfPages.length() > 0 &&
+				numOfPagesText.length() > 0 &&
 				languageText.length() > 0 &&
 				titleText.length() > 0 &&
 				valueText.length() > 0 &&
@@ -186,11 +186,12 @@ public class BookUpdateHandler extends BaseScreenHandler implements Initializabl
 	public void updateBookQuery() throws SQLException {
 		String bookSQL = "UPDATE Book "
 				+ "SET "
+				+ "category='" + category.getValue() + "',"
 				+ "author='" + author.getText() + "',"
 				+ "coverType='" + cover_type.getText() + "',"
 				+ "publisher='" + publisher.getText() + "',"
 				+ "publishDate='" + publish_date.getValue().toString() + "',"
-				+ "numOfPages='" + number_pages.getText() + "',"
+				+ "numOfPages='" + numOfPages.getText() + "',"
 				+ "language='" + language.getText() + "',"
 				+ "bookCategory='" + category.getValue() + "'"
 				+ " WHERE "
@@ -201,7 +202,6 @@ public class BookUpdateHandler extends BaseScreenHandler implements Initializabl
 		String mediaSQL = "UPDATE Media "
 				+ "SET "
 				+ "title='" + title.getText() + "',"
-				+ "category='" + category.getValue() + "',"
 				+ "price='" + price.getText() + "',"
 				+ "value='" + value.getText() + "',"
 				+ "quantity=" + quantity.getValue() + ","

@@ -5,7 +5,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import entity.media.CD;
+import entity.media.LPRecord;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -16,10 +16,10 @@ import javafx.stage.Stage;
 import utils.Configs;
 import views.screen.BaseScreenHandler;
 
-public class CDCreateHandler extends BaseScreenHandler implements Initializable {
+public class LPRecordCreateHandler extends BaseScreenHandler implements Initializable {
 
 	@FXML
-	private ComboBox<String> musicType;
+	private ComboBox<String> genre;
 
 	@FXML
 	private TextField artist;
@@ -38,7 +38,7 @@ public class CDCreateHandler extends BaseScreenHandler implements Initializable 
 	
 	CommonInfoCreateHandler commonInfoCreateHandler;
 
-	public CDCreateHandler(Stage stage, String screenPath) throws IOException {
+	public LPRecordCreateHandler(Stage stage, String screenPath) throws IOException {
 		super(stage, screenPath);
 		// TODO Auto-generated constructor stub
 	}
@@ -46,7 +46,7 @@ public class CDCreateHandler extends BaseScreenHandler implements Initializable 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		musicType.getItems().addAll(
+		genre.getItems().addAll(
 				"Pop",
 				"Rhythm and blues",
 				"Rock",
@@ -58,24 +58,24 @@ public class CDCreateHandler extends BaseScreenHandler implements Initializable 
 			);
 		
 		image_url.getItems().addAll(
-				"assets/images/cd/cd1.jpg",
-				"assets/images/cd/cd2.jpg",
-				"assets/images/cd/cd3.jpg",
-				"assets/images/cd/cd4.jpg",
-				"assets/images/cd/cd5.jpg",
-				"assets/images/cd/cd6.jpg",
-				"assets/images/cd/cd7.jpg",
-				"assets/images/cd/cd8.jpg",
-				"assets/images/cd/cd9.jpg",
-				"assets/images/cd/cd10.jpg",
-				"assets/images/cd/cd11.jpg",
-				"assets/images/cd/cd12.jpg"
+				"assets/images/LPRecord/LPR1.jpg",
+				"assets/images/LPRecord/LPR2.jpg",
+				"assets/images/LPRecord/LPR3.jpg",
+				"assets/images/LPRecord/LPR4.jpg",
+				"assets/images/LPRecord/LPR5.jpg",
+				"assets/images/LPRecord/LPR6.jpg",
+				"assets/images/LPRecord/LPR7.jpg",
+				"assets/images/LPRecord/LPR8.jpg",
+				"assets/images/LPRecord/LPR9.jpg",
+				"assets/images/LPRecord/LPR10.jpg",
+				"assets/images/LPRecord/LPR11.jpg",
+				"assets/images/LPRecord/LPR12.jpg"
 			);
 		
 		create.setOnMouseClicked(event -> {
 			if (checkFillInformation()) {
 				try {
-					commonInfoCreateHandler = new CommonInfoCreateHandler(this.stage, Configs.CREATE_COMMON_MEDIA_PATH, "CD", createCDQuery(), musicType.getValue(), image_url.getValue());
+					commonInfoCreateHandler = new CommonInfoCreateHandler(this.stage, Configs.CREATE_COMMON_MEDIA_PATH, "CD", createLPRecordQuery(), genre.getValue(), image_url.getValue());
 					commonInfoCreateHandler.setScreenTitle("Common information for CD");
 					commonInfoCreateHandler.show();
 				} catch (IOException e) {
@@ -90,21 +90,21 @@ public class CDCreateHandler extends BaseScreenHandler implements Initializable 
 	}
 	
 	public boolean checkFillInformation() {
-		String musicTypeText = musicType.getValue();
+		String genreText = genre.getValue();
 		String imageUrl = image_url.getValue();
 		String artistText = artist.getText();
 		String recordLabelText = recordLabel.getText();
 		String releasedDateText = releasedDate.getValue().toString();
-		return musicTypeText.length() > 0 && 
+		return genreText.length() > 0 && 
 				imageUrl.length() > 0 &&
 				artistText.length() > 0 &&
 				recordLabelText.length() > 0 &&
 				releasedDateText.length() > 0;
 	}
 
-	public String createCDQuery() throws SQLException {
-		CD cdEntity = new CD();
-		String createSql = cdEntity.createCDQuery(artist.getText(), recordLabel.getText(), musicType.getValue(), releasedDate.getValue().toString());
+	public String createLPRecordQuery() throws SQLException {
+		LPRecord lpRecordEntity = new LPRecord();
+		String createSql = lpRecordEntity.createLPRecordQuery(artist.getText(), recordLabel.getText(), genre.getValue(), releasedDate.getValue().toString());
 		return createSql;
 	}
 }

@@ -15,6 +15,7 @@ import views.screen.BaseScreenHandler;
 import views.sellerScreen.sellerEventScreen.create.BookCreateHandler;
 import views.sellerScreen.sellerEventScreen.create.CDCreateHandler;
 import views.sellerScreen.sellerEventScreen.create.DVDCreateHandler;
+import views.sellerScreen.sellerEventScreen.create.LPRecordCreateHandler;
 
 public class CreateMediaByType extends BaseScreenHandler implements Initializable {
 
@@ -31,6 +32,9 @@ public class CreateMediaByType extends BaseScreenHandler implements Initializabl
 
 	@FXML
 	private RadioButton dvd;
+	
+	@FXML
+	private RadioButton record;
 
 	@FXML
 	private Button create;
@@ -43,6 +47,7 @@ public class CreateMediaByType extends BaseScreenHandler implements Initializabl
 	BookCreateHandler createBookItemHandler;
 	CDCreateHandler createCDItemHandler;
 	DVDCreateHandler createDVDItemHandler;
+	LPRecordCreateHandler createLPRecordItemHandler;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -51,6 +56,7 @@ public class CreateMediaByType extends BaseScreenHandler implements Initializabl
 		book.setToggleGroup(group);
 		cd.setToggleGroup(group);
 		dvd.setToggleGroup(group);
+		record.setToggleGroup(group);
 		
 		book.setSelected(true);
 

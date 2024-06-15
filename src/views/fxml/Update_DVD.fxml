@@ -28,22 +28,25 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
             <Label prefHeight="18.0" prefWidth="142.0" text="Disc type" />
             <ComboBox fx:id="discType" prefHeight="26.0" prefWidth="190.0" GridPane.columnIndex="1" />
             <Label prefHeight="18.0" prefWidth="141.0" text="Director" GridPane.rowIndex="1" />
-            <Label prefHeight="18.0" prefWidth="140.0" text="Duration" GridPane.rowIndex="2" />
+            <Label prefHeight="18.0" prefWidth="140.0" text="Runtime" GridPane.rowIndex="2" />
             <Label prefHeight="18.0" prefWidth="142.0" text="Studio" GridPane.rowIndex="3" />
-            <Label prefHeight="18.0" prefWidth="142.0" text="Release Date" GridPane.rowIndex="5" />
-            <Label prefHeight="18.0" prefWidth="141.0" text="Subtitles" GridPane.rowIndex="4" />
-            <Label prefHeight="18.0" prefWidth="141.0" text="Film type" GridPane.rowIndex="6" />
+            <Label prefHeight="18.0" prefWidth="142.0" text="Released Date" GridPane.rowIndex="6" />
+            <Label prefHeight="18.0" prefWidth="141.0" text="Subtitle" GridPane.rowIndex="5" />
+            <Label prefHeight="18.0" prefWidth="141.0" text="Film type" GridPane.rowIndex="7" />
             <TextField fx:id="director" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="duration" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="runtime" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="studio" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="subtitles" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <DatePicker fx:id="releaseDate" prefHeight="26.0" prefWidth="197.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <ComboBox fx:id="filmType" prefHeight="26.0" prefWidth="190.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TextField fx:id="subtitle" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <DatePicker fx:id="releasedDate" prefHeight="26.0" prefWidth="197.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <ComboBox fx:id="filmType" prefHeight="26.0" prefWidth="190.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <TextField fx:id="language" layoutX="201.0" layoutY="157.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label layoutX="10.0" layoutY="161.0" prefHeight="18.0" prefWidth="142.0" text="Language" GridPane.rowIndex="4" />
          </children>
       </GridPane>
       <Button fx:id="update" layoutX="593.0" layoutY="640.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="86.0" text="Update" />

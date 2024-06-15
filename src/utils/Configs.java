@@ -31,21 +31,23 @@ public class Configs {
 	public static final String LOGIN = "/views/fxml/login.fxml";
 	public static final String REGISTER = "/views/fxml/register.fxml";
 
-	public static final String CREATE_USER_POPUP_PATH = "/views/fxml/login.fxml";
+	public static final String CREATE_USER_POPUP_PATH = "/views/fxml/create_user_popup.fxml";
 
-	public static final String CHOOSE_TYPE_CREATE_PATH = "/views/fxml/choose_create_media.fxml";
-	public static final String SELLER_OR_USER_PATH = "/views/fxml/seller_or_user.fxml";
-	public static final String CREATE_COMMON_MEDIA_PATH = "/views/fxml/common_media_info.fxml";
-	public static final String SELLER_ITEM_VIEW_PATH = "/views/fxml/media_item.fxml";
-	public static final String SELLER_CU_BOOK_VIEW_PATH = "/views/fxml/media_book.fxml";
-	public static final String SELLER_CU_CD_VIEW_PATH = "/views/fxml/media_cd.fxml";
-	public static final String SELLER_CU_DVD_VIEW_PATH = "/views/fxml/media_dvd.fxml";
-	public static final String SELLER_UPDATE_BOOK_PATH = "/views/fxml/update_book.fxml";
-	public static final String SELLER_UPDATE_CD_PATH = "/views/fxml/update_cd.fxml";
-	public static final String SELLER_UPDATE_DVD_PATH = "/views/fxml/update_dvd.fxml";
-	public static final String REFUND_RESULT_PATH = "/views/fxml/refund_result.fxml";
-	public static final String ORDER_DETAIL_ADMIN_PATH = "/views/fxml/detail_order_admin.fxml";
-	public static final String ITEM_ORDER_PATH = "/views/fxml/item_order.fxml";
+	public static final String CHOOSE_TYPE_CREATE_PATH = "/views/fxml/CreateMedia.fxml";
+	public static final String SELLER_OR_USER_PATH = "/views/fxml/ChooseRole.fxml";
+	public static final String CREATE_COMMON_MEDIA_PATH = "/views/fxml/CommonMediaInfo.fxml";
+	public static final String SELLER_ITEM_VIEW_PATH = "/views/fxml/Media_Item.fxml";
+	public static final String SELLER_CU_BOOK_VIEW_PATH = "/views/fxml/CreateMedia_Book.fxml";
+	public static final String SELLER_CU_CD_VIEW_PATH = "/views/fxml/CreateMedia_CD.fxml";
+	public static final String SELLER_CU_DVD_VIEW_PATH = "/views/fxml/CreateMedia_DVD.fxml";
+	public static final String SELLER_CU_LPRECORD_VIEW_PATH = "/views/fxml/CreateMedia_LPRecord.fxml";
+	public static final String SELLER_UPDATE_BOOK_PATH = "/views/fxml/Update_Book.fxml";
+	public static final String SELLER_UPDATE_CD_PATH = "/views/fxml/Update_CD.fxml";
+	public static final String SELLER_UPDATE_DVD_PATH = "/views/fxml/Update_DVD.fxml";
+	public static final String SELLER_UPDATE_LPRECORD_PATH = "/views/fxml/Update_LPRecord.fxml";
+	public static final String REFUND_RESULT_PATH = "/views/fxml/RefundResult.fxml";
+	public static final String ORDER_DETAIL_ADMIN_PATH = "/views/fxml/OrderDetails.fxml";
+	public static final String ITEM_ORDER_PATH = "/views/fxml/OrderItem.fxml";
 	public static final String EDIT_USER_POPUP_PATH = "/views/fxml/edit_user_popup.fxml";
 	public static final String ADMIN_PATH = "/views/fxml/admin.fxml";
 	//	FONT

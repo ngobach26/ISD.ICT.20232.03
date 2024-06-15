@@ -15,7 +15,7 @@ import utils.Utils;
  * This class controls the flow of events when users view the Cart
  */
 public class CartController extends BaseController{
-    private static Logger LOGGER = Utils.getLogger(CartController.class.getName());
+    private static final Logger LOGGER = Utils.getLogger(CartController.class.getName());
     /**
      * This method checks the available products in Cart
      * @throws SQLException

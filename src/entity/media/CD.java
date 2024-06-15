@@ -105,19 +105,25 @@ public class CD extends Media {
         }
     }
 
-    @Override
-    public List getAllMedia() {
-        return null;
+    
+    public String toString() {
+        return "{" +
+            super.toString() +
+            " artist='" + artist + "'" +
+            ", recordLabel='" + recordLabel + "'" +
+            ", musicType='" + musicType + "'" +
+            ", releasedDate='" + releasedDate + "'" +
+            "}";
     }
 
-    public String createCDQuery(String artist, String recordLabel, String musicType, String releaseDate) throws SQLException {
+    public String createCDQuery(String artist, String recordLabel, String musicType, String releasedDate) throws SQLException {
         StringBuilder queryValues = new StringBuilder();
         queryValues.append("(")
                 .append("placeForId").append(", ")
                 .append("'").append(artist).append("'").append(", ")
                 .append("'").append(recordLabel).append("'").append(", ")
                 .append("'").append(musicType).append("'").append(", ")
-                .append("'").append(releaseDate).append("'").append(")");
+                .append("'").append(releasedDate).append("'").append(")");
         String sql = "INSERT INTO CD "
                 + "(id, artist, recordLabel, musicType, releasedDate)"
                 + " VALUES "

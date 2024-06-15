@@ -91,7 +91,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
            
             try {
             	LoginManager loginManager = new LoginManager();
-            	loginManager.clearSavedLoginInfo();
+            	LoginManager.clearSavedLoginInfo();
             	LoginHandler loginHandler = new LoginHandler(this.stage, Configs.LOGIN);
 				loginHandler.setScreenTitle("Login");
 //				loginHandler.setImage();
@@ -117,7 +117,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
 
     @Override
     public void show() {
-        numMediaInCart.setText(String.valueOf(Cart.getCart().getListMedia().size()) + " media");
+        numMediaInCart.setText(Cart.getCart().getListMedia().size() + " media");
         super.show();
     }
 

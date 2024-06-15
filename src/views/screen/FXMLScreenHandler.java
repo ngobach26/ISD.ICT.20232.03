@@ -19,7 +19,7 @@ public class FXMLScreenHandler {
 //		System.out.println("Resolved URL: " + this.loader);
         // Set this class as the controller
         this.loader.setController(this);
-        this.content = (AnchorPane) loader.load();
+        this.content = loader.load();
     }
 
     public AnchorPane getContent() {

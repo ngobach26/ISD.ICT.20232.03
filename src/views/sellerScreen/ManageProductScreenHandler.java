@@ -10,7 +10,6 @@ import java.util.logging.Logger;
 
 import controller.HomeController;
 import controller.SellerHomeController;
-import entity.media.Book;
 import entity.media.Media;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

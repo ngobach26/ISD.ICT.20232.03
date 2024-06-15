@@ -3,6 +3,7 @@ package entity.media;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -150,10 +151,7 @@ public class Book extends Media {
             throw new SQLException();
         }
     }
-
-    public List getAllMedia() {
-        return null;
-    }
+    
 
     public String toString() {
         return "{" +

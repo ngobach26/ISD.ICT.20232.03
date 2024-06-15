@@ -11,9 +11,9 @@ import java.util.List;
 public class Cart {
     private int cartId;
     private int userId;
-    private List<CartMedia> lstCartMedia;
+    private final List<CartMedia> lstCartMedia;
     private static Cart cartInstance;
-    private MediaService mediaService;
+    private final MediaService mediaService;
 
     public static Cart getCart() {
         if (cartInstance == null) cartInstance = new Cart();

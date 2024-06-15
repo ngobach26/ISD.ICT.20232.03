@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import entity.media.Book;
 import entity.media.CD;
 import entity.media.DVD;
+import entity.media.LPRecord;
 import entity.media.Media;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -23,6 +24,7 @@ import views.screen.popup.PopupScreen;
 import views.sellerScreen.sellerEventScreen.update.BookUpdateHandler;
 import views.sellerScreen.sellerEventScreen.update.CDUpdateHandler;
 import views.sellerScreen.sellerEventScreen.update.DVDUpdateHandler;
+import views.sellerScreen.sellerEventScreen.update.LPRecordUpdateHandler;
 
 // This class is used for handle the administrators/seller action 
 // to each media product in the AdminHome page
@@ -51,11 +53,12 @@ public class MediaProductHandler extends FXMLScreenHandler {
 	@FXML
 	protected Button update_btn;
 
-	private Media media;
-	private int id;
+	private final Media media;
+	private final int id;
 	private BookUpdateHandler bookUpdateHandler;
 	private CDUpdateHandler cdUpdateHandler;
 	private DVDUpdateHandler dvdUpdateHandler;
+	private LPRecordUpdateHandler lpRecordUpdateHandler;
 	private Media mediaHandler;
 
 	public MediaProductHandler(String screenPath, Media media) throws IOException, SQLException {
@@ -76,12 +79,12 @@ public class MediaProductHandler extends FXMLScreenHandler {
 		item_img.setImage(image);
 		
 		item_name.setText(media.getTitle());
-		item_quantity.setText(Integer.toString((int) media.getQuantity()));
+		item_quantity.setText(Integer.toString(media.getQuantity()));
 		item_type.setText(media.getTitle());
 		item_price.setText("" + media.getPrice());
 
 		update_btn.setOnMouseClicked(event -> {
-			if (this.media.getType().equals("BOOK")) {
+			if (this.media.getType().equals("Book")) {
 				try {
 					bookUpdateHandler = new BookUpdateHandler(new Stage(), Configs.SELLER_UPDATE_BOOK_PATH, this.media);
 					bookUpdateHandler.setScreenTitle("Book Update Dialog");
@@ -96,23 +99,42 @@ public class MediaProductHandler extends FXMLScreenHandler {
 			} else if (this.media.getType().equals("CD")) {
 				try {
 					cdUpdateHandler = new CDUpdateHandler(new Stage(), Configs.SELLER_UPDATE_CD_PATH, this.media);
-					cdUpdateHandler.setScreenTitle("Book Update Dialog");
+					cdUpdateHandler.setScreenTitle("CD Update Dialog");
 					cdUpdateHandler.show();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-			} else {
+			} else if (this.media.getType().equals("CD")) {
 				try {
 					dvdUpdateHandler = new DVDUpdateHandler(new Stage(), Configs.SELLER_UPDATE_DVD_PATH, this.media);
-					dvdUpdateHandler.setScreenTitle("Book Update Dialog");
+					dvdUpdateHandler.setScreenTitle("DVD Update Dialog");
 					dvdUpdateHandler.show();
 				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else  {
+				try {
+					lpRecordUpdateHandler = new LPRecordUpdateHandler(new Stage(), Configs.SELLER_UPDATE_LPRECORD_PATH, this.media);
+					lpRecordUpdateHandler.setScreenTitle("Record Update Dialog");
+					lpRecordUpdateHandler.show();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		});
+
 
 		delete_btn.setOnMouseClicked(event -> {
 			try {
@@ -133,7 +155,8 @@ public class MediaProductHandler extends FXMLScreenHandler {
 				e.printStackTrace();
 			} catch (IOException e) {
                 throw new RuntimeException(e);
-            }
-        });
+			}
+		});
 	}
 }
+

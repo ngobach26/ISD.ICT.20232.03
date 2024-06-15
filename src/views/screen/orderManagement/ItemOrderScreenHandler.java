@@ -60,6 +60,6 @@ public class ItemOrderScreenHandler extends FXMLScreenHandler {
         this.state.setText(order.getStateString());
     }
     interface OnClickItemOrder {
-        public void goToOrderDetail(int id) throws IOException, SQLException;
+        void goToOrderDetail(int id) throws IOException, SQLException;
     }
 }
