@@ -102,20 +102,8 @@
             <!-- Action Buttons -->
             <HBox spacing="10">
                 <Button fx:id="createUserButton" text="Create New User" />
-                <Button fx:id="viewUserInfoButton" text="View User Info" />
-                <Button fx:id="updateUserInfoButton" text="Update User Info" />
-                <Button fx:id="deleteUserButton" text="Delete User" />
-                <Button fx:id="resetPasswordButton" text="Reset Password" />
-                <Button fx:id="blockUserButton" text="Block User" />
-                <Button fx:id="unblockUserButton" text="Unblock User" />
             </HBox>
         </VBox>
-
-        <!-- Bottom Section: Logout and Change Password Buttons -->
-        <HBox layoutX="24.0" layoutY="720.0" spacing="10" prefWidth="1283.0" alignment="CENTER_RIGHT">
-            <Button fx:id="changePasswordButton" text="Change Password"/>
-            <Button fx:id="logoutButton" text="Logout"/>
-        </HBox>
 
     </children>
 </AnchorPane>
