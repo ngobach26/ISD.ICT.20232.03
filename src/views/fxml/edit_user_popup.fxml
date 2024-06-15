@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="278.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="436.0" prefWidth="288.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <VBox alignment="CENTER" layoutX="20.0" layoutY="20.0" spacing="10.0">
             <children>
@@ -41,6 +41,10 @@
                 <HBox spacing="10.0">
                     <Label text="User Type:" />
                     <ComboBox fx:id="userTypeComboBox" promptText="User Type" />
+                </HBox>
+                <HBox spacing="10.0">
+                    <Label text="User Status:" />
+                    <ComboBox fx:id="userStatusComboBox" promptText="User Status" />
                 </HBox>
                 <Button fx:id="saveButton" mnemonicParsing="false" text="Save Changes" />
                 <Button fx:id="deleteButton" mnemonicParsing="false" text="Delete User" />

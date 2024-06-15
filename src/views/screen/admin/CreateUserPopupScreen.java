@@ -1,8 +1,5 @@
 package views.screen.admin;
-
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import controller.AdminController;
@@ -12,9 +9,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import utils.AdminUtils;
 import utils.Configs;
 import views.screen.BaseScreenHandler;
-import views.screen.admin.AdminScreenHandler;
 import views.screen.popup.PopupScreen;
 
 public class CreateUserPopupScreen extends BaseScreenHandler {
@@ -38,8 +35,8 @@ public class CreateUserPopupScreen extends BaseScreenHandler {
     @FXML
     private TextField passwordField;
 
-    private AdminController adminController;
-    private AdminScreenHandler adminScreenHandler;
+    private final AdminController adminController;
+    private final AdminScreenHandler adminScreenHandler;
 
     public CreateUserPopupScreen(Stage stage, AdminScreenHandler adminScreenHandler) throws IOException {
         super(stage, Configs.CREATE_USER_POPUP_PATH);
@@ -49,6 +46,11 @@ public class CreateUserPopupScreen extends BaseScreenHandler {
     }
 
     public void init() {
+        if (createButton == null) {
+            System.out.println("createButton is null");
+        } else {
+            System.out.println("createButton is initialized");
+        }
         createButton.setOnAction(event -> createUser());
 
         userTypeComboBox.getItems().clear();
@@ -64,20 +66,8 @@ public class CreateUserPopupScreen extends BaseScreenHandler {
         String password = passwordField.getText();
         String userType = (String) userTypeComboBox.getValue();
 
-        int userTypeValue;
-        switch (userType) {
-            case "User":
-                userTypeValue = 0;
-                break;
-            case "Manager":
-                userTypeValue = 1;
-                break;
-            case "Admin":
-                userTypeValue = 2;
-                break;
-            default:
-                return;
-        }
+        int userTypeValue = AdminUtils.getUserTypeValue(userType);
+
         User newUser = new User(name, email, address, phone , userTypeValue, password);
         try {
             adminController.createUser(newUser);

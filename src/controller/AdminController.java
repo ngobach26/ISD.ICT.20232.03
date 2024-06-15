@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class AdminController {
-    private UserService userService ;
+    private final UserService userService ;
 
     public AdminController() throws MediaNotAvailableException {
         this.userService = UserService.getInstance();

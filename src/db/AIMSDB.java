@@ -8,14 +8,14 @@ import utils.*;
 
 public class AIMSDB {
 
-    private static Logger LOGGER = Utils.getLogger(Connection.class.getName());
+    private static final Logger LOGGER = Utils.getLogger(Connection.class.getName());
     private static Connection connect;
 
     public static Connection getConnection() {
         if (connect != null) return connect;
         try {
             Class.forName("org.sqlite.JDBC");
-            String url = "jdbc:sqlite:assets/db/aims.db";
+            String url = "jdbc:sqlite:assets/db/aimsTest.db";
             connect = DriverManager.getConnection(url);
             LOGGER.info("Connect database successfully");
         } catch (Exception e) {

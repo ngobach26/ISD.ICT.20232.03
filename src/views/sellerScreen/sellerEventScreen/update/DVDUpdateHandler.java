@@ -119,19 +119,18 @@ public class DVDUpdateHandler extends BaseScreenHandler implements Initializable
 	}
 	
 	public String createBookQuery() throws SQLException {
-		StringBuilder queryValues = new StringBuilder();
-		queryValues.append("(")
-		.append("'").append(author.getText()).append("'").append(", ")
-		.append("'").append(cover_type.getText()).append("'").append(", ")
-		.append("'").append(publisher.getText()).append("'").append(", ")
-		.append("'").append(publish_date.getValue().toString()).append("'").append(", ")
-		.append(number_pages.getText()).append(", ")
-		.append("'").append(language.getText()).append("'").append(", ")
-		.append("'").append(category.getValue()).append("'").append(")");
+		String queryValues = "(" +
+				"'" + author.getText() + "'" + ", " +
+				"'" + cover_type.getText() + "'" + ", " +
+				"'" + publisher.getText() + "'" + ", " +
+				"'" + publish_date.getValue().toString() + "'" + ", " +
+				number_pages.getText() + ", " +
+				"'" + language.getText() + "'" + ", " +
+				"'" + category.getValue() + "'" + ")";
 		String sql = "INSERT INTO Book " 
 				+ "(author, coverType, publisher, publishDate, numOfPages, language, bookCategory)"
 				+ " VALUES "
-				+ queryValues.toString() + ";";
+				+ queryValues + ";";
 		return sql;
 	}
 }

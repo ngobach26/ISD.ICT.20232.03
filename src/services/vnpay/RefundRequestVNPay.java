@@ -59,7 +59,7 @@ public class RefundRequestVNPay {
                 "02", vnp_TxnRef, String.valueOf(amountVNPay), "", vnp_TransactionDate,
                 ConfigVNPay.website_name, vnp_CreateDate, vnp_IpAddr, orderInfor);
 
-        String vnp_SecureHash = ConfigVNPay.hmacSHA512(ConfigVNPay.secretKey, hash_Data.toString());
+        String vnp_SecureHash = ConfigVNPay.hmacSHA512(ConfigVNPay.secretKey, hash_Data);
 
         vnp_Params.put("vnp_SecureHash", vnp_SecureHash);
 
@@ -88,7 +88,7 @@ public class RefundRequestVNPay {
             response.append(output);
         }
         in.close();
-        System.out.println(response.toString());
+        System.out.println(response);
         return response.toString();
     }
 }

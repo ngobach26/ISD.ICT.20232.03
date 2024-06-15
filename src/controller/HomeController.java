@@ -18,8 +18,8 @@ import views.screen.home.MediaHandler;
  */
 public class HomeController extends BaseController{
 
-    private static Logger LOGGER = Utils.getLogger(HomeController.class.getName());
-    private MediaService mediaService ;
+    private static final Logger LOGGER = Utils.getLogger(HomeController.class.getName());
+    private final MediaService mediaService ;
     /**
      * this method gets all Media in DB and return back to home to display
      * @return List[Media]
@@ -50,10 +50,7 @@ public class HomeController extends BaseController{
             @Override
             public int compare(MediaHandler m1, MediaHandler m2) {
                 int priceComparison = m1.getMedia().getPrice() - m2.getMedia().getPrice();
-                if (priceComparison != 0) {
-                    return priceComparison;
-                }
-                return 0;
+                return priceComparison;
             }
         };
         list.sort(mediaTitleComparator);

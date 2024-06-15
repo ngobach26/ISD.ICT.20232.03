@@ -66,7 +66,7 @@ public class ShippingScreenHandler extends BaseScreenHandler implements Initiali
     @FXML
     private ComboBox<String> province;
 
-    private Order order;
+    private final Order order;
 
     public ShippingScreenHandler(Stage stage, String screenPath, Order order) throws IOException {
         super(stage, screenPath);
@@ -88,11 +88,7 @@ public class ShippingScreenHandler extends BaseScreenHandler implements Initiali
         chooseShip.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> obs, Boolean wasPreviouslySelected, Boolean isNowSelected) {
-                if (isNowSelected) {
-                    updateRushShippingView(true);
-                } else {
-                    updateRushShippingView(false);
-                }
+                updateRushShippingView(isNowSelected);
             }
         });
     }

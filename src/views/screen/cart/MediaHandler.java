@@ -55,8 +55,8 @@ public class MediaHandler extends FXMLScreenHandler {
 
 	private CartMedia cartMedia;
 	private Spinner<Integer> spinner;
-	private CartScreenHandler cartScreen;
-	private CartController cartController;
+	private final CartScreenHandler cartScreen;
+	private final CartController cartController;
 
 	public MediaHandler(String screenPath, CartScreenHandler cartScreen) throws IOException {
 		super(screenPath);

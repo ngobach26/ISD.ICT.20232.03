@@ -31,7 +31,7 @@ public class Configs {
 	public static final String LOGIN = "/views/fxml/login.fxml";
 	public static final String REGISTER = "/views/fxml/register.fxml";
 
-	public static final String CREATE_USER_POPUP_PATH = "/views/fxml/login.fxml";
+	public static final String CREATE_USER_POPUP_PATH = "/views/fxml/create_user_popup.fxml";
 
 	public static final String CHOOSE_TYPE_CREATE_PATH = "/views/fxml/choose_create_media.fxml";
 	public static final String SELLER_OR_USER_PATH = "/views/fxml/seller_or_user.fxml";

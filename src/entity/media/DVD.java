@@ -152,20 +152,19 @@ public class DVD extends Media {
     }
 
     public String createDVDQuery(String discType, String director, int runtime, String studio, String subtitles, String releasedDate, String filmType) throws SQLException {
-        StringBuilder queryValues = new StringBuilder();
-        queryValues.append("(")
-                .append("placeForId").append(", ")
-                .append("'").append(discType).append("'").append(", ")
-                .append("'").append(director).append("'").append(", ")
-                .append(runtime).append(", ")
-                .append("'").append(studio).append("'").append(", ")
-                .append("'").append(subtitles).append("'").append(", ")
-                .append("'").append(releasedDate).append("'").append(", ")
-                .append("'").append(filmType).append("'").append(")");
+        String queryValues = "(" +
+                "placeForId" + ", " +
+                "'" + discType + "'" + ", " +
+                "'" + director + "'" + ", " +
+                runtime + ", " +
+                "'" + studio + "'" + ", " +
+                "'" + subtitles + "'" + ", " +
+                "'" + releasedDate + "'" + ", " +
+                "'" + filmType + "'" + ")";
         String sql = "INSERT INTO aims.Book "
                 + "(id, discType, director, runtime, studio, subtitles, releasedDate, filmType)"
                 + " VALUES "
-                + queryValues.toString() + ";";
+                + queryValues + ";";
         return sql;
     }
 

@@ -11,8 +11,8 @@ import entity.cart.Cart;
 import entity.cart.CartMedia;
 
 public class SQLiteCartDAO implements CartDAO{
-    private static Logger LOGGER = Logger.getLogger(SQLiteCartDAO.class.getName());
-    private Connection connection;
+    private static final Logger LOGGER = Logger.getLogger(SQLiteCartDAO.class.getName());
+    private final Connection connection;
     private static final String INSERT_CART = "INSERT INTO CART (cartID, userID) VALUES (?, ?)";
     private static final String INSERT_CART_MEDIA = "INSERT INTO CART_MEDIA (cartID, mediaID, number_of_products) VALUES (?, ?, ?)";
     private static final String GET_CART_ID = "SELECT cartID FROM CART WHERE userID = ?";

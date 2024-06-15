@@ -28,7 +28,7 @@ import views.screen.shipping.ShippingScreenHandler;
 
 public class CartScreenHandler extends BaseScreenHandler {
 
-	private static Logger LOGGER = Utils.getLogger(CartScreenHandler.class.getName());
+	private static final Logger LOGGER = Utils.getLogger(CartScreenHandler.class.getName());
 
 	@FXML
 	private ImageView aimsImage;
@@ -57,7 +57,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 	@FXML
 	private Button btnCancelOrder;
 
-	private CartController cartController;
+	private final CartController cartController;
 
 	public CartScreenHandler(Stage stage, String screenPath) throws IOException {
 		super(stage, screenPath);
