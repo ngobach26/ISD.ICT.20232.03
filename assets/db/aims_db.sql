@@ -113,8 +113,8 @@ CREATE TABLE RUSH_DELIVERY (
 );
 
 -- Table: Transaction
-CREATE TABLE [TRANSACTION] (
-    transactionID INT NOT NULL PRIMARY KEY,
+CREATE TABLE TRANSACTION (
+    transactionID VARCHAR(255) PRIMARY KEY NOT NULL,
     time TIME,
     date DATE,
     transaction_content TEXT,
