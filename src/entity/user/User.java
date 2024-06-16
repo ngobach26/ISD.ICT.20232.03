@@ -26,6 +26,7 @@ public class User {
         this.userType = userType;
     }
     public User(int id, String name, String email, String address, String phone,int userType, String password, int status){
+        this.id = id;
         this.name = name;
         this.email = email;
         this.address = address;

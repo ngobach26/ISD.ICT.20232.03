@@ -9,18 +9,15 @@
   <component name="ChangeListManager">
     <list default="true" id="228d128d-7d0d-4ca2-a953-3525d59eef86" name="Changes" comment="update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/HomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/PaymentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/PaymentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/PlaceOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/PlaceOrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/SellerHomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/SellerHomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/cart/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/cart/Cart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/DAOService/CartService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/DAOService/DAOFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/DAOFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/DAOService/MediaService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/DAOService/OrderService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/DAOService/UserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/db/aimsTest.db" beforeDir="false" afterPath="$PROJECT_DIR$/assets/db/aimsTest.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/SQLiteUserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/SQLiteUserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/user/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/fxml/admin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/fxml/admin.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/admin/AdminScreenHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/admin/AdminScreenHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/auth/LoginHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/auth/LoginHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/sellerScreen/sellerEventScreen/create/CDCreateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/sellerScreen/sellerEventScreen/create/CDCreateHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/sellerScreen/sellerEventScreen/create/DVDCreateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/sellerScreen/sellerEventScreen/create/DVDCreateHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/sellerScreen/sellerEventScreen/update/DVDUpdateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/sellerScreen/sellerEventScreen/update/DVDUpdateHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -20,6 +20,7 @@ import views.screen.BaseScreenHandler;
 //import views.screen.RegisterHandler;
 import views.screen.admin.AdminScreenHandler;
 import views.screen.home.HomeScreenHandler;
+import views.screen.sellerScreen.ManageProductScreenHandler;
 
 public class LoginHandler extends BaseScreenHandler {
     @FXML
@@ -74,12 +75,21 @@ public class LoginHandler extends BaseScreenHandler {
                 User user = authController.validateLogin(email.getText(), password.getText());
                 System.out.println(">>>check user: " + user.toString());
                 if (user.getUserType() == 2){
+                    LoginManager loginManager = new LoginManager();
+                    LoginManager.saveLoginInfo(user.getId(), user.getName(), user.getPhone(), user.getAddress(), user.getEmail());
                     System.out.println("Admin logged in");
                     AdminScreenHandler adminHandler = new AdminScreenHandler(this.stage, Configs.ADMIN_PATH);
 					adminHandler.setScreenTitle("Admin Screen");
 					adminHandler.show();
                 }
-                else if(user.getUserType() == 0) {
+                else if(user.getUserType() == 1) {
+                    LoginManager loginManager = new LoginManager();
+                    LoginManager.saveLoginInfo(user.getId(), user.getName(), user.getPhone(), user.getAddress(), user.getEmail());
+                    System.out.println("Manager logged in");
+                    ManageProductScreenHandler manageProductScreenHandler = new ManageProductScreenHandler(this.stage, Configs.SELLER_HOMEPAGE_PATH);
+                    manageProductScreenHandler.setScreenTitle("Manager screen");
+                    manageProductScreenHandler.show();
+                } else {
                 	LoginManager loginManager = new LoginManager();
                 	LoginManager.saveLoginInfo(user.getId(), user.getName(), user.getPhone(), user.getAddress(), user.getEmail());
                     System.out.println("Customer logged in");

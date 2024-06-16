@@ -116,18 +116,18 @@ public class DVDUpdateHandler extends BaseScreenHandler implements Initializable
         );
 
         image_url.getItems().addAll(
-                "assets/images/book/dvd1.jpg",
-                "assets/images/book/dvd2.jpg",
-                "assets/images/book/dvd3.jpg",
-                "assets/images/book/dvd4.jpg",
-                "assets/images/book/dvd5.jpg",
-                "assets/images/book/dvd6.jpg",
-                "assets/images/book/dvd7.jpg",
-                "assets/images/book/dvd8.jpg",
-                "assets/images/book/dvd9.jpg",
-                "assets/images/book/dvd10.jpg",
-                "assets/images/book/dvd11.jpg",
-                "assets/images/book/dvd12.jpg"
+                "assets/images/dvd/dvd1.jpg",
+                "assets/images/dvd/dvd2.jpg",
+                "assets/images/dvd/dvd3.jpg",
+                "assets/images/dvd/dvd4.jpg",
+                "assets/images/dvd/dvd5.jpg",
+                "assets/images/dvd/dvd6.jpg",
+                "assets/images/dvd/dvd7.jpg",
+                "assets/images/dvd/dvd8.jpg",
+                "assets/images/dvd/dvd9.jpg",
+                "assets/images/dvd/dvd10.jpg",
+                "assets/images/dvd/dvd11.jpg",
+                "assets/images/dvd/dvd12.jpg"
         );
     }
 

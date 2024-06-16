@@ -61,18 +61,18 @@ public class CDCreateHandler extends BaseScreenHandler implements Initializable 
 			);
 		
 		image_url.getItems().addAll(
-				"assets/images/book/cd1.jpg",
-				"assets/images/book/cd2.jpg",
-				"assets/images/book/cd3.jpg",
-				"assets/images/book/cd4.jpg",
-				"assets/images/book/cd5.jpg",
-				"assets/images/book/cd6.jpg",
-				"assets/images/book/cd7.jpg",
-				"assets/images/book/cd8.jpg",
-				"assets/images/book/cd9.jpg",
-				"assets/images/book/cd10.jpg",
-				"assets/images/book/cd11.jpg",
-				"assets/images/book/cd12.jpg"
+				"assets/images/cd/cd1.jpg",
+				"assets/images/cd/cd2.jpg",
+				"assets/images/cd/cd3.jpg",
+				"assets/images/cd/cd4.jpg",
+				"assets/images/cd/cd5.jpg",
+				"assets/images/cd/cd6.jpg",
+				"assets/images/cd/cd7.jpg",
+				"assets/images/cd/cd8.jpg",
+				"assets/images/cd/cd9.jpg",
+				"assets/images/cd/cd10.jpg",
+				"assets/images/cd/cd11.jpg",
+				"assets/images/cd/cd12.jpg"
 			);
 		
 		create.setOnMouseClicked(event -> {

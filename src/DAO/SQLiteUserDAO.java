@@ -107,6 +107,7 @@ public class SQLiteUserDAO implements UserDAO {
             statement.setInt(8, user.getId());
 
             statement.executeUpdate();
+            LOGGER.info("User updated successfully: " + user.getId());
         } finally {
             try {
                 if (statement != null) {

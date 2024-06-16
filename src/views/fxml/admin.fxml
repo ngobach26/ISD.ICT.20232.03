@@ -51,6 +51,7 @@
             <HBox prefHeight="622.0" prefWidth="1287.0" spacing="10">
                <TableView fx:id="userTable" prefHeight="501.0" prefWidth="1143.0">
                    <columns>
+                       <TableColumn fx:id="id" text="Id" />
                        <TableColumn fx:id="usernameColumn" text="Username" />
                        <TableColumn fx:id="emailColumn" text="Email" />
                        <TableColumn fx:id="addressColumn" text="Address" />
