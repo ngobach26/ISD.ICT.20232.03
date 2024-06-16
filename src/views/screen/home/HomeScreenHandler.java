@@ -11,10 +11,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 import common.exception.ViewCartException;
-//import common.exception.ViewCartException;
 import controller.CartController;
 import controller.HomeController;
-//import controller.CartController;
 import entity.cart.Cart;
 import entity.media.Media;
 import entity.user.User;
@@ -31,23 +29,19 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import services.DAOService.CartService;
 import services.user.LoginManager;
 import utils.Configs;
 import utils.Utils;
 import views.screen.BaseScreenHandler;
-//import views.screen.ChooseRoleScreenHandler;
-//import views.screen.cart.CartScreenHandler;
-//import views.screen.order.OrderScreenHandler;
 import views.screen.cart.CartScreenHandler;
 import views.screen.auth.LoginHandler;
 
-
-public class HomeScreenHandler extends BaseScreenHandler implements Initializable{
+public class HomeScreenHandler extends BaseScreenHandler implements Initializable {
 
     public static Logger LOGGER = Utils.getLogger(HomeScreenHandler.class.getName());
 
-    //search
-
+    // search
     @FXML
     private SplitMenuButton sort;
 
@@ -86,31 +80,24 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
 
     private List homeItems;
 
-    public HomeScreenHandler(Stage stage, String screenPath) throws IOException{
+    public HomeScreenHandler(Stage stage, String screenPath) throws IOException {
         super(stage, screenPath);
         sign_out.setOnMouseClicked(mouseEvent -> {
-           
             try {
-            	LoginManager loginManager = new LoginManager();
-            	LoginManager.clearSavedLoginInfo();
-            	LoginHandler loginHandler = new LoginHandler(this.stage, Configs.LOGIN);
-				loginHandler.setScreenTitle("Login");
-//				loginHandler.setImage();
-				loginHandler.show();
-//            	Stage stage1 = (Stage) searchText.getScene().getWindow();
-//    			Parent root = FXMLLoader.load(getClass().getResource(Configs.LOGIN));
-//    			stage1.setScene(new Scene(root));
-//    			stage1.setTitle("Login");
+                LoginManager loginManager = new LoginManager();
+                LoginManager.clearSavedLoginInfo();
+                LoginHandler loginHandler = new LoginHandler(this.stage, Configs.LOGIN);
+                loginHandler.setScreenTitle("Login");
+                loginHandler.show();
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-
         });
     }
 
-    public Label getNumMediaCartLabel(){
+    public Label getNumMediaCartLabel() {
         return this.numMediaInCart;
     }
 
@@ -128,26 +115,25 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         setBController(new HomeController());
-        try{
+        try {
             List medium = getBController().getAllMedia();
             this.homeItems = new ArrayList<>();
             for (Object object : medium) {
-                Media media = (Media)object;
+                Media media = (Media) object;
                 MediaHandler m1 = new MediaHandler(Configs.HOME_MEDIA_PATH, media, this);
                 this.homeItems.add(m1);
             }
-        }catch (SQLException | IOException e){
-            LOGGER.info("Errors occured: " + e.getMessage());
+        } catch (SQLException | IOException e) {
+            LOGGER.info("Errors occurred: " + e.getMessage());
             e.printStackTrace();
         }
 
-
-        this.splitMenuBtnSearch.setOnMouseClicked(e ->{
+        this.splitMenuBtnSearch.setOnMouseClicked(e -> {
             try {
                 List medium = this.getBController().search(this.searchText.getText());
                 this.homeItems = new ArrayList<>();
                 for (Object object : medium) {
-                    Media media = (Media)object;
+                    Media media = (Media) object;
                     MediaHandler m1 = new MediaHandler(Configs.HOME_MEDIA_PATH, media, this);
                     this.homeItems.add(m1);
                 }
@@ -174,17 +160,31 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
             }
         });
 
+        // Adding event handler for orderIcon
+        orderIcon.setOnMouseClicked(e -> {
+            try {
+                LOGGER.info("User clicked to save cart");
+                CartService cs = new CartService();
+                User user = LoginManager.getSavedLoginInfo();
+                cs.saveCart(Cart.getCart(user.getId()));
+                LOGGER.info("Cart saved successfully");
+            } catch (SQLException ex) {
+                LOGGER.severe("Failed to save cart: " + ex.getMessage());
+                throw new ViewCartException(Arrays.toString(ex.getStackTrace()).replaceAll(", ", "\n"));
+            }
+        });
+
         addMediaHome(this.homeItems);
         addMenuItem(0, "Book", splitMenuBtnSearch);
         addMenuItem(1, "DVD", splitMenuBtnSearch);
         addMenuItem(2, "CD", splitMenuBtnSearch);
 
-        //search
+        // search
         addMenuItemSearch(0, "Title", sort);
         addMenuItemSearch(1, "Price", sort);
     }
 
-    public void setImage(){
+    public void setImage() {
         // fix image path caused by fxml
         File file1 = new File(Configs.IMAGE_PATH + "/" + "Logo.png");
         Image img1 = new Image(file1.toURI().toString());
@@ -199,17 +199,17 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
         orderIcon.setImage(img3);
     }
 
-    public void addMediaHome(List items){
-        ArrayList mediaItems = (ArrayList)((ArrayList) items).clone();
+    public void addMediaHome(List items) {
+        ArrayList mediaItems = (ArrayList) ((ArrayList) items).clone();
         hboxMedia.getChildren().forEach(node -> {
             VBox vBox = (VBox) node;
             vBox.getChildren().clear();
         });
-        while(!mediaItems.isEmpty()){
+        while (!mediaItems.isEmpty()) {
             hboxMedia.getChildren().forEach(node -> {
                 int vid = hboxMedia.getChildren().indexOf(node);
                 VBox vBox = (VBox) node;
-                while(vBox.getChildren().size()<3 && !mediaItems.isEmpty()){
+                while (vBox.getChildren().size() < 3 && !mediaItems.isEmpty()) {
                     MediaHandler media = (MediaHandler) mediaItems.get(0);
                     vBox.getChildren().add(media.getContent());
                     mediaItems.remove(media);
@@ -227,16 +227,15 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
         label.setText(text);
         label.setTextAlignment(TextAlignment.RIGHT);
         menuItem.setGraphic(label);
-        menuItem.setOnAction( e ->{
+        menuItem.setOnAction(e -> {
             hboxMedia.getChildren().forEach(node -> {
                 VBox vBox = (VBox) node;
                 vBox.getChildren().clear();
             });
 
-            if(text.contains("Title")) {
+            if (text.contains("Title")) {
                 this.getBController().sortTitle(homeItems);
-            }
-            else if(text.contains("Price")) {
+            } else if (text.contains("Price")) {
                 this.getBController().sortPrice(homeItems);
             }
             this.addMediaHome(homeItems);
@@ -244,7 +243,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
         menuButton.getItems().add(position, menuItem);
     }
 
-    private void addMenuItem(int position, String text, MenuButton menuButton){
+    private void addMenuItem(int position, String text, MenuButton menuButton) {
         MenuItem menuItem = new MenuItem();
         Label label = new Label();
         label.prefWidthProperty().bind(menuButton.widthProperty().subtract(31));
@@ -258,18 +257,19 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
                 vBox.getChildren().clear();
             });
 
-            // filter only media with the choosen category
+            // filter only media with the chosen category
             List filteredItems = new ArrayList<>();
             homeItems.forEach(me -> {
                 MediaHandler media = (MediaHandler) me;
-                if (media.getMedia().getTitle().toLowerCase().startsWith(text.toLowerCase())){
+                if (media.getMedia().getTitle().toLowerCase().startsWith(text.toLowerCase())) {
                     filteredItems.add(media);
                 }
             });
 
-            // fill out the home with filted media as category
+            // fill out the home with filtered media as category
             addMediaHome(filteredItems);
         });
         menuButton.getItems().add(position, menuItem);
     }
+
 }
