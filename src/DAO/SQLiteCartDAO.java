@@ -6,17 +6,23 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
+
 import entity.cart.Cart;
 import entity.cart.CartMedia;
+import entity.media.Media;
+import services.DAOService.MediaService;
 
-public class SQLiteCartDAO implements CartDAO{
-    private static Logger LOGGER = Logger.getLogger(SQLiteCartDAO.class.getName());
-    private Connection connection;
+public class SQLiteCartDAO implements CartDAO {
+    private static final Logger LOGGER = Logger.getLogger(SQLiteCartDAO.class.getName());
+    private final Connection connection;
     private static final String INSERT_CART = "INSERT INTO CART (cartID, userID) VALUES (?, ?)";
     private static final String INSERT_CART_MEDIA = "INSERT INTO CART_MEDIA (cartID, mediaID, number_of_products) VALUES (?, ?, ?)";
     private static final String GET_CART_ID = "SELECT cartID FROM CART WHERE userID = ?";
     private static final String GET_CART_COUNT = "SELECT COUNT(*) AS cartCount FROM CART";
+    private static final String GET_CART_MEDIA_ITEMS = "SELECT mediaID, number_of_products FROM CART_MEDIA WHERE cartID = ?";
 
     public SQLiteCartDAO() throws SQLException {
         this.connection = AIMSDB.getConnection();
@@ -53,7 +59,11 @@ public class SQLiteCartDAO implements CartDAO{
             connection.commit();
         } catch (SQLException e) {
             if (connection != null) {
-                connection.rollback();
+                try {
+                    connection.rollback();
+                } catch (SQLException rollbackEx) {
+                    LOGGER.severe("Failed to rollback transaction: " + rollbackEx.getMessage());
+                }
             }
             LOGGER.severe("Failed to save cart: " + e.getMessage());
             throw e;
@@ -64,11 +74,12 @@ public class SQLiteCartDAO implements CartDAO{
             if (cartMediaStmt != null) {
                 cartMediaStmt.close();
             }
-            if (connection != null) {
-                connection.close();
-            }
+//            if (connection != null) {
+//                connection.close();
+//            }
         }
     }
+
 
     public int getCartID(int userId) throws SQLException {
         PreparedStatement stmt = null;
@@ -110,4 +121,34 @@ public class SQLiteCartDAO implements CartDAO{
         }
         return 0; // Default to 0 if no carts found
     }
+
+    public List<CartMedia> getCartMediaItems(int cartId) throws SQLException {
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<CartMedia> cartMediaList = new ArrayList<>();
+        try {
+            stmt = connection.prepareStatement(GET_CART_MEDIA_ITEMS);
+            stmt.setInt(1, cartId);
+            rs = stmt.executeQuery();
+
+            MediaService mediaService = MediaService.getInstance();
+
+            while (rs.next()) {
+                int mediaID = rs.getInt("mediaID");
+                int numberOfProducts = rs.getInt("number_of_products");
+                Media media = mediaService.getMediaById(mediaID);  // Assume this method exists in MediaService
+                CartMedia cartMedia = new CartMedia(cartId, media, numberOfProducts, media.getPrice());
+                cartMediaList.add(cartMedia);
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stmt != null) {
+                stmt.close();
+            }
+        }
+        return cartMediaList;
+    }
+
 }

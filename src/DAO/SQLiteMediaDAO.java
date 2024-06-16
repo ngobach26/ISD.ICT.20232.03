@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class SQLiteMediaDAO implements MediaDAO {
-    private static Logger LOGGER = Logger.getLogger(SQLiteMediaDAO.class.getName());
-    private Connection connection;
+    private static final Logger LOGGER = Logger.getLogger(SQLiteMediaDAO.class.getName());
+    private final Connection connection;
 
     public SQLiteMediaDAO() throws SQLException {
         this.connection = AIMSDB.getConnection();
@@ -30,8 +30,8 @@ public class SQLiteMediaDAO implements MediaDAO {
                     .setCategory(res.getString("category"))
                     .setMediaURL(res.getString("imageUrl"))
                     .setPrice(res.getInt("price"))
-                    .setType(res.getString("type"))
-                    .setWeight(res.getFloat("weight"));
+                    .setType(res.getString("type"));
+//                    .setWeight(res.getFloat("weight"));
         }
         return null;
     }
@@ -51,8 +51,8 @@ public class SQLiteMediaDAO implements MediaDAO {
                     .setCategory(res.getString("category"))
                     .setMediaURL(res.getString("imageUrl"))
                     .setPrice(res.getInt("price"))
-                    .setType(res.getString("type"))
-                    .setWeight(res.getFloat("weight"));
+                    .setType(res.getString("type"));
+//                    .setWeight(res.getFloat("weight"));
             list.add(m);
         }
         return list;
@@ -72,10 +72,21 @@ public class SQLiteMediaDAO implements MediaDAO {
                     .setCategory(res.getString("category"))
                     .setMediaURL(res.getString("imageUrl"))
                     .setPrice(res.getInt("price"))
-                    .setType(res.getString("type"))
-                    .setWeight(res.getFloat("weight"));
+                    .setType(res.getString("type"));
             list.add(m);
         }
+        // Create and add a fixed Media object
+        Media fixedMedia = new Media()
+                .setId(999)  // Example fixed ID
+                .setTitle("Fixed Media Title")  // Example fixed title
+                .setQuantity(100)  // Example fixed quantity
+                .setCategory("Fixed Category")  // Example fixed category
+                .setMediaURL("http://example.com/fixed-media.jpg")  // Example fixed URL
+                .setPrice(100)  // Example fixed price
+                .setType("Fixed Type")  // Example fixed type
+                .setWeight(0.5f);  // Example fixed weight
+        list.add(fixedMedia);
+
         return list;
     }
 
