@@ -23,9 +23,9 @@ public class CartController extends BaseController{
      * @throws SQLException
      */
     public CartController() throws SQLException {
-        CartService cs = new CartService();
-        User user = LoginManager.getSavedLoginInfo();
-        cs.saveCart(Cart.getCart(user.getId()));
+        // CartService cs = new CartService();
+        // User user = LoginManager.getSavedLoginInfo();
+        // cs.saveCart(Cart.getCart(user.getId()));
     }
     public void checkAvailabilityOfProduct() throws SQLException, MediaNotAvailableException {
         User user = LoginManager.getSavedLoginInfo();
