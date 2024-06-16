@@ -15,6 +15,7 @@ public class User {
     private String phone;
     private int userType;
     private String password;
+    private int status;
 
     public User(int id, String name, String email, String address, String phone, int userType){
         this.id = id;
@@ -24,13 +25,14 @@ public class User {
         this.phone = phone;
         this.userType = userType;
     }
-    public User(int id, String name, String email, String address, String phone,int userType, String password){
+    public User(int id, String name, String email, String address, String phone,int userType, String password, int status){
         this.name = name;
         this.email = email;
         this.address = address;
         this.phone = phone;
         this.userType = userType;
         this.password = password;
+        this.status = status;
     }
     public User(String name, String email, String address, String phone,int userType, String password){
         this.name = name;
@@ -67,6 +69,14 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public String getName() {

@@ -1,9 +1,11 @@
 package entity.invoice;
 
+import entity.order.DeliveryInformation;
 import entity.order.Order;
 
 public class Invoice {
 
+    private DeliveryInformation deliveryInformation;
     private Order order;
     private int amount;
     
@@ -11,7 +13,8 @@ public class Invoice {
 
     }
 
-    public Invoice(Order order){
+    public Invoice(DeliveryInformation deliveryInformation, Order order){
+        this.deliveryInformation = deliveryInformation;
         this.order = order;
     }
 
@@ -27,4 +30,7 @@ public class Invoice {
         return amount;
     }
 
+    public DeliveryInformation getDeliveryInformation() {
+        return deliveryInformation;
+    }
 }

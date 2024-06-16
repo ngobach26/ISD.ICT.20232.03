@@ -169,20 +169,19 @@ public class Book extends Media {
     }
 
     public String createBookQuery(String author, String coverType, String publisher, String publishDate, int numberPages, String language, String category) throws SQLException {
-        StringBuilder queryValues = new StringBuilder();
-        queryValues.append("(")
-                .append("placeForId").append(", ")
-                .append("'").append(author).append("'").append(", ")
-                .append("'").append(coverType).append("'").append(", ")
-                .append("'").append(publisher).append("'").append(", ")
-                .append("'").append(publishDate).append("'").append(", ")
-                .append(numberPages).append(", ")
-                .append("'").append(language).append("'").append(", ")
-                .append("'").append(category).append("'").append(")");
+        String queryValues = "(" +
+                "placeForId" + ", " +
+                "'" + author + "'" + ", " +
+                "'" + coverType + "'" + ", " +
+                "'" + publisher + "'" + ", " +
+                "'" + publishDate + "'" + ", " +
+                numberPages + ", " +
+                "'" + language + "'" + ", " +
+                "'" + category + "'" + ")";
         String sql = "INSERT INTO Book "
                 + "(id, author, coverType, publisher, publishDate, numOfPages, language, bookCategory)"
                 + " VALUES "
-                + queryValues.toString() + ";";
+                + queryValues + ";";
         return sql;
     }
 
