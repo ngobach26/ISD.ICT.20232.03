@@ -28,7 +28,7 @@ import views.screen.shipping.ShippingScreenHandler;
 
 public class CartScreenHandler extends BaseScreenHandler {
 
-	private static Logger LOGGER = Utils.getLogger(CartScreenHandler.class.getName());
+	private static final Logger LOGGER = Utils.getLogger(CartScreenHandler.class.getName());
 
 	@FXML
 	private ImageView aimsImage;
@@ -53,9 +53,13 @@ public class CartScreenHandler extends BaseScreenHandler {
 
 	@FXML
 	private Button btnPlaceOrder;
-	private CartController cartController;
 
-	public CartScreenHandler(Stage stage, String screenPath) throws IOException {
+	@FXML
+	private Button btnCancelOrder;
+
+	private final CartController cartController;
+
+	public CartScreenHandler(Stage stage, String screenPath) throws IOException, SQLException {
 		super(stage, screenPath);
 		this.cartController = new CartController();
 		// fix relative image path caused by fxml
@@ -65,7 +69,11 @@ public class CartScreenHandler extends BaseScreenHandler {
 
 		// Click to go back to home screen
 		aimsImage.setOnMouseClicked(e -> {
-			homeScreenHandler.show();
+			try {
+				homeScreenHandler.show();
+			} catch (SQLException ex) {
+				throw new RuntimeException(ex);
+			}
 		});
 
 		// On clicked, start Place Order UC
@@ -80,7 +88,19 @@ public class CartScreenHandler extends BaseScreenHandler {
 			}
 
 		});
-
+		btnCancelOrder.setOnMouseClicked(e -> {
+			LOGGER.info("Cancel Order button clicked");
+			navigateToHomeScreen();
+		});
+	}
+	private void navigateToHomeScreen() {
+		try {
+			homeScreenHandler.show();
+			LOGGER.info("Navigated to Home Screen");
+		} catch (Exception e) {
+			LOGGER.severe("Error while navigating to Home Screen: " + e.getMessage());
+			e.printStackTrace();
+		}
 	}
 
 	public Label getLabelAmount() {
@@ -145,7 +165,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 		displayCartWithMediaAvailability();
 	}
 
-	void updateCartAmount(){
+	void updateCartAmount() throws SQLException {
 		// calculate subtotal and amount
 		int subtotal = getBController().getCartSubtotal();
 		int vat = (int)((Configs.PERCENT_VAT/100)*subtotal);
@@ -158,7 +178,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 		labelAmount.setText(Utils.getCurrencyFormat(amount));
 	}
 
-	private void displayCartWithMediaAvailability(){
+	private void displayCartWithMediaAvailability() throws SQLException {
 		// clear all old cartMedia
 		vboxCart.getChildren().clear();
 
@@ -180,6 +200,8 @@ public class CartScreenHandler extends BaseScreenHandler {
 			updateCartAmount();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
 		}
 	}
 }

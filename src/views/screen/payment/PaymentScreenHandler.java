@@ -1,6 +1,7 @@
 package views.screen.payment;
 
 import controller.PaymentController;
+import entity.order.DeliveryInformation;
 import entity.order.Order;
 import entity.payment.PaymentTransaction;
 import javafx.fxml.FXML;
@@ -22,19 +23,21 @@ import java.util.Map;
 
 public class PaymentScreenHandler extends BaseScreenHandler {
 
-    private Order order;
+    private final Order order;
+    private final DeliveryInformation deliveryInformation;
     @FXML
     private Label pageTitle;
     @FXML
     private VBox vBox;
 
-    public PaymentScreenHandler(Stage stage, String screenPath, Order order) throws IOException {
+    public PaymentScreenHandler(Stage stage, String screenPath, Order order, DeliveryInformation deliveryInformation) throws IOException {
         super(stage, screenPath);
         this.setBController(new PaymentController());
         this.order = order;
+        this.deliveryInformation = deliveryInformation;
         WebView paymentView = new WebView();
         WebEngine webEngine = paymentView.getEngine();
-        webEngine.load(((PaymentController) getBController()).generateURL(order.calculateTotalPrice(), "Payment"));
+        webEngine.load(((PaymentController) getBController()).generateURL(order.calculateTotalPrice(deliveryInformation), "Payment"));
         webEngine.locationProperty().addListener((observable, oldValue, newValue) -> {
             completePaymentTransaction(newValue);
         });
@@ -51,7 +54,7 @@ public class PaymentScreenHandler extends BaseScreenHandler {
 
                 Map<String, String> params = Utils.parseQueryString(query);
                 PaymentController controller = (PaymentController) getBController();
-                int orderId = controller.createOrder(order);
+                int orderId = controller.createOrder(deliveryInformation,order);
                 if (orderId != -1) {
                     params.put("orderId", String.valueOf(orderId));
                     PaymentTransaction transaction = controller.makePayment(params);
@@ -71,7 +74,7 @@ public class PaymentScreenHandler extends BaseScreenHandler {
     /**
      * @throws IOException
      */
-    void showResult(PaymentTransaction paymentTransaction) throws IOException {
+    void showResult(PaymentTransaction paymentTransaction) throws IOException, SQLException {
         PaymentController controller = (PaymentController) getBController();
         BaseScreenHandler resultScreen = new ResultScreenHandler(this.stage, Configs.RESULT_SCREEN_PATH, paymentTransaction);
         controller.emptyCart();

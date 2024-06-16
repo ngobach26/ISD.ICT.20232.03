@@ -12,6 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import services.user.LoginManager;
+import utils.AdminUtils;
 import utils.Configs;
 import utils.Utils;
 import views.screen.BaseScreenHandler;
@@ -69,6 +70,8 @@ public class AdminScreenHandler extends BaseScreenHandler implements Initializab
 
     @FXML
     private TableColumn<User, String> typeColumn;
+    @FXML
+    private TableColumn<User, String> statusColumn;
 
     @FXML
     private Button createUserButton;
@@ -126,24 +129,7 @@ public class AdminScreenHandler extends BaseScreenHandler implements Initializab
 
     private void initializeButtons() {
         createUserButton.setOnAction(event -> createUser());
-//        viewUserInfoButton.setOnAction(event -> viewUserInfo());
-//        updateUserInfoButton.setOnAction(event -> updateUserInfo());
-//        deleteUserButton.setOnAction(event -> deleteUser());
-//        resetPasswordButton.setOnAction(event -> resetPassword());
-//        blockUserButton.setOnAction(event -> blockUser());
-//        unblockUserButton.setOnAction(event -> unblockUser());
-//        setRolesButton.setOnAction(event -> setRoles());
-//        changePasswordButton.setOnAction(event -> changePassword());
-//        logoutButton.setOnAction(event -> logout());
-//
         sign_out.setOnMouseClicked(event -> logout());
-//
-//        aimsImage.setOnMouseClicked(event -> reloadPage());
-//        cartImage.setOnMouseClicked(event -> viewCart());
-//        orderIcon.setOnMouseClicked(event -> viewOrders());
-//
-//        splitMenuBtnSearch.setOnMouseClicked(event -> search());
-//        sort.setOnMouseClicked(event -> sort());
     }
 
     private void initializeTable() {
@@ -152,10 +138,15 @@ public class AdminScreenHandler extends BaseScreenHandler implements Initializab
         addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
         typeColumn.setCellValueFactory(cellData -> {
-            User user = (User) cellData.getValue();
+            User user = cellData.getValue();
 //            System.out.println(user.getUserType());
-            String userTypeString = getUserTypeString(user.getUserType());
+            String userTypeString = AdminUtils.getUserTypeString(user.getUserType());
 //            System.out.println(userTypeString);
+            return new SimpleStringProperty(userTypeString);
+        });
+        statusColumn.setCellValueFactory(cellData -> {
+            User user = cellData.getValue();
+            String userTypeString = AdminUtils.getUserStatusString(user.getStatus());
             return new SimpleStringProperty(userTypeString);
         });
         try {
@@ -168,19 +159,6 @@ public class AdminScreenHandler extends BaseScreenHandler implements Initializab
         }
     }
 
-    private String getUserTypeString(int userType) {
-        switch (userType) {
-            case 0:
-                return "User";
-            case 1:
-                return "Manager";
-            case 2:
-                return "Admin";
-            default:
-                return "Unknown";
-        }
-    }
-
 
     private void createUser() {
         try {
@@ -189,6 +167,8 @@ public class AdminScreenHandler extends BaseScreenHandler implements Initializab
             createUserPopup.show();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -204,6 +184,8 @@ public class AdminScreenHandler extends BaseScreenHandler implements Initializab
                         editUserPopup.show();
                     } catch (IOException e) {
                         e.printStackTrace();
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
                     }
                 }
             });
@@ -211,47 +193,17 @@ public class AdminScreenHandler extends BaseScreenHandler implements Initializab
         });
     }
 
-    private void viewUserInfo() {
-        // Logic to view user information
-    }
-
-    private void updateUserInfo() {
-        // Logic to update user information
-    }
-
-    private void deleteUser() {
-        // Logic to delete a user
-    }
-
-    private void resetPassword() {
-        // Logic to reset password
-    }
-
-    private void blockUser() {
-        // Logic to block a user
-    }
-
-    private void unblockUser() {
-        // Logic to unblock a user
-    }
-
-    private void setRoles() {
-        // Logic to set or change user roles
-    }
-
-    private void changePassword() {
-        // Logic to change the password
-    }
-
     private void logout() {
         try {
             LoginManager loginManager = new LoginManager();
-            loginManager.clearSavedLoginInfo();
+            LoginManager.clearSavedLoginInfo();
             LoginHandler loginHandler = new LoginHandler(this.stage, Configs.LOGIN);
             loginHandler.setScreenTitle("Login");
             loginHandler.show();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 
     }
@@ -263,21 +215,5 @@ public class AdminScreenHandler extends BaseScreenHandler implements Initializab
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    private void viewCart() {
-        // Logic to view the cart
-    }
-
-    private void viewOrders() {
-        // Logic to view orders
-    }
-
-    private void search() {
-        // Logic to search users
-    }
-
-    private void sort() {
-        // Logic to sort users
     }
 }

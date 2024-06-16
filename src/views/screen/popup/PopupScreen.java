@@ -1,6 +1,7 @@
 package views.screen.popup;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
@@ -37,11 +38,11 @@ public class PopupScreen extends BaseScreenHandler{
         return popup;
     }
 
-    public static void success(String message) throws IOException{
+    public static void success(String message) throws IOException, SQLException {
         popup(message, Configs.IMAGE_PATH + "/" + "tickgreen.png", true).show(true);
     }
 
-    public static void error(String message) throws IOException{
+    public static void error(String message) throws IOException, SQLException {
         popup(message, Configs.IMAGE_PATH + "/" + "tickerror.png", false).show(false);
     }
 
@@ -53,12 +54,12 @@ public class PopupScreen extends BaseScreenHandler{
         super.setImage(tickicon, path);
     }
 
-    public void show(Boolean autoclose) {
+    public void show(Boolean autoclose) throws SQLException {
         super.show();
         if (autoclose) close(2);
     }
 
-    public void show(double time) {
+    public void show(double time) throws SQLException {
         super.show();
         close(time);
     }

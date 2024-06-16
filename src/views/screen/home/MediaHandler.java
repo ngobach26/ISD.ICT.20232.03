@@ -10,6 +10,7 @@ import controller.HomeController;
 import entity.cart.Cart;
 import entity.cart.CartMedia;
 import entity.media.Media;
+import entity.user.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,6 +18,7 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import services.user.LoginManager;
 import utils.Utils;
 import views.screen.FXMLScreenHandler;
 import views.screen.popup.PopupScreen;
@@ -41,10 +43,10 @@ public class MediaHandler extends FXMLScreenHandler {
     @FXML
     protected Button addToCartBtn;
 
-    private static Logger LOGGER = Utils.getLogger(MediaHandler.class.getName());
-    private Media media;
-    private HomeScreenHandler home;
-    private HomeController homeController;
+    private static final Logger LOGGER = Utils.getLogger(MediaHandler.class.getName());
+    private final Media media;
+    private final HomeScreenHandler home;
+    private final HomeController homeController;
 
     public MediaHandler(String screenPath, Media media, HomeScreenHandler home) throws SQLException, IOException {
         super(screenPath);
@@ -71,7 +73,8 @@ public class MediaHandler extends FXMLScreenHandler {
 
     private void updateUIAfterAddingToCart(int quantity) throws SQLException {
         mediaAvail.setText(String.valueOf(media.getQuantity()));
-        home.getNumMediaCartLabel().setText(String.valueOf(Cart.getCart().getTotalMedia()) + " media");
+        User user = LoginManager.getSavedLoginInfo();
+        home.getNumMediaCartLabel().setText(Cart.getCart(user.getId()).getTotalMedia() + " media");
     }
 
     private void handleMediaNotAvailableException(MediaNotAvailableException exp) {

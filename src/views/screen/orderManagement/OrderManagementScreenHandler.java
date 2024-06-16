@@ -127,7 +127,11 @@ public class OrderManagementScreenHandler extends BaseScreenHandler implements I
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            manageProductScreenHandler.show();
+            try {
+                manageProductScreenHandler.show();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         });
     }
 

@@ -2,6 +2,7 @@ package views.screen.auth;
 
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Logger;
 
 import common.exception.LoginAccountException;
@@ -40,7 +41,7 @@ public class LoginHandler extends BaseScreenHandler {
 
     public static Logger LOGGER = Utils.getLogger(LoginHandler.class.getName());
 
-    private AuthController authController = new AuthController();
+    private final AuthController authController = new AuthController();
 
     public LoginHandler(Stage stage, String screenPath) throws IOException {
         super(stage, screenPath);
@@ -76,12 +77,12 @@ public class LoginHandler extends BaseScreenHandler {
                 if (user.getUserType() == 2){
                     System.out.println("Admin logged in");
                     AdminScreenHandler adminHandler = new AdminScreenHandler(this.stage, Configs.ADMIN_PATH);
-					adminHandler.setScreenTitle("Home Screen");
+					adminHandler.setScreenTitle("Admin Screen");
 					adminHandler.show();
                 }
                 else if(user.getUserType() == 0) {
                 	LoginManager loginManager = new LoginManager();
-                	loginManager.saveLoginInfo(user.getId(), user.getName(), user.getPhone(), user.getAddress(), user.getEmail());
+                	LoginManager.saveLoginInfo(user.getId(), user.getName(), user.getPhone(), user.getAddress(), user.getEmail());
                     System.out.println("Customer logged in");
                     homeHandler = new HomeScreenHandler(this.stage, Configs.HOME_PATH);
 					homeHandler.setScreenTitle("Home Screen");
@@ -95,6 +96,8 @@ public class LoginHandler extends BaseScreenHandler {
                 alert.setContentText("Wrong username or password");
                 alert.showAndWait();
                 e.printStackTrace();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
         }
         

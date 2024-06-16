@@ -1,6 +1,7 @@
 package views.screen;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class BaseScreenHandler extends FXMLScreenHandler {
         this.stage = stage;
     }
 
-    public void show() {
+    public void show() throws SQLException {
         if (this.scene == null) {
             this.scene = new Scene(this.content);
         }

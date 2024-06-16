@@ -17,6 +17,7 @@ import controller.HomeController;
 //import controller.CartController;
 import entity.cart.Cart;
 import entity.media.Media;
+import entity.user.User;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -91,7 +92,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
            
             try {
             	LoginManager loginManager = new LoginManager();
-            	loginManager.clearSavedLoginInfo();
+            	LoginManager.clearSavedLoginInfo();
             	LoginHandler loginHandler = new LoginHandler(this.stage, Configs.LOGIN);
 				loginHandler.setScreenTitle("Login");
 //				loginHandler.setImage();
@@ -102,8 +103,10 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
 //    			stage1.setTitle("Login");
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
-           
+
         });
     }
 
@@ -116,8 +119,9 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
     }
 
     @Override
-    public void show() {
-        numMediaInCart.setText(String.valueOf(Cart.getCart().getListMedia().size()) + " media");
+    public void show() throws SQLException {
+        User user = LoginManager.getSavedLoginInfo();
+        numMediaInCart.setText(Cart.getCart(user.getId()).getListMedia().size() + " media");
         super.show();
     }
 

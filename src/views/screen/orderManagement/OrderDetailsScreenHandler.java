@@ -2,6 +2,7 @@ package views.screen.orderManagement;
 
 import common.exception.ProcessInvoiceException;
 import controller.OrderManagementAdminController;
+import entity.order.DeliveryInformation;
 import entity.order.Order;
 import entity.order.OrderMedia;
 import entity.payment.RefundTransaction;
@@ -79,21 +80,22 @@ public class OrderDetailsScreenHandler extends BaseScreenHandler {
         super(stage, screenPath);
         setBController(new OrderManagementAdminController());
         Order order = getBController().getOrderDetail(orderId);
-        display(order);
+        DeliveryInformation deliveryInformation = new DeliveryInformation();
+        display(deliveryInformation,order);
     }
     public OrderManagementAdminController getBController() {
         return (OrderManagementAdminController) super.getBController();
     }
-    private void display(Order order){
-        this.email.setText(order.getDeliveryInfo().get("email"));
-        this.phone.setText(order.getDeliveryInfo().get("phone"));
-        this.address.setText(order.getDeliveryInfo().get("address"));
-        this.shippingInstr.setText(order.getDeliveryInfo().get("instructions"));
-        this.province.setText(order.getDeliveryInfo().get("province"));
+    private void display(DeliveryInformation deliveryInformation,Order order){
+        this.email.setText(deliveryInformation.getEmail());
+        this.phone.setText(deliveryInformation.getPhoneNumber());
+        this.address.setText(deliveryInformation.getDeliveryAddress());
+        this.shippingInstr.setText(deliveryInformation.getDeliveryAddress());
+        this.province.setText(deliveryInformation.getProvinceCity());
 
-        if(order.getDeliveryInfo().get("isRushShipping").equals("Yes")){
-            this.rushShippingInstr.setText(order.getDeliveryInfo().get("rushShippingInstruction"));
-            this.shippingTime.setText(order.getDeliveryInfo().get("time"));
+        if(deliveryInformation.isRushShipping()){
+           // this.rushShippingInstr.setText(order.getDeliveryInfo().get("rushShippingInstruction"));
+            //this.shippingTime.setText(order.getDeliveryInfo().get("time"));
         }
         else{
             this.rushShippingInstr.setVisible(false);
@@ -103,13 +105,13 @@ public class OrderDetailsScreenHandler extends BaseScreenHandler {
         this.state.setText(order.getStateString());
         this.VAT.setText(Utils.getCurrencyFormat(order.calculateTotalProductIncludeVAT()));
         this.noVAT.setText(Utils.getCurrencyFormat(order.calculateTotalProductNoVAT()));
-        this.shippingFees.setText(Utils.getCurrencyFormat(order.calculateShippingFees()));
-        this.total.setText(Utils.getCurrencyFormat(order.calculateTotalPrice()));
+        this.shippingFees.setText(Utils.getCurrencyFormat(order.calculateShippingFees(deliveryInformation)));
+        this.total.setText(Utils.getCurrencyFormat(order.calculateTotalPrice(deliveryInformation)));
 
         order.getlstOrderMedia().forEach(orderMedia -> {
             try {
                 MediaInvoiceScreenHandler mis = new MediaInvoiceScreenHandler(Configs.INVOICE_MEDIA_SCREEN_PATH);
-                mis.setOrderMedia((OrderMedia) orderMedia);
+                mis.setOrderMedia(orderMedia);
                 vboxItems.getChildren().add(mis.getContent());
             } catch (IOException | SQLException e) {
                 System.err.println("errors: " + e.getMessage());
@@ -137,7 +139,11 @@ public class OrderDetailsScreenHandler extends BaseScreenHandler {
             }
         });
         back.setOnMouseClicked(mouseEvent -> {
-            goBack();
+            try {
+                goBack();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         });
 
         switch (order.getState()) {
@@ -153,7 +159,7 @@ public class OrderDetailsScreenHandler extends BaseScreenHandler {
                 decline.setVisible(false);
         }
     }
-    private void goBack(){
+    private void goBack() throws SQLException {
         OrderManagementScreenHandler orderManagementAdminScreenHandler = null;
         try {
             orderManagementAdminScreenHandler = new OrderManagementScreenHandler(stage, Configs.ORDER_MANAGEMENT_ADMIN_PATH);

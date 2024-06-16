@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import common.exception.ProcessInvoiceException;
 import controller.PaymentController;
 import entity.invoice.Invoice;
+import entity.order.DeliveryInformation;
 import entity.order.OrderMedia;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -23,7 +24,7 @@ import views.screen.payment.PaymentScreenHandler;
 
 public class InvoiceScreenHandler extends BaseScreenHandler {
 
-	private static Logger LOGGER = Utils.getLogger(InvoiceScreenHandler.class.getName());
+	private static final Logger LOGGER = Utils.getLogger(InvoiceScreenHandler.class.getName());
 
 	@FXML
 	private Label pageTitle;
@@ -70,7 +71,7 @@ public class InvoiceScreenHandler extends BaseScreenHandler {
 	@FXML
 	private VBox vboxItems;
 
-	private Invoice invoice;
+	private final Invoice invoice;
 
 	public InvoiceScreenHandler(Stage stage, String screenPath, Invoice invoice) throws IOException {
 		super(stage, screenPath);
@@ -79,20 +80,18 @@ public class InvoiceScreenHandler extends BaseScreenHandler {
 	}
 
 	private void setInvoiceInfo(){
-		HashMap<String, String> deliveryInfo = invoice.getOrder().getDeliveryInfo();
-		name.setText(deliveryInfo.get("name"));
-		province.setText(deliveryInfo.get("province"));
-		instructions.setText(deliveryInfo.get("instructions"));
-		address.setText(deliveryInfo.get("address"));
-		email.setText(deliveryInfo.get("email"));
+		DeliveryInformation deliveryInfo = invoice.getDeliveryInformation();
+		name.setText("chi");
+		province.setText(deliveryInfo.getProvinceCity());
+		instructions.setText(deliveryInfo.getDeliveryAddress());
+		address.setText(deliveryInfo.getDeliveryAddress());
+		email.setText(deliveryInfo.getEmail());
 
-		if(deliveryInfo.get("isRushShipping").equals("Yes")){
+		if(deliveryInfo.isRushShipping()){
 			labelTime.setVisible(true);
 			labelRushShippingInstr.setVisible(true);
 			time.setVisible(true);
 			rushInstruction.setVisible(true);
-			time.setText(deliveryInfo.get("time"));
-			rushInstruction.setText(deliveryInfo.get("rushShippingInstruction"));
 		}
 		else{
 			labelTime.setVisible(false);
@@ -102,12 +101,12 @@ public class InvoiceScreenHandler extends BaseScreenHandler {
 		}
 
 		subtotal.setText(Utils.getCurrencyFormat(invoice.getOrder().calculateTotalProductIncludeVAT()));
-		shippingFees.setText(Utils.getCurrencyFormat(invoice.getOrder().calculateShippingFees()));
-		total.setText(Utils.getCurrencyFormat(invoice.getOrder().calculateTotalPrice()));
+		shippingFees.setText(Utils.getCurrencyFormat(invoice.getOrder().calculateShippingFees(deliveryInfo)));
+		total.setText(Utils.getCurrencyFormat(invoice.getOrder().calculateTotalPrice(deliveryInfo)));
 		invoice.getOrder().getlstOrderMedia().forEach(orderMedia -> {
 			try {
 				MediaInvoiceScreenHandler mis = new MediaInvoiceScreenHandler(Configs.INVOICE_MEDIA_SCREEN_PATH);
-				mis.setOrderMedia((OrderMedia) orderMedia);
+				mis.setOrderMedia(orderMedia);
 				vboxItems.getChildren().add(mis.getContent());
 			} catch (IOException | SQLException e) {
 				System.err.println("errors: " + e.getMessage());
@@ -118,8 +117,8 @@ public class InvoiceScreenHandler extends BaseScreenHandler {
 
 	}
 	@FXML
-	void confirmInvoice(MouseEvent event) throws IOException {
-		BaseScreenHandler paymentScreen = new PaymentScreenHandler(this.stage, Configs.PAYMENT_SCREEN_PATH, invoice.getOrder());
+	void confirmInvoice(MouseEvent event) throws IOException, SQLException {
+		BaseScreenHandler paymentScreen = new PaymentScreenHandler(this.stage, Configs.PAYMENT_SCREEN_PATH, invoice.getOrder(), invoice.getDeliveryInformation());
 		paymentScreen.setBController(new PaymentController());
 		paymentScreen.setPreviousScreen(this);
 		paymentScreen.setHomeScreenHandler(homeScreenHandler);

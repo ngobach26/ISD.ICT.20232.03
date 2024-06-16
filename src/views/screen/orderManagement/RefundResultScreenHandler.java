@@ -10,6 +10,7 @@ import utils.Utils;
 import views.screen.BaseScreenHandler;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class RefundResultScreenHandler extends BaseScreenHandler {
 
@@ -37,10 +38,14 @@ public class RefundResultScreenHandler extends BaseScreenHandler {
         status.setText(refundTransaction.getMessage());
 
         okButton.setOnMouseClicked(mouseEvent -> {
-            goBack();
+            try {
+                goBack();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         });
     }
-    private void goBack(){
+    private void goBack() throws SQLException {
         OrderManagementScreenHandler orderManagementAdminScreenHandler = null;
         try {
             orderManagementAdminScreenHandler = new OrderManagementScreenHandler(stage, Configs.ORDER_MANAGEMENT_ADMIN_PATH);

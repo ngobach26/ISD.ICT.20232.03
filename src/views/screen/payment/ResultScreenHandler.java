@@ -10,6 +10,7 @@ import utils.Utils;
 import views.screen.BaseScreenHandler;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class ResultScreenHandler extends BaseScreenHandler {
 
@@ -45,7 +46,7 @@ public class ResultScreenHandler extends BaseScreenHandler {
 	}
 
 	@FXML
-	void confirmPayment(MouseEvent event) throws IOException {
+	void confirmPayment(MouseEvent event) throws IOException, SQLException {
 		homeScreenHandler.show();
 	}
 }

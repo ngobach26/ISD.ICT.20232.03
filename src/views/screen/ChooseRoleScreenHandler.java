@@ -2,6 +2,7 @@ package views.screen;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
@@ -34,7 +35,7 @@ public class ChooseRoleScreenHandler extends BaseScreenHandler implements Initia
 	}
 
     @Override
-    public void show() {
+    public void show() throws SQLException {
         super.show();
     }
 
@@ -65,8 +66,10 @@ public class ChooseRoleScreenHandler extends BaseScreenHandler implements Initia
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				} catch (SQLException e) {
+					throw new RuntimeException(e);
 				}
-    		}
+			}
     	});
     }
 }
