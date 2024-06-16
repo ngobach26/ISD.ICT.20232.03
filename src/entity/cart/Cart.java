@@ -11,23 +11,45 @@ import java.util.List;
 public class Cart {
     private int cartId;
     private int userId;
-    private List<CartMedia> lstCartMedia;
     private static Cart cartInstance;
-    private MediaService mediaService;
+    private final List<CartMedia> lstCartMedia;
+    private final MediaService mediaService;
 
-    public static Cart getCart() {
-        if (cartInstance == null) cartInstance = new Cart();
+    public static Cart getCart(int userId) throws SQLException {
+        if (cartInstance == null || cartInstance.getUserId() != userId) {
+            cartInstance = new Cart(userId);
+        }
         return cartInstance;
     }
+
+    public Cart(int userId) throws SQLException {
+        this.userId = userId;
+        this.lstCartMedia = new ArrayList<>();
+        this.mediaService = MediaService.getInstance();
+
+        // Retrieve the cart ID from the database
+        CartService cartService = CartService.getInstance();
+        this.cartId = cartService.getCartId(userId);
+
+        // Retrieve the cart media items from the database and populate lstCartMedia
+        this.lstCartMedia.addAll(cartService.getCartMediaItems(this.cartId));
+    }
+
     public int getUserId() {
         return userId;
     }
+
     public void setUserId(int userId) {
         this.userId = userId;
     }
+
     private Cart() {
         lstCartMedia = new ArrayList<>();
         mediaService = MediaService.getInstance();
+    }
+
+    public int getCartId() {
+        return cartId;
     }
 
     public void addCartMedia(CartMedia cm) {
@@ -42,7 +64,6 @@ public class Cart {
         return lstCartMedia;
     }
 
-    // This function is the replacement for the clear cart function in payment class
     public void emptyCart() {
         lstCartMedia.clear();
     }
@@ -75,4 +96,5 @@ public class Cart {
         }
         return total;
     }
+
 }
