@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 public class AuthController {
 
-    private UserService userService ;
+    private final UserService userService ;
 
     public AuthController() throws MediaNotAvailableException {
         this.userService = UserService.getInstance();

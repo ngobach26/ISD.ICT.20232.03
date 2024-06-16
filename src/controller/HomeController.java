@@ -9,7 +9,9 @@ import common.exception.MediaNotAvailableException;
 import entity.cart.Cart;
 import entity.cart.CartMedia;
 import entity.media.Media;
+import entity.user.User;
 import services.DAOService.MediaService;
+import services.user.LoginManager;
 import utils.Utils;
 import views.screen.home.MediaHandler;
 
@@ -18,8 +20,8 @@ import views.screen.home.MediaHandler;
  */
 public class HomeController extends BaseController{
 
-    private static Logger LOGGER = Utils.getLogger(HomeController.class.getName());
-    private MediaService mediaService ;
+    private static final Logger LOGGER = Utils.getLogger(HomeController.class.getName());
+    private final MediaService mediaService ;
     /**
      * this method gets all Media in DB and return back to home to display
      * @return List[Media]
@@ -50,10 +52,7 @@ public class HomeController extends BaseController{
             @Override
             public int compare(MediaHandler m1, MediaHandler m2) {
                 int priceComparison = m1.getMedia().getPrice() - m2.getMedia().getPrice();
-                if (priceComparison != 0) {
-                    return priceComparison;
-                }
-                return 0;
+                return priceComparison;
             }
         };
         list.sort(mediaTitleComparator);
@@ -61,7 +60,8 @@ public class HomeController extends BaseController{
 
     public void addMediaToCart(Media media, int quantity) throws MediaNotAvailableException, SQLException {
         if (quantity > media.getQuantity()) throw new MediaNotAvailableException();
-        Cart cart = Cart.getCart();
+        User user = LoginManager.getSavedLoginInfo();
+        Cart cart = Cart.getCart(user.getId());
         CartMedia mediaInCart = cart.checkMediaInCart(media);
         if (mediaInCart != null) {
             mediaInCart.setQuantity(mediaInCart.getQuantity() + quantity);

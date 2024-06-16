@@ -9,32 +9,42 @@ import common.exception.MediaUpdateException;
 import common.exception.ViewCartException;
 import entity.cart.Cart;
 import entity.cart.CartMedia;
+import entity.user.User;
+import services.DAOService.CartService;
 import utils.Utils;
-
+import services.user.LoginManager;
 /**
  * This class controls the flow of events when users view the Cart
  */
 public class CartController extends BaseController{
-    private static Logger LOGGER = Utils.getLogger(CartController.class.getName());
+    private static final Logger LOGGER = Utils.getLogger(CartController.class.getName());
     /**
      * This method checks the available products in Cart
      * @throws SQLException
      */
+    public CartController() throws SQLException {
+        CartService cs = new CartService();
+        User user = LoginManager.getSavedLoginInfo();
+        cs.saveCart(Cart.getCart(user.getId()));
+    }
     public void checkAvailabilityOfProduct() throws SQLException, MediaNotAvailableException {
-        Cart.getCart().checkAvailabilityOfProduct();
+        User user = LoginManager.getSavedLoginInfo();
+        Cart.getCart(user.getId()).checkAvailabilityOfProduct();
     }
 
     /**
      * This method calculates the cart subtotal
      * @return subtotal
      */
-    public int getCartSubtotal(){
-        int subtotal = Cart.getCart().calSubtotal();
+    public int getCartSubtotal() throws SQLException {
+        User user = LoginManager.getSavedLoginInfo();
+        int subtotal = Cart.getCart(user.getId()).calSubtotal();
         return subtotal;
     }
 
     public void removeCartMedia(CartMedia cartMedia) throws SQLException, ViewCartException {
-        Cart.getCart().removeCartMedia(cartMedia);
+        User user = LoginManager.getSavedLoginInfo();
+        Cart.getCart(user.getId()).removeCartMedia(cartMedia);
         LOGGER.info("Deleted " + cartMedia.getMedia().getTitle() + " from the cart");
     }
     public void updateCartMediaQuantity(CartMedia cartMedia, int quantity) throws SQLException, MediaUpdateException {
@@ -51,7 +61,8 @@ public class CartController extends BaseController{
         return requestedQuantity;
     }
 
-    public List getListCartMedia() {
-        return Cart.getCart().getListMedia();
+    public List getListCartMedia() throws SQLException {
+        User user = LoginManager.getSavedLoginInfo();
+        return Cart.getCart(user.getId()).getListMedia();
     }
 }

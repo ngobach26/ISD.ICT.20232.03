@@ -10,13 +10,16 @@ import common.exception.MediaNotAvailableException;
 import entity.cart.Cart;
 import entity.cart.CartMedia;
 import entity.invoice.Invoice;
+import entity.order.DeliveryInformation;
 import entity.order.Order;
 import entity.order.OrderMedia;
+import entity.user.User;
 import services.DAOService.MediaService;
+import services.user.LoginManager;
 
 public class PlaceOrderController extends BaseController{
-    private static Logger LOGGER = utils.Utils.getLogger(PlaceOrderController.class.getName());
-    private MediaService mediaService ;
+    private static final Logger LOGGER = utils.Utils.getLogger(PlaceOrderController.class.getName());
+    private final MediaService mediaService ;
 
     public PlaceOrderController() throws MediaNotAvailableException {
         this.mediaService = MediaService.getInstance();
@@ -24,12 +27,14 @@ public class PlaceOrderController extends BaseController{
 
 
     public void placeOrder() throws SQLException{
-        Cart.getCart().checkAvailabilityOfProduct();
+        User user = LoginManager.getSavedLoginInfo();
+        Cart.getCart(user.getId()).checkAvailabilityOfProduct();
     }
 
      public Order createOrder() throws SQLException{
          Order order = new Order();
-         for (Object object : Cart.getCart().getListMedia()) {
+         User user = LoginManager.getSavedLoginInfo();
+         for (Object object : Cart.getCart(user.getId()).getListMedia()) {
              CartMedia cartMedia = (CartMedia) object;
              OrderMedia orderMedia = new OrderMedia(cartMedia.getMedia(),
                                                     cartMedia.getQuantity(),
@@ -40,8 +45,8 @@ public class PlaceOrderController extends BaseController{
          return order;
      }
 
-    public Invoice createInvoice(Order order) {
-        return new Invoice(order);
+    public Invoice createInvoice(DeliveryInformation deliveryInformation,Order order) {
+        return new Invoice(deliveryInformation, order);
     }
 
     public void processDeliveryInfo(HashMap info) throws InterruptedException, IOException{
