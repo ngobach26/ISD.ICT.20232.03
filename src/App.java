@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
@@ -23,7 +24,7 @@ public class App extends Application {
 		try {
 
 			// initialize the scene
-			StackPane root = (StackPane) FXMLLoader.load(getClass().getResource(Configs.SPLASH_SCREEN_PATH));
+			StackPane root = FXMLLoader.load(getClass().getResource(Configs.SPLASH_SCREEN_PATH));
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.show();
@@ -56,6 +57,8 @@ public class App extends Application {
 
 				} catch (IOException e1) {
 					e1.printStackTrace();
+				} catch (SQLException ex) {
+					throw new RuntimeException(ex);
 				}
 			});
 		} catch (Exception e) {
