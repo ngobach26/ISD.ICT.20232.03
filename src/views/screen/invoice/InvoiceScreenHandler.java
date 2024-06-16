@@ -2,14 +2,12 @@ package views.screen.invoice;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.logging.Logger;
 
 import common.exception.ProcessInvoiceException;
 import controller.PaymentController;
 import entity.invoice.Invoice;
 import entity.order.DeliveryInformation;
-import entity.order.OrderMedia;
 import entity.user.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

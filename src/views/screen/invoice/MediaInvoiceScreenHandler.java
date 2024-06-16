@@ -1,13 +1,11 @@
 package views.screen.invoice;
 
-import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 
 import entity.order.OrderMedia;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;

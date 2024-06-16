@@ -2,7 +2,6 @@ package entity.order;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import db.AIMSDB;
@@ -13,7 +12,7 @@ public class Order {
     private int id;
 
     private double total;
-    private int shippingFees;
+    private double shippingFees;
 
     private int deliveryID;
     private List lstOrderMedia;
@@ -25,6 +24,13 @@ public class Order {
 
     public static ArrayList<Order> getOrdersByPage(int start, int pageSize, int state) {
         return null;
+    }
+
+    public Order(int id, double total, double shippingFees, int deliveryID) {
+        this.id = id;
+        this.total = total;
+        this.shippingFees = shippingFees;
+        this.deliveryID = deliveryID;
     }
 
     public static Order getOrderById(int id) {
@@ -67,11 +73,11 @@ public class Order {
         this.lstOrderMedia = lstOrderMedia;
     }
 
-    public void setShippingFees(int shippingFees) {
+    public void setShippingFees(double shippingFees) {
         this.shippingFees = shippingFees;
     }
 
-    public int getShippingFees() {
+    public double getShippingFees() {
         return shippingFees;
     }
 

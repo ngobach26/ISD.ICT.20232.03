@@ -24,8 +24,8 @@ public class DVD extends Media {
     }
 
     public DVD(int id, String title, String category, int price, int quantity, String type, String discType,
-            String director, int runtime, String studio, String language, String subtitles, Date releasedDate, String filmType) throws SQLException{
-        super(id, title, category, price, quantity, type);
+            String director, int runtime, String studio, String language, String subtitles, Date releasedDate, String filmType, int rushDelivery) throws SQLException{
+        super(id, title, category, price, quantity, type, rushDelivery);
         this.discType = discType;
         this.director = director;
         this.runtime = runtime;
@@ -36,9 +36,9 @@ public class DVD extends Media {
         this.filmType = filmType;
     }
 
-    public DVD(int id, String title, String category, int price, int value, int quantity, String type, float weight, String imageURL, String discType,
-               String director, int runtime, String studio, String language, String subtitles, Date releasedDate, String filmType, int supportForRushDelivery) throws SQLException{
-        super(id, title, category, price, value, quantity, weight, type, imageURL, supportForRushDelivery);
+    public DVD(int id, String title, String category, int price, int value, int quantity, String type, String imageURL,
+               String director, int runtime, String studio, String language, String subtitles,String discType,String filmType, Date releasedDate,int supportForRushDelivery) throws SQLException{
+        super(id, title, category, price, value, quantity, type, imageURL, supportForRushDelivery);
         this.discType = discType;
         this.director = director;
         this.runtime = runtime;
@@ -49,6 +49,17 @@ public class DVD extends Media {
         this.filmType = filmType;
     }
 
+
+    public DVD(String discType, String director, int runtime, String studio, String subtitles, Date releaseDate, String filmType) throws SQLException {
+        super();
+        this.discType = discType;
+        this.director = director;
+        this.runtime = runtime;
+        this.studio = studio;
+        this.subtitles = subtitles;
+        this.releasedDate = releaseDate;
+        this.filmType = filmType;
+    }
     public String getDiscType() {
         return this.discType;
     }
@@ -65,6 +76,14 @@ public class DVD extends Media {
     public DVD setDirector(String director) {
         this.director = director;
         return this;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
     }
 
     public int getRuntime() {
@@ -103,6 +122,7 @@ public class DVD extends Media {
         return this;
     }
 
+
     public String getFilmType() {
         return this.filmType;
     }
@@ -111,61 +131,9 @@ public class DVD extends Media {
         this.filmType = filmType;
         return this;
     }
-    
-    
-    public Media getMediaById(int id) throws SQLException {
-        String sql = "SELECT * FROM "+
-                "DVD " +
-                "JOIN Media " +
-                "ON Media.id = DVD.id " +
-                "where Media.id = " + id + ";";
-        ResultSet res = stm.executeQuery(sql);
-        if(res.next()) {
-            // from media table
-            String title = res.getString("title");
-            String type = res.getString("type");
-            int price = res.getInt("price");
-            int value = res.getInt("value");
-            String category = res.getString("category");
-            int quantity = res.getInt("quantity");
-            float weight = res.getFloat("weight");
-            String imageUrl = res.getString("imageUrl");
 
-            // from DVD table
-            String discType = res.getString("discType");
-            String director = res.getString("director");
-            int runtime = res.getInt("runtime");
-            String studio = res.getString("studio");
-            String subtitles = res.getString("subtitle");
-            Date releasedDate = res.getDate("releasedDate");
-            String filmType = res.getString("filmType");
-
-            return new DVD(id, title, category, price, value, quantity, type, weight, imageUrl, discType, director, 
-            		runtime, studio, language, subtitles, releasedDate, filmType, supportForRushDelivery);        
-        } else {
-            throw new SQLException();
-        }
-    }
-   
     public List getAllMedia() {
         return null;
-    }
-
-    public String createDVDQuery(String discType, String director, int runtime, String studio, String subtitles, String releasedDate, String filmType) throws SQLException {
-        String queryValues = "(" +
-                "placeForId" + ", " +
-                "'" + discType + "'" + ", " +
-                "'" + director + "'" + ", " +
-                runtime + ", " +
-                "'" + studio + "'" + ", " +
-                "'" + subtitles + "'" + ", " +
-                "'" + releasedDate + "'" + ", " +
-                "'" + filmType + "'" + ")";
-        String sql = "INSERT INTO aims.Book "
-                + "(id, discType, director, runtime, studio, subtitles, releasedDate, filmType)"
-                + " VALUES "
-                + queryValues + ";";
-        return sql;
     }
 
     public void deleteMediaFieldById(int id) throws SQLException {

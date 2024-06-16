@@ -18,7 +18,7 @@ public class SQLiteCartDAO implements CartDAO{
     private static final String GET_CART_ID = "SELECT cartID FROM CART WHERE userID = ?";
     private static final String GET_CART_COUNT = "SELECT COUNT(*) AS cartCount FROM CART";
 
-    public SQLiteCartDAO() throws SQLException {
+    public SQLiteCartDAO() {
         this.connection = AIMSDB.getConnection();
     }
 

@@ -1,34 +1,33 @@
 package controller;
 
-import common.exception.MediaNotAvailableException;
+import DAO.UserDAO;
 import entity.user.User;
-import services.DAOService.MediaService;
-import services.DAOService.UserService;
+import services.DAOFactory;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public class AdminController {
-    private final UserService userService ;
+    private final UserDAO mediaDAO ;
 
-    public AdminController() throws MediaNotAvailableException {
-        this.userService = UserService.getInstance();
+    public AdminController()  {
+        this.mediaDAO = DAOFactory.getUserDAO();
     }
 
     public void createUser(User user) throws SQLException{
-        userService.createUser(user);
+        mediaDAO.createUser(user);
     }
 
     public List<User> getAllUsers() throws SQLException{
-        return userService.getAllUsers();
+        return mediaDAO.getAllUsers();
     }
 
     public void updateUser(User user) throws SQLException{
-        userService.updateUser(user);
+        mediaDAO.updateUser(user);
     }
 
     public void deleteUser(int id) throws SQLException{
-        userService.deleteUser(id);
+        mediaDAO.deleteUser(id);
     }
 
 }

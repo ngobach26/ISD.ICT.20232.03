@@ -33,25 +33,37 @@ public class Media {
         stm = AIMSDB.getConnection().createStatement();
     }
 
-    public Media(int id, String title, String category, int price, int quantity, String type) throws SQLException {
+    public Media(int id, String title, String category, int price, int quantity, String type, int supportForRushDelivery) throws SQLException {
         this.id = id;
         this.title = title;
         this.category = category;
         this.price = price;
         this.quantity = quantity;
         this.type = type;
+        this.supportForRushDelivery = supportForRushDelivery;
         //stm = AIMSDB.getConnection().createStatement();
     }
 
     public Media (int id, String title, String category, int price, int value,
-                  int quantity, float weight, String type, String imageURL, int supportForRushDelivery) throws SQLException{
+                  int quantity, String type, String imageURL, int supportForRushDelivery) throws SQLException{
         this.id = id;
         this.title = title;
         this.category = category;
         this.price = price;
         this.value = value;
         this.quantity = quantity;
-        this.weight = weight;
+        this.type = type;
+        this.imageURL = imageURL;
+        this.supportForRushDelivery = supportForRushDelivery;
+    }
+    public Media ( String title, String category, int price, int value,
+                  int quantity, String type, String imageURL, int supportForRushDelivery) throws SQLException{
+        this.id = id;
+        this.title = title;
+        this.category = category;
+        this.price = price;
+        this.value = value;
+        this.quantity = quantity;
         this.type = type;
         this.imageURL = imageURL;
         this.supportForRushDelivery = supportForRushDelivery;
@@ -65,6 +77,10 @@ public class Media {
     public Media setId(int id) {
         this.id = id;
         return this;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     public String getTitle() {
@@ -151,8 +167,7 @@ public class Media {
                     .setCategory(res.getString("category"))
                     .setMediaURL(res.getString("imageUrl"))
                     .setPrice(res.getInt("price"))
-                    .setType(res.getString("type"))
-                    .setWeight(res.getFloat("weight"));
+                    .setType(res.getString("type"));
             medium.add(media);
         }
         return medium;

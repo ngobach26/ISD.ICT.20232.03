@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:sqlite:assets/db/aimsTest.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="aimsTest" uuid="dfb24a45-1af5-4a8b-812e-9f44393fe6ae">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:D:\2023_2\ITSS\ISD.ICT.20232.03\assets\db\aimsTest.db</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

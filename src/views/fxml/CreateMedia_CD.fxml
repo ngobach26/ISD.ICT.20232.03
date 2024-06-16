@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="318.0" prefWidth="662.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.sellerScreen.sellerEventScreen.create.CDCreateHandler">
+<AnchorPane prefHeight="318.0" prefWidth="662.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.screen.sellerScreen.sellerEventScreen.create.CDCreateHandler">
    <children>
       <GridPane layoutX="14.0" layoutY="14.0" prefHeight="226.0" prefWidth="382.0">
          <columnConstraints>

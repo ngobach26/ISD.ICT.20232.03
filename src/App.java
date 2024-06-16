@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import utils.Configs;
 import views.screen.auth.LoginHandler;
+import views.screen.sellerScreen.ManageProductScreenHandler;
 
 
 public class App extends Application {
@@ -53,6 +54,8 @@ public class App extends Application {
 					LoginHandler loginHandler = new LoginHandler(primaryStage, Configs.LOGIN);
 					loginHandler.setScreenTitle("Login");
 					loginHandler.show();
+//					ManageProductScreenHandler manageProductScreenHandler = new ManageProductScreenHandler(primaryStage,Configs.SELLER_HOMEPAGE_PATH);
+//					manageProductScreenHandler.show();
 
 				} catch (IOException e1) {
 					e1.printStackTrace();
