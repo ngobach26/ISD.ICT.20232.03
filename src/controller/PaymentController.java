@@ -10,8 +10,7 @@ import entity.order.DeliveryInformation;
 import entity.order.Order;
 import entity.payment.PaymentTransaction;
 import entity.user.User;
-import services.DAOService.DAOFactory;
-import services.DAOService.OrderService;
+import services.DAOFactory;
 import services.vnpay.IPaymentSubsystem;
 import services.vnpay.PaymentSubsystem;
 import services.vnpay.VNPaySubsystemController;
@@ -24,11 +23,11 @@ public class PaymentController extends BaseController {
      * Represent the Interbank subsystem
      */
     private final IPaymentSubsystem vnPay;
-    private final OrderDAO orderService;
+    private final OrderDAO orderDAO;
 
     public PaymentController(){
         this.vnPay = new PaymentSubsystem(new VNPaySubsystemController());
-        this.orderService = DAOFactory.getOrderDAO();
+        this.orderDAO = DAOFactory.getOrderDAO();
     }
 
 
@@ -42,7 +41,7 @@ public class PaymentController extends BaseController {
         return vnPay.generateURL(amount, content);
     }
     public int createOrder(DeliveryInformation deliveryInformation, Order order, User user) throws SQLException {
-        return orderService.createOrder(deliveryInformation,order,user);
+        return orderDAO.createOrder(deliveryInformation,order,user);
     }
 
     public void emptyCart(){

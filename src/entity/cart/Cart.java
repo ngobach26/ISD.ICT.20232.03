@@ -1,9 +1,9 @@
 package entity.cart;
 
+import DAO.MediaDAO;
 import common.exception.MediaNotAvailableException;
 import entity.media.Media;
-import services.DAOService.CartService;
-import services.DAOService.MediaService;
+import services.DAOFactory;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ public class Cart {
     private int userId;
     private final List<CartMedia> lstCartMedia;
     private static Cart cartInstance;
-    private final MediaService mediaService;
+    private final MediaDAO mediaService;
 
     public static Cart getCart() {
         if (cartInstance == null) cartInstance = new Cart();
@@ -27,7 +27,7 @@ public class Cart {
     }
     private Cart() {
         lstCartMedia = new ArrayList<>();
-        mediaService = MediaService.getInstance();
+        mediaService = DAOFactory.getMediaDAO();
     }
 
     public void addCartMedia(CartMedia cm) {
@@ -65,7 +65,14 @@ public class Cart {
     }
 
     public void checkAvailabilityOfProduct() throws SQLException, MediaNotAvailableException {
-        mediaService.checkAvailabilityOfProduct(lstCartMedia); // Pass the list of cart media to the service method
+        for (CartMedia cartMedia : lstCartMedia) {
+            int mediaId = cartMedia.getMedia().getId();
+            int requiredQuantity = cartMedia.getQuantity();
+            int availQuantity = mediaService.getMediaById(mediaId).getQuantity();
+            if (requiredQuantity > availQuantity) {
+                throw new MediaNotAvailableException("Media with ID " + mediaId + " not available in required quantity");
+            }
+        }
     }
 
     public int calSubtotal() {

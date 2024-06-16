@@ -8,15 +8,14 @@ import entity.media.Book;
 import entity.media.CD;
 import entity.media.DVD;
 import entity.media.Media;
-import services.DAOService.DAOFactory;
-import services.DAOService.MediaService;
+import services.DAOFactory;
 
 public class SellerHomeController extends BaseController {
 
-    private final MediaDAO mediaService ;
+    private final MediaDAO mediaDAO;
 
     public SellerHomeController() {
-        this.mediaService = DAOFactory.getMediaDAO();
+        this.mediaDAO = DAOFactory.getMediaDAO();
     }
 
     public List<Media> getAllMedia() throws SQLException{
@@ -24,54 +23,54 @@ public class SellerHomeController extends BaseController {
     }
 
     public void deleteMediaById(int id) throws SQLException {
-        mediaService.deleteMediaById(id);
+        mediaDAO.deleteMediaById(id);
     }
     public CD getCDById(int id) throws SQLException{
-        return mediaService.getCDById(id);
+        return mediaDAO.getCDById(id);
     }
 
     public Book getBookById(int id) throws SQLException{
-        return mediaService.getBookById(id);
+        return mediaDAO.getBookById(id);
     }
 
     public int createMedia(Media media) throws SQLException {
-        return mediaService.createMedia(media);
+        return mediaDAO.createMedia(media);
     }
 
     public void createBook(Book book) throws SQLException{
-        mediaService.createBook(book);
+        mediaDAO.createBook(book);
     }
 
     public void createCD(CD cd) throws SQLException{
-        mediaService.createCD(cd);
+        mediaDAO.createCD(cd);
     }
 
     public void createDVD(DVD dvd) throws SQLException{
-        mediaService.createDVD(dvd);
+        mediaDAO.createDVD(dvd);
     }
 
     public void updateBook(Book book) throws SQLException {
         // Assuming you have a method in mediaDAO to update a book
-        mediaService.updateBook(book);
+        mediaDAO.updateBook(book);
     }
 
     public void updateCD(CD cd) throws SQLException {
         // Assuming you have a method in mediaDAO to update a CD
-        mediaService.updateCD(cd);
+        mediaDAO.updateCD(cd);
     }
 
     public void updateDVD(DVD dvd) throws SQLException {
         // Assuming you have a method in mediaDAO to update a DVD
-        mediaService.updateDVD(dvd);
+        mediaDAO.updateDVD(dvd);
     }
 
     public void updateMedia(Media media) throws SQLException {
         // Assuming you have a method in mediaDAO to update a DVD
-        mediaService.updateMedia(media);
+        mediaDAO.updateMedia(media);
     }
 
     public DVD getDVDById(int id) throws SQLException{
-        return mediaService.getDVDById(id);
+        return mediaDAO.getDVDById(id);
     }
 
 

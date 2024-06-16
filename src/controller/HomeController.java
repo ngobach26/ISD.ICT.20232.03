@@ -10,8 +10,7 @@ import common.exception.MediaNotAvailableException;
 import entity.cart.Cart;
 import entity.cart.CartMedia;
 import entity.media.Media;
-import services.DAOService.DAOFactory;
-import services.DAOService.MediaService;
+import services.DAOFactory;
 import utils.Utils;
 import views.screen.home.MediaHandler;
 
@@ -21,22 +20,22 @@ import views.screen.home.MediaHandler;
 public class HomeController extends BaseController{
 
     private static final Logger LOGGER = Utils.getLogger(HomeController.class.getName());
-    private final MediaDAO mediaService ;
+    private final MediaDAO mediaDAO;
     /**
      * this method gets all Media in DB and return back to home to display
      * @return List[Media]
      * @throws SQLException
      */
     public HomeController(){
-        this.mediaService = DAOFactory.getMediaDAO();
+        this.mediaDAO = DAOFactory.getMediaDAO();
     }
     public List getAllMedia() throws SQLException{
-        return mediaService.getAllMedia();
+        return mediaDAO.getAllMedia();
     }
 
     public List<Media> search(String searchText) throws SQLException{
 
-        return mediaService.searchMedia(searchText);
+        return mediaDAO.searchMedia(searchText);
     }
     public void sortTitle(List<MediaHandler> list){
         Comparator<MediaHandler> mediaTitleComparator = new Comparator<MediaHandler>() {

@@ -5,22 +5,21 @@ import common.exception.LoginAccountException;
 import common.exception.MediaNotAvailableException;
 import common.exception.RegisterAccountException;
 import entity.user.User;
-import services.DAOService.DAOFactory;
-import services.DAOService.UserService;
+import services.DAOFactory;
 
 import java.sql.SQLException;
 
 public class AuthController {
 
-    private final UserDAO userService ;
+    private final UserDAO userDAO;
 
     public AuthController() throws MediaNotAvailableException {
-        this.userService = DAOFactory.getUserDAO();
+        this.userDAO = DAOFactory.getUserDAO();
     }
     public User validateLogin(String email, String password) throws LoginAccountException {
 
     	System.out.println("check user validate login");
-        User accountDb = userService.getUserByEmail(email);
+        User accountDb = userDAO.getUserByEmail(email);
 //        System.out.println(">>>check user: " + accountDb.toString());
         if (accountDb == null) {
             throw new LoginAccountException("Login fail - account or password is wrong");
@@ -38,7 +37,7 @@ public class AuthController {
         if(name == null && email == null && address == null && phone == null && password == null) {
             throw new RegisterAccountException("Please complete all information!");
         }
-        boolean accountDb = userService.registerUser(name, email, address, phone, password, user_type);
+        boolean accountDb = userDAO.registerUser(name, email, address, phone, password, user_type);
         return accountDb;
     }
 
