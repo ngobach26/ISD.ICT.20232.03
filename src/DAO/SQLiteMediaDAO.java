@@ -16,7 +16,7 @@ public class SQLiteMediaDAO implements MediaDAO {
     private static final Logger LOGGER = Logger.getLogger(SQLiteMediaDAO.class.getName());
     private final Connection connection;
 
-    public SQLiteMediaDAO() throws SQLException {
+    public SQLiteMediaDAO() {
         this.connection = AIMSDB.getConnection();
     }
 

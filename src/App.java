@@ -10,6 +10,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import utils.Configs;
+import views.screen.auth.LoginHandler;
 import views.screen.sellerScreen.ManageProductScreenHandler;
 
 
@@ -50,11 +51,11 @@ public class App extends Application {
 //					AdminScreenHandler adminHandler = new AdminScreenHandler(primaryStage, Configs.ADMIN_PATH);
 //					adminHandler.setScreenTitle("Home Screen");
 //					adminHandler.show();
-//					LoginHandler loginHandler = new LoginHandler(primaryStage, Configs.LOGIN);
-//					loginHandler.setScreenTitle("Login");
-//					loginHandler.show();
-					ManageProductScreenHandler manageProductScreenHandler = new ManageProductScreenHandler(primaryStage,Configs.SELLER_HOMEPAGE_PATH);
-					manageProductScreenHandler.show();
+					LoginHandler loginHandler = new LoginHandler(primaryStage, Configs.LOGIN);
+					loginHandler.setScreenTitle("Login");
+					loginHandler.show();
+//					ManageProductScreenHandler manageProductScreenHandler = new ManageProductScreenHandler(primaryStage,Configs.SELLER_HOMEPAGE_PATH);
+//					manageProductScreenHandler.show();
 
 				} catch (IOException e1) {
 					e1.printStackTrace();

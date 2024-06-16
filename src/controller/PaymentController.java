@@ -3,11 +3,14 @@ package controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Map;
+
+import DAO.OrderDAO;
 import entity.cart.Cart;
 import entity.order.DeliveryInformation;
 import entity.order.Order;
 import entity.payment.PaymentTransaction;
 import entity.user.User;
+import services.DAOService.DAOFactory;
 import services.DAOService.OrderService;
 import services.vnpay.IPaymentSubsystem;
 import services.vnpay.PaymentSubsystem;
@@ -21,11 +24,11 @@ public class PaymentController extends BaseController {
      * Represent the Interbank subsystem
      */
     private final IPaymentSubsystem vnPay;
-    private final OrderService orderService;
+    private final OrderDAO orderService;
 
     public PaymentController(){
         this.vnPay = new PaymentSubsystem(new VNPaySubsystemController());
-        this.orderService = OrderService.getInstance();
+        this.orderService = DAOFactory.getOrderDAO();
     }
 
 

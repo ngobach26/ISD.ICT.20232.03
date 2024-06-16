@@ -3,18 +3,20 @@ package controller;
 import java.sql.SQLException;
 import java.util.List;
 
+import DAO.MediaDAO;
 import entity.media.Book;
 import entity.media.CD;
 import entity.media.DVD;
 import entity.media.Media;
+import services.DAOService.DAOFactory;
 import services.DAOService.MediaService;
 
 public class SellerHomeController extends BaseController {
 
-    private final MediaService mediaService ;
+    private final MediaDAO mediaService ;
 
     public SellerHomeController() {
-        this.mediaService = MediaService.getInstance();
+        this.mediaService = DAOFactory.getMediaDAO();
     }
 
     public List<Media> getAllMedia() throws SQLException{

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.logging.Logger;
 
+import DAO.MediaDAO;
 import common.exception.MediaNotAvailableException;
 import entity.cart.Cart;
 import entity.cart.CartMedia;
@@ -13,14 +14,15 @@ import entity.invoice.Invoice;
 import entity.order.DeliveryInformation;
 import entity.order.Order;
 import entity.order.OrderMedia;
+import services.DAOService.DAOFactory;
 import services.DAOService.MediaService;
 
 public class PlaceOrderController extends BaseController{
     private static final Logger LOGGER = utils.Utils.getLogger(PlaceOrderController.class.getName());
-    private final MediaService mediaService ;
+    private final MediaDAO mediaService ;
 
     public PlaceOrderController() throws MediaNotAvailableException {
-        this.mediaService = MediaService.getInstance();
+        this.mediaService = DAOFactory.getMediaDAO();
     }
 
 

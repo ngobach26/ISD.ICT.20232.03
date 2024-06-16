@@ -5,16 +5,17 @@ import common.exception.LoginAccountException;
 import common.exception.MediaNotAvailableException;
 import common.exception.RegisterAccountException;
 import entity.user.User;
+import services.DAOService.DAOFactory;
 import services.DAOService.UserService;
 
 import java.sql.SQLException;
 
 public class AuthController {
 
-    private final UserService userService ;
+    private final UserDAO userService ;
 
     public AuthController() throws MediaNotAvailableException {
-        this.userService = UserService.getInstance();
+        this.userService = DAOFactory.getUserDAO();
     }
     public User validateLogin(String email, String password) throws LoginAccountException {
 

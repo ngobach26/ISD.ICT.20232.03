@@ -5,10 +5,12 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Logger;
 
+import DAO.MediaDAO;
 import common.exception.MediaNotAvailableException;
 import entity.cart.Cart;
 import entity.cart.CartMedia;
 import entity.media.Media;
+import services.DAOService.DAOFactory;
 import services.DAOService.MediaService;
 import utils.Utils;
 import views.screen.home.MediaHandler;
@@ -19,14 +21,14 @@ import views.screen.home.MediaHandler;
 public class HomeController extends BaseController{
 
     private static final Logger LOGGER = Utils.getLogger(HomeController.class.getName());
-    private final MediaService mediaService ;
+    private final MediaDAO mediaService ;
     /**
      * this method gets all Media in DB and return back to home to display
      * @return List[Media]
      * @throws SQLException
      */
     public HomeController(){
-        this.mediaService = MediaService.getInstance();
+        this.mediaService = DAOFactory.getMediaDAO();
     }
     public List getAllMedia() throws SQLException{
         return mediaService.getAllMedia();

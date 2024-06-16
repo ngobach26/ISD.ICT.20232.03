@@ -5,19 +5,19 @@ import DAO.*;
 import java.sql.SQLException;
 
 public class DAOFactory {
-    public static MediaDAO getMediaDAO() throws SQLException {
+    public static MediaDAO getMediaDAO() {
         // Bạn có thể thay đổi implementation ở đây nếu muốn sử dụng loại cơ sở dữ liệu khác
         return new SQLiteMediaDAO();
     }
-    public static OrderDAO getOrderDAO() throws SQLException {
+    public static OrderDAO getOrderDAO(){
         // Bạn có thể thay đổi implementation ở đây nếu muốn sử dụng loại cơ sở dữ liệu khác
         return new SQLiteOrderDAO();
     }
-    public static CartDAO getCartDAO() throws SQLException {
+    public static CartDAO getCartDAO(){
         return new SQLiteCartDAO();
     }
 
-    public static UserDAO getUserDAO() throws SQLException {
+    public static UserDAO getUserDAO(){
         // Bạn có thể thay đổi implementation ở đây nếu muốn sử dụng loại cơ sở dữ liệu khác
         return new SQLiteUserDAO();
     }

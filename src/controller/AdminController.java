@@ -1,7 +1,9 @@
 package controller;
 
+import DAO.UserDAO;
 import common.exception.MediaNotAvailableException;
 import entity.user.User;
+import services.DAOService.DAOFactory;
 import services.DAOService.MediaService;
 import services.DAOService.UserService;
 
@@ -9,10 +11,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class AdminController {
-    private final UserService userService ;
+    private final UserDAO userService ;
 
-    public AdminController() throws MediaNotAvailableException {
-        this.userService = UserService.getInstance();
+    public AdminController()  {
+        this.userService = DAOFactory.getUserDAO();
     }
 
     public void createUser(User user) throws SQLException{
