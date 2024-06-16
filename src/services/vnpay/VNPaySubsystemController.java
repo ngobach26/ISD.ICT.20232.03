@@ -9,7 +9,7 @@ import java.util.Map;
 public class VNPaySubsystemController implements IPaymentSubsystem {
 
 
-	private static VNPayBoundary vnPayBoundary = new VNPayBoundary();
+	private static final VNPayBoundary vnPayBoundary = new VNPayBoundary();
 
 	@Override
 	public String generateURL(int amount, String content) throws IOException {
