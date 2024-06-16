@@ -2,8 +2,10 @@ package services.DAOService;
 
 import DAO.CartDAO;
 import entity.cart.Cart;
+import entity.cart.CartMedia;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class CartService {
     private static CartService instance;
@@ -27,5 +29,8 @@ public class CartService {
     }
     public int getCartId(int userId) throws SQLException{
         return cartDAO.getCartID(userId);
+    }
+    public List<CartMedia> getCartMediaItems(int cartId) throws SQLException {
+        return cartDAO.getCartMediaItems(cartId);
     }
 }

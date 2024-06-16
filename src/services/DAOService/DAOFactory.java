@@ -15,7 +15,8 @@ public class DAOFactory {
     }
     public static CartDAO getCartDAO() throws SQLException {
         return new SQLiteCartDAO();
-    };
+    }
+
     public static UserDAO getUserDAO() throws SQLException {
         // Bạn có thể thay đổi implementation ở đây nếu muốn sử dụng loại cơ sở dữ liệu khác
         return new SQLiteUserDAO();
