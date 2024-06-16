@@ -4,6 +4,7 @@ import db.AIMSDB;
 import entity.order.DeliveryInformation;
 import entity.order.Order;
 import entity.order.OrderMedia;
+import entity.user.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class SQLiteOrderDAO implements OrderDAO{
-    public int createOrder(DeliveryInformation deliveryInformation, Order order) throws SQLException {
+    public int createOrder(DeliveryInformation deliveryInformation, Order order, User user) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet generatedKeys = null;
@@ -24,7 +25,7 @@ public class SQLiteOrderDAO implements OrderDAO{
             String insertDeliverySQL = "INSERT INTO Delivery_information (userID, province_city, delivery_address, recipient_name, email, phone_number) VALUES (?, ?, ?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(insertDeliverySQL);
 
-            preparedStatement.setInt(1, deliveryInformation.getUserID());
+            preparedStatement.setInt(1, user.getId());
             preparedStatement.setString(2, deliveryInformation.getProvinceCity());
             preparedStatement.setString(3, deliveryInformation.getDeliveryAddress());
             preparedStatement.setString(4, deliveryInformation.getRecipientName());
@@ -42,7 +43,7 @@ public class SQLiteOrderDAO implements OrderDAO{
                 int deliveryID = generatedKeys.getInt(1);
 
                 // Insert order
-                String insertOrderSQL = "INSERT INTO \"ORDER\" (total, total_shipping_fee, cartID, deliveryID) VALUES (?, ?, ?, ?)";
+                String insertOrderSQL = "INSERT INTO \"ORDER\" (total, total_shipping_fee, deliveryID) VALUES (?, ?, ?)";
                 preparedStatement = connection.prepareStatement(insertOrderSQL);
 
                 double total = order.calculateTotalProductIncludeVAT();
@@ -51,8 +52,7 @@ public class SQLiteOrderDAO implements OrderDAO{
 
                 preparedStatement.setDouble(1, total);
                 preparedStatement.setDouble(2, totalShippingFee);
-                preparedStatement.setInt(3, cartID);
-                preparedStatement.setInt(4, deliveryID);
+                preparedStatement.setInt(3, deliveryID);
 
                 int orderRowsAffected = preparedStatement.executeUpdate();
                 if (orderRowsAffected == 0) {
@@ -114,7 +114,7 @@ public class SQLiteOrderDAO implements OrderDAO{
 
     public void createOrderMedia(OrderMedia orderMedia, int orderId) throws SQLException {
         try {
-            String sql = "INSERT INTO OrderMedia (mediaID, orderID, price, quantity) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO ORDER_MEDIA (mediaID, orderID, price, number_of_products) VALUES (?, ?, ?, ?)";
 
             try (PreparedStatement preparedStatement = AIMSDB.getConnection().prepareStatement(sql)) {
                 preparedStatement.setInt(1, orderMedia.getMedia().getId());
@@ -127,4 +127,5 @@ public class SQLiteOrderDAO implements OrderDAO{
             e.printStackTrace();
         }
     }
+
 }

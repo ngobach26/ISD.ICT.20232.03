@@ -83,7 +83,7 @@ public class LoginHandler extends BaseScreenHandler {
                 	LoginManager loginManager = new LoginManager();
                 	LoginManager.saveLoginInfo(user.getId(), user.getName(), user.getPhone(), user.getAddress(), user.getEmail());
                     System.out.println("Customer logged in");
-                    homeHandler = new HomeScreenHandler(this.stage, Configs.HOME_PATH);
+                    homeHandler = new HomeScreenHandler(this.stage, Configs.HOME_PATH,user);
 					homeHandler.setScreenTitle("Home Screen");
 					homeHandler.setImage();
 					homeHandler.show();

@@ -108,6 +108,7 @@ CREATE TABLE "ORDER_MEDIA" (
     orderID INTEGER NOT NULL,
     mediaID INTEGER NOT NULL,
     number_of_products INTEGER,
+    price INTEGER,
     CONSTRAINT "fk_order_cartmedia" FOREIGN KEY ("orderID") REFERENCES "ORDER"("orderID"),
     CONSTRAINT "fk_media_cartmedia" FOREIGN KEY ("mediaID") REFERENCES "MEDIA"("ID")
 );
@@ -122,8 +123,8 @@ CREATE TABLE RUSH_DELIVERY (
 );
 
 -- Table: Transaction
-CREATE TABLE [TRANSACTION] (
-    transactionID INT NOT NULL PRIMARY KEY,
+CREATE TABLE PAYMENT_TRANSACTION (
+    transactionID VARCHAR(255) NOT NULL PRIMARY KEY,
     time TIME,
     date DATE,
     transaction_content TEXT,

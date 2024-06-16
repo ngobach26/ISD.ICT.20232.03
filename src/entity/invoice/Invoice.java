@@ -31,6 +31,6 @@ public class Invoice {
     }
 
     public DeliveryInformation getDeliveryInformation() {
-        return deliveryInformation;
+        return this.deliveryInformation;
     }
 }

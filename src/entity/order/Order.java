@@ -139,7 +139,7 @@ public class Order {
                     }
 
                     connection.commit(); // Commit transaction
-                    System.out.println("Order & OrderMedia added successfully!");
+                    System.out.println("Order added successfully!");
                     return orderID;
                 }
             }
@@ -229,15 +229,12 @@ public class Order {
         }
 
         double baseCost = 0;
-        double baseWeight = 0;
         double additionalCostPerHalfKg = 0;
 
         if (deliveryInformation.isUrban()) {
-            baseCost = 18000;
-            baseWeight = 3;
+            baseCost = 10000;
         } else {
-            baseCost = 25000;
-            baseWeight = 0.5;
+            baseCost = 15000;
         }
         additionalCostPerHalfKg = 2500;
 
@@ -247,11 +244,8 @@ public class Order {
 
         double regularShippingCost = 0;
 
-        if (getMaxWeight() <= baseWeight) {
-            regularShippingCost = baseCost;
-        } else {
-            regularShippingCost = baseCost + Math.ceil((getMaxWeight() - baseWeight) * 2) * additionalCostPerHalfKg;
-        }
+        regularShippingCost = baseCost;
+
         setShippingFees((int) (rushShippingCost + regularShippingCost));
         return (int) (rushShippingCost + regularShippingCost);
     }

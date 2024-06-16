@@ -134,23 +134,7 @@
                         <Insets left="10.0" />
                     </GridPane.margin>
                 </Label>
-                <Label text="Shipping&#10;Instructions" GridPane.rowIndex="5">
-                    <font>
-                        <Font name="System Bold Italic" size="24.0" />
-                    </font>
-                    <GridPane.margin>
-                        <Insets left="10.0" />
-                    </GridPane.margin>
-                </Label>
                 <Label fx:id="lbtime" text="Shipping time" wrapText="true" GridPane.rowIndex="6">
-                    <font>
-                        <Font name="System Bold Italic" size="24.0" />
-                    </font>
-               <GridPane.margin>
-                  <Insets left="10.0" />
-               </GridPane.margin>
-                </Label>
-                <Label fx:id="lbrushInstruction" text="Rush shipping Instructions" wrapText="true" GridPane.rowIndex="7">
                     <font>
                         <Font name="System Bold Italic" size="24.0" />
                     </font>

@@ -10,6 +10,7 @@ import controller.PaymentController;
 import entity.invoice.Invoice;
 import entity.order.DeliveryInformation;
 import entity.order.OrderMedia;
+import entity.user.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -70,18 +71,28 @@ public class InvoiceScreenHandler extends BaseScreenHandler {
 
 	@FXML
 	private VBox vboxItems;
+	@FXML
+	private void goBack() {
+		if (getPreviousScreen() != null) {
+			getPreviousScreen().show();
+		} else {
+		}
+	}
 
 	private final Invoice invoice;
+	private User user;
 
-	public InvoiceScreenHandler(Stage stage, String screenPath, Invoice invoice) throws IOException {
+	public InvoiceScreenHandler(Stage stage, String screenPath, Invoice invoice,User user) throws IOException {
 		super(stage, screenPath);
 		this.invoice = invoice;
+		this.user = user;
 		setInvoiceInfo();
 	}
 
 	private void setInvoiceInfo(){
 		DeliveryInformation deliveryInfo = invoice.getDeliveryInformation();
-		name.setText("chi");
+		name.setText(deliveryInfo.getRecipientName());
+		phone.setText(deliveryInfo.getPhoneNumber());
 		province.setText(deliveryInfo.getProvinceCity());
 		instructions.setText(deliveryInfo.getDeliveryAddress());
 		address.setText(deliveryInfo.getDeliveryAddress());
@@ -118,7 +129,7 @@ public class InvoiceScreenHandler extends BaseScreenHandler {
 	}
 	@FXML
 	void confirmInvoice(MouseEvent event) throws IOException {
-		BaseScreenHandler paymentScreen = new PaymentScreenHandler(this.stage, Configs.PAYMENT_SCREEN_PATH, invoice.getOrder(), invoice.getDeliveryInformation());
+		BaseScreenHandler paymentScreen = new PaymentScreenHandler(this.stage, Configs.PAYMENT_SCREEN_PATH, invoice.getOrder(), invoice.getDeliveryInformation(),user);
 		paymentScreen.setBController(new PaymentController());
 		paymentScreen.setPreviousScreen(this);
 		paymentScreen.setHomeScreenHandler(homeScreenHandler);
