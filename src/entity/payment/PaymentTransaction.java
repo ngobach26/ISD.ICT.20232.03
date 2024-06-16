@@ -107,6 +107,7 @@ public class PaymentTransaction {
     public static PaymentTransaction getPaymentTransactionByOrderId(int orderId) throws SQLException {
         String sql = "SELECT * FROM `PAYMENT_TRANSACTION` WHERE orderID = ?";
         Connection connection = AIMSDB.getConnection();
+
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, orderId);
 
