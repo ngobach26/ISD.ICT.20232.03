@@ -2,6 +2,7 @@ package views.sellerScreen.sellerEventScreen;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
@@ -36,7 +37,7 @@ public class CreateMediaByType extends BaseScreenHandler implements Initializabl
 	private Button create;
 
 	@Override
-	public void show() {
+	public void show() throws SQLException {
 		super.show();
 	}
 	
@@ -72,6 +73,8 @@ public class CreateMediaByType extends BaseScreenHandler implements Initializabl
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				} catch (SQLException e) {
+					throw new RuntimeException(e);
 				}
 			} else {
 				try {
@@ -81,6 +84,8 @@ public class CreateMediaByType extends BaseScreenHandler implements Initializabl
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				} catch (SQLException e) {
+					throw new RuntimeException(e);
 				}
 			}
 		});

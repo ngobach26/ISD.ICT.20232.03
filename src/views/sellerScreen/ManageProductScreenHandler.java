@@ -69,7 +69,7 @@ public class ManageProductScreenHandler extends BaseScreenHandler implements Ini
 	}
 
 	@Override
-	public void show() {
+	public void show() throws SQLException {
 		super.show();
 	}
 
@@ -85,6 +85,8 @@ public class ManageProductScreenHandler extends BaseScreenHandler implements Ini
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
 			}
 		});
 		
@@ -106,7 +108,11 @@ public class ManageProductScreenHandler extends BaseScreenHandler implements Ini
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			orderManagementAdminScreenHandler.show();
+			try {
+				orderManagementAdminScreenHandler.show();
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
+			}
 		});
 
 		sign_out.setOnMouseClicked(mouseEvent -> {
@@ -117,7 +123,11 @@ public class ManageProductScreenHandler extends BaseScreenHandler implements Ini
 				e.printStackTrace();
 			}
 			roleScreenHandler.setScreenTitle("Path choosing screen");
-			roleScreenHandler.show();
+			try {
+				roleScreenHandler.show();
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
+			}
 		});
 		
 		try{

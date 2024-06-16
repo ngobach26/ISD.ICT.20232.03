@@ -51,8 +51,8 @@ public class MediaProductHandler extends FXMLScreenHandler {
 	@FXML
 	protected Button update_btn;
 
-	private Media media;
-	private int id;
+	private final Media media;
+	private final int id;
 	private BookUpdateHandler bookUpdateHandler;
 	private CDUpdateHandler cdUpdateHandler;
 	private DVDUpdateHandler dvdUpdateHandler;
@@ -76,7 +76,7 @@ public class MediaProductHandler extends FXMLScreenHandler {
 		item_img.setImage(image);
 		
 		item_name.setText(media.getTitle());
-		item_quantity.setText(Integer.toString((int) media.getQuantity()));
+		item_quantity.setText(Integer.toString(media.getQuantity()));
 		item_type.setText(media.getTitle());
 		item_price.setText("" + media.getPrice());
 
@@ -101,6 +101,8 @@ public class MediaProductHandler extends FXMLScreenHandler {
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				} catch (SQLException e) {
+					throw new RuntimeException(e);
 				}
 			} else {
 				try {
@@ -110,6 +112,8 @@ public class MediaProductHandler extends FXMLScreenHandler {
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				} catch (SQLException e) {
+					throw new RuntimeException(e);
 				}
 			}
 		});
