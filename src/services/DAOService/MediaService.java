@@ -2,6 +2,9 @@ package services.DAOService;
 import DAO.MediaDAO;
 import common.exception.MediaNotAvailableException;
 import entity.cart.CartMedia;
+import entity.media.Book;
+import entity.media.CD;
+import entity.media.DVD;
 import entity.media.Media;
 
 import java.sql.SQLException;
@@ -40,8 +43,11 @@ public class MediaService {
         return mediaDAO.getAllMedia();
     }
 
-    public void createMedia(Media media) throws SQLException {
-        mediaDAO.createMedia(media);
+    public int  createMedia(Media media) throws SQLException {
+        return mediaDAO.createMedia(media);
+    }
+    public void updateMedia(Media media) throws SQLException {
+        mediaDAO.updateMedia(media);
     }
 
     public void updateMediaFieldById(int id, String field, Object value) throws SQLException {
@@ -62,5 +68,43 @@ public class MediaService {
             }
         }
     }
+
+    public CD getCDById(int id) throws SQLException{
+        return mediaDAO.getCDById(id);
+    }
+
+    public Book getBookById(int id) throws SQLException{
+        return mediaDAO.getBookById(id);
+    }
+
+    public void createBook(Book book) throws SQLException{
+        mediaDAO.createBook(book);
+    }
+    public void createCD(CD cd) throws SQLException{
+        mediaDAO.createCD(cd);
+    }
+    public void createDVD(DVD dvd) throws SQLException{
+        mediaDAO.createDVD(dvd);
+    }
+
+    public void updateBook(Book book) throws SQLException {
+        mediaDAO.updateBook(book);
+    }
+
+    public void updateCD(CD cd) throws SQLException {
+        mediaDAO.updateCD(cd);
+    }
+
+    public void updateDVD(DVD dvd) throws SQLException {
+        mediaDAO.updateDVD(dvd);
+    }
+    public DVD getDVDById(int id) throws SQLException{
+        return mediaDAO.getDVDById(id);
+    }
+
+
+
+
+
 
 }

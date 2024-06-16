@@ -3,6 +3,9 @@ package views.screen.sellerScreen.sellerEventScreen.create;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import entity.media.Book;
@@ -85,7 +88,11 @@ public class BookCreateHandler extends BaseScreenHandler implements Initializabl
 		create.setOnMouseClicked(event -> {
 			if (checkFillInformation()) {
 				try {
-					commonInfoCreateHandler = new CommonInfoCreateHandler(this.stage, Configs.CREATE_COMMON_MEDIA_PATH, "BOOK", createBookQuery(), category.getValue(), image_url.getValue());
+					LocalDate dateToConvert = publish_date.getValue();
+					Date date = Date.from(dateToConvert.atStartOfDay(ZoneId.systemDefault()).toInstant());
+					Book newBook = new Book(author.getText(), cover_type.getText(), publisher.getText(), date, Integer.parseInt(number_pages.getText()), language.getText(), category.getValue());
+
+					commonInfoCreateHandler = new CommonInfoCreateHandler(this.stage, Configs.CREATE_COMMON_MEDIA_PATH, "BOOK", newBook, category.getValue(), image_url.getValue());
 					commonInfoCreateHandler.setScreenTitle("Common information for Book");
 					commonInfoCreateHandler.show();
 				} catch (IOException e) {
@@ -116,11 +123,5 @@ public class BookCreateHandler extends BaseScreenHandler implements Initializabl
 				publishDateText.length() > 0 && 
 				numOfPages.length() > 0 && 
 				languageText.length() > 0;
-	}
-	
-	public String createBookQuery() throws SQLException {
-		Book bookEntity = new Book();
-		String createSql = bookEntity.createBookQuery(author.getText(), cover_type.getText(), publisher.getText(), publish_date.getValue().toString(), Integer.parseInt(number_pages.getText()), language.getText(), category.getValue());
-		return createSql;
 	}
 }

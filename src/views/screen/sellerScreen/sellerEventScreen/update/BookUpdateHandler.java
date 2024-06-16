@@ -3,14 +3,14 @@ package views.screen.sellerScreen.sellerEventScreen.update;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
-import db.AIMSDB;
+import controller.SellerHomeController;
 import entity.media.Book;
+import entity.media.CD;
 import entity.media.Media;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,8 +21,10 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import utils.SellerUtils;
 import utils.Utils;
 import views.screen.BaseScreenHandler;
+import views.screen.popup.PopupScreen;
 import views.screen.sellerScreen.sellerEventScreen.create.CommonInfoCreateHandler;
 
 public class BookUpdateHandler extends BaseScreenHandler implements Initializable {
@@ -74,9 +76,13 @@ public class BookUpdateHandler extends BaseScreenHandler implements Initializabl
 	private CommonInfoCreateHandler commonInfoCreateHandler;
 	private final Media media;
 
+	SellerHomeController sellerHomeController;
+	Book targetMedia;
+
 	public BookUpdateHandler(Stage stage, String screenPath, Media media) throws IOException, SQLException {
 		super(stage, screenPath);
 		// TODO Auto-generated constructor stub
+		sellerHomeController = new SellerHomeController();
 		this.media = media;
 		setMediaInfo();
 	}
@@ -117,19 +123,25 @@ public class BookUpdateHandler extends BaseScreenHandler implements Initializabl
 		create.setOnMouseClicked(event -> {
 			if (checkFillInformation()) {
 				try {
-					updateBookQuery();
+					updateMediaInformation(targetMedia);
+					updateBook();
+					PopupScreen.success("Book updated successfully!");
 					this.stage.close();
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
-			}
+				} catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
 		});
 	}
 
+
+
 	public void setMediaInfo() throws SQLException {
 		LOGGER.info("Id of the media: " + this.media);
-		Book targetMedia = new Book().getMediaById(media.getId());
+		targetMedia = sellerHomeController.getBookById(media.getId());
 		category.setValue(targetMedia.getCategory());
 		author.setText(targetMedia.getAuthor());
 		cover_type.setText(targetMedia.getCoverType());
@@ -140,7 +152,6 @@ public class BookUpdateHandler extends BaseScreenHandler implements Initializabl
 		title.setText(targetMedia.getTitle());
 		value.setText("" + targetMedia.getValue());
 		price.setText("" + targetMedia.getPrice());
-		weight.setText("" + targetMedia.getWeight());
 		quantity.getValueFactory().setValue(targetMedia.getQuantity());
 		image_url.setValue(targetMedia.getImageURL());
 	}
@@ -163,7 +174,6 @@ public class BookUpdateHandler extends BaseScreenHandler implements Initializabl
 		String titleText = title.getText();
 		String valueText = value.getText();
 		String priceText = price.getText();
-		String weightText = weight.getText();
 		int quantityText = quantity.getValue();
 		return comboBoxText.length() > 0 &&
 				authorText.length() > 0 &&
@@ -176,40 +186,28 @@ public class BookUpdateHandler extends BaseScreenHandler implements Initializabl
 				titleText.length() > 0 &&
 				valueText.length() > 0 &&
 				priceText.length() > 0 &&
-				weightText.length() > 0 &&
 				quantityText > 0;
 	}
 
-	public void updateBookQuery() throws SQLException {
-		String bookSQL = "UPDATE Book "
-				+ "SET "
-				+ "author='" + author.getText() + "',"
-				+ "coverType='" + cover_type.getText() + "',"
-				+ "publisher='" + publisher.getText() + "',"
-				+ "publishDate='" + publish_date.getValue().toString() + "',"
-				+ "numOfPages='" + number_pages.getText() + "',"
-				+ "language='" + language.getText() + "',"
-				+ "bookCategory='" + category.getValue() + "'"
-				+ " WHERE "
-				+ "id = " + this.media.getId() + ";";
+	public void updateMediaInformation(Book media) {
+		media.setCategory(category.getValue());
+		media.setAuthor(author.getText());
+		media.setCoverType(cover_type.getText());
+		media.setPublisher(publisher.getText());
+		media.setPublishDate(SellerUtils.converToDate(publish_date.getValue()));
+		media.setNumOfPages(Integer.parseInt(number_pages.getText()));
+		media.setLanguage(language.getText());
+		media.setImageURL(image_url.getValue());
+		media.setTitle(title.getText());
+		media.setValue(Integer.parseInt(value.getText()));
+		media.setPrice(Integer.parseInt(price.getText()));
+		media.setQuantity(quantity.getValue());
+	}
 
-		LOGGER.info(bookSQL);
 
-		String mediaSQL = "UPDATE Media "
-				+ "SET "
-				+ "title='" + title.getText() + "',"
-				+ "category='" + category.getValue() + "',"
-				+ "price='" + price.getText() + "',"
-				+ "value='" + value.getText() + "',"
-				+ "quantity=" + quantity.getValue() + ","
-				+ "weight='" + weight.getText() + "',"
-				+ "imageURL='" + image_url.getValue() + "'"
-				+ " WHERE "
-				+ "id = " + this.media.getId() + ";";
 
-		LOGGER.info(mediaSQL);
-		Statement stm = AIMSDB.getConnection().createStatement();
-		stm.executeUpdate(bookSQL);
-		stm.executeUpdate(mediaSQL);
+	public void updateBook() throws SQLException {
+		sellerHomeController.updateMedia(targetMedia);
+		sellerHomeController.updateBook((targetMedia));
 	}
 }

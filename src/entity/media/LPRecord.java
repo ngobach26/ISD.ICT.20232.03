@@ -11,21 +11,21 @@ public class LPRecord extends Media {
     Date releasedDate;
     public LPRecord() throws SQLException {
     }
-    public LPRecord(int id, String title, String category, int price, int quantity, String type, String artist, String recordLabel, String musicType, Date releasedDate) throws SQLException {
-        super(id, title, category, price, quantity, type);
-        this.artist = artist;
-        this.recordLabel = recordLabel;
-        this.musicType = musicType;
-        this.releasedDate = releasedDate;
-    }
+//    public LPRecord(int id, String title, String category, int price, int quantity, String type, String artist, String recordLabel, String musicType, Date releasedDate) throws SQLException {
+//        super(id, title, category, price, quantity, type);
+//        this.artist = artist;
+//        this.recordLabel = recordLabel;
+//        this.musicType = musicType;
+//        this.releasedDate = releasedDate;
+//    }
 
-    public LPRecord(int id, String title, String category, int price, int value, int quantity, float weight, String type, String imageURL, int supportForRushDelivery, String artist, String recordLabel, String musicType, Date releasedDate) throws SQLException {
-        super(id, title, category, price, value, quantity, weight, type, imageURL, supportForRushDelivery);
-        this.artist = artist;
-        this.recordLabel = recordLabel;
-        this.musicType = musicType;
-        this.releasedDate = releasedDate;
-    }
+//    public LPRecord(int id, String title, String category, int price, int value, int quantity, float weight, String type, String imageURL, int supportForRushDelivery, String artist, String recordLabel, String musicType, Date releasedDate) throws SQLException {
+//        super(id, title, category, price, value, quantity, weight, type, imageURL, supportForRushDelivery);
+//        this.artist = artist;
+//        this.recordLabel = recordLabel;
+//        this.musicType = musicType;
+//        this.releasedDate = releasedDate;
+//    }
 
     public String getArtist() {
         return artist;

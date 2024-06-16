@@ -3,6 +3,9 @@ package views.screen.sellerScreen.sellerEventScreen.create;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import entity.media.CD;
@@ -75,7 +78,10 @@ public class CDCreateHandler extends BaseScreenHandler implements Initializable 
 		create.setOnMouseClicked(event -> {
 			if (checkFillInformation()) {
 				try {
-					commonInfoCreateHandler = new CommonInfoCreateHandler(this.stage, Configs.CREATE_COMMON_MEDIA_PATH, "CD", createCDQuery(), musicType.getValue(), image_url.getValue());
+					LocalDate dateToConvert = releaseDate.getValue();
+					Date date = Date.from(dateToConvert.atStartOfDay(ZoneId.systemDefault()).toInstant());
+					CD newCD = new CD(artist.getText(), recordLabel.getText(), musicType.getValue(), date);
+					commonInfoCreateHandler = new CommonInfoCreateHandler(this.stage, Configs.CREATE_COMMON_MEDIA_PATH, "CD", newCD, musicType.getValue(), image_url.getValue());
 					commonInfoCreateHandler.setScreenTitle("Common information for CD");
 					commonInfoCreateHandler.show();
 				} catch (IOException e) {
@@ -102,9 +108,4 @@ public class CDCreateHandler extends BaseScreenHandler implements Initializable 
 				releaseDateText.length() > 0;
 	}
 
-	public String createCDQuery() throws SQLException {
-		CD cdEntity = new CD();
-		String createSql = cdEntity.createCDQuery(artist.getText(), recordLabel.getText(), musicType.getValue(), releaseDate.getValue().toString());
-		return createSql;
-	}
 }

@@ -1,136 +1,196 @@
 package views.screen.sellerScreen.sellerEventScreen.update;
 
-import java.io.IOException;
-import java.net.URL;
-import java.sql.SQLException;
-import java.util.ResourceBundle;
-
+import controller.SellerHomeController;
+import entity.media.DVD;
 import entity.media.Media;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
-import utils.Configs;
+import utils.SellerUtils;
+import utils.Utils;
 import views.screen.BaseScreenHandler;
-import views.screen.sellerScreen.sellerEventScreen.create.CommonInfoCreateHandler;
+import views.screen.popup.PopupScreen;
+
+import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
 public class DVDUpdateHandler extends BaseScreenHandler implements Initializable {
 
-	@FXML
-	private ComboBox<String> discType;
+    public static Logger LOGGER = Utils.getLogger(DVDUpdateHandler.class.getName());
 
-	@FXML
-	
-	private TextField author;
+    @FXML
+    private TextField director;
 
-	@FXML
-	private TextField cover_type;
+    @FXML
+    private TextField runtime;
 
-	@FXML
-	private TextField publisher;
+    @FXML
+    private TextField studio;
+    @FXML
+    private TextField title;
+    @FXML
+    private TextField price;
+    @FXML
+    private TextField value;
 
-	@FXML
-	private DatePicker publish_date;
+    @FXML
+    private TextField subtitles;
 
-	@FXML
-	private TextField number_pages;
+    @FXML
+    private ComboBox<String> discType;
 
-	@FXML
-	private TextField language;
-	
-	@FXML
-	private Button update;
-	@FXML
-	private ComboBox<String> image_url;
-	
-	CommonInfoCreateHandler commonInfoCreateHandler;
+    @FXML
+    private ComboBox<String> filmType;
 
-	public DVDUpdateHandler(Stage stage, String screenPath, Media media) throws IOException {
-		super(stage, screenPath);
-		// TODO Auto-generated constructor stub
-	}
+    @FXML
+    private DatePicker releaseDate;
 
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		discType.getItems().addAll(
-				"Horror",
-				"Science fiction",
-				"Western",
-				"Action",
-				"Drama",
-				"Comedy",
-				"Thriller",
-				"Romance"
-			);
-		
-		image_url.getItems().addAll(
-				"assets/images/book/book1.jpg",
-				"assets/images/book/book2.jpg",
-				"assets/images/book/book3.jpg",
-				"assets/images/book/book4.jpg",
-				"assets/images/book/book5.jpg",
-				"assets/images/book/book6.jpg",
-				"assets/images/book/book7.jpg",
-				"assets/images/book/book8.jpg",
-				"assets/images/book/book9.jpg",
-				"assets/images/book/book10.jpg",
-				"assets/images/book/book11.jpg",
-				"assets/images/book/book12.jpg"
-			);
-		
-		update.setOnMouseClicked(event -> {
-			if (checkFillInformation()) {
-				try {
-					commonInfoCreateHandler = new CommonInfoCreateHandler(this.stage, Configs.CREATE_COMMON_MEDIA_PATH, "BOOK", createBookQuery(), discType.getValue(), image_url.getValue());
-					commonInfoCreateHandler.setScreenTitle("Common information for Book");
-					commonInfoCreateHandler.show();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	
-	public boolean checkFillInformation() {
-		String comboBoxText = discType.getValue();
-		String authorText = author.getText();
-		String coverTypeText = cover_type.getText();
-		String publisherText = publisher.getText();
-		String publishDateText = publish_date.getValue().toString();
-		String numOfPages = number_pages.getText();
-		String languageText = language.getText();
-		String imageUrl = image_url.getValue();
-		return comboBoxText.length() > 0 && 
-				authorText.length() > 0 &&
-				imageUrl.length() > 0 &&
-				coverTypeText.length() > 0 && 
-				publisherText.length() > 0 && 
-				publishDateText.length() > 0 && 
-				numOfPages.length() > 0 && 
-				languageText.length() > 0;
-	}
-	
-	public String createBookQuery() throws SQLException {
-		String queryValues = "(" +
-				"'" + author.getText() + "'" + ", " +
-				"'" + cover_type.getText() + "'" + ", " +
-				"'" + publisher.getText() + "'" + ", " +
-				"'" + publish_date.getValue().toString() + "'" + ", " +
-				number_pages.getText() + ", " +
-				"'" + language.getText() + "'" + ", " +
-				"'" + discType.getValue() + "'" + ")";
-		String sql = "INSERT INTO Book " 
-				+ "(author, coverType, publisher, publishDate, numOfPages, language, bookCategory)"
-				+ " VALUES "
-				+ queryValues + ";";
-		return sql;
-	}
+    @FXML
+    private Spinner<Integer> quantity;
+
+    @FXML
+    private Button update;
+
+    @FXML
+    private ComboBox<String> image_url;
+
+    private final Media media;
+
+    SellerHomeController sellerHomeController;
+    DVD targetMedia;
+
+    public DVDUpdateHandler(Stage stage, String screenPath, Media media) throws IOException, SQLException {
+        super(stage, screenPath);
+        sellerHomeController = new SellerHomeController();
+        this.media = media;
+        setMediaInfo();
+    }
+
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1) {
+        quantity.setValueFactory(
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 1)
+        );
+
+        // Initialize ComboBoxes and Image URLs
+        initializeComboBoxes();
+
+        update.setOnMouseClicked(event -> {
+            if (checkFillInformation()) {
+                try {
+                    updateMediaInformation(targetMedia);
+                    updateDVD();
+                    PopupScreen.success("DVD updated successfully!");
+                    this.stage.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+    }
+
+    private void initializeComboBoxes() {
+        discType.getItems().addAll(
+                "Hard",
+                "Soft",
+                "USB"
+        );
+
+        filmType.getItems().addAll(
+                "Horror",
+                "Science fiction",
+                "Western",
+                "Action",
+                "Drama",
+                "Comedy",
+                "Thriller",
+                "Romance"
+        );
+
+        image_url.getItems().addAll(
+                "assets/images/book/dvd1.jpg",
+                "assets/images/book/dvd2.jpg",
+                "assets/images/book/dvd3.jpg",
+                "assets/images/book/dvd4.jpg",
+                "assets/images/book/dvd5.jpg",
+                "assets/images/book/dvd6.jpg",
+                "assets/images/book/dvd7.jpg",
+                "assets/images/book/dvd8.jpg",
+                "assets/images/book/dvd9.jpg",
+                "assets/images/book/dvd10.jpg",
+                "assets/images/book/dvd11.jpg",
+                "assets/images/book/dvd12.jpg"
+        );
+    }
+
+    public void setMediaInfo() throws SQLException {
+        LOGGER.info("Id of the media: " + this.media);
+        targetMedia = sellerHomeController.getDVDById(media.getId());
+        director.setText(targetMedia.getDirector());
+        runtime.setText(Integer.toString(targetMedia.getRuntime()));
+        studio.setText(targetMedia.getStudio());
+        subtitles.setText(targetMedia.getSubtitles());
+        discType.setValue(targetMedia.getDiscType());
+        filmType.setValue(targetMedia.getFilmType());
+        releaseDate.setValue(LOCAL_DATE(targetMedia.getReleasedDate().toString()));
+        quantity.getValueFactory().setValue(targetMedia.getQuantity());
+        image_url.setValue(targetMedia.getImageURL());
+        title.setText(targetMedia.getTitle());
+        value.setText("" + targetMedia.getValue());
+        price.setText("" + targetMedia.getPrice());
+        quantity.getValueFactory().setValue(targetMedia.getQuantity());
+    }
+
+    public LocalDate LOCAL_DATE(String dateString) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        return LocalDate.parse(dateString, formatter);
+    }
+
+    public boolean checkFillInformation() {
+        String directorText = director.getText();
+        String runtimeText = runtime.getText();
+        String studioText = studio.getText();
+        String subtitlesText = subtitles.getText();
+        String discTypeText = discType.getValue();
+        String filmTypeText = filmType.getValue();
+        String releaseDateText = releaseDate.getValue().toString();
+        int quantityText = quantity.getValue();
+        return directorText != null && !directorText.isEmpty() &&
+                runtimeText != null && !runtimeText.isEmpty() &&
+                studioText != null && !studioText.isEmpty() &&
+                subtitlesText != null && !subtitlesText.isEmpty() &&
+                discTypeText != null && !discTypeText.isEmpty() &&
+                filmTypeText != null && !filmTypeText.isEmpty() &&
+                releaseDateText != null && !releaseDateText.isEmpty() &&
+                quantityText > 0;
+    }
+
+    public void updateMediaInformation(DVD media) {
+        media.setDirector(director.getText());
+        media.setStudio(studio.getText());
+        media.setSubtitles(subtitles.getText());
+        media.setDiscType(discType.getValue());
+        media.setFilmType(filmType.getValue());
+        media.setReleasedDate(SellerUtils.converToDate(releaseDate.getValue()));
+        media.setQuantity(quantity.getValue());
+        media.setImageURL(image_url.getValue());
+        media.setTitle(title.getText());
+        media.setValue(Integer.parseInt(value.getText()));
+        media.setPrice(Integer.parseInt(price.getText()));
+        media.setQuantity(quantity.getValue());
+    }
+
+    public void updateDVD() throws SQLException {
+        sellerHomeController.updateMedia(targetMedia);
+        sellerHomeController.updateDVD(targetMedia);
+    }
+
 }

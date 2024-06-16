@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.Objects;
 import java.util.logging.Logger;
 
+import controller.SellerHomeController;
 import entity.media.Book;
 import entity.media.CD;
 import entity.media.DVD;
@@ -57,10 +58,12 @@ public class MediaProductHandler extends FXMLScreenHandler {
 	private CDUpdateHandler cdUpdateHandler;
 	private DVDUpdateHandler dvdUpdateHandler;
 	private Media mediaHandler;
+	private SellerHomeController sellerHomeController;
 
 	public MediaProductHandler(String screenPath, Media media) throws IOException, SQLException {
 		super(screenPath);
 		// TODO Auto-generated constructor stub
+		sellerHomeController = new SellerHomeController();
 		this.media = media;
 		this.id = media.getId();
 		setMediaInfo();
@@ -96,27 +99,29 @@ public class MediaProductHandler extends FXMLScreenHandler {
 			} else if (this.media.getType().equals("CD")) {
 				try {
 					cdUpdateHandler = new CDUpdateHandler(new Stage(), Configs.SELLER_UPDATE_CD_PATH, this.media);
-					cdUpdateHandler.setScreenTitle("Book Update Dialog");
+					cdUpdateHandler.setScreenTitle("CD Update Dialog");
 					cdUpdateHandler.show();
-				} catch (IOException e) {
+				} catch (IOException | SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			} else {
 				try {
 					dvdUpdateHandler = new DVDUpdateHandler(new Stage(), Configs.SELLER_UPDATE_DVD_PATH, this.media);
-					dvdUpdateHandler.setScreenTitle("Book Update Dialog");
+					dvdUpdateHandler.setScreenTitle("DD Update Dialog");
 					dvdUpdateHandler.show();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
 					e.printStackTrace();
 				}
+
 			}
 		});
 
 		delete_btn.setOnMouseClicked(event -> {
 			try {
-				this.media.deleteMediaFieldById(this.id);
+				sellerHomeController.deleteMediaById(this.id);
 				if (Objects.equals(this.media.getType(), "BOOK")) {
 					new Book().deleteMediaFieldById(this.media.getId());
 					// mediaHandler.deleteMediaFieldById(this.media.getId());

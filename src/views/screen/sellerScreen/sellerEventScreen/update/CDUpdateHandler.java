@@ -3,134 +3,168 @@ package views.screen.sellerScreen.sellerEventScreen.update;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
+import controller.SellerHomeController;
+import entity.media.CD;
 import entity.media.Media;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import utils.Configs;
+import utils.SellerUtils;
+import utils.Utils;
 import views.screen.BaseScreenHandler;
-import views.screen.sellerScreen.sellerEventScreen.create.CommonInfoCreateHandler;
+import views.screen.popup.PopupScreen;
 
 public class CDUpdateHandler extends BaseScreenHandler implements Initializable {
 
-	@FXML
-	private ComboBox<String> category;
+    public static Logger LOGGER = Utils.getLogger(CDUpdateHandler.class.getName());
 
-	@FXML
-	private TextField author;
+    @FXML
+    private TextField artist;
 
-	@FXML
-	private TextField cover_type;
+    @FXML
+    private TextField recordLabel;
+    @FXML
+    private TextField title;
+    @FXML
+    private TextField price;
+    @FXML
+    private TextField value;
 
-	@FXML
-	private TextField publisher;
+    @FXML
+    private ComboBox<String> musicType;
 
-	@FXML
-	private DatePicker publish_date;
+    @FXML
+    private DatePicker releasedDate;
 
-	@FXML
-	private TextField number_pages;
+    @FXML
+    private Spinner<Integer> quantity;
 
-	@FXML
-	private TextField language;
-	
-	@FXML
-	private Button create;
-	
-	@FXML
-	private ComboBox<String> image_url;
-	
-	CommonInfoCreateHandler commonInfoCreateHandler;
+    @FXML
+    private Button update;
 
-	public CDUpdateHandler(Stage stage, String screenPath, Media media) throws IOException {
-		super(stage, screenPath);
-		// TODO Auto-generated constructor stub
-	}
+    @FXML
+    private ComboBox<String> image_url;
 
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		category.getItems().addAll(
-				"Horror",
-				"Science fiction",
-				"Western",
-				"Action",
-				"Drama",
-				"Comedy",
-				"Thriller",
-				"Romance"
-			);
-		
-		image_url.getItems().addAll(
-				"assets/images/book/book1.jpg",
-				"assets/images/book/book2.jpg",
-				"assets/images/book/book3.jpg",
-				"assets/images/book/book4.jpg",
-				"assets/images/book/book5.jpg",
-				"assets/images/book/book6.jpg",
-				"assets/images/book/book7.jpg",
-				"assets/images/book/book8.jpg",
-				"assets/images/book/book9.jpg",
-				"assets/images/book/book10.jpg",
-				"assets/images/book/book11.jpg",
-				"assets/images/book/book12.jpg"
-			);
-		
-		create.setOnMouseClicked(event -> {
-			if (checkFillInformation()) {
-				try {
-					commonInfoCreateHandler = new CommonInfoCreateHandler(this.stage, Configs.CREATE_COMMON_MEDIA_PATH, "BOOK", createBookQuery(), category.getValue(), image_url.getValue());
-					commonInfoCreateHandler.setScreenTitle("Common information for Book");
-					commonInfoCreateHandler.show();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	
-	public boolean checkFillInformation() {
-		String comboBoxText = category.getValue();
-		String authorText = author.getText();
-		String coverTypeText = cover_type.getText();
-		String publisherText = publisher.getText();
-		String publishDateText = publish_date.getValue().toString();
-		String numOfPages = number_pages.getText();
-		String languageText = language.getText();
-		String imageUrl = image_url.getValue();
-		return comboBoxText.length() > 0 && 
-				authorText.length() > 0 &&
-				imageUrl.length() > 0 &&
-				coverTypeText.length() > 0 && 
-				publisherText.length() > 0 && 
-				publishDateText.length() > 0 && 
-				numOfPages.length() > 0 && 
-				languageText.length() > 0;
-	}
-	
-	public String createBookQuery() throws SQLException {
-		String queryValues = "(" +
-				"'" + author.getText() + "'" + ", " +
-				"'" + cover_type.getText() + "'" + ", " +
-				"'" + publisher.getText() + "'" + ", " +
-				"'" + publish_date.getValue().toString() + "'" + ", " +
-				number_pages.getText() + ", " +
-				"'" + language.getText() + "'" + ", " +
-				"'" + category.getValue() + "'" + ")";
-		String sql = "INSERT INTO Book " 
-				+ "(author, coverType, publisher, publishDate, numOfPages, language, bookCategory)"
-				+ " VALUES "
-				+ queryValues + ";";
-		return sql;
-	}
+    private final Media media;
+
+    SellerHomeController sellerHomeController;
+    CD targetMedia;
+
+    public CDUpdateHandler(Stage stage, String screenPath, Media media) throws IOException, SQLException {
+        super(stage, screenPath);
+        sellerHomeController = new SellerHomeController();
+        this.media = media;
+        setMediaInfo();
+    }
+
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1) {
+        quantity.setValueFactory(
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 1)
+        );
+        musicType.getItems().addAll(
+                "Classical",
+                "Rock",
+                "Pop",
+                "Jazz",
+                "Hip Hop",
+                "Electronic",
+                "Country",
+                "Blues"
+        );
+
+        image_url.getItems().addAll(
+                "assets/images/cd/cd1.jpg",
+                "assets/images/cd/cd2.jpg",
+                "assets/images/cd/cd3.jpg",
+                "assets/images/cd/cd4.jpg",
+                "assets/images/cd/cd5.jpg",
+                "assets/images/cd/cd6.jpg",
+                "assets/images/cd/cd7.jpg",
+                "assets/images/cd/cd8.jpg",
+                "assets/images/cd/cd9.jpg",
+                "assets/images/cd/cd10.jpg",
+                "assets/images/cd/cd11.jpg",
+                "assets/images/cd/cd12.jpg"
+        );
+
+        update.setOnMouseClicked(event -> {
+            if (checkFillInformation()) {
+                try {
+                    updateMediaInformation(targetMedia);
+                    updateCD();
+                    PopupScreen.success("CD updated successfully!");
+                    this.stage.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+    }
+
+    public void setMediaInfo() throws SQLException {
+        LOGGER.info("Id of the media: " + this.media);
+        targetMedia = sellerHomeController.getCDById(media.getId());
+        artist.setText(targetMedia.getArtist());
+        recordLabel.setText(targetMedia.getRecordLabel());
+        musicType.setValue(targetMedia.getMusicType());
+        releasedDate.setValue(LOCAL_DATE(targetMedia.getReleasedDate().toString()));
+        quantity.getValueFactory().setValue(targetMedia.getQuantity());
+        image_url.setValue(targetMedia.getImageURL());
+        title.setText(targetMedia.getTitle());
+        value.setText("" + targetMedia.getValue());
+        price.setText("" + targetMedia.getPrice());
+        quantity.getValueFactory().setValue(targetMedia.getQuantity());
+    }
+
+    public LocalDate LOCAL_DATE(String dateString) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        return LocalDate.parse(dateString, formatter);
+    }
+
+    public boolean checkFillInformation() {
+        String artistText = artist.getText();
+        String recordLabelValue = recordLabel.getText();
+        String musicTypeText = musicType.getValue();
+        String releasedDateText = releasedDate.getValue().toString();
+        int quantityText = quantity.getValue();
+        return artistText != null && !artistText.isEmpty() &&
+                recordLabelValue != null && !recordLabelValue.isEmpty() &&
+                musicTypeText != null && !musicTypeText.isEmpty() &&
+                releasedDateText != null && !releasedDateText.isEmpty() &&
+                quantityText > 0;
+    }
+
+    public void updateMediaInformation(CD media) {
+
+        media.setArtist(artist.getText());
+        media.setRecordLabel(recordLabel.getText());
+        media.setMusicType(musicType.getValue());
+        media.setReleasedDate(SellerUtils.converToDate(releasedDate.getValue()));
+        media.setQuantity(quantity.getValue());
+        media.setImageURL(image_url.getValue());
+        media.setTitle(title.getText());
+        media.setValue(Integer.parseInt(value.getText()));
+        media.setPrice(Integer.parseInt(price.getText()));
+        media.setQuantity(quantity.getValue());
+    }
+
+    public void updateCD() throws SQLException {
+        sellerHomeController.updateMedia(targetMedia);
+        sellerHomeController.updateCD(targetMedia);
+    }
+
 }

@@ -20,21 +20,29 @@ public class CD extends Media {
     }
 
     public CD(int id, String title, String category, int price, int quantity, String type, String artist,
-            String recordLabel, String musicType, Date releasedDate) throws SQLException{
-        super(id, title, category, price, quantity, type);
+            String recordLabel, String musicType, Date releasedDate, int rushDelivery) throws SQLException{
+        super(id, title, category, price, quantity, type, rushDelivery);
         this.artist = artist;
         this.recordLabel = recordLabel;
         this.musicType = musicType;
         this.releasedDate = releasedDate;
     }
 
-    public CD(int id, String title, String category, int price, int value, int quantity, String type, float weight, String imageURL, String artist,
+    public CD(int id, String title, String category, int price, int value, int quantity, String type, String imageURL, String artist,
               String recordLabel, String musicType, Date releasedDate, int supportForRushDelivery) throws SQLException{
-        super(id, title, category, price, value, quantity, weight, type, imageURL, supportForRushDelivery);
+        super(id, title, category, price, value, quantity, type, imageURL, supportForRushDelivery);
         this.artist = artist;
         this.recordLabel = recordLabel;
         this.musicType = musicType;
         this.releasedDate = releasedDate;
+    }
+
+    public CD(String artist, String recordLabel, String musicType, Date releaseDate) throws SQLException {
+        super();
+        this.artist = artist;
+        this.recordLabel = recordLabel;
+        this.musicType = musicType;
+        this.releasedDate = releaseDate;
     }
 
     public String getArtist() {
@@ -72,57 +80,12 @@ public class CD extends Media {
         this.releasedDate = releasedDate;
         return this;
     }
-    
-    public Media getMediaById(int id) throws SQLException {
-        String sql = "SELECT * FROM "+
-                "CD " +
-                "JOIN Media " +
-                "ON Media.id = CD.id " +
-                "where Media.id = " + id + ";";
-        ResultSet res = stm.executeQuery(sql);
-        if(res.next()) {
-            // from media table
-            String title = res.getString("title");
-            String type = res.getString("type");
-            int price = res.getInt("price");
-            int value = res.getInt("value");
-            String category = res.getString("category");
-            int quantity = res.getInt("quantity");
-            float weight = res.getFloat("weight");
-            String imageUrl = res.getString("imageUrl");
-
-            // from CD table
-            String artist = res.getString("artist");
-            String recordLabel = res.getString("recordLabel");
-            String musicType = res.getString("musicType");
-            Date releasedDate = res.getDate("releasedDate");
-
-            return new CD(id, title, category, price, value, quantity, type, weight, imageUrl,
-                    artist, recordLabel, musicType, releasedDate, supportForRushDelivery);
-
-        } else {
-            throw new SQLException();
-        }
-    }
 
     @Override
     public List getAllMedia() {
         return null;
     }
 
-    public String createCDQuery(String artist, String recordLabel, String musicType, String releaseDate) throws SQLException {
-        String queryValues = "(" +
-                "placeForId" + ", " +
-                "'" + artist + "'" + ", " +
-                "'" + recordLabel + "'" + ", " +
-                "'" + musicType + "'" + ", " +
-                "'" + releaseDate + "'" + ")";
-        String sql = "INSERT INTO CD "
-                + "(id, artist, recordLabel, musicType, releasedDate)"
-                + " VALUES "
-                + queryValues + ";";
-        return sql;
-    }
 
     @Override
     public void deleteMediaFieldById(int id) throws SQLException {

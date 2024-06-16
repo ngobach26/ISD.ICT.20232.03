@@ -3,8 +3,12 @@ package views.screen.sellerScreen.sellerEventScreen.create;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.ResourceBundle;
 
+import entity.media.CD;
 import entity.media.DVD;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -90,7 +94,10 @@ public class DVDCreateHandler extends BaseScreenHandler implements Initializable
 		create.setOnMouseClicked(event -> {
 			if (checkFillInformation()) {
 				try {
-					commonInfoCreateHandler = new CommonInfoCreateHandler(this.stage, Configs.CREATE_COMMON_MEDIA_PATH, "DVD", createDVDQuery(), filmType.getValue(), image_url.getValue());
+					LocalDate dateToConvert = releasedDate.getValue();
+					Date date = Date.from(dateToConvert.atStartOfDay(ZoneId.systemDefault()).toInstant());
+					DVD newDVD = new DVD(discType.getValue(), director.getText(), Integer.parseInt(runtime.getText()), studio.getText(), subtitles.getText(), date, filmType.getValue());
+					commonInfoCreateHandler = new CommonInfoCreateHandler(this.stage, Configs.CREATE_COMMON_MEDIA_PATH, "DVD", newDVD, filmType.getValue(), image_url.getValue());
 					commonInfoCreateHandler.setScreenTitle("Common information for DVD");
 					commonInfoCreateHandler.show();
 				} catch (IOException e) {
@@ -121,11 +128,5 @@ public class DVDCreateHandler extends BaseScreenHandler implements Initializable
 				subtitlesText.length() > 0 && 
 				releasedDateText.length() > 0 && 
 				filmTypeText.length() > 0;
-	}
-	
-	public String createDVDQuery() throws SQLException {
-		DVD cdEntity = new DVD();
-		String createSql = cdEntity.createDVDQuery(discType.getValue(), director.getText(), Integer.parseInt(runtime.getText()), studio.getText(), subtitles.getText(), releasedDate.getValue().toString(), filmType.getValue());
-		return createSql;
 	}
 }

@@ -8,38 +8,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="228d128d-7d0d-4ca2-a953-3525d59eef86" name="Changes" comment="update">
-      <change afterPath="$PROJECT_DIR$/src/DAO/BookDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DAO/SQLiteBookDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/SellerUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/db/aimsTest.db" beforeDir="false" afterPath="$PROJECT_DIR$/assets/db/aimsTest.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/BookDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/MediaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/MediaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/SQLiteBookDAO.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DAO/SQLiteMediaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/SQLiteMediaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/SellerHomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/SellerHomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/media/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/media/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/media/CD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/media/CD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/media/DVD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/media/DVD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/media/LPRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/media/LPRecord.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entity/media/Media.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/media/Media.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/Configs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/Configs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/fxml/CommonMediaInfo.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/fxml/CommonMediaInfo.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/fxml/CreateMedia.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/fxml/CreateMedia.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/fxml/CreateMedia_Book.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/fxml/CreateMedia_Book.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/fxml/CreateMedia_CD.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/fxml/CreateMedia_CD.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/fxml/CreateMedia_DVD.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/fxml/CreateMedia_DVD.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/fxml/Media_Item.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/fxml/media_Item.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/fxml/OrderManagementAdmin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/fxml/order_management_admin.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/fxml/SellerHomeScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/fxml/sellerHomeScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/fxml/Update_Book.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/fxml/update_book.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/fxml/Update_CD.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/fxml/update_cd.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/fxml/Update_DVD.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/fxml/update_dvd.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/screen/ChooseRoleScreenHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/ChooseRoleScreenHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/screen/orderManagement/OrderManagementScreenHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/orderManagement/OrderManagementScreenHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/sellerScreen/ManageProductScreenHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/sellerScreen/ManageProductScreenHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/sellerScreen/MediaProductHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/sellerScreen/MediaProductHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/sellerScreen/sellerEventScreen/CreateMediaByType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/sellerScreen/sellerEventScreen/CreateMediaByType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/sellerScreen/sellerEventScreen/create/BookCreateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/sellerScreen/sellerEventScreen/create/BookCreateHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/sellerScreen/sellerEventScreen/create/CDCreateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/sellerScreen/sellerEventScreen/create/CDCreateHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/sellerScreen/sellerEventScreen/create/CommonInfoCreateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/sellerScreen/sellerEventScreen/create/CommonInfoCreateHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/sellerScreen/sellerEventScreen/create/DVDCreateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/sellerScreen/sellerEventScreen/create/DVDCreateHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/sellerScreen/sellerEventScreen/update/BookUpdateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/sellerScreen/sellerEventScreen/update/BookUpdateHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/sellerScreen/sellerEventScreen/update/CDUpdateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/sellerScreen/sellerEventScreen/update/CDUpdateHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/sellerScreen/sellerEventScreen/update/DVDUpdateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/sellerScreen/sellerEventScreen/update/DVDUpdateHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/seller/Seller.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/DAOService/MediaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/DAOService/MediaService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/fxml/CommonMediaInfo.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/fxml/common_media_info.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/fxml/update_book.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/fxml/update_book.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/fxml/update_cd.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/fxml/update_cd.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/fxml/update_dvd.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/fxml/update_dvd.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/sellerScreen/MediaProductHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/sellerScreen/MediaProductHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/sellerScreen/sellerEventScreen/create/BookCreateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/sellerScreen/sellerEventScreen/create/BookCreateHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/sellerScreen/sellerEventScreen/create/CDCreateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/sellerScreen/sellerEventScreen/create/CDCreateHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/sellerScreen/sellerEventScreen/create/CommonInfoCreateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/sellerScreen/sellerEventScreen/create/CommonInfoCreateHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/sellerScreen/sellerEventScreen/create/DVDCreateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/sellerScreen/sellerEventScreen/create/DVDCreateHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/sellerScreen/sellerEventScreen/update/BookUpdateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/sellerScreen/sellerEventScreen/update/BookUpdateHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/sellerScreen/sellerEventScreen/update/CDUpdateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/sellerScreen/sellerEventScreen/update/CDUpdateHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/sellerScreen/sellerEventScreen/update/DVDUpdateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/sellerScreen/sellerEventScreen/update/DVDUpdateHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,6 +160,9 @@
       <workItem from="1716738970674" duration="436000" />
       <workItem from="1717906615203" duration="857000" />
       <workItem from="1718099876197" duration="9856000" />
+      <workItem from="1718503474187" duration="4976000" />
+      <workItem from="1718512500999" duration="1995000" />
+      <workItem from="1718529431367" duration="11598000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1704544342831</created>
