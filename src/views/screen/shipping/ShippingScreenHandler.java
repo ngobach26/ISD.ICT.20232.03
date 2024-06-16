@@ -11,6 +11,7 @@ import common.exception.InvalidDeliveryInfoException;
 import entity.invoice.Invoice;
 import entity.order.DeliveryInformation;
 import entity.order.Order;
+import entity.user.User;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
@@ -43,9 +44,6 @@ public class ShippingScreenHandler extends BaseScreenHandler implements Initiali
     private TextField address;
 
     @FXML
-    private TextField instructions;
-
-    @FXML
     private Label labelTime;
 
     @FXML
@@ -65,23 +63,47 @@ public class ShippingScreenHandler extends BaseScreenHandler implements Initiali
 
     @FXML
     private ComboBox<String> province;
-
+    @FXML
+    private void goBack() {
+        if (getPreviousScreen() != null) {
+            getPreviousScreen().show();
+        } else {
+        }
+    }
     private final Order order;
+    private User loggedInUser;
 
     public ShippingScreenHandler(Stage stage, String screenPath, Order order) throws IOException {
         super(stage, screenPath);
         this.order = order;
+        System.out.println("Constructor user: " + this.loggedInUser);
+    }
+    public void setLoggedInUser(User loggedInUser) {
+        this.loggedInUser = loggedInUser;
+        initializeUserFields();
+    }
+
+    private void initializeUserFields() {
+        if (this.loggedInUser != null) {
+            name.setText(this.loggedInUser.getName());
+            phone.setText(this.loggedInUser.getPhone());
+            email.setText(this.loggedInUser.getEmail());
+            address.setText(this.loggedInUser.getAddress());
+        }
     }
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        final BooleanProperty firstTime = new SimpleBooleanProperty(true); // Variable to store the focus on stage load
+        System.out.println("initialize method called");
+
+        final BooleanProperty firstTime = new SimpleBooleanProperty(true);
         name.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue && firstTime.get()) {
-                content.requestFocus(); // Delegate the focus to container
-                firstTime.setValue(false); // Variable value changed for future references
+                content.requestFocus();
+                firstTime.setValue(false);
             }
         });
+
         this.province.getItems().addAll(Configs.PROVINCES);
         updateRushShippingView(false);
 
@@ -94,8 +116,7 @@ public class ShippingScreenHandler extends BaseScreenHandler implements Initiali
     }
 
     private void updateRushShippingView(boolean check) {
-        labelTime.setVisible(check);
-        labelRushShippingInstr.setVisible(check);
+        labelTime.setVisible(check);;
         time.setVisible(check);
         rushShippingInstr.setVisible(check);
     }
@@ -109,9 +130,10 @@ public class ShippingScreenHandler extends BaseScreenHandler implements Initiali
         messages.put("name", name.getText());
         messages.put("phone", phone.getText());
         messages.put("address", address.getText());
-        messages.put("instructions", instructions.getText());
         DeliveryInformation deliveryInformation = new DeliveryInformation();
         deliveryInformation.setDeliveryAddress(address.getText());
+        deliveryInformation.setRecipientName(name.getText());
+        deliveryInformation.setPhoneNumber(phone.getText());
         if(province.getValue() != null){
             messages.put("province", province.getValue());
             deliveryInformation.setProvinceCity(province.getValue());
@@ -145,7 +167,7 @@ public class ShippingScreenHandler extends BaseScreenHandler implements Initiali
 
         // create invoice screen
         Invoice invoice = getBController().createInvoice(deliveryInformation,order);
-        BaseScreenHandler InvoiceScreenHandler = new InvoiceScreenHandler(this.stage, Configs.INVOICE_SCREEN_PATH, invoice);
+        BaseScreenHandler InvoiceScreenHandler = new InvoiceScreenHandler(this.stage, Configs.INVOICE_SCREEN_PATH, invoice,loggedInUser);
         InvoiceScreenHandler.setPreviousScreen(this);
         InvoiceScreenHandler.setHomeScreenHandler(homeScreenHandler);
         InvoiceScreenHandler.setScreenTitle("Invoice Screen");
@@ -168,5 +190,4 @@ public class ShippingScreenHandler extends BaseScreenHandler implements Initiali
         notifyError(res);
         return false;
     }
-
 }

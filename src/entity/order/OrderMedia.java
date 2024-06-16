@@ -2,15 +2,19 @@ package entity.order;
 
 import db.AIMSDB;
 import entity.media.Media;
+import utils.Utils;
+import views.screen.cart.CartScreenHandler;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class OrderMedia {
 
+    private static final Logger LOGGER = Utils.getLogger(OrderMedia.class.getName());
     private Media media;
     private int price;
     private int quantity;

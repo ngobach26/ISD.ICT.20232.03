@@ -64,9 +64,6 @@ public class SQLiteCartDAO implements CartDAO{
             if (cartMediaStmt != null) {
                 cartMediaStmt.close();
             }
-            if (connection != null) {
-                connection.close();
-            }
         }
     }
 

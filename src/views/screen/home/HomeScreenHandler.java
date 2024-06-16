@@ -17,6 +17,7 @@ import controller.HomeController;
 //import controller.CartController;
 import entity.cart.Cart;
 import entity.media.Media;
+import entity.user.User;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -84,9 +85,32 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
     private SplitMenuButton splitMenuBtnSearch;
 
     private List homeItems;
-
+    private User loggedInUser;
     public HomeScreenHandler(Stage stage, String screenPath) throws IOException{
         super(stage, screenPath);
+        sign_out.setOnMouseClicked(mouseEvent -> {
+
+            try {
+                LoginManager loginManager = new LoginManager();
+                LoginManager.clearSavedLoginInfo();
+                LoginHandler loginHandler = new LoginHandler(this.stage, Configs.LOGIN);
+                loginHandler.setScreenTitle("Login");
+//				loginHandler.setImage();
+                loginHandler.show();
+//            	Stage stage1 = (Stage) searchText.getScene().getWindow();
+//    			Parent root = FXMLLoader.load(getClass().getResource(Configs.LOGIN));
+//    			stage1.setScene(new Scene(root));
+//    			stage1.setTitle("Login");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        });
+    }
+
+    public HomeScreenHandler(Stage stage, String screenPath,User loggedInUser) throws IOException{
+        super(stage, screenPath);
+        this.loggedInUser = loggedInUser;
         sign_out.setOnMouseClicked(mouseEvent -> {
            
             try {
@@ -94,12 +118,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
             	LoginManager.clearSavedLoginInfo();
             	LoginHandler loginHandler = new LoginHandler(this.stage, Configs.LOGIN);
 				loginHandler.setScreenTitle("Login");
-//				loginHandler.setImage();
 				loginHandler.show();
-//            	Stage stage1 = (Stage) searchText.getScene().getWindow();
-//    			Parent root = FXMLLoader.load(getClass().getResource(Configs.LOGIN));
-//    			stage1.setScene(new Scene(root));
-//    			stage1.setTitle("Login");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -161,7 +180,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
             CartScreenHandler cartScreen;
             try {
                 LOGGER.info("User clicked to view cart");
-                cartScreen = new CartScreenHandler(this.stage, Configs.CART_SCREEN_PATH);
+                cartScreen = new CartScreenHandler(this.stage, Configs.CART_SCREEN_PATH, this.loggedInUser);
                 cartScreen.setHomeScreenHandler(this);
                 cartScreen.setBController(new CartController());
                 cartScreen.requestToViewCart(this);

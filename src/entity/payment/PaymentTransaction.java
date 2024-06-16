@@ -90,7 +90,7 @@ public class PaymentTransaction {
     }
 
     public static void saveTransaction(PaymentTransaction transaction) throws SQLException {
-        String sql = "INSERT INTO `TRANSACTION` (orderID, time, date, transaction_content,transactionID) VALUES (?, ?, ?, ?,?)";
+        String sql = "INSERT INTO `PAYMENT_TRANSACTION` (orderID, time, date, transaction_content,transactionID) VALUES (?, ?, ?, ?,?)";
         Connection connection = AIMSDB.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
@@ -105,8 +105,9 @@ public class PaymentTransaction {
 
 
     public static PaymentTransaction getPaymentTransactionByOrderId(int orderId) throws SQLException {
-        String sql = "SELECT * FROM `Transaction` WHERE orderID = ?";
+        String sql = "SELECT * FROM `PAYMENT_TRANSACTION` WHERE orderID = ?";
         Connection connection = AIMSDB.getConnection();
+
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, orderId);
 

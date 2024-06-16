@@ -34,7 +34,7 @@ public class SQLiteUserDAO implements UserDAO {
                 stmt.setString(4, user.getPhone());
                 stmt.setString(5, user.getPassword());
                 stmt.setInt(6, user.getUserType());
-                stmt.setInt(6, 0);
+                stmt.setInt(7, 0);
 
                 int rowsAffected = stmt.executeUpdate();
                 LOGGER.info("User creation check: " + rowsAffected);

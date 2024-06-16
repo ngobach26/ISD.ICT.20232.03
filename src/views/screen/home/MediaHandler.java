@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 import common.exception.MediaNotAvailableException;
 import controller.HomeController;
 import entity.cart.Cart;
-import entity.cart.CartMedia;
 import entity.media.Media;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

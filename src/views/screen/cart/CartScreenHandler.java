@@ -13,6 +13,7 @@ import controller.PlaceOrderController;
 import controller.CartController;
 import entity.cart.CartMedia;
 import entity.order.Order;
+import entity.user.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -57,11 +58,14 @@ public class CartScreenHandler extends BaseScreenHandler {
 	@FXML
 	private Button btnCancelOrder;
 
+	private User loggedInUser;
+
 	private final CartController cartController;
 
-	public CartScreenHandler(Stage stage, String screenPath) throws IOException {
+	public CartScreenHandler(Stage stage, String screenPath, User loggedInUser) throws IOException {
 		super(stage, screenPath);
 		this.cartController = new CartController();
+		this.loggedInUser = loggedInUser;
 		// fix relative image path caused by fxml
 		File file = new File("assets/images/Logo.png");
 		Image im = new Image(file.toURI().toString());
@@ -143,6 +147,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 			Order order = placeOrderController.createOrder();
 
 			ShippingScreenHandler ShippingScreenHandler = new ShippingScreenHandler(this.stage, Configs.SHIPPING_SCREEN_PATH, order);
+			ShippingScreenHandler.setLoggedInUser(this.loggedInUser);
 			ShippingScreenHandler.setPreviousScreen(this);
 			ShippingScreenHandler.setHomeScreenHandler(homeScreenHandler);
 			ShippingScreenHandler.setScreenTitle("Shipping Screen");

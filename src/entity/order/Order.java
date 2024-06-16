@@ -2,7 +2,6 @@ package entity.order;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import db.AIMSDB;
@@ -13,7 +12,7 @@ public class Order {
     private int id;
 
     private double total;
-    private int shippingFees;
+    private double shippingFees;
 
     private int deliveryID;
     private List lstOrderMedia;
@@ -25,6 +24,13 @@ public class Order {
 
     public static ArrayList<Order> getOrdersByPage(int start, int pageSize, int state) {
         return null;
+    }
+
+    public Order(int id, double total, double shippingFees, int deliveryID) {
+        this.id = id;
+        this.total = total;
+        this.shippingFees = shippingFees;
+        this.deliveryID = deliveryID;
     }
 
     public static Order getOrderById(int id) {
@@ -67,11 +73,11 @@ public class Order {
         this.lstOrderMedia = lstOrderMedia;
     }
 
-    public void setShippingFees(int shippingFees) {
+    public void setShippingFees(double shippingFees) {
         this.shippingFees = shippingFees;
     }
 
-    public int getShippingFees() {
+    public double getShippingFees() {
         return shippingFees;
     }
 
@@ -83,105 +89,6 @@ public class Order {
     	}
     	return (int) (amount + (Configs.PERCENT_VAT / 100) * amount);
     }
-
-    public int createOrder(DeliveryInformation deliveryInformation, Order order) throws SQLException {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet generatedKeys = null;
-
-        try {
-            connection = AIMSDB.getConnection();
-            connection.setAutoCommit(false); // Begin transaction
-
-            // Insert delivery information
-            String insertDeliverySQL = "INSERT INTO Delivery_information (/* columns for delivery info */) VALUES (/* values for delivery info */)";
-            preparedStatement = connection.prepareStatement(insertDeliverySQL, Statement.RETURN_GENERATED_KEYS);
-
-            // Set the values for the delivery information here
-            // preparedStatement.setXXX(index, value);
-
-            int deliveryRowsAffected = preparedStatement.executeUpdate();
-            if (deliveryRowsAffected == 0) {
-                connection.rollback();
-                throw new SQLException("Failed to insert delivery information!");
-            }
-
-            generatedKeys = preparedStatement.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                int deliveryID = generatedKeys.getInt(1);
-
-                // Insert order
-                String insertOrderSQL = "INSERT INTO \"ORDER\" (total, total_shipping_fee, cartID, deliveryID) VALUES (?, ?, ?, ?)";
-                preparedStatement = connection.prepareStatement(insertOrderSQL, Statement.RETURN_GENERATED_KEYS);
-
-                double total = order.calculateTotalProductIncludeVAT();
-                double totalShippingFee = order.calculateShippingFees(deliveryInformation);
-                int cartID = 1;
-
-                preparedStatement.setDouble(1, total);
-                preparedStatement.setDouble(2, totalShippingFee);
-                preparedStatement.setInt(3, cartID);
-                preparedStatement.setInt(4, deliveryID);
-
-                int orderRowsAffected = preparedStatement.executeUpdate();
-                if (orderRowsAffected == 0) {
-                    connection.rollback();
-                    throw new SQLException("Failed to insert order!");
-                }
-
-                generatedKeys = preparedStatement.getGeneratedKeys();
-                if (generatedKeys.next()) {
-                    int orderID = generatedKeys.getInt(1);
-
-                    // Insert order media
-                    for (OrderMedia orderMedia : order.getlstOrderMedia()) {
-                        OrderMedia.createOrderMedia(orderMedia, orderID);
-                    }
-
-                    connection.commit(); // Commit transaction
-                    System.out.println("Order & OrderMedia added successfully!");
-                    return orderID;
-                }
-            }
-
-            connection.rollback();
-            throw new SQLException("Failed to create order!");
-        } catch (SQLException e) {
-            if (connection != null) {
-                try {
-                    connection.rollback();
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
-            }
-            throw e;
-        } finally {
-            if (generatedKeys != null) {
-                try {
-                    generatedKeys.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (preparedStatement != null) {
-                try {
-                    preparedStatement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (connection != null) {
-                try {
-                    connection.setAutoCommit(true);
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-
     public static void acceptOrderById(int orderId) throws SQLException {
         Statement stm = AIMSDB.getConnection().createStatement();
         stm.executeUpdate("UPDATE `Order` SET" + " state = " + 1
@@ -229,15 +136,12 @@ public class Order {
         }
 
         double baseCost = 0;
-        double baseWeight = 0;
         double additionalCostPerHalfKg = 0;
 
         if (deliveryInformation.isUrban()) {
-            baseCost = 18000;
-            baseWeight = 3;
+            baseCost = 10000;
         } else {
-            baseCost = 25000;
-            baseWeight = 0.5;
+            baseCost = 15000;
         }
         additionalCostPerHalfKg = 2500;
 
@@ -247,11 +151,8 @@ public class Order {
 
         double regularShippingCost = 0;
 
-        if (getMaxWeight() <= baseWeight) {
-            regularShippingCost = baseCost;
-        } else {
-            regularShippingCost = baseCost + Math.ceil((getMaxWeight() - baseWeight) * 2) * additionalCostPerHalfKg;
-        }
+        regularShippingCost = baseCost;
+
         setShippingFees((int) (rushShippingCost + regularShippingCost));
         return (int) (rushShippingCost + regularShippingCost);
     }

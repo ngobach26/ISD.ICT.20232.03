@@ -4,12 +4,15 @@ import DAO.MediaDAO;
 import DAO.OrderDAO;
 import entity.order.DeliveryInformation;
 import entity.order.Order;
+import entity.user.User;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class OrderService {
     private static OrderService instance;
     private final OrderDAO orderDAO;
+    private User user;
 
     public OrderService() throws SQLException {
         this.orderDAO = DAOFactory.getOrderDAO();
@@ -28,8 +31,8 @@ public class OrderService {
         }
         return instance;
     }
-    public int createOrder(DeliveryInformation deliveryInformation,Order order) throws SQLException {
-        return orderDAO.createOrder(deliveryInformation,order);
+    public int createOrder(DeliveryInformation deliveryInformation,Order order,User user) throws SQLException {
+        return orderDAO.createOrder(deliveryInformation,order,user);
     }
 
 }

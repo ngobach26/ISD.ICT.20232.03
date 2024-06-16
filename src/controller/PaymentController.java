@@ -7,6 +7,7 @@ import entity.cart.Cart;
 import entity.order.DeliveryInformation;
 import entity.order.Order;
 import entity.payment.PaymentTransaction;
+import entity.user.User;
 import services.DAOService.OrderService;
 import services.vnpay.IPaymentSubsystem;
 import services.vnpay.PaymentSubsystem;
@@ -37,8 +38,8 @@ public class PaymentController extends BaseController {
     public String generateURL(int amount, String content) throws IOException {
         return vnPay.generateURL(amount, content);
     }
-    public int createOrder(DeliveryInformation deliveryInformation,Order order) throws SQLException {
-        return orderService.createOrder(deliveryInformation,order);
+    public int createOrder(DeliveryInformation deliveryInformation, Order order, User user) throws SQLException {
+        return orderService.createOrder(deliveryInformation,order,user);
     }
 
     public void emptyCart(){

@@ -23,9 +23,7 @@ import services.user.LoginManager;
 import utils.Configs;
 import utils.Utils;
 import views.screen.BaseScreenHandler;
-import views.screen.ChooseRoleScreenHandler;
 import views.screen.auth.LoginHandler;
-import views.screen.orderManagement.OrderManagementScreenHandler;
 import views.screen.sellerScreen.sellerEventScreen.CreateMediaByType;
 
 public class ManageProductScreenHandler extends BaseScreenHandler implements Initializable {

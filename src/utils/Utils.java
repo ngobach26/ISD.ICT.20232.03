@@ -1,9 +1,5 @@
 package utils;
 
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,7 +16,7 @@ public class Utils {
 		System.setProperty("java.util.logging.SimpleFormatter.format", "[%4$-4s] [%1$tF %1$tT] [%2$-7s] %5$s %n");
 	}
 
-	public static String getCurrencyFormat(int num) {
+	public static String getCurrencyFormat(double num) {
 		Locale vietname = new Locale("vi", "VN");
 		NumberFormat defaultFormat = NumberFormat.getCurrencyInstance(vietname);
 		return defaultFormat.format(num);
