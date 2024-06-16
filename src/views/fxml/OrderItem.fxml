@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="orderItem" prefHeight="112.0" prefWidth="926.0" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.screen.orderManagement.ItemOrderScreenHandler">
+<AnchorPane fx:id="orderItem" prefHeight="112.0" prefWidth="926.0" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox layoutX="155.0" prefHeight="110.0" prefWidth="822.0">
          <children>

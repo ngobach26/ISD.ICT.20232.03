@@ -34,9 +34,6 @@ public class CommonInfoCreateHandler extends BaseScreenHandler implements Initia
 
 	@FXML
 	private TextField price;
-	
-	@FXML
-	private TextField weight;
 
 	@FXML
 	private Spinner<Integer> quantity;
@@ -100,14 +97,12 @@ public class CommonInfoCreateHandler extends BaseScreenHandler implements Initia
 		String valueText = value.getText();
 		String priceText = price.getText();
 		String quantityText = quantity.getValue().toString();
-		String weightMedia = weight.getText();
 		return titleText.length() > 0 &&
 				priceText.length() > 0 && 
 				valueText.length() > 0 && 
 				Integer.parseInt(value.getText()) * 0.3 <= Integer.parseInt(price.getText()) && 
 				Integer.parseInt(value.getText()) * 1.5 >= Integer.parseInt(price.getText()) &&
-				quantityText.length() > 0 && quantity.getValue() > 0 && 
-				weightMedia.length() > 0 && Integer.parseInt(weightMedia) > 0;
+				quantityText.length() > 0 && quantity.getValue() > 0;
 	}
 
 	public String createMediaQuery() throws SQLException {
@@ -118,10 +113,9 @@ public class CommonInfoCreateHandler extends BaseScreenHandler implements Initia
 				quantity.getValue() + ", " +
 				"'" + type + "'" + ", " +
 				"'" + Integer.parseInt(value.getText()) + "'" + ", " +
-				"'" + this.imageUrl + "'" + ", " +
-				weight.getText() + ")";
+				"'" + this.imageUrl + "'" + ", ";
 		String sql = "INSERT INTO Media " 
-				+ "(title, category, price, quantity, type, value, imageUrl, weight)"
+				+ "(title, category, price, quantity, type, value, imageUrl)"
 				+ " VALUES "
 				+ queryValues + ";";
 //		LOGGER.info("Errors occured: " + sql);

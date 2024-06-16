@@ -108,7 +108,7 @@ public class MediaProductHandler extends FXMLScreenHandler {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			} else if (this.media.getType().equals("CD")) {
+			} else if (this.media.getType().equals("DVD")) {
 				try {
 					dvdUpdateHandler = new DVDUpdateHandler(new Stage(), Configs.SELLER_UPDATE_DVD_PATH, this.media);
 					dvdUpdateHandler.setScreenTitle("DVD Update Dialog");
@@ -139,14 +139,17 @@ public class MediaProductHandler extends FXMLScreenHandler {
 		delete_btn.setOnMouseClicked(event -> {
 			try {
 				this.media.deleteMediaFieldById(this.id);
-				if (Objects.equals(this.media.getType(), "BOOK")) {
+				if (Objects.equals(this.media.getType(), "Book")) {
 					new Book().deleteMediaFieldById(this.media.getId());
 					// mediaHandler.deleteMediaFieldById(this.media.getId());
 				} else if (Objects.equals(this.media.getType(), "CD")) {
 					new CD().deleteMediaFieldById(this.media.getId());
 					// mediaHandler.deleteMediaFieldById(this.media.getId());
-				} else {
+				} else if (Objects.equals(this.media.getType(), "DVD")) {
 					new DVD().deleteMediaFieldById(this.media.getId());
+					// mediaHandler.deleteMediaFieldById(this.media.getId());
+				} else {
+					new LPRecord().deleteMediaFieldById(this.media.getId());
 					// mediaHandler.deleteMediaFieldById(this.media.getId());
 				}
 				PopupScreen.success("Delete success");

@@ -76,7 +76,7 @@ public class LPRecordCreateHandler extends BaseScreenHandler implements Initiali
 			if (checkFillInformation()) {
 				try {
 					commonInfoCreateHandler = new CommonInfoCreateHandler(this.stage, Configs.CREATE_COMMON_MEDIA_PATH, "CD", createLPRecordQuery(), genre.getValue(), image_url.getValue());
-					commonInfoCreateHandler.setScreenTitle("Common information for CD");
+					commonInfoCreateHandler.setScreenTitle("Common information for Records");
 					commonInfoCreateHandler.show();
 				} catch (IOException e) {
 					// TODO Auto-generated catch blockS

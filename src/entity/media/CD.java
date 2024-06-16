@@ -30,7 +30,7 @@ public class CD extends Media {
 
     public CD(int id, String title, String category, int price, int value, int quantity, String type, float weight, String imageURL, String artist,
               String recordLabel, String musicType, Date releasedDate, int supportForRushDelivery) throws SQLException{
-        super(id, title, category, price, value, quantity, weight, type, imageURL, supportForRushDelivery);
+        super(id, title, category, price, value, quantity, type, imageURL, supportForRushDelivery);
         this.artist = artist;
         this.recordLabel = recordLabel;
         this.musicType = musicType;

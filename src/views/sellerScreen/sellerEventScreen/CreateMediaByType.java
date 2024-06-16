@@ -79,11 +79,20 @@ public class CreateMediaByType extends BaseScreenHandler implements Initializabl
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			} else {
+			} else if (dvd.isSelected()){
 				try {
 					createDVDItemHandler = new DVDCreateHandler(this.stage, Configs.SELLER_CU_DVD_VIEW_PATH);
 					createDVDItemHandler.setScreenTitle("DVD Media Screen");
 					createDVDItemHandler.show();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else {
+				try {
+					createLPRecordItemHandler = new LPRecordCreateHandler(this.stage, Configs.SELLER_CU_LPRECORD_VIEW_PATH);
+					createLPRecordItemHandler.setScreenTitle("Record Media Screen");
+					createLPRecordItemHandler.show();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

@@ -54,9 +54,6 @@ public class CDUpdateHandler extends BaseScreenHandler implements Initializable 
 	private TextField price;
 
 	@FXML
-	private TextField weight;
-
-	@FXML
 	private Spinner<Integer> quantity;
 	
 	@FXML 
@@ -131,7 +128,6 @@ public class CDUpdateHandler extends BaseScreenHandler implements Initializable 
 		title.setText(targetMedia.getTitle());
 		value.setText("" + targetMedia.getValue());
 		price.setText("" + targetMedia.getPrice());
-		weight.setText("" + targetMedia.getWeight());
 		quantity.getValueFactory().setValue(targetMedia.getQuantity());
 		image_url.setValue(targetMedia.getImageURL());
 	}
@@ -151,7 +147,6 @@ public class CDUpdateHandler extends BaseScreenHandler implements Initializable 
 		String titleText = title.getText();
 		String valueText = value.getText();
 		String priceText = price.getText();
-		String weightText = weight.getText();
 		int quantityText = quantity.getValue();
 		return musicTypeText.length() > 0 &&
 				artistText.length() > 0 &&
@@ -161,7 +156,6 @@ public class CDUpdateHandler extends BaseScreenHandler implements Initializable 
 				titleText.length() > 0 &&
 				valueText.length() > 0 &&
 				priceText.length() > 0 &&
-				weightText.length() > 0 &&
 				quantityText > 0;
 	}
 
@@ -183,7 +177,6 @@ public class CDUpdateHandler extends BaseScreenHandler implements Initializable 
 				+ "price='" + price.getText() + "',"
 				+ "value='" + value.getText() + "',"
 				+ "quantity=" + quantity.getValue() + ","
-				+ "weight='" + weight.getText() + "',"
 				+ "imageURL='" + image_url.getValue() + "'"
 				+ " WHERE "
 				+ "id = " + this.media.getId() + ";";

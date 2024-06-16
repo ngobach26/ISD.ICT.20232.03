@@ -38,7 +38,7 @@ public class DVD extends Media {
 
     public DVD(int id, String title, String category, int price, int value, int quantity, String type, float weight, String imageURL, String discType,
                String director, int runtime, String studio, String language, String subtitle, Date releasedDate, String filmType, int supportForRushDelivery) throws SQLException{
-        super(id, title, category, price, value, quantity, weight, type, imageURL, supportForRushDelivery);
+        super(id, title, category, price, value, quantity, type, imageURL, supportForRushDelivery);
         this.discType = discType;
         this.director = director;
         this.runtime = runtime;

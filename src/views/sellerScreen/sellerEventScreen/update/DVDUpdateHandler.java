@@ -67,9 +67,6 @@ public class DVDUpdateHandler extends BaseScreenHandler implements Initializable
 	private TextField price;
 
 	@FXML
-	private TextField weight;
-
-	@FXML
 	private Spinner<Integer> quantity;
 
 	
@@ -152,7 +149,6 @@ public class DVDUpdateHandler extends BaseScreenHandler implements Initializable
 		title.setText(targetMedia.getTitle());
 		value.setText("" + targetMedia.getValue());
 		price.setText("" + targetMedia.getPrice());
-		weight.setText("" + targetMedia.getWeight());
 		quantity.getValueFactory().setValue(targetMedia.getQuantity());
 		image_url.setValue(targetMedia.getImageURL());
 	}
@@ -173,6 +169,10 @@ public class DVDUpdateHandler extends BaseScreenHandler implements Initializable
 		String releasedDateText = releasedDate.getValue().toString();
 		String filmTypeText = filmType.getValue();
 		String imageUrl = image_url.getValue();
+		String titleText = title.getText();
+		String valueText = value.getText();
+		String priceText = price.getText();
+		int quantityText = quantity.getValue();
 		return discTypeText.length() > 0 && 
 				directorText.length() > 0 &&
 				imageUrl.length() > 0 &&
@@ -181,7 +181,11 @@ public class DVDUpdateHandler extends BaseScreenHandler implements Initializable
 				releasedDateText.length() > 0 && 
 				subtitleText.length() > 0 && 
 				filmTypeText.length() > 0 &&
-				languageText.length() > 0;
+				languageText.length() > 0 &&
+				titleText.length() > 0 &&
+				valueText.length() > 0 &&
+				priceText.length() > 0 &&
+				quantityText > 0;
 	}
 	
 	public void updateDVDQuery() throws SQLException {
@@ -206,7 +210,6 @@ public class DVDUpdateHandler extends BaseScreenHandler implements Initializable
 				+ "price='" + price.getText() + "',"
 				+ "value='" + value.getText() + "',"
 				+ "quantity=" + quantity.getValue() + ","
-				+ "weight='" + weight.getText() + "',"
 				+ "imageURL='" + image_url.getValue() + "'"
 				+ " WHERE "
 				+ "id = " + this.media.getId() + ";";

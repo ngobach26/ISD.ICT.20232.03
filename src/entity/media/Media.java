@@ -24,7 +24,6 @@ public class Media {
     protected int value; // the real price of product (eg: 450)
     protected int price; // the price which will be displayed on browser (eg: 500)
     protected int quantity;
-    protected float weight;
     protected String type;
     protected String imageURL;
     protected int supportForRushDelivery;
@@ -44,14 +43,13 @@ public class Media {
     }
 
     public Media (int id, String title, String category, int price, int value,
-                  int quantity, float weight, String type, String imageURL, int supportForRushDelivery) throws SQLException{
+                  int quantity, String type, String imageURL, int supportForRushDelivery) throws SQLException{
         this.id = id;
         this.title = title;
         this.category = category;
         this.price = price;
         this.value = value;
         this.quantity = quantity;
-        this.weight = weight;
         this.type = type;
         this.imageURL = imageURL;
         this.supportForRushDelivery = supportForRushDelivery;
@@ -91,15 +89,6 @@ public class Media {
 
     public Media setPrice(int price) {
         this.price = price;
-        return this;
-    }
-
-    public float getWeight() {
-        return this.weight;
-    }
-
-    public Media setWeight(float weight) {
-        this.weight = weight;
         return this;
     }
 
@@ -151,8 +140,7 @@ public class Media {
                     .setCategory(res.getString("category"))
                     .setMediaURL(res.getString("imageUrl"))
                     .setPrice(res.getInt("price"))
-                    .setType(res.getString("type"))
-                    .setWeight(res.getFloat("weight"));
+                    .setType(res.getString("type"));
             medium.add(media);
         }
         return medium;

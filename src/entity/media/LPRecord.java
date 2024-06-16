@@ -25,7 +25,7 @@ public class LPRecord extends Media {
     }
 
     public LPRecord(int id, String title, String category, int price, int value, int quantity, float weight, String type, String imageURL, int supportForRushDelivery, String artist, String recordLabel, String genre, Date releasedDate) throws SQLException {
-        super(id, title, category, price, value, quantity, weight, type, imageURL, supportForRushDelivery);
+        super(id, title, category, price, value, quantity, type, imageURL, supportForRushDelivery);
         this.artist = artist;
         this.recordLabel = recordLabel;
         this.genre = genre;

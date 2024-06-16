@@ -63,9 +63,6 @@ public class BookUpdateHandler extends BaseScreenHandler implements Initializabl
 	private TextField price;
 
 	@FXML
-	private TextField weight;
-
-	@FXML
 	private Spinner<Integer> quantity;
 
 	@FXML
@@ -143,7 +140,6 @@ public class BookUpdateHandler extends BaseScreenHandler implements Initializabl
 		title.setText(targetMedia.getTitle());
 		value.setText("" + targetMedia.getValue());
 		price.setText("" + targetMedia.getPrice());
-		weight.setText("" + targetMedia.getWeight());
 		quantity.getValueFactory().setValue(targetMedia.getQuantity());
 		image_url.setValue(targetMedia.getImageURL());
 	}
@@ -166,7 +162,6 @@ public class BookUpdateHandler extends BaseScreenHandler implements Initializabl
 		String titleText = title.getText();
 		String valueText = value.getText();
 		String priceText = price.getText();
-		String weightText = weight.getText();
 		int quantityText = quantity.getValue();
 		return comboBoxText.length() > 0 &&
 				authorText.length() > 0 &&
@@ -179,7 +174,6 @@ public class BookUpdateHandler extends BaseScreenHandler implements Initializabl
 				titleText.length() > 0 &&
 				valueText.length() > 0 &&
 				priceText.length() > 0 &&
-				weightText.length() > 0 &&
 				quantityText > 0;
 	}
 
@@ -205,7 +199,6 @@ public class BookUpdateHandler extends BaseScreenHandler implements Initializabl
 				+ "price='" + price.getText() + "',"
 				+ "value='" + value.getText() + "',"
 				+ "quantity=" + quantity.getValue() + ","
-				+ "weight='" + weight.getText() + "',"
 				+ "imageURL='" + image_url.getValue() + "'"
 				+ " WHERE "
 				+ "id = " + this.media.getId() + ";";

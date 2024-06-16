@@ -50,6 +50,7 @@ public class Configs {
 	public static final String ITEM_ORDER_PATH = "/views/fxml/OrderItem.fxml";
 	public static final String EDIT_USER_POPUP_PATH = "/views/fxml/edit_user_popup.fxml";
 	public static final String ADMIN_PATH = "/views/fxml/admin.fxml";
+	public static final String SELLER_PATH = "/views/fxml/SellerHomeScreen.fxml";
 	//	FONT
 	public static Font REGULAR_FONT = Font.font("Segoe UI", FontWeight.NORMAL, FontPosture.REGULAR, 24);
 
