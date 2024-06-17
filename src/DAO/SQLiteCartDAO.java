@@ -67,26 +67,6 @@ public class SQLiteCartDAO implements CartDAO {
                 }
             }
             LOGGER.severe("Failed to save cart: " + e.getMessage());
-        } finally {
-            try {
-                if (cartStmt != null) {
-                    cartStmt.close();
-                }
-            } catch (SQLException e) {
-                LOGGER.severe("Error closing cartStmt: " + e.getMessage());
-            }
-            try {
-                if (cartMediaStmt != null) {
-                    cartMediaStmt.close();
-                }
-            } catch (SQLException e) {
-                LOGGER.severe("Error closing cartMediaStmt: " + e.getMessage());
-            }
-            try {
-                connection.setAutoCommit(true);
-            } catch (SQLException e) {
-                LOGGER.severe("Error resetting auto-commit: " + e.getMessage());
-            }
         }
     }
 
@@ -102,21 +82,6 @@ public class SQLiteCartDAO implements CartDAO {
             }
         } catch (SQLException e) {
             LOGGER.severe("Error fetching cart ID: " + e.getMessage());
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-            } catch (SQLException e) {
-                LOGGER.severe("Error closing ResultSet: " + e.getMessage());
-            }
-            try {
-                if (stmt != null) {
-                    stmt.close();
-                }
-            } catch (SQLException e) {
-                LOGGER.severe("Error closing PreparedStatement: " + e.getMessage());
-            }
         }
         return -1; // No cart found
     }
@@ -124,19 +89,10 @@ public class SQLiteCartDAO implements CartDAO {
     private int getCartCount() throws SQLException {
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        try {
-            stmt = connection.prepareStatement(GET_CART_COUNT);
-            rs = stmt.executeQuery();
-            if (rs.next()) {
-                return rs.getInt("cartCount");
-            }
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (stmt != null) {
-                stmt.close();
-            }
+        stmt = connection.prepareStatement(GET_CART_COUNT);
+        rs = stmt.executeQuery();
+        if (rs.next()) {
+            return rs.getInt("cartCount");
         }
         return 0; // Default to 0 if no carts found
     }
@@ -161,21 +117,6 @@ public class SQLiteCartDAO implements CartDAO {
             }
         } catch (SQLException e) {
             LOGGER.severe("Error fetching cart media items: " + e.getMessage());
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-            } catch (SQLException e) {
-                LOGGER.severe("Error closing ResultSet: " + e.getMessage());
-            }
-            try {
-                if (stmt != null) {
-                    stmt.close();
-                }
-            } catch (SQLException e) {
-                LOGGER.severe("Error closing PreparedStatement: " + e.getMessage());
-            }
         }
         return cartMediaList;
     }
@@ -207,14 +148,6 @@ public class SQLiteCartDAO implements CartDAO {
             }
         } catch (SQLException e) {
             LOGGER.severe("Error adding media to cart: " + e.getMessage());
-        } finally {
-            try {
-                if (stmt != null) {
-                    stmt.close();
-                }
-            } catch (SQLException e) {
-                LOGGER.severe("Error closing PreparedStatement: " + e.getMessage());
-            }
         }
     }
 
@@ -230,14 +163,6 @@ public class SQLiteCartDAO implements CartDAO {
             }
         } catch (SQLException e) {
             LOGGER.severe("Error removing media from cart: " + e.getMessage());
-        } finally {
-            try {
-                if (stmt != null) {
-                    stmt.close();
-                }
-            } catch (SQLException e) {
-                LOGGER.severe("Error closing PreparedStatement: " + e.getMessage());
-            }
         }
     }
 
@@ -257,21 +182,6 @@ public class SQLiteCartDAO implements CartDAO {
             }
         } catch (SQLException e) {
             LOGGER.severe("Error fetching cart media: " + e.getMessage());
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-            } catch (SQLException e) {
-                LOGGER.severe("Error closing ResultSet: " + e.getMessage());
-            }
-            try {
-                if (stmt != null) {
-                    stmt.close();
-                }
-            } catch (SQLException e) {
-                LOGGER.severe("Error closing PreparedStatement: " + e.getMessage());
-            }
         }
         return null;
     }
@@ -291,14 +201,6 @@ public class SQLiteCartDAO implements CartDAO {
             }
         } catch (SQLException e) {
             LOGGER.severe("Error deleting CART_MEDIA for user: " + e.getMessage());
-        } finally {
-            try {
-                if (stmt != null) {
-                    stmt.close();
-                }
-            } catch (SQLException e) {
-                LOGGER.severe("Error closing PreparedStatement: " + e.getMessage());
-            }
         }
     }
 }

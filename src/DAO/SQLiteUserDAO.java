@@ -41,14 +41,6 @@ public class SQLiteUserDAO implements UserDAO {
                 userCreated = rowsAffected > 0;
             } catch (SQLException e) {
                 LOGGER.severe("Error creating user: " + e.getMessage());
-            } finally {
-                try {
-                    if (stmt != null) {
-                        stmt.close();
-                    }
-                } catch (SQLException e) {
-                    LOGGER.severe("Error closing resources: " + e.getMessage());
-                }
             }
         }
         return userCreated;
@@ -76,17 +68,8 @@ public class SQLiteUserDAO implements UserDAO {
                 User user = new User(id, name, email, address, phone, userType, password,status);
                 users.add(user);
             }
-        } finally {
-            try {
-                if (resultSet != null) {
-                    resultSet.close();
-                }
-                if (statement != null) {
-                    statement.close();
-                }
-            } catch (SQLException e) {
-                LOGGER.severe("Error closing resources: " + e.getMessage());
-            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
         return users;
     }
@@ -95,28 +78,18 @@ public class SQLiteUserDAO implements UserDAO {
     public void updateUser(User user) throws SQLException {
         String sql = "UPDATE User SET name = ?, email = ?, address = ?, phone = ?, user_type = ?, password = ?, status = ? WHERE id = ?";
         PreparedStatement statement = null;
-        try {
-            statement = connection.prepareStatement(sql);
-            statement.setString(1, user.getName());
-            statement.setString(2, user.getEmail());
-            statement.setString(3, user.getAddress());
-            statement.setString(4, user.getPhone());
-            statement.setInt(5, user.getUserType());
-            statement.setString(6, user.getPassword());
-            statement.setInt(7, user.getStatus());
-            statement.setInt(8, user.getId());
+        statement = connection.prepareStatement(sql);
+        statement.setString(1, user.getName());
+        statement.setString(2, user.getEmail());
+        statement.setString(3, user.getAddress());
+        statement.setString(4, user.getPhone());
+        statement.setInt(5, user.getUserType());
+        statement.setString(6, user.getPassword());
+        statement.setInt(7, user.getStatus());
+        statement.setInt(8, user.getId());
 
-            statement.executeUpdate();
-            LOGGER.info("User updated successfully: " + user.getId());
-        } finally {
-            try {
-                if (statement != null) {
-                    statement.close();
-                }
-            } catch (SQLException e) {
-                LOGGER.severe("Error closing resources: " + e.getMessage());
-            }
-        }
+        statement.executeUpdate();
+        LOGGER.info("User updated successfully: " + user.getId());
     }
 
     public User getUserByEmail(String email) {
@@ -140,17 +113,6 @@ public class SQLiteUserDAO implements UserDAO {
             }
         } catch (SQLException e) {
             LOGGER.severe("Error retrieving user by email: " + e.getMessage());
-        } finally {
-            try {
-                if (res != null) {
-                    res.close();
-                }
-                if (stmt != null) {
-                    stmt.close();
-                }
-            } catch (SQLException e) {
-                LOGGER.severe("Error closing resources: " + e.getMessage());
-            }
         }
         return user;
     }
@@ -163,18 +125,8 @@ public class SQLiteUserDAO implements UserDAO {
     public void deleteUser(int userId) throws SQLException {
         String sql = "DELETE FROM User WHERE id = ?";
         PreparedStatement statement = null;
-        try {
-            statement = connection.prepareStatement(sql);
-            statement.setInt(1, userId);
-            statement.executeUpdate();
-        } finally {
-            try {
-                if (statement != null) {
-                    statement.close();
-                }
-            } catch (SQLException e) {
-                LOGGER.severe("Error closing resources: " + e.getMessage());
-            }
-        }
+        statement = connection.prepareStatement(sql);
+        statement.setInt(1, userId);
+        statement.executeUpdate();
     }
 }

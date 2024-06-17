@@ -34,7 +34,12 @@ public class PaymentController extends BaseController {
 
     public PaymentTransaction makePayment(Map<String, String> res) throws IOException, SQLException {
         PaymentTransaction transaction = vnPay.getPaymentTransaction(res);
-        PaymentTransaction.saveTransaction(transaction);
+        try {
+            PaymentTransaction.saveTransaction(transaction);
+        } catch (SQLException e) {
+            System.err.println("Error saving transaction: " + e.getMessage());
+            e.printStackTrace();
+        }
         return transaction;
     }
 

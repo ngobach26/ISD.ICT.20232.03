@@ -85,7 +85,7 @@ VALUES
 (10.99, '2024-06-13 12:00:00', 'Call on arrival', 5),
 (10.99, '2024-06-13 13:00:00', 'Ring doorbell', 7);
 
-INSERT INTO 'TRANSACTION' (transactionID, time, date, transaction_content, orderID)
+INSERT INTO 'PAYMENT_TRANSACTION' (transactionID, time, date, transaction_content, orderID)
 VALUES
 (1, '12:00:00', '2024-06-13', 'Purchase of books', 1),
 (2, '13:00:00', '2024-06-13', 'Purchase of DVD', 2),

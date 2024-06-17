@@ -57,29 +57,32 @@ public class PlaceOrderController extends BaseController{
     }
 
     public String validateDeliveryInfo(HashMap<String, String> info) {
-        if(!validateName(info.get("name"))){
+        if (!validateName(info.get("name"))) {
             return "Invalid name";
         }
-        if(!validatePhoneNumber(info.get("phone"))){
+        if (!validatePhoneNumber(info.get("phone"))) {
             return "Invalid phone number";
         }
-        if(!validateAddress(info.get("address"))){
+        if (!validateAddress(info.get("address"))) {
             return "Invalid address";
         }
-        if(!validateEmail(info.get("email"))){
+        if (!validateEmail(info.get("email"))) {
             return "Invalid email";
         }
 
-        if(info.get("province").isEmpty() || info.get("province") == null){
+        String province = info.get("province");
+        if (province == null || province.isEmpty()) {
             return "Empty province";
         }
 
-        if(info.get("isRushShipping").equals("Yes")){
-            if(!validateTime(info.get("time"))){
+        if ("Yes".equals(info.get("isRushShipping"))) {
+            if (!validateTime(info.get("time"))) {
                 return "Invalid time";
             }
-            String province = info.get("province").toLowerCase();
-            if(!province.contains("hà nội") && !province.contains("hồ chí minh")) return "Address not support rush shipping";
+            String lowerCaseProvince = province.toLowerCase();
+            if (!lowerCaseProvince.contains("hà nội") && !lowerCaseProvince.contains("hồ chí minh")) {
+                return "Address not support rush shipping";
+            }
         }
         return "Valid";
     }

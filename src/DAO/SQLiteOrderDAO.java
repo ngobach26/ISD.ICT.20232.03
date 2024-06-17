@@ -10,15 +10,20 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class SQLiteOrderDAO implements OrderDAO{
+
+    private final Connection connection;
+
+    public SQLiteOrderDAO() {
+        this.connection = AIMSDB.getConnection();
+    }
+
     public int createOrder(DeliveryInformation deliveryInformation, Order order, User user) throws SQLException {
         String insertDeliverySQL = "INSERT INTO Delivery_information (userID, province_city, delivery_address, recipient_name, email, phone_number) VALUES (?, ?, ?, ?, ?, ?)";
         String insertOrderSQL = "INSERT INTO \"ORDER\" (total, total_shipping_fee, deliveryID) VALUES (?, ?, ?)";
 
-        try (Connection connection = AIMSDB.getConnection();
-             PreparedStatement deliveryStatement = connection.prepareStatement(insertDeliverySQL, PreparedStatement.RETURN_GENERATED_KEYS);
+        try (PreparedStatement deliveryStatement = connection.prepareStatement(insertDeliverySQL, PreparedStatement.RETURN_GENERATED_KEYS);
              PreparedStatement orderStatement = connection.prepareStatement(insertOrderSQL, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             connection.setAutoCommit(false); // Begin transaction
@@ -75,22 +80,20 @@ public class SQLiteOrderDAO implements OrderDAO{
             connection.rollback();
             throw new SQLException("Failed to create order!");
         } catch (SQLException e) {
+            connection.rollback();
             throw e;
         }
     }
 
-
     public void createOrderMedia(OrderMedia orderMedia, int orderId) throws SQLException {
-        try {
-            String sql = "INSERT INTO ORDER_MEDIA (mediaID, orderID, price, number_of_products) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO ORDER_MEDIA (mediaID, orderID, price, number_of_products) VALUES (?, ?, ?, ?)";
 
-            try (PreparedStatement preparedStatement = AIMSDB.getConnection().prepareStatement(sql)) {
-                preparedStatement.setInt(1, orderMedia.getMedia().getId());
-                preparedStatement.setInt(2, orderId);
-                preparedStatement.setDouble(3, orderMedia.getPrice());
-                preparedStatement.setInt(4, orderMedia.getQuantity());
-                preparedStatement.executeUpdate();
-            }
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, orderMedia.getMedia().getId());
+            preparedStatement.setInt(2, orderId);
+            preparedStatement.setDouble(3, orderMedia.getPrice());
+            preparedStatement.setInt(4, orderMedia.getQuantity());
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }

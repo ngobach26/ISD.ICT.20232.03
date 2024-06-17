@@ -92,6 +92,9 @@ public class PaymentTransaction {
     public static void saveTransaction(PaymentTransaction transaction) throws SQLException {
         String sql = "INSERT INTO `PAYMENT_TRANSACTION` (orderID, time, date, transaction_content,transactionID) VALUES (?, ?, ?, ?,?)";
         Connection connection = AIMSDB.getConnection();
+        if (connection == null || connection.isClosed()) {
+            throw new SQLException("Failed to establish a database connection.");
+        }
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
         preparedStatement.setInt(1, transaction.getOrderId());
