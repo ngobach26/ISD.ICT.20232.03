@@ -14,7 +14,7 @@ import entity.cart.CartMedia;
 import entity.media.Media;
 import services.DAOFactory;
 
-public class SQLiteCartDAO implements CartDAO{
+public class SQLiteCartDAO implements CartDAO {
     private static final Logger LOGGER = Logger.getLogger(SQLiteCartDAO.class.getName());
     private final Connection connection;
     private static final String INSERT_CART = "INSERT INTO CART (cartID, userID) VALUES (?, ?)";
@@ -22,12 +22,14 @@ public class SQLiteCartDAO implements CartDAO{
     private static final String GET_CART_ID = "SELECT cartID FROM CART WHERE userID = ?";
     private static final String GET_CART_COUNT = "SELECT COUNT(*) AS cartCount FROM CART";
     private static final String GET_CART_MEDIA_ITEMS = "SELECT mediaID, number_of_products FROM CART_MEDIA WHERE cartID = ?";
+    private static final String UPDATE_CART_MEDIA = "UPDATE CART_MEDIA SET number_of_products = ? WHERE cartID = ? AND mediaID = ?";
+    private static final String DELETE_CART_MEDIA = "DELETE FROM CART_MEDIA WHERE cartID = ? AND mediaID = ?";
 
     public SQLiteCartDAO() {
         this.connection = AIMSDB.getConnection();
     }
 
-    public void saveCart(Cart cart) throws SQLException {
+    public void saveCart(Cart cart) {
         PreparedStatement cartStmt = null;
         PreparedStatement cartMediaStmt = null;
 
@@ -65,20 +67,28 @@ public class SQLiteCartDAO implements CartDAO{
                 }
             }
             LOGGER.severe("Failed to save cart: " + e.getMessage());
-            throw e;
         } finally {
-            if (cartStmt != null) {
-                cartStmt.close();
+            try {
+                if (cartStmt != null) {
+                    cartStmt.close();
+                }
+            } catch (SQLException e) {
+                LOGGER.severe("Error closing cartStmt: " + e.getMessage());
             }
-            if (cartMediaStmt != null) {
-                cartMediaStmt.close();
+            try {
+                if (cartMediaStmt != null) {
+                    cartMediaStmt.close();
+                }
+            } catch (SQLException e) {
+                LOGGER.severe("Error closing cartMediaStmt: " + e.getMessage());
             }
-//            if (connection != null) {
-//                connection.close();
-//            }
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException e) {
+                LOGGER.severe("Error resetting auto-commit: " + e.getMessage());
+            }
         }
     }
-
 
     public int getCartID(int userId) {
         PreparedStatement stmt = null;
@@ -168,5 +178,127 @@ public class SQLiteCartDAO implements CartDAO{
             }
         }
         return cartMediaList;
+    }
+
+    public void addMediaToCart(int userId, Media media, int quantity) {
+        PreparedStatement stmt = null;
+        try {
+            int cartID = getCartID(userId);
+            if (cartID == -1) {
+                cartID = getCartCount() + 1;
+                saveCart(new Cart(userId));  // Create a new cart if it doesn't exist
+            }
+
+            CartMedia cartMedia = getCartMedia(cartID, media.getId());
+            if (cartMedia != null) {
+                // Update existing cart media
+                stmt = connection.prepareStatement(UPDATE_CART_MEDIA);
+                stmt.setInt(1, cartMedia.getQuantity() + quantity);
+                stmt.setInt(2, cartID);
+                stmt.setInt(3, media.getId());
+                stmt.executeUpdate();
+            } else {
+                // Insert new cart media
+                stmt = connection.prepareStatement(INSERT_CART_MEDIA);
+                stmt.setInt(1, cartID);
+                stmt.setInt(2, media.getId());
+                stmt.setInt(3, quantity);
+                stmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            LOGGER.severe("Error adding media to cart: " + e.getMessage());
+        } finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                LOGGER.severe("Error closing PreparedStatement: " + e.getMessage());
+            }
+        }
+    }
+
+    public void removeMediaFromCart(int userId, int mediaId) {
+        PreparedStatement stmt = null;
+        try {
+            int cartID = getCartID(userId);
+            if (cartID != -1) {
+                stmt = connection.prepareStatement(DELETE_CART_MEDIA);
+                stmt.setInt(1, cartID);
+                stmt.setInt(2, mediaId);
+                stmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            LOGGER.severe("Error removing media from cart: " + e.getMessage());
+        } finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                LOGGER.severe("Error closing PreparedStatement: " + e.getMessage());
+            }
+        }
+    }
+
+    private CartMedia getCartMedia(int cartID, int mediaID) {
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            stmt = connection.prepareStatement(GET_CART_MEDIA_ITEMS);
+            stmt.setInt(1, cartID);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                if (rs.getInt("mediaID") == mediaID) {
+                    int numberOfProducts = rs.getInt("number_of_products");
+                    Media media = DAOFactory.getMediaDAO().getMediaById(mediaID);
+                    return new CartMedia(cartID, media, numberOfProducts, media.getPrice());
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.severe("Error fetching cart media: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                LOGGER.severe("Error closing ResultSet: " + e.getMessage());
+            }
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                LOGGER.severe("Error closing PreparedStatement: " + e.getMessage());
+            }
+        }
+        return null;
+    }
+
+    public void deleteAllCartMediaForUser(int userId) {
+        PreparedStatement stmt = null;
+
+        try {
+            // Get the cartID associated with the user
+            int cartID = getCartID(userId);
+
+            if (cartID != -1) { // If cartID exists
+                // Delete all CART_MEDIA items with the cartID
+                stmt = connection.prepareStatement(DELETE_CART_MEDIA);
+                stmt.setInt(1, cartID);
+                stmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            LOGGER.severe("Error deleting CART_MEDIA for user: " + e.getMessage());
+        } finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                LOGGER.severe("Error closing PreparedStatement: " + e.getMessage());
+            }
+        }
     }
 }

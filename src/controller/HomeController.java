@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Logger;
 
+import DAO.CartDAO;
 import DAO.MediaDAO;
 import common.exception.MediaNotAvailableException;
 import entity.cart.Cart;
@@ -23,6 +24,7 @@ public class HomeController extends BaseController{
 
     private static final Logger LOGGER = Utils.getLogger(HomeController.class.getName());
     private final MediaDAO mediaDAO;
+    private final CartDAO cartDAO;
     /**
      * this method gets all Media in DB and return back to home to display
      * @return List[Media]
@@ -30,6 +32,7 @@ public class HomeController extends BaseController{
      */
     public HomeController(){
         this.mediaDAO = DAOFactory.getMediaDAO();
+        this.cartDAO = DAOFactory.getCartDAO();
     }
     public List getAllMedia() throws SQLException{
         return mediaDAO.getAllMedia();
@@ -39,6 +42,7 @@ public class HomeController extends BaseController{
 
         return mediaDAO.searchMedia(searchText);
     }
+
     public void sortTitle(List<MediaHandler> list){
         Comparator<MediaHandler> mediaTitleComparator = new Comparator<MediaHandler>() {
             @Override
@@ -71,7 +75,7 @@ public class HomeController extends BaseController{
             cart.getListMedia().add(cartMedia);
             LOGGER.info("Added " + cartMedia.getQuantity() + " " + media.getTitle() + " to cart");
         }
-
+        cartDAO.addMediaToCart(user.getId(), media, quantity);
         media.setQuantity(media.getQuantity() - quantity);
     }
 

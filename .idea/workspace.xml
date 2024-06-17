@@ -9,19 +9,13 @@
   <component name="ChangeListManager">
     <list default="true" id="228d128d-7d0d-4ca2-a953-3525d59eef86" name="Changes" comment="update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/db/aimsTest.db" beforeDir="false" afterPath="$PROJECT_DIR$/assets/db/AIMSDB.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DAO/CartDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/CartDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DAO/SQLiteCartDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/SQLiteCartDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/CartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/CartController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/HomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/PaymentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/PaymentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/PlaceOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/PlaceOrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/cart/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/cart/Cart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/cart/CartMedia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/cart/CartMedia.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/screen/auth/LoginHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/auth/LoginHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/screen/cart/CartScreenHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/cart/CartScreenHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/screen/cart/MediaHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/cart/MediaHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/db/AIMSDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/AIMSDB.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/screen/home/HomeScreenHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/home/HomeScreenHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/screen/home/MediaHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/home/MediaHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,6 +144,9 @@
       <workItem from="1718503474187" duration="4976000" />
       <workItem from="1718512500999" duration="1995000" />
       <workItem from="1718529431367" duration="11598000" />
+      <workItem from="1718596340056" duration="794000" />
+      <workItem from="1718601448947" duration="542000" />
+      <workItem from="1718608698058" duration="3792000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1704544342831</created>

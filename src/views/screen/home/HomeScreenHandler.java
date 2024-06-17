@@ -86,6 +86,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
 
     private List homeItems;
     private User loggedInUser;
+    HomeController homeController = new HomeController();
     public HomeScreenHandler(Stage stage, String screenPath) throws IOException{
         super(stage, screenPath);
         sign_out.setOnMouseClicked(mouseEvent -> {
@@ -137,7 +138,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
     @Override
     public void show() {
         User user = LoginManager.getSavedLoginInfo();
-        numMediaInCart.setText(Cart.getCart(user.getId()).getListMedia().size() + " media");
+        numMediaInCart.setText(Cart.getCart(user.getId()).getTotalMedia() + " media");
         super.show();
     }
 
