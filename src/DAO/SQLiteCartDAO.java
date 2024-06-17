@@ -6,9 +6,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 import entity.cart.Cart;
 import entity.cart.CartMedia;
+import entity.media.Media;
+import services.DAOFactory;
 
 public class SQLiteCartDAO implements CartDAO{
     private static final Logger LOGGER = Logger.getLogger(SQLiteCartDAO.class.getName());
@@ -17,6 +21,7 @@ public class SQLiteCartDAO implements CartDAO{
     private static final String INSERT_CART_MEDIA = "INSERT INTO CART_MEDIA (cartID, mediaID, number_of_products) VALUES (?, ?, ?)";
     private static final String GET_CART_ID = "SELECT cartID FROM CART WHERE userID = ?";
     private static final String GET_CART_COUNT = "SELECT COUNT(*) AS cartCount FROM CART";
+    private static final String GET_CART_MEDIA_ITEMS = "SELECT mediaID, number_of_products FROM CART_MEDIA WHERE cartID = ?";
 
     public SQLiteCartDAO() {
         this.connection = AIMSDB.getConnection();
@@ -53,7 +58,11 @@ public class SQLiteCartDAO implements CartDAO{
             connection.commit();
         } catch (SQLException e) {
             if (connection != null) {
-                connection.rollback();
+                try {
+                    connection.rollback();
+                } catch (SQLException rollbackEx) {
+                    LOGGER.severe("Failed to rollback transaction: " + rollbackEx.getMessage());
+                }
             }
             LOGGER.severe("Failed to save cart: " + e.getMessage());
             throw e;
@@ -64,10 +73,14 @@ public class SQLiteCartDAO implements CartDAO{
             if (cartMediaStmt != null) {
                 cartMediaStmt.close();
             }
+//            if (connection != null) {
+//                connection.close();
+//            }
         }
     }
 
-    public int getCartID(int userId) throws SQLException {
+
+    public int getCartID(int userId) {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
@@ -77,12 +90,22 @@ public class SQLiteCartDAO implements CartDAO{
             if (rs.next()) {
                 return rs.getInt("cartID");
             }
+        } catch (SQLException e) {
+            LOGGER.severe("Error fetching cart ID: " + e.getMessage());
         } finally {
-            if (rs != null) {
-                rs.close();
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                LOGGER.severe("Error closing ResultSet: " + e.getMessage());
             }
-            if (stmt != null) {
-                stmt.close();
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                LOGGER.severe("Error closing PreparedStatement: " + e.getMessage());
             }
         }
         return -1; // No cart found
@@ -106,5 +129,44 @@ public class SQLiteCartDAO implements CartDAO{
             }
         }
         return 0; // Default to 0 if no carts found
+    }
+
+    public List<CartMedia> getCartMediaItems(int cartId) {
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<CartMedia> cartMediaList = new ArrayList<>();
+        try {
+            stmt = connection.prepareStatement(GET_CART_MEDIA_ITEMS);
+            stmt.setInt(1, cartId);
+            rs = stmt.executeQuery();
+
+            MediaDAO mediaDAO = DAOFactory.getMediaDAO();
+
+            while (rs.next()) {
+                int mediaID = rs.getInt("mediaID");
+                int numberOfProducts = rs.getInt("number_of_products");
+                Media media = mediaDAO.getMediaById(mediaID);  // Assume this method exists in MediaDAO
+                CartMedia cartMedia = new CartMedia(cartId, media, numberOfProducts, media.getPrice());
+                cartMediaList.add(cartMedia);
+            }
+        } catch (SQLException e) {
+            LOGGER.severe("Error fetching cart media items: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                LOGGER.severe("Error closing ResultSet: " + e.getMessage());
+            }
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                LOGGER.severe("Error closing PreparedStatement: " + e.getMessage());
+            }
+        }
+        return cartMediaList;
     }
 }

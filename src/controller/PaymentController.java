@@ -11,6 +11,7 @@ import entity.order.Order;
 import entity.payment.PaymentTransaction;
 import entity.user.User;
 import services.DAOFactory;
+import services.user.LoginManager;
 import services.vnpay.IPaymentSubsystem;
 import services.vnpay.PaymentSubsystem;
 import services.vnpay.VNPaySubsystemController;
@@ -45,6 +46,7 @@ public class PaymentController extends BaseController {
     }
 
     public void emptyCart(){
-        Cart.getCart().emptyCart();
+        User user = LoginManager.getSavedLoginInfo();
+        Cart.getCart(user.getId()).emptyCart();
     }
 }

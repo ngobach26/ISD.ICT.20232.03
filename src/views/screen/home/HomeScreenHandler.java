@@ -136,7 +136,8 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
 
     @Override
     public void show() {
-        numMediaInCart.setText(Cart.getCart().getListMedia().size() + " media");
+        User user = LoginManager.getSavedLoginInfo();
+        numMediaInCart.setText(Cart.getCart(user.getId()).getListMedia().size() + " media");
         super.show();
     }
 

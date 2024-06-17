@@ -8,7 +8,9 @@ import java.util.logging.Logger;
 import common.exception.MediaNotAvailableException;
 import controller.HomeController;
 import entity.cart.Cart;
+import entity.cart.CartMedia;
 import entity.media.Media;
+import entity.user.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,6 +18,7 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import services.user.LoginManager;
 import utils.Utils;
 import views.screen.FXMLScreenHandler;
 import views.screen.popup.PopupScreen;
@@ -70,7 +73,8 @@ public class MediaHandler extends FXMLScreenHandler {
 
     private void updateUIAfterAddingToCart(int quantity) throws SQLException {
         mediaAvail.setText(String.valueOf(media.getQuantity()));
-        home.getNumMediaCartLabel().setText(Cart.getCart().getTotalMedia() + " media");
+        User user = LoginManager.getSavedLoginInfo();
+        home.getNumMediaCartLabel().setText(Cart.getCart(user.getId()).getTotalMedia() + " media");
     }
 
     private void handleMediaNotAvailableException(MediaNotAvailableException exp) {

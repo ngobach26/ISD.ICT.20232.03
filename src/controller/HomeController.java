@@ -10,7 +10,9 @@ import common.exception.MediaNotAvailableException;
 import entity.cart.Cart;
 import entity.cart.CartMedia;
 import entity.media.Media;
+import entity.user.User;
 import services.DAOFactory;
+import services.user.LoginManager;
 import utils.Utils;
 import views.screen.home.MediaHandler;
 
@@ -59,7 +61,8 @@ public class HomeController extends BaseController{
 
     public void addMediaToCart(Media media, int quantity) throws MediaNotAvailableException, SQLException {
         if (quantity > media.getQuantity()) throw new MediaNotAvailableException();
-        Cart cart = Cart.getCart();
+        User user = LoginManager.getSavedLoginInfo();
+        Cart cart = Cart.getCart(user.getId());
         CartMedia mediaInCart = cart.checkMediaInCart(media);
         if (mediaInCart != null) {
             mediaInCart.setQuantity(mediaInCart.getQuantity() + quantity);

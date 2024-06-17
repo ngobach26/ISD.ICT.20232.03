@@ -3,10 +3,13 @@ package views.screen.cart;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.logging.Logger;
 
 import common.exception.MediaUpdateException;
 import common.exception.ViewCartException;
 import controller.CartController;
+import entity.cart.Cart;
 import entity.cart.CartMedia;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -55,7 +58,7 @@ public class MediaHandler extends FXMLScreenHandler {
 	private final CartScreenHandler cartScreen;
 	private final CartController cartController;
 
-	public MediaHandler(String screenPath, CartScreenHandler cartScreen) throws IOException {
+	public MediaHandler(String screenPath, CartScreenHandler cartScreen) throws IOException, SQLException {
 		super(screenPath);
 		this.cartScreen = cartScreen;
 		this.cartController = new CartController();

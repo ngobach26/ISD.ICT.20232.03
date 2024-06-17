@@ -58,11 +58,10 @@ public class CartScreenHandler extends BaseScreenHandler {
 	@FXML
 	private Button btnCancelOrder;
 
+	private final CartController cartController;
 	private User loggedInUser;
 
-	private final CartController cartController;
-
-	public CartScreenHandler(Stage stage, String screenPath, User loggedInUser) throws IOException {
+	public CartScreenHandler(Stage stage, String screenPath, User loggedInUser) throws IOException, SQLException {
 		super(stage, screenPath);
 		this.cartController = new CartController();
 		this.loggedInUser = loggedInUser;
@@ -73,7 +72,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 
 		// Click to go back to home screen
 		aimsImage.setOnMouseClicked(e -> {
-			homeScreenHandler.show();
+				homeScreenHandler.show();
 		});
 
 		// On clicked, start Place Order UC
@@ -123,9 +122,9 @@ public class CartScreenHandler extends BaseScreenHandler {
 			displayCartWithMediaAvailability();
 			show();
 		} catch (MediaNotAvailableException e) {
-		// if some media are not available then display cart and break usecase Place Order
-		displayCartWithMediaAvailability();
-	}
+			// if some media are not available then display cart and break usecase Place Order
+			displayCartWithMediaAvailability();
+		}
 
 	}
 
@@ -147,8 +146,8 @@ public class CartScreenHandler extends BaseScreenHandler {
 			Order order = placeOrderController.createOrder();
 
 			ShippingScreenHandler ShippingScreenHandler = new ShippingScreenHandler(this.stage, Configs.SHIPPING_SCREEN_PATH, order);
-			ShippingScreenHandler.setLoggedInUser(this.loggedInUser);
 			ShippingScreenHandler.setPreviousScreen(this);
+			ShippingScreenHandler.setLoggedInUser(this.loggedInUser);
 			ShippingScreenHandler.setHomeScreenHandler(homeScreenHandler);
 			ShippingScreenHandler.setScreenTitle("Shipping Screen");
 			ShippingScreenHandler.setBController(placeOrderController);
@@ -166,7 +165,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 		displayCartWithMediaAvailability();
 	}
 
-	void updateCartAmount(){
+	void updateCartAmount() throws SQLException {
 		// calculate subtotal and amount
 		int subtotal = getBController().getCartSubtotal();
 		int vat = (int)((Configs.PERCENT_VAT/100)*subtotal);
@@ -179,7 +178,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 		labelAmount.setText(Utils.getCurrencyFormat(amount));
 	}
 
-	private void displayCartWithMediaAvailability(){
+	private void displayCartWithMediaAvailability() throws SQLException {
 		// clear all old cartMedia
 		vboxCart.getChildren().clear();
 
@@ -201,6 +200,8 @@ public class CartScreenHandler extends BaseScreenHandler {
 			updateCartAmount();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
 		}
 	}
 }
