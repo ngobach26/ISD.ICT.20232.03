@@ -80,12 +80,24 @@
 </details>
 
 ## Setup Instructions
+## Setting Up IntelliJ for JavaFX
 
-##For IntellJ
-- Edit the run configuration
-- In VM Option add the following:
-  --module-path path\to\lib\your_os\javafx-sdk-21.0.1\lib --add-modules javafx.controls,javafx.fxml --add-modules javafx.web
-- For example;
---module-path D:\2023_2\ITSS\Check\TKXDPM.KHMT.20231-15-develop\lib\win\javafx-sdk-21.0.1\lib --add-modules javafx.controls,javafx.fxml --add-modules javafx.web
+1. **Edit Run Configuration:**
+  - Open your project in IntelliJ.
+  - Navigate to `Run` > `Edit Configurations...`.
+
+2. **Add VM Options:**
+  - In the **VM options** field, add the following line:
+    ```
+    --module-path path\to\lib\your_os\javafx-sdk-21.0.1\lib --add-modules javafx.controls,javafx.fxml,javafx.web
+    ```
+
+3. **Example Configuration:**
+  - If your JavaFX SDK is located at `D:\2023_2\ITSS\Check\TKXDPM.KHMT.20231-15-develop\lib\win\javafx-sdk-21.0.1\lib`, your VM options should look like this:
+    ```
+    --module-path D:\2023_2\ITSS\Check\TKXDPM.KHMT.20231-15-develop\lib\win\javafx-sdk-21.0.1\lib --add-modules javafx.controls,javafx.fxml,javafx.web
+    ```
+
+This configuration ensures that IntelliJ uses the correct JavaFX modules when running your application.
 
 
