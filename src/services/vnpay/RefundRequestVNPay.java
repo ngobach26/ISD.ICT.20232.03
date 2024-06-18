@@ -3,7 +3,7 @@ package services.vnpay;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import entity.payment.PaymentTransaction;
-import utils.Utils;
+import utils.PaymentUtils;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -50,7 +50,7 @@ public class RefundRequestVNPay {
 
         Calendar cld = Calendar.getInstance(TimeZone.getTimeZone("Etc/GMT+7"));
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
-        String vnp_TransactionDate = Utils.convertDateFormat(paymentTransaction.getCreatedAt());
+        String vnp_TransactionDate = PaymentUtils.convertDateFormat(paymentTransaction.getCreatedAt());
         vnp_Params.put("vnp_TransactionDate", vnp_TransactionDate);
         String vnp_CreateDate = formatter.format(cld.getTime());
         vnp_Params.put("vnp_CreateDate", vnp_CreateDate);

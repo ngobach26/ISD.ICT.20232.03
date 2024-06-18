@@ -9,7 +9,7 @@ import java.util.Random;
 import java.util.logging.Logger;
 
 public class DeliveryValidateInfo {
-    private static final Logger LOGGER = utils.Utils.getLogger(PlaceOrderController.class.getName());
+    private static final Logger LOGGER = utils.LOGGER.getLogger(PlaceOrderController.class.getName());
 
     public static void processDeliveryInfo(HashMap info) throws InterruptedException, IOException {
         LOGGER.info("Process Delivery Info");

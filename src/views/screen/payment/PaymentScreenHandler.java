@@ -13,7 +13,7 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import services.vnpay.ConfigVNPay;
 import utils.Configs;
-import utils.Utils;
+import utils.PaymentUtils;
 import views.screen.BaseScreenHandler;
 
 import java.io.IOException;
@@ -55,7 +55,7 @@ public class PaymentScreenHandler extends BaseScreenHandler {
                 String query = uri.getQuery();
                 System.out.println(query);
 
-                Map<String, String> params = Utils.parseQueryString(query);
+                Map<String, String> params = PaymentUtils.parseQueryString(query);
                 PaymentController controller = (PaymentController) getBController();
                 int orderId = controller.createOrder(deliveryInformation,order,this.user);
                 if (orderId != -1) {

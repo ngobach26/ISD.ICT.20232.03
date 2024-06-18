@@ -21,14 +21,13 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import utils.SellerUtils;
-import utils.Utils;
 import views.screen.BaseScreenHandler;
 import views.screen.popup.PopupScreen;
 import views.screen.sellerScreen.sellerEventScreen.create.CommonInfoCreateHandler;
 
 public class BookUpdateHandler extends BaseScreenHandler implements Initializable {
 
-	public static Logger LOGGER = Utils.getLogger(BookUpdateHandler.class.getName());
+	public static Logger LOGGER = utils.LOGGER.getLogger(BookUpdateHandler.class.getName());
 
 	@FXML
 	private ComboBox<String> category;

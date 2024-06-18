@@ -15,7 +15,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import utils.Configs;
-import utils.Utils;
 import views.screen.FXMLScreenHandler;
 import views.screen.popup.PopupScreen;
 import views.screen.sellerScreen.sellerEventScreen.update.BookUpdateHandler;
@@ -26,7 +25,7 @@ import views.screen.sellerScreen.sellerEventScreen.update.DVDUpdateHandler;
 // to each media product in the AdminHome page
 public class MediaProductHandler extends FXMLScreenHandler {
 	
-	public static Logger LOGGER = Utils.getLogger(MediaProductHandler.class.getName());
+	public static Logger LOGGER = utils.LOGGER.getLogger(MediaProductHandler.class.getName());
 	// media product's Image
 	@FXML
 	protected ImageView item_img;

@@ -8,7 +8,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import utils.SellerUtils;
-import utils.Utils;
 import views.screen.BaseScreenHandler;
 import views.screen.popup.PopupScreen;
 
@@ -22,7 +21,7 @@ import java.util.logging.Logger;
 
 public class DVDUpdateHandler extends BaseScreenHandler implements Initializable {
 
-    public static Logger LOGGER = Utils.getLogger(DVDUpdateHandler.class.getName());
+    public static Logger LOGGER = utils.LOGGER.getLogger(DVDUpdateHandler.class.getName());
 
     @FXML
     private TextField director;

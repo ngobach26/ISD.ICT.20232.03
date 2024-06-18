@@ -14,7 +14,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import services.user.LoginManager;
 import utils.Configs;
-import utils.Utils;
 import views.screen.BaseScreenHandler;
 import views.screen.admin.AdminScreenHandler;
 import views.screen.home.HomeScreenHandler;
@@ -36,7 +35,7 @@ public class LoginHandler extends BaseScreenHandler {
     public Alert alert;
     private HomeScreenHandler homeHandler;
 
-    public static Logger LOGGER = Utils.getLogger(LoginHandler.class.getName());
+    public static Logger LOGGER = utils.LOGGER.getLogger(LoginHandler.class.getName());
 
     private final AuthController authController = new AuthController();
 

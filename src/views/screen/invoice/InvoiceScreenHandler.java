@@ -15,7 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import utils.Configs;
-import utils.Utils;
+import utils.PaymentUtils;
 import views.screen.BaseScreenHandler;
 import views.screen.payment.PaymentScreenHandler;
 
@@ -23,7 +23,7 @@ import views.screen.payment.PaymentScreenHandler;
 
 public class InvoiceScreenHandler extends BaseScreenHandler {
 
-	private static final Logger LOGGER = Utils.getLogger(InvoiceScreenHandler.class.getName());
+	private static final Logger LOGGER = utils.LOGGER.getLogger(InvoiceScreenHandler.class.getName());
 
 	@FXML
 	private Label pageTitle;
@@ -109,9 +109,9 @@ public class InvoiceScreenHandler extends BaseScreenHandler {
 			rushInstruction.setVisible(false);
 		}
 
-		subtotal.setText(Utils.getCurrencyFormat(invoice.getOrder().calculateTotalProductIncludeVAT()));
-		shippingFees.setText(Utils.getCurrencyFormat(invoice.getOrder().calculateShippingFees(deliveryInfo)));
-		total.setText(Utils.getCurrencyFormat(invoice.getOrder().calculateTotalPrice(deliveryInfo)));
+		subtotal.setText(PaymentUtils.getCurrencyFormat(invoice.getOrder().calculateTotalProductIncludeVAT()));
+		shippingFees.setText(PaymentUtils.getCurrencyFormat(invoice.getOrder().calculateShippingFees(deliveryInfo)));
+		total.setText(PaymentUtils.getCurrencyFormat(invoice.getOrder().calculateTotalPrice(deliveryInfo)));
 		invoice.getOrder().getlstOrderMedia().forEach(orderMedia -> {
 			try {
 				MediaInvoiceScreenHandler mis = new MediaInvoiceScreenHandler(Configs.INVOICE_MEDIA_SCREEN_PATH);

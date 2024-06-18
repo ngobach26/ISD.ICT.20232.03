@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 import common.exception.MediaNotAvailableException;
 import controller.HomeController;
 import entity.cart.Cart;
-import entity.cart.CartMedia;
 import entity.media.Media;
 import entity.user.User;
 import javafx.fxml.FXML;
@@ -19,7 +18,7 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import services.user.LoginManager;
-import utils.Utils;
+import utils.PaymentUtils;
 import views.screen.FXMLScreenHandler;
 import views.screen.popup.PopupScreen;
 
@@ -43,7 +42,7 @@ public class MediaHandler extends FXMLScreenHandler {
     @FXML
     protected Button addToCartBtn;
 
-    private static final Logger LOGGER = Utils.getLogger(MediaHandler.class.getName());
+    private static final Logger LOGGER = utils.LOGGER.getLogger(MediaHandler.class.getName());
     private final Media media;
     private final HomeScreenHandler home;
     private final HomeController homeController;
@@ -99,7 +98,7 @@ public class MediaHandler extends FXMLScreenHandler {
         mediaImage.setImage(image);
 
         mediaTitle.setText(media.getTitle());
-        mediaPrice.setText(Utils.getCurrencyFormat(media.getPrice()));
+        mediaPrice.setText(PaymentUtils.getCurrencyFormat(media.getPrice()));
         mediaAvail.setText(Integer.toString(media.getQuantity()));
         spinnerChangeNumber.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 1));
 

@@ -4,13 +4,10 @@ import java.sql.DriverManager;
 import java.util.logging.Logger;
 
 import java.sql.Connection;
-import utils.*;
 
 public class AIMSDB {
-
-    private static final Logger LOGGER = Utils.getLogger(Connection.class.getName());
+    private static final Logger LOGGER = utils.LOGGER.getLogger(Connection.class.getName());
     private static Connection connect;
-
     public static Connection getConnection() {
         if (connect != null) return connect;
         try {

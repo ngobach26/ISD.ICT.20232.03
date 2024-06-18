@@ -22,14 +22,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import services.user.LoginManager;
 import utils.Configs;
-import utils.Utils;
 import views.screen.BaseScreenHandler;
 import views.screen.auth.LoginHandler;
 import views.screen.sellerScreen.sellerEventScreen.CreateMediaByType;
 
 public class ManageProductScreenHandler extends BaseScreenHandler implements Initializable {
 
-	public static Logger LOGGER = Utils.getLogger(ManageProductScreenHandler.class.getName());
+	public static Logger LOGGER = utils.LOGGER.getLogger(ManageProductScreenHandler.class.getName());
 
 	@FXML
 	private ScrollPane scroll_pane;

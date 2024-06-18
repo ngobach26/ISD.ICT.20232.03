@@ -10,7 +10,6 @@ import entity.media.Media;
 import entity.user.User;
 import services.DAOFactory;
 import services.user.LoginManager;
-import utils.Utils;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -19,7 +18,7 @@ import java.util.logging.Logger;
  * This class controls the flow of events when users view the Cart
  */
 public class CartController extends BaseController{
-    private static final Logger LOGGER = Utils.getLogger(CartController.class.getName());
+    private static final Logger LOGGER = utils.LOGGER.getLogger(CartController.class.getName());
     ICartDAO cartDAO;
     /**
      * This method checks the available products in Cart

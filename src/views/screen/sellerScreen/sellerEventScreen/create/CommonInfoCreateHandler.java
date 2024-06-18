@@ -12,7 +12,6 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import utils.Utils;
 import views.screen.BaseScreenHandler;
 import views.screen.popup.PopupScreen;
 
@@ -25,7 +24,7 @@ import java.util.logging.Logger;
 
 public class CommonInfoCreateHandler extends BaseScreenHandler implements Initializable {
 	
-	private static final Logger LOGGER = Utils.getLogger(CommonInfoCreateHandler.class.getName());
+	private static final Logger LOGGER = utils.LOGGER.getLogger(CommonInfoCreateHandler.class.getName());
 
 	@FXML
 	private TextField title;

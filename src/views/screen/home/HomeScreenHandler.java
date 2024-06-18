@@ -33,7 +33,6 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import services.user.LoginManager;
 import utils.Configs;
-import utils.Utils;
 import views.screen.BaseScreenHandler;
 //import views.screen.ChooseRoleScreenHandler;
 //import views.screen.cart.CartScreenHandler;
@@ -44,7 +43,7 @@ import views.screen.auth.LoginHandler;
 
 public class HomeScreenHandler extends BaseScreenHandler implements Initializable{
 
-    public static Logger LOGGER = Utils.getLogger(HomeScreenHandler.class.getName());
+    public static Logger LOGGER = utils.LOGGER.getLogger(HomeScreenHandler.class.getName());
 
     //search
 

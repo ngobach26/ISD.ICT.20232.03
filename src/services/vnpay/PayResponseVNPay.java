@@ -2,7 +2,7 @@ package services.vnpay;
 
 import common.exception.*;
 import entity.payment.PaymentTransaction;
-import utils.Utils;
+import utils.PaymentUtils;
 
 import java.util.Map;
 
@@ -25,7 +25,7 @@ public class PayResponseVNPay {
         int orderId = Integer.parseInt(response.get("orderId"));
         String createdAt = response.get("vnp_PayDate");
         String vnpTxnRef = response.get("vnp_TxnRef");
-        PaymentTransaction trans = new PaymentTransaction(orderId,errorCode, transactionId, transactionContent, amount, Utils.convertPaymentTimeFormat(createdAt), vnpTxnRef);
+        PaymentTransaction trans = new PaymentTransaction(orderId,errorCode, transactionId, transactionContent, amount, PaymentUtils.convertPaymentTimeFormat(createdAt), vnpTxnRef);
 
         switch (trans.getErrorCode()) {
             case "00":

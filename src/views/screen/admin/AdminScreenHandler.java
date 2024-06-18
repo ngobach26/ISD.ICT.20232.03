@@ -14,7 +14,6 @@ import javafx.stage.Stage;
 import services.user.LoginManager;
 import utils.AdminUtils;
 import utils.Configs;
-import utils.Utils;
 import views.screen.BaseScreenHandler;
 import views.screen.auth.LoginHandler;
 
@@ -27,7 +26,7 @@ import java.util.logging.Logger;
 
 public class AdminScreenHandler extends BaseScreenHandler implements Initializable {
 
-    public static final Logger LOGGER = Utils.getLogger(AdminScreenHandler.class.getName());
+    public static final Logger LOGGER = utils.LOGGER.getLogger(AdminScreenHandler.class.getName());
 
     @FXML
     private SplitMenuButton sort;

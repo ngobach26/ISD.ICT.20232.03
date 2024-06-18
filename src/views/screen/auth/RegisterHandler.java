@@ -10,7 +10,6 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import utils.Configs;
-import utils.Utils;
 import views.screen.BaseScreenHandler;
 
 public class RegisterHandler extends BaseScreenHandler {
@@ -32,7 +31,7 @@ public class RegisterHandler extends BaseScreenHandler {
 	private Button loginBtn;
 	public Alert alert;
 	private final AuthController authController = new AuthController();
-	public static Logger LOGGER = Utils.getLogger(LoginHandler.class.getName());
+	public static Logger LOGGER = utils.LOGGER.getLogger(LoginHandler.class.getName());
 
 	public RegisterHandler(Stage stage, String screenPath) throws IOException {
 		super(stage, screenPath);

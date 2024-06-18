@@ -13,13 +13,12 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import utils.AdminUtils;
 import utils.Configs;
-import utils.Utils;
 import views.screen.BaseScreenHandler;
 import views.screen.popup.PopupScreen;
 
 public class CreateUserPopupScreen extends BaseScreenHandler {
 
-    private static final Logger LOGGER = Utils.getLogger(CreateUserPopupScreen.class.getName());
+    private static final Logger LOGGER = utils.LOGGER.getLogger(CreateUserPopupScreen.class.getName());
 
     @FXML
     private TextField nameField;

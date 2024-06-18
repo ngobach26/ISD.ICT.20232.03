@@ -16,7 +16,7 @@ import services.DAOFactory;
 import services.user.LoginManager;
 
 public class PlaceOrderController extends BaseController{
-    private static final Logger LOGGER = utils.Utils.getLogger(PlaceOrderController.class.getName());
+    private static final Logger LOGGER = utils.LOGGER.getLogger(PlaceOrderController.class.getName());
     private final IMediaDAO mediaDAO;
 
     public PlaceOrderController() throws MediaNotAvailableException {

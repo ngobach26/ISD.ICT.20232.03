@@ -22,14 +22,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import utils.Configs;
-import utils.Utils;
+import utils.PaymentUtils;
 import views.screen.BaseScreenHandler;
 import views.screen.popup.PopupScreen;
 import views.screen.shipping.ShippingScreenHandler;
 
 public class CartScreenHandler extends BaseScreenHandler {
 
-	private static final Logger LOGGER = Utils.getLogger(CartScreenHandler.class.getName());
+	private static final Logger LOGGER = utils.LOGGER.getLogger(CartScreenHandler.class.getName());
 
 	@FXML
 	private ImageView aimsImage;
@@ -173,9 +173,9 @@ public class CartScreenHandler extends BaseScreenHandler {
 		LOGGER.info("amount" + amount);
 
 		// update subtotal and amount of Cart
-		labelSubtotal.setText(Utils.getCurrencyFormat(subtotal));
-		labelVAT.setText(Utils.getCurrencyFormat(vat));
-		labelAmount.setText(Utils.getCurrencyFormat(amount));
+		labelSubtotal.setText(PaymentUtils.getCurrencyFormat(subtotal));
+		labelVAT.setText(PaymentUtils.getCurrencyFormat(vat));
+		labelAmount.setText(PaymentUtils.getCurrencyFormat(amount));
 	}
 
 	private void displayCartWithMediaAvailability() throws SQLException {

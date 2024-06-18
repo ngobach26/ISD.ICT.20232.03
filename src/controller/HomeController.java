@@ -14,7 +14,6 @@ import entity.media.Media;
 import entity.user.User;
 import services.DAOFactory;
 import services.user.LoginManager;
-import utils.Utils;
 import views.screen.home.MediaHandler;
 
 /**
@@ -22,7 +21,7 @@ import views.screen.home.MediaHandler;
  */
 public class HomeController extends BaseController{
 
-    private static final Logger LOGGER = Utils.getLogger(HomeController.class.getName());
+    private static final Logger LOGGER = utils.LOGGER.getLogger(HomeController.class.getName());
     private final IMediaDAO mediaDAO;
     private final ICartDAO cartDAO;
     /**

@@ -3,13 +3,10 @@ package views.screen.cart;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.logging.Logger;
 
 import common.exception.MediaUpdateException;
 import common.exception.ViewCartException;
 import controller.CartController;
-import entity.cart.Cart;
 import entity.cart.CartMedia;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -22,7 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import utils.Configs;
-import utils.Utils;
+import utils.PaymentUtils;
 import views.screen.FXMLScreenHandler;
 
 public class MediaHandler extends FXMLScreenHandler {
@@ -72,7 +69,7 @@ public class MediaHandler extends FXMLScreenHandler {
 
 	private void setMediaInfo() {
 		title.setText(cartMedia.getMedia().getTitle());
-		price.setText(Utils.getCurrencyFormat(cartMedia.getPrice()));
+		price.setText(PaymentUtils.getCurrencyFormat(cartMedia.getPrice()));
 		File file = new File(cartMedia.getMedia().getImageURL());
 		Image im = new Image(file.toURI().toString());
 		image.setImage(im);
@@ -104,7 +101,7 @@ public class MediaHandler extends FXMLScreenHandler {
 				labelOutOfStock.setText(numOfProd < cartMedia.getQuantity() ? "Sorry, Only " + numOfProd + " remain in stock" : "");
 				spinner.getValueFactory().setValue(numOfProd);
 				cartController.updateCartMediaQuantity(cartMedia, numOfProd);
-				price.setText(Utils.getCurrencyFormat(numOfProd * cartMedia.getPrice()));
+				price.setText(PaymentUtils.getCurrencyFormat(numOfProd * cartMedia.getPrice()));
 				cartScreen.updateCartAmount();
 			} catch (SQLException | MediaUpdateException e1) {
 				e1.printStackTrace();

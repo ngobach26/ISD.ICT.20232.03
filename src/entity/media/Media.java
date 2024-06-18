@@ -8,14 +8,13 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import db.AIMSDB;
-import utils.Utils;
 
 /**
  * The general media class, for another media it can be done by inheriting this class
  */
 public class Media {
 
-    private static final Logger LOGGER = Utils.getLogger(Media.class.getName());
+    private static final Logger LOGGER = utils.LOGGER.getLogger(Media.class.getName());
 
     protected Statement stm;
     protected int id;

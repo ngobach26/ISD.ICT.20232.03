@@ -21,13 +21,12 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import utils.SellerUtils;
-import utils.Utils;
 import views.screen.BaseScreenHandler;
 import views.screen.popup.PopupScreen;
 
 public class CDUpdateHandler extends BaseScreenHandler implements Initializable {
 
-    public static Logger LOGGER = Utils.getLogger(CDUpdateHandler.class.getName());
+    public static Logger LOGGER = utils.LOGGER.getLogger(CDUpdateHandler.class.getName());
 
     @FXML
     private TextField artist;
