@@ -81,6 +81,11 @@
 
 ## Setup Instructions
 
-
+##For IntellJ
+- Edit the run configuration
+- In VM Option add the following:
+  --module-path path\to\lib\your_os\javafx-sdk-21.0.1\lib --add-modules javafx.controls,javafx.fxml --add-modules javafx.web
+- For example;
+--module-path D:\2023_2\ITSS\Check\TKXDPM.KHMT.20231-15-develop\lib\win\javafx-sdk-21.0.1\lib --add-modules javafx.controls,javafx.fxml --add-modules javafx.web
 
 
