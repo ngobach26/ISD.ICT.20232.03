@@ -6,10 +6,7 @@ import java.sql.SQLException;
 import java.util.Objects;
 import java.util.logging.Logger;
 
-import controller.SellerHomeController;
-import entity.media.Book;
-import entity.media.CD;
-import entity.media.DVD;
+import controller.SellerController;
 import entity.media.Media;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -58,12 +55,12 @@ public class MediaProductHandler extends FXMLScreenHandler {
 	private CDUpdateHandler cdUpdateHandler;
 	private DVDUpdateHandler dvdUpdateHandler;
 	private Media mediaHandler;
-	private SellerHomeController sellerHomeController;
+	private SellerController sellerController;
 
 	public MediaProductHandler(String screenPath, Media media) throws IOException, SQLException {
 		super(screenPath);
 		// TODO Auto-generated constructor stub
-		sellerHomeController = new SellerHomeController();
+		sellerController = new SellerController();
 		this.media = media;
 		this.id = media.getId();
 		setMediaInfo();
@@ -121,15 +118,15 @@ public class MediaProductHandler extends FXMLScreenHandler {
 
 		delete_btn.setOnMouseClicked(event -> {
 			try {
-				sellerHomeController.deleteMediaById(this.id);
+				sellerController.deleteMediaById(this.id);
 				if (Objects.equals(this.media.getType(), "BOOK")) {
-					new Book().deleteMediaFieldById(this.media.getId());
+					sellerController.deleteBookById(this.media.getId());
 					// mediaHandler.deleteMediaFieldById(this.media.getId());
 				} else if (Objects.equals(this.media.getType(), "CD")) {
-					new CD().deleteMediaFieldById(this.media.getId());
+					sellerController.deleteCDById(this.media.getId());
 					// mediaHandler.deleteMediaFieldById(this.media.getId());
 				} else {
-					new DVD().deleteMediaFieldById(this.media.getId());
+					sellerController.deleteDVDById(this.media.getId());
 					// mediaHandler.deleteMediaFieldById(this.media.getId());
 				}
 				PopupScreen.success("Delete success");

@@ -8,26 +8,26 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class AdminController {
-    private final UserDAO mediaDAO ;
+    private final UserDAO userDAO;
 
     public AdminController()  {
-        this.mediaDAO = DAOFactory.getUserDAO();
+        this.userDAO = DAOFactory.getUserDAO();
     }
 
     public void createUser(User user) throws SQLException{
-        mediaDAO.createUser(user);
+        userDAO.createUser(user);
     }
 
     public List<User> getAllUsers() throws SQLException{
-        return mediaDAO.getAllUsers();
+        return userDAO.getAllUsers();
     }
 
     public void updateUser(User user) throws SQLException{
-        mediaDAO.updateUser(user);
+        userDAO.updateUser(user);
     }
 
     public void deleteUser(int id) throws SQLException{
-        mediaDAO.deleteUser(id);
+        userDAO.deleteUser(id);
     }
 
 }

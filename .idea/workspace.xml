@@ -8,14 +8,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="228d128d-7d0d-4ca2-a953-3525d59eef86" name="Changes" comment="update">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/db/aimsTest.db" beforeDir="false" afterPath="$PROJECT_DIR$/assets/db/AIMSDB.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/CartDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/CartDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/SQLiteCartDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/SQLiteCartDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/CartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/CartController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/HomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/db/AIMSDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/AIMSDB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/screen/home/HomeScreenHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/home/HomeScreenHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/db/aimsTest.db" beforeDir="false" afterPath="$PROJECT_DIR$/assets/db/aimsTest.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/MediaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/MediaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/SQLiteMediaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/SQLiteMediaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/SellerHomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/SellerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/cart/CartMedia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/cart/CartMedia.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/media/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/media/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/media/CD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/media/CD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/media/DVD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/media/DVD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/media/Media.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/media/Media.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/order/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/order/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/order/OrderMedia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/order/OrderMedia.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/admin/AdminScreenHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/admin/AdminScreenHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/sellerScreen/ManageProductScreenHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/sellerScreen/ManageProductScreenHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/sellerScreen/MediaProductHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/sellerScreen/MediaProductHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/sellerScreen/sellerEventScreen/create/CommonInfoCreateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/sellerScreen/sellerEventScreen/create/CommonInfoCreateHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/sellerScreen/sellerEventScreen/update/BookUpdateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/sellerScreen/sellerEventScreen/update/BookUpdateHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/sellerScreen/sellerEventScreen/update/CDUpdateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/sellerScreen/sellerEventScreen/update/CDUpdateHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/screen/sellerScreen/sellerEventScreen/update/DVDUpdateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/screen/sellerScreen/sellerEventScreen/update/DVDUpdateHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +87,7 @@
     &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;refactor/user-refactor&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;K:/ITSS/ISD.ICT.20232.03/lib/win/javafx-sdk-21.0.3&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/2023_2/ITSS/Check/TKXDPM.KHMT.20231-15-develop&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -146,7 +160,9 @@
       <workItem from="1718529431367" duration="11598000" />
       <workItem from="1718596340056" duration="794000" />
       <workItem from="1718601448947" duration="542000" />
-      <workItem from="1718608698058" duration="3792000" />
+      <workItem from="1718608698058" duration="12277000" />
+      <workItem from="1718674491358" duration="708000" />
+      <workItem from="1718677378085" duration="934000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1704544342831</created>

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
-import controller.SellerHomeController;
+import controller.SellerController;
 import entity.media.Media;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -54,8 +54,8 @@ public class ManageProductScreenHandler extends BaseScreenHandler implements Ini
 	private CreateMediaByType createMediaByType;
 	private List<?> allTheMedia;
 
-	public SellerHomeController getBController() {
-		return (SellerHomeController) super.getBController();
+	public SellerController getBController() {
+		return (SellerController) super.getBController();
 	}
 
 	public ManageProductScreenHandler(Stage stage, String screenPath) throws IOException {
@@ -70,7 +70,7 @@ public class ManageProductScreenHandler extends BaseScreenHandler implements Ini
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		setBController(new SellerHomeController());
+		setBController(new SellerController());
 
 		add_btn.setOnMouseClicked(event -> {
 			try {

@@ -27,5 +27,9 @@ public interface MediaDAO {
     void updateDVD(DVD DVD) throws SQLException;
     public DVD getDVDById(int id) throws SQLException;
 
+    void deleteBookById(int id) throws SQLException;
+    void deleteCDById(int id) throws SQLException;
+    void deleteDVDById(int id) throws SQLException;
+
 }
 

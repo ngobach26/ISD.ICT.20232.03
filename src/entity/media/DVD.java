@@ -136,8 +136,4 @@ public class DVD extends Media {
         return null;
     }
 
-    public void deleteMediaFieldById(int id) throws SQLException {
-        Statement stm = AIMSDB.getConnection().createStatement();
-        stm.executeUpdate("DELETE FROM " + "DVD" + " WHERE id = " + id + ";");
-    }
 }

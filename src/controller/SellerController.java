@@ -10,11 +10,11 @@ import entity.media.DVD;
 import entity.media.Media;
 import services.DAOFactory;
 
-public class SellerHomeController extends BaseController {
+public class SellerController extends BaseController {
 
     private final MediaDAO mediaDAO;
 
-    public SellerHomeController() {
+    public SellerController() {
         this.mediaDAO = DAOFactory.getMediaDAO();
     }
 
@@ -72,6 +72,16 @@ public class SellerHomeController extends BaseController {
     public DVD getDVDById(int id) throws SQLException{
         return mediaDAO.getDVDById(id);
     }
+    public void deleteDVDById(int id) throws SQLException{
+        mediaDAO.deleteDVDById(id);
+    }
+    public void deleteCDById(int id) throws SQLException{
+        mediaDAO.deleteCDById(id);
+    }
+    public void deleteBookById(int id) throws SQLException{
+        mediaDAO.deleteBookById(id);
+    }
+
 
 
 

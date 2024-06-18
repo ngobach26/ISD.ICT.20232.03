@@ -1,6 +1,6 @@
 package views.screen.sellerScreen.sellerEventScreen.update;
 
-import controller.SellerHomeController;
+import controller.SellerController;
 import entity.media.DVD;
 import entity.media.Media;
 import javafx.fxml.FXML;
@@ -62,12 +62,12 @@ public class DVDUpdateHandler extends BaseScreenHandler implements Initializable
 
     private final Media media;
 
-    SellerHomeController sellerHomeController;
+    SellerController sellerController;
     DVD targetMedia;
 
     public DVDUpdateHandler(Stage stage, String screenPath, Media media) throws IOException, SQLException {
         super(stage, screenPath);
-        sellerHomeController = new SellerHomeController();
+        sellerController = new SellerController();
         this.media = media;
         setMediaInfo();
     }
@@ -133,7 +133,7 @@ public class DVDUpdateHandler extends BaseScreenHandler implements Initializable
 
     public void setMediaInfo() throws SQLException {
         LOGGER.info("Id of the media: " + this.media);
-        targetMedia = sellerHomeController.getDVDById(media.getId());
+        targetMedia = sellerController.getDVDById(media.getId());
         director.setText(targetMedia.getDirector());
         runtime.setText(Integer.toString(targetMedia.getRuntime()));
         studio.setText(targetMedia.getStudio());
@@ -189,8 +189,8 @@ public class DVDUpdateHandler extends BaseScreenHandler implements Initializable
     }
 
     public void updateDVD() throws SQLException {
-        sellerHomeController.updateMedia(targetMedia);
-        sellerHomeController.updateDVD(targetMedia);
+        sellerController.updateMedia(targetMedia);
+        sellerController.updateDVD(targetMedia);
     }
 
 }

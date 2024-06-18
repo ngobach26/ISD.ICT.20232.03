@@ -86,10 +86,4 @@ public class CD extends Media {
         return null;
     }
 
-
-    @Override
-    public void deleteMediaFieldById(int id) throws SQLException {
-        Statement stm = AIMSDB.getConnection().createStatement();
-        stm.executeUpdate("DELETE FROM " + "CD" + " WHERE id = " + id + ";");
-    }
 }

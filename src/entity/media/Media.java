@@ -172,11 +172,6 @@ public class Media {
         }
         return medium;
     }
-    
-    public void deleteMediaFieldById(int id) throws SQLException {
-        Statement stm = AIMSDB.getConnection().createStatement();
-        stm.executeUpdate("DELETE FROM " + "Media" + " WHERE id = " + id + ";");
-    }
 
     public int getSupportForRushDelivery() {
         return supportForRushDelivery;

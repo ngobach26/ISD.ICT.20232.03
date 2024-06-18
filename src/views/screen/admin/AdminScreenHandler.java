@@ -57,8 +57,6 @@ public class AdminScreenHandler extends BaseScreenHandler implements Initializab
     private TableView<User> userTable;
 
     @FXML
-    private TableColumn<User, Integer> id;
-    @FXML
     private TableColumn<User, String> usernameColumn;
 
     @FXML
@@ -135,7 +133,6 @@ public class AdminScreenHandler extends BaseScreenHandler implements Initializab
     }
 
     private void initializeTable() {
-        id.setCellValueFactory(new PropertyValueFactory<>("id"));
         usernameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
         addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));

@@ -8,9 +8,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
-import controller.SellerHomeController;
+import controller.SellerController;
 import entity.media.Book;
-import entity.media.CD;
 import entity.media.Media;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -76,13 +75,13 @@ public class BookUpdateHandler extends BaseScreenHandler implements Initializabl
 	private CommonInfoCreateHandler commonInfoCreateHandler;
 	private final Media media;
 
-	SellerHomeController sellerHomeController;
+	SellerController sellerController;
 	Book targetMedia;
 
 	public BookUpdateHandler(Stage stage, String screenPath, Media media) throws IOException, SQLException {
 		super(stage, screenPath);
 		// TODO Auto-generated constructor stub
-		sellerHomeController = new SellerHomeController();
+		sellerController = new SellerController();
 		this.media = media;
 		setMediaInfo();
 	}
@@ -141,7 +140,7 @@ public class BookUpdateHandler extends BaseScreenHandler implements Initializabl
 
 	public void setMediaInfo() throws SQLException {
 		LOGGER.info("Id of the media: " + this.media);
-		targetMedia = sellerHomeController.getBookById(media.getId());
+		targetMedia = sellerController.getBookById(media.getId());
 		category.setValue(targetMedia.getCategory());
 		author.setText(targetMedia.getAuthor());
 		cover_type.setText(targetMedia.getCoverType());
@@ -207,7 +206,7 @@ public class BookUpdateHandler extends BaseScreenHandler implements Initializabl
 
 
 	public void updateBook() throws SQLException {
-		sellerHomeController.updateMedia(targetMedia);
-		sellerHomeController.updateBook((targetMedia));
+		sellerController.updateMedia(targetMedia);
+		sellerController.updateBook((targetMedia));
 	}
 }

@@ -1,7 +1,6 @@
 package views.screen.sellerScreen.sellerEventScreen.create;
 
-import controller.SellerHomeController;
-import db.AIMSDB;
+import controller.SellerController;
 import entity.media.Book;
 import entity.media.CD;
 import entity.media.DVD;
@@ -19,7 +18,6 @@ import views.screen.popup.PopupScreen;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
@@ -55,12 +53,12 @@ public class CommonInfoCreateHandler extends BaseScreenHandler implements Initia
 	private final String imageUrl;
 	private String createQuery;
 	private final Media mediaItem;
-	SellerHomeController sellerHomeController;
+	SellerController sellerController;
 
 	public CommonInfoCreateHandler(Stage stage, String screenPath, String type, Media media, String category, String imageUrl) throws IOException {
 		super(stage, screenPath);
 		// TODO Auto-generated constructor
-		sellerHomeController = new SellerHomeController();
+		sellerController = new SellerController();
 		this.type = type;
 		this.mediaItem = media;
 		this.category = category;
@@ -90,14 +88,14 @@ public class CommonInfoCreateHandler extends BaseScreenHandler implements Initia
 							this.imageUrl,
 							Integer.parseInt(rushDelivery.getText())
 					);
-					int rowInsertedId = sellerHomeController.createMedia(media);
+					int rowInsertedId = sellerController.createMedia(media);
 					mediaItem.setId(rowInsertedId);
 					if(this.type == "BOOK"){
-						sellerHomeController.createBook((Book)mediaItem);
+						sellerController.createBook((Book)mediaItem);
 					}else if (this.type == "CD"){
-						sellerHomeController.createCD((CD)mediaItem);
+						sellerController.createCD((CD)mediaItem);
 					}else {
-						sellerHomeController.createDVD((DVD)mediaItem);
+						sellerController.createDVD((DVD)mediaItem);
 					}
 					PopupScreen.success("Create success");
 					this.stage.close();

@@ -339,5 +339,23 @@ public class SQLiteMediaDAO implements MediaDAO {
             throw new SQLException("DVD not found with id: " + id);
         }
     }
+
+    @Override
+    public void deleteBookById(int id) throws SQLException {
+        Statement stm = connection.createStatement();
+        stm.executeUpdate("DELETE FROM " + "Books" + " WHERE id = " + id + ";");
+    }
+
+    @Override
+    public void deleteCDById(int id) throws SQLException {
+        Statement stm = AIMSDB.getConnection().createStatement();
+        stm.executeUpdate("DELETE FROM " + "CD" + " WHERE id = " + id + ";");
+    }
+
+    @Override
+    public void deleteDVDById(int id) throws SQLException {
+        Statement stm = AIMSDB.getConnection().createStatement();
+        stm.executeUpdate("DELETE FROM " + "DVD" + " WHERE id = " + id + ";");
+    }
 }
 

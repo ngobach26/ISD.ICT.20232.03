@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
-import controller.SellerHomeController;
+import controller.SellerController;
 import entity.media.CD;
 import entity.media.Media;
 import javafx.fxml.FXML;
@@ -58,12 +58,12 @@ public class CDUpdateHandler extends BaseScreenHandler implements Initializable 
 
     private final Media media;
 
-    SellerHomeController sellerHomeController;
+    SellerController sellerController;
     CD targetMedia;
 
     public CDUpdateHandler(Stage stage, String screenPath, Media media) throws IOException, SQLException {
         super(stage, screenPath);
-        sellerHomeController = new SellerHomeController();
+        sellerController = new SellerController();
         this.media = media;
         setMediaInfo();
     }
@@ -117,7 +117,7 @@ public class CDUpdateHandler extends BaseScreenHandler implements Initializable 
 
     public void setMediaInfo() throws SQLException {
         LOGGER.info("Id of the media: " + this.media);
-        targetMedia = sellerHomeController.getCDById(media.getId());
+        targetMedia = sellerController.getCDById(media.getId());
         artist.setText(targetMedia.getArtist());
         recordLabel.setText(targetMedia.getRecordLabel());
         musicType.setValue(targetMedia.getMusicType());
@@ -163,8 +163,8 @@ public class CDUpdateHandler extends BaseScreenHandler implements Initializable 
     }
 
     public void updateCD() throws SQLException {
-        sellerHomeController.updateMedia(targetMedia);
-        sellerHomeController.updateCD(targetMedia);
+        sellerController.updateMedia(targetMedia);
+        sellerController.updateCD(targetMedia);
     }
 
 }

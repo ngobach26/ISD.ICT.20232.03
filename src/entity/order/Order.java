@@ -89,45 +89,6 @@ public class Order {
     	}
     	return (int) (amount + (Configs.PERCENT_VAT / 100) * amount);
     }
-    public static void acceptOrderById(int orderId) throws SQLException {
-        Statement stm = AIMSDB.getConnection().createStatement();
-        stm.executeUpdate("UPDATE `Order` SET" + " state = " + 1
-                + " WHERE id=" + orderId);
-    }
-    
-    public static void declineOrderById(int orderId) throws SQLException {
-        Statement stm = AIMSDB.getConnection().createStatement();
-        stm.executeUpdate("UPDATE `Order` SET" + " state = " + 3
-                + " WHERE id=" + orderId);
-    }
-
-    public static void confirmDeliveredOrderById(int orderId) throws SQLException {
-        Statement stm = AIMSDB.getConnection().createStatement();
-        stm.executeUpdate("UPDATE `Order` SET" + " state = " + 2
-                + " WHERE id=" + orderId);
-    }
-
-    public static void deleteOrderById(int orderId) throws SQLException {
-        String sql = "DELETE FROM `Order` WHERE id = ?";
-        Connection connection = AIMSDB.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setInt(1, orderId);
-        preparedStatement.executeUpdate();
-    }
-    
-    public String getStateString() {
-        switch (getState()) {
-            case WAITING:
-                return "Pending approval";
-            case DELIVERING:
-                return "Delivering";
-            case DECLINED:
-                return "Refuse approval";
-            case DELIVERED:
-                return "Shipped successfully";
-        }
-        return "";
-    }
 
     public int calculateShippingFees(DeliveryInformation deliveryInformation) {
 
