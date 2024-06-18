@@ -79,8 +79,8 @@
 </details>
 </details>
 
-## Setup Instructions
-## Setting Up IntelliJ for JavaFX
+# Setup Instructions
+## Working with IntelliJ
 
 1. **Edit Run Configuration:**
   - Open your project in IntelliJ.
@@ -99,5 +99,59 @@
     ```
 
 This configuration ensures that IntelliJ uses the correct JavaFX modules when running your application.
+
+
+## Working with Eclipse
+
+### Importing Project
+
+1. **Import Repository:**
+  - Clone the repository.
+  - In Eclipse, go to `File` -> `Import...` -> `General` -> `Existing Projects into Workspace...`.
+  - Select the root directory of the cloned repository.
+
+### Setting Up SQLite
+
+1. **Import sqlite-jdbc-3.7.2.jar:**
+  - Place `sqlite-jdbc-3.7.2.jar` in the `lib` directory of your project.
+  - In Eclipse, right-click on your project -> `Properties` -> `Java Build Path` -> `Libraries` -> `Add JARs...`.
+  - Navigate to the `lib` directory and select `sqlite-jdbc-3.7.2.jar`.
+
+### Setting Up JUnit
+
+1. **Import JUnit5 Library:**
+  - In Eclipse, right-click on your project -> `Properties` -> `Java Build Path`.
+  - Under `Modulepath` or `Classpath`, depending on your project configuration:
+    - `Add Library...` -> `JUnit` -> `JUnit 5`.
+
+### Setting Up JavaFX
+
+1. **Create User Library for JavaFX:**
+  - In Eclipse, go to `Window` -> `Preferences` -> `Java` -> `Build Path` -> `User Libraries`.
+  - Click `New` to create a new User Library (e.g., JavaFX15).
+  - Add the JavaFX JARs from the directory specific to your operating system:
+    - For Linux: `lib/linux/javafx-sdk-15/lib`
+    - For Windows: `lib/win/javafx-sdk-15/lib`
+
+2. **Include User Library in Project:**
+  - Right-click on your project -> `Properties` -> `Java Build Path` -> `Libraries` -> `Add Library...`.
+  - Select the User Library created (e.g., JavaFX15).
+
+### Add VM Arguments
+
+1. **Set VM Arguments for Running the Project:**
+  - Click on `Run` -> `Run Configurations...` -> `Java Application`.
+  - Create a new configuration for your project if not already created.
+  - In the `VM arguments` section, add the appropriate JavaFX module path and modules:
+    - For Linux:
+      ```
+      --module-path lib/linux/javafx-sdk-15/lib --add-modules=javafx.controls,javafx.fxml,javafx.base,javafx.web
+      ```
+    - For Windows:
+      ```
+      --module-path lib/win/javafx-sdk-15/lib --add-modules=javafx.controls,javafx.fxml,javafx.base,javafx.web
+      ```
+
+These steps ensure that Eclipse is properly configured to work with SQLite, JUnit, and JavaFX for your project.
 
 
