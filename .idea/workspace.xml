@@ -8,8 +8,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="228d128d-7d0d-4ca2-a953-3525d59eef86" name="Changes" comment="update">
-      <change beforePath="$PROJECT_DIR$/assets/db/aims.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/db/aimsTest.db" beforeDir="false" afterPath="$PROJECT_DIR$/assets/db/AIMS.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/db/AIMS.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/db/AIMSDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/assets/db/AIMSDB.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/db/AIMSDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/AIMSDB.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
