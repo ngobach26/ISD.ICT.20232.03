@@ -17,6 +17,7 @@ import utils.Configs;
 import views.screen.BaseScreenHandler;
 import views.screen.admin.AdminScreenHandler;
 import views.screen.home.HomeScreenHandler;
+import views.screen.popup.PopupScreen;
 import views.screen.sellerScreen.ManageProductScreenHandler;
 
 public class LoginHandler extends BaseScreenHandler {
@@ -72,24 +73,29 @@ public class LoginHandler extends BaseScreenHandler {
                 LOGGER.info("User validated successfully: " + user.toString());
                 LoginManager loginManager = new LoginManager();
                 LoginManager.saveLoginInfo(user.getId(), user.getName(), user.getPhone(), user.getAddress(), user.getEmail());
-
-                if (user.getUserType() == 2) {
-                    LOGGER.info("Admin logged in");
-                    AdminScreenHandler adminHandler = new AdminScreenHandler(this.stage, Configs.ADMIN_PATH);
-                    adminHandler.setScreenTitle("Admin Screen");
-                    adminHandler.show();
-                } else if (user.getUserType() == 1) {
-                    LOGGER.info("Manager logged in");
-                    ManageProductScreenHandler manageProductScreenHandler = new ManageProductScreenHandler(this.stage, Configs.SELLER_HOMEPAGE_PATH);
-                    manageProductScreenHandler.setScreenTitle("Manager screen");
-                    manageProductScreenHandler.show();
-                } else {
-                    LOGGER.info("Customer logged in");
-                    homeHandler = new HomeScreenHandler(this.stage, Configs.HOME_PATH, user);
-                    homeHandler.setScreenTitle("Home Screen");
-                    homeHandler.setImage();
-                    homeHandler.show();
+                if (user.getStatus() == 0){
+                    if (user.getUserType() == 2) {
+                        LOGGER.info("Admin logged in");
+                        AdminScreenHandler adminHandler = new AdminScreenHandler(this.stage, Configs.ADMIN_PATH);
+                        adminHandler.setScreenTitle("Admin Screen");
+                        adminHandler.show();
+                    } else if (user.getUserType() == 1) {
+                        LOGGER.info("Manager logged in");
+                        ManageProductScreenHandler manageProductScreenHandler = new ManageProductScreenHandler(this.stage, Configs.SELLER_HOMEPAGE_PATH);
+                        manageProductScreenHandler.setScreenTitle("Manager screen");
+                        manageProductScreenHandler.show();
+                    } else {
+                        LOGGER.info("Customer logged in");
+                        homeHandler = new HomeScreenHandler(this.stage, Configs.HOME_PATH, user);
+                        homeHandler.setScreenTitle("Home Screen");
+                        homeHandler.setImage();
+                        homeHandler.show();
+                    }
+                }else{
+                    LOGGER.severe("LoginAccountException: Account is blocked");
+                    PopupScreen.error("User is blocked");
                 }
+
             } catch (LoginAccountException e) {
                 LOGGER.severe("LoginAccountException: " + e.getMessage());
                 alert = new Alert(Alert.AlertType.ERROR);

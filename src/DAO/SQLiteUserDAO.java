@@ -108,6 +108,7 @@ public class SQLiteUserDAO implements IUserDAO {
                     user.setEmail(res.getString("email"));
                     user.setAddress(res.getString("address"));
                     user.setPhone(res.getString("phone"));
+                    user.setStatus(res.getInt("status"));
                     LOGGER.info("User retrieved by email: " + email);
                 }
             }

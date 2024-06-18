@@ -48,14 +48,9 @@ public class App extends Application {
 			});
 			fadeOut.setOnFinished((e) -> {
 				try {
-//					AdminScreenHandler adminHandler = new AdminScreenHandler(primaryStage, Configs.ADMIN_PATH);
-//					adminHandler.setScreenTitle("Home Screen");
-//					adminHandler.show();
 					LoginHandler loginHandler = new LoginHandler(primaryStage, Configs.LOGIN);
 					loginHandler.setScreenTitle("Login");
 					loginHandler.show();
-//					ManageProductScreenHandler manageProductScreenHandler = new ManageProductScreenHandler(primaryStage,Configs.SELLER_HOMEPAGE_PATH);
-//					manageProductScreenHandler.show();
 
 				} catch (IOException e1) {
 					e1.printStackTrace();
