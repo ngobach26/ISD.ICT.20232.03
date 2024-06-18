@@ -25,6 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import utils.Configs;
+import utils.DeliveryValidateInfo;
 import views.screen.BaseScreenHandler;
 import views.screen.invoice.InvoiceScreenHandler;
 import views.screen.popup.PopupScreen;
@@ -156,13 +157,13 @@ public class ShippingScreenHandler extends BaseScreenHandler implements Initiali
         }
 
         try {
-            getBController().processDeliveryInfo(messages);
+            DeliveryValidateInfo.processDeliveryInfo(messages);
         } catch (InvalidDeliveryInfoException e) {
             throw new InvalidDeliveryInfoException(e.getMessage());
         }
 
         // calculate shipping fees
-        int shippingFees = getBController().calculateShippingFee(order);
+        int shippingFees = DeliveryValidateInfo.calculateShippingFee(order);
         order.setShippingFees(shippingFees);
 
         // create invoice screen
@@ -183,7 +184,7 @@ public class ShippingScreenHandler extends BaseScreenHandler implements Initiali
         PopupScreen.error(error);
     }
     private boolean validateShippingInformation(HashMap<String,String> deliveryInfor) throws IOException {
-        String res = getBController().validateDeliveryInfo(deliveryInfor);
+        String res = DeliveryValidateInfo.validateDeliveryInfo(deliveryInfor);
         if(res.equals("Valid")){
             return true;
         }

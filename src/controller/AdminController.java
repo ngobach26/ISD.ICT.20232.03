@@ -1,6 +1,6 @@
 package controller;
 
-import DAO.UserDAO;
+import DAO.IUserDAO;
 import entity.user.User;
 import services.DAOFactory;
 
@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class AdminController {
-    private final UserDAO userDAO;
+    private final IUserDAO userDAO;
 
     public AdminController()  {
         this.userDAO = DAOFactory.getUserDAO();

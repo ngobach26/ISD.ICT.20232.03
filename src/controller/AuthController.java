@@ -1,6 +1,6 @@
 package controller;
 
-import DAO.UserDAO;
+import DAO.IUserDAO;
 import common.exception.LoginAccountException;
 import common.exception.MediaNotAvailableException;
 import common.exception.RegisterAccountException;
@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 public class AuthController {
 
-    private final UserDAO userDAO;
+    private final IUserDAO userDAO;
 
     public AuthController() throws MediaNotAvailableException {
         this.userDAO = DAOFactory.getUserDAO();

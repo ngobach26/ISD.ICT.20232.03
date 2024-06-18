@@ -14,7 +14,7 @@ import entity.cart.CartMedia;
 import entity.media.Media;
 import services.DAOFactory;
 
-public class SQLiteCartDAO implements CartDAO {
+public class SQLiteCartDAO implements ICartDAO {
     private static final Logger LOGGER = Logger.getLogger(SQLiteCartDAO.class.getName());
     private final Connection connection;
     private static final String INSERT_CART = "INSERT INTO CART (cartID, userID) VALUES (?, ?)";
@@ -106,12 +106,12 @@ public class SQLiteCartDAO implements CartDAO {
             stmt.setInt(1, cartId);
             rs = stmt.executeQuery();
 
-            MediaDAO mediaDAO = DAOFactory.getMediaDAO();
+            IMediaDAO mediaDAO = DAOFactory.getMediaDAO();
 
             while (rs.next()) {
                 int mediaID = rs.getInt("mediaID");
                 int numberOfProducts = rs.getInt("number_of_products");
-                Media media = mediaDAO.getMediaById(mediaID);  // Assume this method exists in MediaDAO
+                Media media = mediaDAO.getMediaById(mediaID);  // Assume this method exists in IMediaDAO
                 CartMedia cartMedia = new CartMedia(cartId, media, numberOfProducts, media.getPrice());
                 cartMediaList.add(cartMedia);
             }

@@ -1,7 +1,7 @@
 package entity.cart;
 
-import DAO.CartDAO;
-import DAO.MediaDAO;
+import DAO.ICartDAO;
+import DAO.IMediaDAO;
 import common.exception.MediaNotAvailableException;
 import entity.media.Media;
 import services.DAOFactory;
@@ -15,7 +15,7 @@ public class Cart {
     private int userId;
     private static Cart cartInstance;
     private final List<CartMedia> lstCartMedia;
-    private final MediaDAO mediaDAO;
+    private final IMediaDAO mediaDAO;
 
     public static Cart getCart(int userId) {
         if (cartInstance == null || cartInstance.getUserId() != userId) {
@@ -30,7 +30,7 @@ public class Cart {
         this.mediaDAO = DAOFactory.getMediaDAO();
 
         // Retrieve the cart ID from the database
-        CartDAO cartDAO = DAOFactory.getCartDAO();
+        ICartDAO cartDAO = DAOFactory.getCartDAO();
         this.cartId = cartDAO.getCartID(userId);
 
         // Retrieve the cart media items from the database and populate lstCartMedia

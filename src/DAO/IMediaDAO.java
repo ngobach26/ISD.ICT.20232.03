@@ -8,7 +8,7 @@ import entity.media.Media;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface MediaDAO {
+public interface IMediaDAO {
     Media getMediaById(int id) throws SQLException;
     List<Media> searchMedia(String title) throws SQLException;
     List<Media> getAllMedia() throws SQLException;

@@ -1,6 +1,6 @@
 package controller;
 
-import DAO.CartDAO;
+import DAO.ICartDAO;
 import common.exception.MediaNotAvailableException;
 import common.exception.MediaUpdateException;
 import common.exception.ViewCartException;
@@ -20,15 +20,12 @@ import java.util.logging.Logger;
  */
 public class CartController extends BaseController{
     private static final Logger LOGGER = Utils.getLogger(CartController.class.getName());
-    CartDAO cartDAO;
+    ICartDAO cartDAO;
     /**
      * This method checks the available products in Cart
      * @throws SQLException
      */
     public CartController(){
-//        CartService cs = new CartService();
-//        User user = LoginManager.getSavedLoginInfo();
-//        cs.saveCart(Cart.getCart(user.getId()));
         cartDAO = DAOFactory.getCartDAO();
     }
 

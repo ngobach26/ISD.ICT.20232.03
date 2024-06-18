@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import controller.SellerController;
@@ -38,7 +39,7 @@ public class ManageProductScreenHandler extends BaseScreenHandler implements Ini
 
 	@FXML
 	private Button add_btn;
-	
+
 	@FXML
 	private Button reset;
 
@@ -60,7 +61,6 @@ public class ManageProductScreenHandler extends BaseScreenHandler implements Ini
 
 	public ManageProductScreenHandler(Stage stage, String screenPath) throws IOException {
 		super(stage, screenPath);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -78,11 +78,10 @@ public class ManageProductScreenHandler extends BaseScreenHandler implements Ini
 				createMediaByType.setScreenTitle("Choose Media Type");
 				createMediaByType.show();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				LOGGER.log(Level.SEVERE, "IOException occurred while creating media by type: ", e);
 			}
 		});
-		
+
 		reset.setOnMouseClicked(event -> {
 			try {
 				this.vboxes.getChildren().clear();
@@ -90,22 +89,11 @@ public class ManageProductScreenHandler extends BaseScreenHandler implements Ini
 				List<?> convertMediaList = convertMediaToRenderItem(allTheMedia);
 				renderMediaToScreen(convertMediaList);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				LOGGER.log(Level.SEVERE, "SQLException occurred while resetting media list: ", e);
 			}
 		});
-//		order_img.setOnMouseClicked(mouseEvent -> {
-//			OrderManagementScreenHandler orderManagementAdminScreenHandler = null;
-//			try {
-//				orderManagementAdminScreenHandler = new OrderManagementScreenHandler(stage, Configs.ORDER_MANAGEMENT_ADMIN_PATH);
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//			orderManagementAdminScreenHandler.show();
-//		});
 
 		sign_out.setOnMouseClicked(mouseEvent -> {
-
 			try {
 				LoginManager loginManager = new LoginManager();
 				LoginManager.clearSavedLoginInfo();
@@ -113,31 +101,29 @@ public class ManageProductScreenHandler extends BaseScreenHandler implements Ini
 				loginHandler.setScreenTitle("Login");
 				loginHandler.show();
 			} catch (IOException e) {
-				e.printStackTrace();
+				LOGGER.log(Level.SEVERE, "IOException occurred while signing out: ", e);
 			}
-
 		});
-		
-		try{
+
+		try {
 			this.vboxes.getChildren().clear();
 			this.allTheMedia = getBController().getAllMedia();
 			List<?> convertMediaList = convertMediaToRenderItem(allTheMedia);
 			renderMediaToScreen(convertMediaList);
-		} catch (Error | SQLException e){
-			e.printStackTrace();
+		} catch (Error | SQLException e) {
+			LOGGER.log(Level.SEVERE, "Error or SQLException occurred while initializing media list: ", e);
 		}
 	}
 
 	public List<MediaProductHandler> convertMediaToRenderItem(List<?> MediaList) throws SQLException {
-		List<MediaProductHandler> renderList = new ArrayList<MediaProductHandler>();
+		List<MediaProductHandler> renderList = new ArrayList<>();
 		try {
-			for (Object item: MediaList) {
+			for (Object item : MediaList) {
 				MediaProductHandler mediaProductHandler = new MediaProductHandler(Configs.SELLER_ITEM_VIEW_PATH, (Media) item);
 				renderList.add(mediaProductHandler);
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "IOException occurred while converting media to render item: ", e);
 		}
 		return renderList;
 	}
@@ -145,12 +131,8 @@ public class ManageProductScreenHandler extends BaseScreenHandler implements Ini
 	public void renderMediaToScreen(List<?> MediaList) {
 		if (MediaList.size() == 0) return;
 		int numberOfLastRow = MediaList.size() % 3;
-		int numberOfRows = -1;
-		if (numberOfLastRow > 0) {
-			numberOfRows = (int) Math.floor(MediaList.size() / 3) + 1;
-		} else {
-			numberOfRows = (int) Math.floor(MediaList.size() / 3);
-		}
+		int numberOfRows = (numberOfLastRow > 0) ? (int) Math.floor(MediaList.size() / 3) + 1 : (int) Math.floor(MediaList.size() / 3);
+
 		for (int rowIndex = 0; rowIndex < numberOfRows; rowIndex++) {
 			HBox hbox = new HBox();
 			if (rowIndex == numberOfRows - 1 && numberOfLastRow > 0) {

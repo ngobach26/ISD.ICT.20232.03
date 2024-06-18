@@ -5,8 +5,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Logger;
 
-import DAO.CartDAO;
-import DAO.MediaDAO;
+import DAO.ICartDAO;
+import DAO.IMediaDAO;
 import common.exception.MediaNotAvailableException;
 import entity.cart.Cart;
 import entity.cart.CartMedia;
@@ -23,8 +23,8 @@ import views.screen.home.MediaHandler;
 public class HomeController extends BaseController{
 
     private static final Logger LOGGER = Utils.getLogger(HomeController.class.getName());
-    private final MediaDAO mediaDAO;
-    private final CartDAO cartDAO;
+    private final IMediaDAO mediaDAO;
+    private final ICartDAO cartDAO;
     /**
      * this method gets all Media in DB and return back to home to display
      * @return List[Media]

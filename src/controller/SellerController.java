@@ -3,7 +3,7 @@ package controller;
 import java.sql.SQLException;
 import java.util.List;
 
-import DAO.MediaDAO;
+import DAO.IMediaDAO;
 import entity.media.Book;
 import entity.media.CD;
 import entity.media.DVD;
@@ -12,7 +12,7 @@ import services.DAOFactory;
 
 public class SellerController extends BaseController {
 
-    private final MediaDAO mediaDAO;
+    private final IMediaDAO mediaDAO;
 
     public SellerController() {
         this.mediaDAO = DAOFactory.getMediaDAO();

@@ -2,6 +2,7 @@ package views.screen.admin;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 
 import controller.AdminController;
 import entity.user.User;
@@ -12,10 +13,13 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import utils.AdminUtils;
 import utils.Configs;
+import utils.Utils;
 import views.screen.BaseScreenHandler;
 import views.screen.popup.PopupScreen;
 
 public class EditUserPopupScreen extends BaseScreenHandler {
+
+    private static final Logger LOGGER = Utils.getLogger(EditUserPopupScreen.class.getName());
 
     @FXML
     private TextField nameField;
@@ -40,6 +44,7 @@ public class EditUserPopupScreen extends BaseScreenHandler {
 
     @FXML
     private ComboBox<String> userTypeComboBox;
+
     @FXML
     private ComboBox<String> userStatusComboBox;
 
@@ -54,11 +59,13 @@ public class EditUserPopupScreen extends BaseScreenHandler {
         super(stage, Configs.EDIT_USER_POPUP_PATH);
         this.adminScreenHandler = adminScreenHandler;
         this.user = user;
+        LOGGER.info("EditUserPopupScreen initialized for user: " + user.getId());
         init();
     }
 
     public void init() {
         this.adminController = new AdminController();
+        LOGGER.info("Initializing user details in the form.");
         userTypeComboBox.getItems().clear();
         userTypeComboBox.getItems().addAll("Admin", "User", "Manager");
         userStatusComboBox.getItems().addAll("Active", "Block");
@@ -72,7 +79,8 @@ public class EditUserPopupScreen extends BaseScreenHandler {
 
         saveButton.setOnAction(event -> saveUser());
         cancelButton.setOnAction(event -> cancelEdit());
-        deleteButton.setOnAction(event -> deleteUser());  // Add this line
+        deleteButton.setOnAction(event -> deleteUser());
+        LOGGER.info("Button actions initialized.");
     }
 
     private void saveUser() {
@@ -83,6 +91,8 @@ public class EditUserPopupScreen extends BaseScreenHandler {
         String password = passwordField.getText();
         String userType = userTypeComboBox.getValue();
         String status = userStatusComboBox.getValue();
+
+        LOGGER.info("Saving user details: name=" + name + ", email=" + email + ", address=" + address + ", phone=" + phone + ", userType=" + userType + ", status=" + status);
 
         int userTypeValue = AdminUtils.getUserTypeValue(userType);
         int statusValue = AdminUtils.getUserStatusValue(status);
@@ -97,17 +107,22 @@ public class EditUserPopupScreen extends BaseScreenHandler {
 
         try {
             adminController.updateUser(user);
+            LOGGER.info("User updated successfully in the database.");
             // Show success popup
             PopupScreen.success("User information updated successfully!");
             adminScreenHandler.reloadPage();
+            LOGGER.info("Admin screen reloaded.");
             // Close the popup
             Stage stage = (Stage) saveButton.getScene().getWindow();
             stage.close();
+            LOGGER.info("Edit user popup closed.");
         } catch (SQLException | IOException e) {
+            LOGGER.severe("Error updating user: " + e.getMessage());
             try {
                 // Show error popup
                 PopupScreen.error("Error updating user: Invalid Information");
             } catch (IOException ex) {
+                LOGGER.severe("Error displaying error popup: " + ex.getMessage());
                 ex.printStackTrace();
             }
         }
@@ -116,24 +131,31 @@ public class EditUserPopupScreen extends BaseScreenHandler {
     private void deleteUser() {
         try {
             adminController.deleteUser(user.getId());
+            LOGGER.info("User deleted successfully from the database.");
             // Show success popup
             PopupScreen.success("User deleted successfully!");
             adminScreenHandler.reloadPage();
+            LOGGER.info("Admin screen reloaded.");
             // Close the popup
             Stage stage = (Stage) deleteButton.getScene().getWindow();
             stage.close();
+            LOGGER.info("Delete user popup closed.");
         } catch (SQLException | IOException e) {
+            LOGGER.severe("Error deleting user: " + e.getMessage());
             try {
                 // Show error popup
                 PopupScreen.error("Error deleting user");
             } catch (IOException ex) {
+                LOGGER.severe("Error displaying error popup: " + ex.getMessage());
                 ex.printStackTrace();
             }
         }
     }
 
     private void cancelEdit() {
+        LOGGER.info("Cancel edit action triggered.");
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
+        LOGGER.info("Edit user popup closed.");
     }
 }

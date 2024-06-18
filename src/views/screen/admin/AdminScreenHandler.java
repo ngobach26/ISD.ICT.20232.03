@@ -27,7 +27,7 @@ import java.util.logging.Logger;
 
 public class AdminScreenHandler extends BaseScreenHandler implements Initializable {
 
-    public static Logger LOGGER = Utils.getLogger(AdminScreenHandler.class.getName());
+    public static final Logger LOGGER = Utils.getLogger(AdminScreenHandler.class.getName());
 
     @FXML
     private SplitMenuButton sort;
@@ -70,58 +70,24 @@ public class AdminScreenHandler extends BaseScreenHandler implements Initializab
 
     @FXML
     private TableColumn<User, String> typeColumn;
+
     @FXML
     private TableColumn<User, String> statusColumn;
 
     @FXML
     private Button createUserButton;
 
-    @FXML
-    private Button viewUserInfoButton;
-
-    @FXML
-    private Button updateUserInfoButton;
-
-    @FXML
-    private Button deleteUserButton;
-
-    @FXML
-    private Button resetPasswordButton;
-
-    @FXML
-    private Button blockUserButton;
-
-    @FXML
-    private Button unblockUserButton;
-
-    @FXML
-    private ComboBox<?> userComboBox;
-
-    @FXML
-    private CheckBox adminRoleCheckBox;
-
-    @FXML
-    private CheckBox productManagerRoleCheckBox;
-
-    @FXML
-    private Button setRolesButton;
-
-    @FXML
-    private Button changePasswordButton;
-
-    @FXML
-    private Button logoutButton;
-
     private AdminController adminController;
 
-
-    public AdminScreenHandler(Stage stage, String screenPath) throws IOException{
+    public AdminScreenHandler(Stage stage, String screenPath) throws IOException {
         super(stage, screenPath);
-
+        LOGGER.info("Admin screen handler initialized.");
     }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.adminController = new AdminController();
+        LOGGER.info("Initializing admin screen...");
         initializeButtons();
         initializeTable();
         setupClickHandlerForEachRow();
@@ -130,6 +96,7 @@ public class AdminScreenHandler extends BaseScreenHandler implements Initializab
     private void initializeButtons() {
         createUserButton.setOnAction(event -> createUser());
         sign_out.setOnMouseClicked(event -> logout());
+        LOGGER.info("Buttons initialized.");
     }
 
     private void initializeTable() {
@@ -139,33 +106,34 @@ public class AdminScreenHandler extends BaseScreenHandler implements Initializab
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
         typeColumn.setCellValueFactory(cellData -> {
             User user = cellData.getValue();
-//            System.out.println(user.getUserType());
             String userTypeString = AdminUtils.getUserTypeString(user.getUserType());
-//            System.out.println(userTypeString);
             return new SimpleStringProperty(userTypeString);
         });
         statusColumn.setCellValueFactory(cellData -> {
             User user = cellData.getValue();
-            String userTypeString = AdminUtils.getUserStatusString(user.getStatus());
-            return new SimpleStringProperty(userTypeString);
+            String userStatusString = AdminUtils.getUserStatusString(user.getStatus());
+            return new SimpleStringProperty(userStatusString);
         });
+
         try {
             List<User> userList = adminController.getAllUsers();
             ObservableList<User> users = FXCollections.observableArrayList(userList);
             userTable.setItems(users);
+            LOGGER.info("User table initialized with data.");
         } catch (SQLException e) {
+            LOGGER.severe("Error loading users: " + e.getMessage());
             e.printStackTrace();
-            // Handle exception
         }
     }
-
 
     private void createUser() {
         try {
             Stage popupStage = new Stage();
-            CreateUserPopupScreen createUserPopup = new CreateUserPopupScreen(popupStage,this);
+            CreateUserPopupScreen createUserPopup = new CreateUserPopupScreen(popupStage, this);
             createUserPopup.show();
+            LOGGER.info("Create user popup displayed.");
         } catch (IOException e) {
+            LOGGER.severe("Error displaying create user popup: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -178,15 +146,18 @@ public class AdminScreenHandler extends BaseScreenHandler implements Initializab
                     try {
                         User user = row.getItem();
                         Stage popupStage = new Stage();
-                        EditUserPopupScreen editUserPopup = new EditUserPopupScreen(popupStage, user,this);
+                        EditUserPopupScreen editUserPopup = new EditUserPopupScreen(popupStage, user, this);
                         editUserPopup.show();
+                        LOGGER.info("Edit user popup displayed for user: " + user.getEmail());
                     } catch (IOException e) {
+                        LOGGER.severe("Error displaying edit user popup: " + e.getMessage());
                         e.printStackTrace();
                     }
                 }
             });
             return row;
         });
+        LOGGER.info("Click handler for user table rows initialized.");
     }
 
     private void logout() {
@@ -196,17 +167,20 @@ public class AdminScreenHandler extends BaseScreenHandler implements Initializab
             LoginHandler loginHandler = new LoginHandler(this.stage, Configs.LOGIN);
             loginHandler.setScreenTitle("Login");
             loginHandler.show();
+            LOGGER.info("User logged out and redirected to login screen.");
         } catch (IOException e) {
+            LOGGER.severe("Error during logout: " + e.getMessage());
             e.printStackTrace();
         }
-
     }
 
     public void reloadPage() {
         try {
             ObservableList<User> users = FXCollections.observableArrayList(adminController.getAllUsers());
             userTable.setItems(users);
+            LOGGER.info("Admin page reloaded.");
         } catch (SQLException e) {
+            LOGGER.severe("Error reloading page: " + e.getMessage());
             e.printStackTrace();
         }
     }

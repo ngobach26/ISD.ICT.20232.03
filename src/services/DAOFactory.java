@@ -3,19 +3,19 @@ package services;
 import DAO.*;
 
 public class DAOFactory {
-    public static MediaDAO getMediaDAO() {
+    public static IMediaDAO getMediaDAO() {
         // Bạn có thể thay đổi implementation ở đây nếu muốn sử dụng loại cơ sở dữ liệu khác
         return new SQLiteMediaDAO();
     }
-    public static OrderDAO getOrderDAO(){
+    public static IOrderDAO getOrderDAO(){
         // Bạn có thể thay đổi implementation ở đây nếu muốn sử dụng loại cơ sở dữ liệu khác
         return new SQLiteOrderDAO();
     }
-    public static CartDAO getCartDAO(){
+    public static ICartDAO getCartDAO(){
         return new SQLiteCartDAO();
     }
 
-    public static UserDAO getUserDAO(){
+    public static IUserDAO getUserDAO(){
         // Bạn có thể thay đổi implementation ở đây nếu muốn sử dụng loại cơ sở dữ liệu khác
         return new SQLiteUserDAO();
     }

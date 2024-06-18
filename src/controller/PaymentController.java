@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Map;
 
-import DAO.OrderDAO;
+import DAO.IOrderDAO;
 import entity.cart.Cart;
 import entity.order.DeliveryInformation;
 import entity.order.Order;
@@ -24,7 +24,7 @@ public class PaymentController extends BaseController {
      * Represent the Interbank subsystem
      */
     private final IPaymentSubsystem vnPay;
-    private final OrderDAO orderDAO;
+    private final IOrderDAO orderDAO;
 
     public PaymentController(){
         this.vnPay = new PaymentSubsystem(new VNPaySubsystemController());

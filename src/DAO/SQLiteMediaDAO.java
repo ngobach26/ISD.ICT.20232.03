@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class SQLiteMediaDAO implements MediaDAO {
+public class SQLiteMediaDAO implements IMediaDAO {
     private static final Logger LOGGER = Logger.getLogger(SQLiteMediaDAO.class.getName());
     private final Connection connection;
 
