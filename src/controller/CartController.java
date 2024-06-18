@@ -1,40 +1,57 @@
 package controller;
 
-import java.sql.SQLException;
-import java.util.List;
-import java.util.logging.Logger;
-
+import DAO.ICartDAO;
 import common.exception.MediaNotAvailableException;
 import common.exception.MediaUpdateException;
 import common.exception.ViewCartException;
 import entity.cart.Cart;
 import entity.cart.CartMedia;
-import utils.Utils;
+import entity.media.Media;
+import entity.user.User;
+import services.DAOFactory;
+import services.user.LoginManager;
 
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Logger;
 /**
  * This class controls the flow of events when users view the Cart
  */
 public class CartController extends BaseController{
-    private static Logger LOGGER = Utils.getLogger(CartController.class.getName());
+    private static final Logger LOGGER = utils.LOGGER.getLogger(CartController.class.getName());
+    ICartDAO cartDAO;
     /**
      * This method checks the available products in Cart
      * @throws SQLException
      */
-    public void checkAvailabilityOfProduct() throws SQLException, MediaNotAvailableException {
-        Cart.getCart().checkAvailabilityOfProduct();
+    public CartController(){
+        cartDAO = DAOFactory.getCartDAO();
     }
+
+    public void addMediaToCart(int userId, Media media, int quantity) {
+        cartDAO.addMediaToCart(userId, media, quantity);
+    }
+
+    public void checkAvailabilityOfProduct() throws SQLException, MediaNotAvailableException {
+        User user = LoginManager.getSavedLoginInfo();
+        Cart.getCart(user.getId()).checkAvailabilityOfProduct();
+    }
+
 
     /**
      * This method calculates the cart subtotal
      * @return subtotal
      */
     public int getCartSubtotal(){
-        int subtotal = Cart.getCart().calSubtotal();
+        User user = LoginManager.getSavedLoginInfo();
+        int subtotal = Cart.getCart(user.getId()).calSubtotal();
         return subtotal;
     }
 
     public void removeCartMedia(CartMedia cartMedia) throws SQLException, ViewCartException {
-        Cart.getCart().removeCartMedia(cartMedia);
+        User user = LoginManager.getSavedLoginInfo();
+        Cart.getCart(user.getId()).removeCartMedia(cartMedia);
+        cartDAO.removeMediaFromCart(user.getId(),cartMedia.getMedia().getId());
         LOGGER.info("Deleted " + cartMedia.getMedia().getTitle() + " from the cart");
     }
     public void updateCartMediaQuantity(CartMedia cartMedia, int quantity) throws SQLException, MediaUpdateException {
@@ -52,6 +69,7 @@ public class CartController extends BaseController{
     }
 
     public List getListCartMedia() {
-        return Cart.getCart().getListMedia();
+        User user = LoginManager.getSavedLoginInfo();
+        return Cart.getCart(user.getId()).getListMedia();
     }
 }

@@ -8,6 +8,7 @@ import controller.BaseController;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import views.screen.cart.CartScreenHandler;
 import views.screen.home.HomeScreenHandler;
 
 public class BaseScreenHandler extends FXMLScreenHandler {
@@ -16,6 +17,7 @@ public class BaseScreenHandler extends FXMLScreenHandler {
     private BaseScreenHandler prev;
     protected final Stage stage;
     protected HomeScreenHandler homeScreenHandler;
+    protected CartScreenHandler cartScreenHandler;
     protected Hashtable<String, String> messages;
     private BaseController bController;
 
@@ -64,5 +66,16 @@ public class BaseScreenHandler extends FXMLScreenHandler {
     public void setHomeScreenHandler(HomeScreenHandler HomeScreenHandler) {
         this.homeScreenHandler = HomeScreenHandler;
     }
+    public void setCartScreenHandler(CartScreenHandler cartScreenHandler) {
+        this.cartScreenHandler = cartScreenHandler;
+    }
 
+    // Method to navigate to the cart screen
+    public void goToCartScreen() {
+        if (this.cartScreenHandler != null) {
+            this.cartScreenHandler.show();
+        } else {
+            System.err.println("Cart screen handler is not set!");
+        }
+    }
 }

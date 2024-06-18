@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import utils.Utils;
+import utils.PaymentUtils;
 import views.screen.BaseScreenHandler;
 
 import java.io.IOException;
@@ -39,7 +39,7 @@ public class ResultScreenHandler extends BaseScreenHandler {
 		super(stage, screenPath);
 		resultLabel.setText(transaction.getMessage());
 		transactionID.setText(transaction.getTransactionId());
-		amount.setText(Utils.getCurrencyFormat(transaction.getAmount()));
+		amount.setText(PaymentUtils.getCurrencyFormat(transaction.getAmount()));
 		transtime.setText(transaction.getCreatedAt());
 		content.setText(transaction.getTransactionContent());
 	}

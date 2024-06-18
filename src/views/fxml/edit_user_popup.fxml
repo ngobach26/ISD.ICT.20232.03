@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="436.0" prefWidth="288.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <VBox alignment="CENTER" layoutX="20.0" layoutY="20.0" spacing="10.0">
+            <children>
+                <Label text="Edit User Information">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Label>
+                <HBox spacing="10.0">
+                    <Label text="Name:" />
+                    <TextField fx:id="nameField" promptText="Name" />
+                </HBox>
+                <HBox spacing="10.0">
+                    <Label text="Email:" />
+                    <TextField fx:id="emailField" promptText="Email" />
+                </HBox>
+                <HBox spacing="10.0">
+                    <Label text="Address:" />
+                    <TextField fx:id="addressField" promptText="Address" />
+                </HBox>
+                <HBox spacing="10.0">
+                    <Label text="Phone:" />
+                    <TextField fx:id="phoneField" promptText="Phone" />
+                </HBox>
+                <HBox spacing="10.0">
+                    <Label text="Password:" />
+                    <TextField fx:id="passwordField" promptText="Password" />
+                </HBox>
+                <HBox spacing="10.0">
+                    <Label text="User Type:" />
+                    <ComboBox fx:id="userTypeComboBox" promptText="User Type" />
+                </HBox>
+                <HBox spacing="10.0">
+                    <Label text="User Status:" />
+                    <ComboBox fx:id="userStatusComboBox" promptText="User Status" />
+                </HBox>
+                <Button fx:id="saveButton" mnemonicParsing="false" text="Save Changes" />
+                <Button fx:id="deleteButton" mnemonicParsing="false" text="Delete User" />
+                <Button fx:id="cancelButton" mnemonicParsing="false" text="Cancel" />
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

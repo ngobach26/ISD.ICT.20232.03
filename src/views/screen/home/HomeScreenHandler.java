@@ -17,6 +17,7 @@ import controller.HomeController;
 //import controller.CartController;
 import entity.cart.Cart;
 import entity.media.Media;
+import entity.user.User;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -30,18 +31,19 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import services.user.LoginManager;
 import utils.Configs;
-import utils.Utils;
 import views.screen.BaseScreenHandler;
 //import views.screen.ChooseRoleScreenHandler;
 //import views.screen.cart.CartScreenHandler;
 //import views.screen.order.OrderScreenHandler;
 import views.screen.cart.CartScreenHandler;
+import views.screen.auth.LoginHandler;
 
 
 public class HomeScreenHandler extends BaseScreenHandler implements Initializable{
 
-    public static Logger LOGGER = Utils.getLogger(HomeScreenHandler.class.getName());
+    public static Logger LOGGER = utils.LOGGER.getLogger(HomeScreenHandler.class.getName());
 
     //search
 
@@ -82,9 +84,46 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
     private SplitMenuButton splitMenuBtnSearch;
 
     private List homeItems;
-
+    private User loggedInUser;
+    HomeController homeController = new HomeController();
     public HomeScreenHandler(Stage stage, String screenPath) throws IOException{
         super(stage, screenPath);
+        sign_out.setOnMouseClicked(mouseEvent -> {
+
+            try {
+                LoginManager loginManager = new LoginManager();
+                LoginManager.clearSavedLoginInfo();
+                LoginHandler loginHandler = new LoginHandler(this.stage, Configs.LOGIN);
+                loginHandler.setScreenTitle("Login");
+//				loginHandler.setImage();
+                loginHandler.show();
+//            	Stage stage1 = (Stage) searchText.getScene().getWindow();
+//    			Parent root = FXMLLoader.load(getClass().getResource(Configs.LOGIN));
+//    			stage1.setScene(new Scene(root));
+//    			stage1.setTitle("Login");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        });
+    }
+
+    public HomeScreenHandler(Stage stage, String screenPath,User loggedInUser) throws IOException{
+        super(stage, screenPath);
+        this.loggedInUser = loggedInUser;
+        sign_out.setOnMouseClicked(mouseEvent -> {
+           
+            try {
+            	LoginManager loginManager = new LoginManager();
+            	LoginManager.clearSavedLoginInfo();
+            	LoginHandler loginHandler = new LoginHandler(this.stage, Configs.LOGIN);
+				loginHandler.setScreenTitle("Login");
+				loginHandler.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+           
+        });
     }
 
     public Label getNumMediaCartLabel(){
@@ -97,7 +136,8 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
 
     @Override
     public void show() {
-        numMediaInCart.setText(String.valueOf(Cart.getCart().getListMedia().size()) + " media");
+        User user = LoginManager.getSavedLoginInfo();
+        numMediaInCart.setText(Cart.getCart(user.getId()).getTotalMedia() + " media");
         super.show();
     }
 
@@ -141,7 +181,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
             CartScreenHandler cartScreen;
             try {
                 LOGGER.info("User clicked to view cart");
-                cartScreen = new CartScreenHandler(this.stage, Configs.CART_SCREEN_PATH);
+                cartScreen = new CartScreenHandler(this.stage, Configs.CART_SCREEN_PATH, this.loggedInUser);
                 cartScreen.setHomeScreenHandler(this);
                 cartScreen.setBController(new CartController());
                 cartScreen.requestToViewCart(this);
@@ -149,31 +189,6 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
                 throw new ViewCartException(Arrays.toString(e1.getStackTrace()).replaceAll(", ", "\n"));
             }
         });
-
-//        orderIcon.setOnMouseClicked(e -> {
-//        	OrderScreenHandler orderScreen;
-//            try {
-//                LOGGER.info("User clicked to view orders");
-//                orderScreen = new OrderScreenHandler(this.stage, Configs.VIEW_ORDER_SCREEN_PATH);
-//                orderScreen.setHomeScreenHandler(this);
-//                orderScreen.setBController(new ViewOrderController());
-//                orderScreen.show();
-//            } catch (IOException ex) {
-//                LOGGER.severe("Failed to load order view: " + ex.getMessage());
-//                ex.printStackTrace();
-//            }
-//        });
-//
-//        sign_out.setOnMouseClicked(mouseEvent -> {
-//            ChooseRoleScreenHandler roleScreenHandler = null;
-//            try {
-//                roleScreenHandler = new ChooseRoleScreenHandler(stage, Configs.SELLER_OR_USER_PATH);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            roleScreenHandler.setScreenTitle("Path choosing screen");
-//            roleScreenHandler.show();
-//        });
 
         addMediaHome(this.homeItems);
         addMenuItem(0, "Book", splitMenuBtnSearch);

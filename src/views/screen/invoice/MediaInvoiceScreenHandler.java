@@ -1,17 +1,15 @@
 package views.screen.invoice;
 
-import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 
 import entity.order.OrderMedia;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import utils.Utils;
+import utils.PaymentUtils;
 import views.screen.FXMLScreenHandler;
 
 public class MediaInvoiceScreenHandler extends FXMLScreenHandler{
@@ -53,7 +51,7 @@ public class MediaInvoiceScreenHandler extends FXMLScreenHandler{
 
     public void setMediaInfo() throws SQLException{
         title.setText(orderMedia.getMedia().getTitle());
-        price.setText(Utils.getCurrencyFormat(orderMedia.getPrice()));
+        price.setText(PaymentUtils.getCurrencyFormat(orderMedia.getPrice()));
         numOfProd.setText(String.valueOf(orderMedia.getQuantity()));
         setImage(image, orderMedia.getMedia().getImageURL());
 		image.setPreserveRatio(false);

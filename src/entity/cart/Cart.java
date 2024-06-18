@@ -1,26 +1,57 @@
 package entity.cart;
 
+import DAO.ICartDAO;
+import DAO.IMediaDAO;
 import common.exception.MediaNotAvailableException;
 import entity.media.Media;
-import services.DAOService.MediaService;
+import services.DAOFactory;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Cart {
-
-    private List<CartMedia> lstCartMedia;
+    private int cartId;
+    private int userId;
     private static Cart cartInstance;
-    private MediaService mediaService;
+    private final List<CartMedia> lstCartMedia;
+    private final IMediaDAO mediaDAO;
 
-    public static Cart getCart() {
-        if (cartInstance == null) cartInstance = new Cart();
+    public static Cart getCart(int userId) {
+        if (cartInstance == null || cartInstance.getUserId() != userId) {
+            cartInstance = new Cart(userId);
+        }
         return cartInstance;
+    }
+
+    public Cart(int userId){
+        this.userId = userId;
+        this.lstCartMedia = new ArrayList<>();
+        this.mediaDAO = DAOFactory.getMediaDAO();
+
+        // Retrieve the cart ID from the database
+        ICartDAO cartDAO = DAOFactory.getCartDAO();
+        this.cartId = cartDAO.getCartID(userId);
+
+        // Retrieve the cart media items from the database and populate lstCartMedia
+        this.lstCartMedia.addAll(cartDAO.getCartMediaItems(this.cartId));
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     private Cart() {
         lstCartMedia = new ArrayList<>();
-        mediaService = MediaService.getInstance();
+        mediaDAO = DAOFactory.getMediaDAO();
+    }
+
+    public int getCartId() {
+        return cartId;
     }
 
     public void addCartMedia(CartMedia cm) {
@@ -35,7 +66,6 @@ public class Cart {
         return lstCartMedia;
     }
 
-    // This function is the replacement for the clear cart function in payment class
     public void emptyCart() {
         lstCartMedia.clear();
     }
@@ -57,15 +87,22 @@ public class Cart {
         return total;
     }
 
-    public void checkAvailabilityOfProduct() throws SQLException, MediaNotAvailableException {
-        mediaService.checkAvailabilityOfProduct(lstCartMedia); // Pass the list of cart media to the service method
-    }
-
     public int calSubtotal() {
         int total = 0;
         for (CartMedia cm : lstCartMedia) {
             total += cm.getPrice() * cm.getQuantity();
         }
         return total;
+    }
+
+    public void checkAvailabilityOfProduct() throws SQLException, MediaNotAvailableException {
+        for (CartMedia cartMedia : lstCartMedia) {
+            int mediaId = cartMedia.getMedia().getId();
+            int requiredQuantity = cartMedia.getQuantity();
+            int availQuantity = mediaDAO.getMediaById(mediaId).getQuantity();
+            if (requiredQuantity > availQuantity) {
+                throw new MediaNotAvailableException("Media with ID " + mediaId + " not available in required quantity");
+            }
+        }
     }
 }

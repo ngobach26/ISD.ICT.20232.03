@@ -10,7 +10,9 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import utils.Configs;
-import views.screen.home.HomeScreenHandler;
+import views.screen.auth.LoginHandler;
+import views.screen.sellerScreen.ManageProductScreenHandler;
+
 
 public class App extends Application {
 
@@ -22,7 +24,7 @@ public class App extends Application {
 		try {
 
 			// initialize the scene
-			StackPane root = (StackPane) FXMLLoader.load(getClass().getResource(Configs.SPLASH_SCREEN_PATH));
+			StackPane root = FXMLLoader.load(getClass().getResource(Configs.SPLASH_SCREEN_PATH));
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.show();
@@ -44,13 +46,12 @@ public class App extends Application {
 			fadeIn.setOnFinished((e) -> {
 				fadeOut.play();
 			});
-			// After fade out, load actual content
 			fadeOut.setOnFinished((e) -> {
 				try {
-					HomeScreenHandler homeHandler = new HomeScreenHandler(primaryStage, Configs.HOME_PATH);
-					homeHandler.setScreenTitle("Home Screen");
-					homeHandler.setImage();
-					homeHandler.show();
+					LoginHandler loginHandler = new LoginHandler(primaryStage, Configs.LOGIN);
+					loginHandler.setScreenTitle("Login");
+					loginHandler.show();
+
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}

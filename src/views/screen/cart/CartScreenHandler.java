@@ -13,6 +13,7 @@ import controller.PlaceOrderController;
 import controller.CartController;
 import entity.cart.CartMedia;
 import entity.order.Order;
+import entity.user.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -21,14 +22,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import utils.Configs;
-import utils.Utils;
+import utils.PaymentUtils;
 import views.screen.BaseScreenHandler;
 import views.screen.popup.PopupScreen;
 import views.screen.shipping.ShippingScreenHandler;
 
 public class CartScreenHandler extends BaseScreenHandler {
 
-	private static Logger LOGGER = Utils.getLogger(CartScreenHandler.class.getName());
+	private static final Logger LOGGER = utils.LOGGER.getLogger(CartScreenHandler.class.getName());
 
 	@FXML
 	private ImageView aimsImage;
@@ -53,11 +54,17 @@ public class CartScreenHandler extends BaseScreenHandler {
 
 	@FXML
 	private Button btnPlaceOrder;
-	private CartController cartController;
 
-	public CartScreenHandler(Stage stage, String screenPath) throws IOException {
+	@FXML
+	private Button btnCancelOrder;
+
+	private final CartController cartController;
+	private User loggedInUser;
+
+	public CartScreenHandler(Stage stage, String screenPath, User loggedInUser) throws IOException, SQLException {
 		super(stage, screenPath);
 		this.cartController = new CartController();
+		this.loggedInUser = loggedInUser;
 		// fix relative image path caused by fxml
 		File file = new File("assets/images/Logo.png");
 		Image im = new Image(file.toURI().toString());
@@ -65,7 +72,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 
 		// Click to go back to home screen
 		aimsImage.setOnMouseClicked(e -> {
-			homeScreenHandler.show();
+				homeScreenHandler.show();
 		});
 
 		// On clicked, start Place Order UC
@@ -80,7 +87,19 @@ public class CartScreenHandler extends BaseScreenHandler {
 			}
 
 		});
-
+		btnCancelOrder.setOnMouseClicked(e -> {
+			LOGGER.info("Cancel Order button clicked");
+			navigateToHomeScreen();
+		});
+	}
+	private void navigateToHomeScreen() {
+		try {
+			homeScreenHandler.show();
+			LOGGER.info("Navigated to Home Screen");
+		} catch (Exception e) {
+			LOGGER.severe("Error while navigating to Home Screen: " + e.getMessage());
+			e.printStackTrace();
+		}
 	}
 
 	public Label getLabelAmount() {
@@ -103,9 +122,9 @@ public class CartScreenHandler extends BaseScreenHandler {
 			displayCartWithMediaAvailability();
 			show();
 		} catch (MediaNotAvailableException e) {
-		// if some media are not available then display cart and break usecase Place Order
-		displayCartWithMediaAvailability();
-	}
+			// if some media are not available then display cart and break usecase Place Order
+			displayCartWithMediaAvailability();
+		}
 
 	}
 
@@ -128,6 +147,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 
 			ShippingScreenHandler ShippingScreenHandler = new ShippingScreenHandler(this.stage, Configs.SHIPPING_SCREEN_PATH, order);
 			ShippingScreenHandler.setPreviousScreen(this);
+			ShippingScreenHandler.setLoggedInUser(this.loggedInUser);
 			ShippingScreenHandler.setHomeScreenHandler(homeScreenHandler);
 			ShippingScreenHandler.setScreenTitle("Shipping Screen");
 			ShippingScreenHandler.setBController(placeOrderController);
@@ -145,7 +165,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 		displayCartWithMediaAvailability();
 	}
 
-	void updateCartAmount(){
+	void updateCartAmount() throws SQLException {
 		// calculate subtotal and amount
 		int subtotal = getBController().getCartSubtotal();
 		int vat = (int)((Configs.PERCENT_VAT/100)*subtotal);
@@ -153,12 +173,12 @@ public class CartScreenHandler extends BaseScreenHandler {
 		LOGGER.info("amount" + amount);
 
 		// update subtotal and amount of Cart
-		labelSubtotal.setText(Utils.getCurrencyFormat(subtotal));
-		labelVAT.setText(Utils.getCurrencyFormat(vat));
-		labelAmount.setText(Utils.getCurrencyFormat(amount));
+		labelSubtotal.setText(PaymentUtils.getCurrencyFormat(subtotal));
+		labelVAT.setText(PaymentUtils.getCurrencyFormat(vat));
+		labelAmount.setText(PaymentUtils.getCurrencyFormat(amount));
 	}
 
-	private void displayCartWithMediaAvailability(){
+	private void displayCartWithMediaAvailability() throws SQLException {
 		// clear all old cartMedia
 		vboxCart.getChildren().clear();
 
@@ -180,6 +200,8 @@ public class CartScreenHandler extends BaseScreenHandler {
 			updateCartAmount();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
 		}
 	}
 }

@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class PaymentSubsystem implements IPaymentSubsystem {
 
-	private IPaymentSubsystem controller;
+	private final IPaymentSubsystem controller;
 
 	/**
 	 * Initializes a newly created {@code PaymentSubsystem} object with the specified controller.

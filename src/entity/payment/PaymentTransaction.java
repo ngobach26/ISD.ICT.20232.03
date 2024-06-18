@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class PaymentTransaction {
     private int orderId;
@@ -88,23 +90,27 @@ public class PaymentTransaction {
     }
 
     public static void saveTransaction(PaymentTransaction transaction) throws SQLException {
-        String sql = "INSERT INTO `Transaction` (orderID, createAt, content, transaction_id, transaction_num, amount) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO `PAYMENT_TRANSACTION` (orderID, time, date, transaction_content,transactionID) VALUES (?, ?, ?, ?,?)";
         Connection connection = AIMSDB.getConnection();
+        if (connection == null || connection.isClosed()) {
+            throw new SQLException("Failed to establish a database connection.");
+        }
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
         preparedStatement.setInt(1, transaction.getOrderId());
-        preparedStatement.setString(2, transaction.getCreatedAt());
-        preparedStatement.setString(3, transaction.getTransactionContent());
-        preparedStatement.setString(4, transaction.getTransactionId());
-        preparedStatement.setString(5, transaction.getTransactionNum());
-        preparedStatement.setInt(6, transaction.getAmount());
+        preparedStatement.setTime(2, java.sql.Time.valueOf(LocalTime.now()));
+        preparedStatement.setDate(3, java.sql.Date.valueOf(LocalDate.now()));
+        preparedStatement.setString(4, transaction.getTransactionContent());
+        preparedStatement.setString(5,transaction.getTransactionId());
 
         preparedStatement.executeUpdate();
     }
 
+
     public static PaymentTransaction getPaymentTransactionByOrderId(int orderId) throws SQLException {
-        String sql = "SELECT * FROM `Transaction` WHERE orderID = ?";
+        String sql = "SELECT * FROM `PAYMENT_TRANSACTION` WHERE orderID = ?";
         Connection connection = AIMSDB.getConnection();
+
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, orderId);
 

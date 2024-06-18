@@ -8,14 +8,13 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import db.AIMSDB;
-import utils.Utils;
 
 /**
  * The general media class, for another media it can be done by inheriting this class
  */
 public class Media {
 
-    private static Logger LOGGER = Utils.getLogger(Media.class.getName());
+    private static final Logger LOGGER = utils.LOGGER.getLogger(Media.class.getName());
 
     protected Statement stm;
     protected int id;
@@ -27,32 +26,46 @@ public class Media {
     protected float weight;
     protected String type;
     protected String imageURL;
+    protected int supportForRushDelivery;
 
     public Media() throws SQLException {
         stm = AIMSDB.getConnection().createStatement();
     }
 
-    public Media(int id, String title, String category, int price, int quantity, String type) throws SQLException {
+    public Media(int id, String title, String category, int price, int quantity, String type, int supportForRushDelivery) throws SQLException {
         this.id = id;
         this.title = title;
         this.category = category;
         this.price = price;
         this.quantity = quantity;
         this.type = type;
+        this.supportForRushDelivery = supportForRushDelivery;
         //stm = AIMSDB.getConnection().createStatement();
     }
 
     public Media (int id, String title, String category, int price, int value,
-                  int quantity, float weight, String type, String imageURL) throws SQLException{
+                  int quantity, String type, String imageURL, int supportForRushDelivery) throws SQLException{
         this.id = id;
         this.title = title;
         this.category = category;
         this.price = price;
         this.value = value;
         this.quantity = quantity;
-        this.weight = weight;
         this.type = type;
         this.imageURL = imageURL;
+        this.supportForRushDelivery = supportForRushDelivery;
+    }
+    public Media ( String title, String category, int price, int value,
+                  int quantity, String type, String imageURL, int supportForRushDelivery) throws SQLException{
+        this.id = id;
+        this.title = title;
+        this.category = category;
+        this.price = price;
+        this.value = value;
+        this.quantity = quantity;
+        this.type = type;
+        this.imageURL = imageURL;
+        this.supportForRushDelivery = supportForRushDelivery;
     }
 
     // getter and setter
@@ -63,6 +76,10 @@ public class Media {
     public Media setId(int id) {
         this.id = id;
         return this;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     public String getTitle() {
@@ -134,6 +151,33 @@ public class Media {
     public Media setType(String type) {
         this.type = type;
         return this;
+    }
+    
+    
+    public List getAllMedia() throws SQLException {
+        Statement stm = AIMSDB.getConnection().createStatement();
+        ResultSet res = stm.executeQuery("select * from Media");
+        ArrayList medium = new ArrayList<>();
+        while (res.next()) {
+            Media media = new Media()
+                    .setId(res.getInt("id"))
+                    .setTitle(res.getString("title"))
+                    .setQuantity(res.getInt("quantity"))
+                    .setCategory(res.getString("category"))
+                    .setMediaURL(res.getString("imageUrl"))
+                    .setPrice(res.getInt("price"))
+                    .setType(res.getString("type"));
+            medium.add(media);
+        }
+        return medium;
+    }
+
+    public int getSupportForRushDelivery() {
+        return supportForRushDelivery;
+    }
+
+    public void setSupportForRushDelivery(int supportForRushDelivery) {
+        this.supportForRushDelivery = supportForRushDelivery;
     }
 
     @Override

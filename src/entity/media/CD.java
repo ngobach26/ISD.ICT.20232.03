@@ -1,7 +1,12 @@
 package entity.media;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Date;
+import java.util.List;
+
+import db.AIMSDB;
 
 public class CD extends Media {
 
@@ -15,21 +20,29 @@ public class CD extends Media {
     }
 
     public CD(int id, String title, String category, int price, int quantity, String type, String artist,
-            String recordLabel, String musicType, Date releasedDate) throws SQLException{
-        super(id, title, category, price, quantity, type);
+            String recordLabel, String musicType, Date releasedDate, int rushDelivery) throws SQLException{
+        super(id, title, category, price, quantity, type, rushDelivery);
         this.artist = artist;
         this.recordLabel = recordLabel;
         this.musicType = musicType;
         this.releasedDate = releasedDate;
     }
 
-    public CD(int id, String title, String category, int price, int value, int quantity, String type, float weight, String imageURL, String artist,
-              String recordLabel, String musicType, Date releasedDate) throws SQLException{
-        super(id, title, category, price, value, quantity, weight, type, imageURL);
+    public CD(int id, String title, String category, int price, int value, int quantity, String type, String imageURL, String artist,
+              String recordLabel, String musicType, Date releasedDate, int supportForRushDelivery) throws SQLException{
+        super(id, title, category, price, value, quantity, type, imageURL, supportForRushDelivery);
         this.artist = artist;
         this.recordLabel = recordLabel;
         this.musicType = musicType;
         this.releasedDate = releasedDate;
+    }
+
+    public CD(String artist, String recordLabel, String musicType, Date releaseDate) throws SQLException {
+        super();
+        this.artist = artist;
+        this.recordLabel = recordLabel;
+        this.musicType = musicType;
+        this.releasedDate = releaseDate;
     }
 
     public String getArtist() {
@@ -67,4 +80,10 @@ public class CD extends Media {
         this.releasedDate = releasedDate;
         return this;
     }
+
+    @Override
+    public List getAllMedia() {
+        return null;
+    }
+
 }

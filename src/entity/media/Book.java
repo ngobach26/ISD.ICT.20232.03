@@ -1,7 +1,10 @@
 package entity.media;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Date;
+import java.util.List;
 
 import db.AIMSDB;
 
@@ -21,8 +24,18 @@ public class Book extends Media {
 
     public Book(int id, String title, String category, int price, int quantity, String type, String author,
             String coverType, String publisher, Date publishDate, int numOfPages, String language,
-            String bookCategory) throws SQLException{
-        super(id, title, category, price, quantity, type);
+            String bookCategory, int rushDelivery) throws SQLException{
+        super(id, title, category, price, quantity, type, rushDelivery);
+        this.author = author;
+        this.coverType = coverType;
+        this.publisher = publisher;
+        this.publishDate = publishDate;
+        this.numOfPages = numOfPages;
+        this.language = language;
+        this.bookCategory = bookCategory;
+    }
+    public Book(String author, String coverType, String publisher, Date publishDate, int numOfPages, String language, String bookCategory) throws SQLException {
+        super();
         this.author = author;
         this.coverType = coverType;
         this.publisher = publisher;
@@ -32,10 +45,10 @@ public class Book extends Media {
         this.bookCategory = bookCategory;
     }
 
-    public Book(int id, String title, String category, int price, int value, int quantity, String type, float weight, String imageURL, String author,
+    public Book(int id, String title, String category, int price, int value, int quantity, String type, String imageURL, String author,
                 String coverType, String publisher, Date publishDate, int numOfPages, String language,
-                String bookCategory) throws SQLException{
-        super(id, title, category, price, value, quantity, weight, type, imageURL);
+                String bookCategory, int supportForRushDelivery) throws SQLException{
+        super(id, title, category, price, value, quantity, type, imageURL, supportForRushDelivery);
         this.author = author;
         this.coverType = coverType;
         this.publisher = publisher;
@@ -112,4 +125,22 @@ public class Book extends Media {
         this.bookCategory = bookCategory;
         return this;
     }
+
+    public List getAllMedia() {
+        return null;
+    }
+
+    public String toString() {
+        return "{" +
+            super.toString() +
+            " author='" + author + "'" +
+            ", coverType='" + coverType + "'" +
+            ", publisher='" + publisher + "'" +
+            ", publishDate='" + publishDate + "'" +
+            ", numOfPages='" + numOfPages + "'" +
+            ", language='" + language + "'" +
+            ", bookCategory='" + bookCategory + "'" +
+            "}";
+    }
 }
+

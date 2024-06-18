@@ -1,7 +1,5 @@
 package common.exception;
 
-;
-
 public class TransactionReverseException extends PaymentException {
 
     public TransactionReverseException() {

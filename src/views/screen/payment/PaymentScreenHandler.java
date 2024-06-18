@@ -1,8 +1,10 @@
 package views.screen.payment;
 
 import controller.PaymentController;
+import entity.order.DeliveryInformation;
 import entity.order.Order;
 import entity.payment.PaymentTransaction;
+import entity.user.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -11,7 +13,7 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import services.vnpay.ConfigVNPay;
 import utils.Configs;
-import utils.Utils;
+import utils.PaymentUtils;
 import views.screen.BaseScreenHandler;
 
 import java.io.IOException;
@@ -22,19 +24,23 @@ import java.util.Map;
 
 public class PaymentScreenHandler extends BaseScreenHandler {
 
-    private Order order;
+    private final Order order;
+    private User user;
+    private final DeliveryInformation deliveryInformation;
     @FXML
     private Label pageTitle;
     @FXML
     private VBox vBox;
 
-    public PaymentScreenHandler(Stage stage, String screenPath, Order order) throws IOException {
+    public PaymentScreenHandler(Stage stage, String screenPath, Order order, DeliveryInformation deliveryInformation,User user) throws IOException {
         super(stage, screenPath);
         this.setBController(new PaymentController());
         this.order = order;
+        this.deliveryInformation = deliveryInformation;
+        this.user = user;
         WebView paymentView = new WebView();
         WebEngine webEngine = paymentView.getEngine();
-        webEngine.load(((PaymentController) getBController()).generateURL(order.calculateTotalPrice(), "Payment"));
+        webEngine.load(((PaymentController) getBController()).generateURL(order.calculateTotalPrice(deliveryInformation), "Payment"));
         webEngine.locationProperty().addListener((observable, oldValue, newValue) -> {
             completePaymentTransaction(newValue);
         });
@@ -49,9 +55,9 @@ public class PaymentScreenHandler extends BaseScreenHandler {
                 String query = uri.getQuery();
                 System.out.println(query);
 
-                Map<String, String> params = Utils.parseQueryString(query);
+                Map<String, String> params = PaymentUtils.parseQueryString(query);
                 PaymentController controller = (PaymentController) getBController();
-                int orderId = controller.createOrder(order);
+                int orderId = controller.createOrder(deliveryInformation,order,this.user);
                 if (orderId != -1) {
                     params.put("orderId", String.valueOf(orderId));
                     PaymentTransaction transaction = controller.makePayment(params);
